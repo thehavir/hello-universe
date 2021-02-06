@@ -7,14 +7,18 @@ void main() {
   group('APOD Cubit test', () {
     ApodCubit apodCubit;
     MockNasaApodRepository mockNasaApodRepository;
-    
+
     setUp(() {
       EquatableConfig.stringify = true;
       mockNasaApodRepository = MockNasaApodRepository();
       apodCubit = ApodCubit(mockNasaApodRepository);
     });
 
-    tearDown((){
+    test('First state is [ApodInitial]', () {
+      expect(apodCubit.state, const ApodInitial());
+    });
+
+    tearDown(() {
       apodCubit?.close();
     });
   });
