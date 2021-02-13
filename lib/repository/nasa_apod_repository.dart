@@ -1,4 +1,4 @@
-import 'package:hello_universe/model/picture_of_day.dart';
+import 'package:hello_universe/api/models/apod.dart';
 
 abstract class NasaApodRepository {
   Future<PictureOfDay> fetchPictureOfDay();

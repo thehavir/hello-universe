@@ -1,7 +1,7 @@
-import 'package:hello_universe/model/picture_of_day.dart';
-import 'package:hello_universe/repository/NasaApodRepository.dart';
+import 'package:hello_universe/api/models/apod.dart';
+import 'package:hello_universe/repository/nasa_apod_repository.dart';
 
-final mockApod = PictureOfDay(
+final PictureOfDay mockApod = PictureOfDay(
   copyright: 'mock1 copyright',
   date: 'mock1 date',
   explanation: 'mock1 explanation',
@@ -12,7 +12,10 @@ final mockApod = PictureOfDay(
   url: 'mock1 url',
 );
 
-class MockNasaApodRepository implements NasaApodRepository {
+const String mockNasaApodApiErrorMessage =
+    'An error occurred while fetching Nasa Apod';
+
+class FakeNasaApodRepository implements NasaApodRepository {
   @override
   Future<PictureOfDay> fetchPictureOfDay() async {
     await Future.delayed(Duration(seconds: 2));

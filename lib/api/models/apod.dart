@@ -44,4 +44,29 @@ class PictureOfDay {
 
     return data;
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is PictureOfDay &&
+          runtimeType == other.runtimeType &&
+          copyright == other.copyright &&
+          date == other.date &&
+          explanation == other.explanation &&
+          hdurl == other.hdurl &&
+          mediaType == other.mediaType &&
+          serviceVersion == other.serviceVersion &&
+          title == other.title &&
+          url == other.url;
+
+  @override
+  int get hashCode =>
+      copyright.hashCode ^
+      date.hashCode ^
+      explanation.hashCode ^
+      hdurl.hashCode ^
+      mediaType.hashCode ^
+      serviceVersion.hashCode ^
+      title.hashCode ^
+      url.hashCode;
 }
