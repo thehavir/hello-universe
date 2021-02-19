@@ -16,6 +16,9 @@ const String mockNasaApodApiErrorMessage =
     'An error occurred while fetching Nasa Apod';
 
 class FakeNasaApodRepository implements NasaApodRepository {
+
+  const FakeNasaApodRepository();
+
   @override
   Future<PictureOfDay> fetchPictureOfDay() async {
     await Future.delayed(Duration(seconds: 2));

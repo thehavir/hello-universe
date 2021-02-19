@@ -33,7 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
 
-    _imageDetailsCubit = ImageDetailsCubit(FakeNasaApodRepository())
+    _imageDetailsCubit = ImageDetailsCubit(const FakeNasaApodRepository())
       ..fetchImageDetails();
   }
 
