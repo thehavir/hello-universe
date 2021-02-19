@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hello_universe/api/models/apod.dart';
-import 'package:hello_universe/image_detail/cubit/image_details_cubit.dart';
+import 'package:hello_universe/features/image_detail/cubit/image_details_cubit.dart';
 import 'package:hello_universe/repository/fake_nasa_apod_repository.dart';
 
 class MyApp extends StatelessWidget {

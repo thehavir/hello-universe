@@ -1,10 +1,8 @@
-import 'dart:async';
-
 import 'package:bloc_test/bloc_test.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hello_universe/api/models/apod.dart';
-import 'package:hello_universe/image_detail/cubit/image_details_cubit.dart';
+import 'package:hello_universe/features/image_detail/cubit/image_details_cubit.dart';
 import 'package:hello_universe/repository/fake_nasa_apod_repository.dart';
 import 'package:hello_universe/repository/nasa_apod_repository.dart';
 import 'package:mockito/mockito.dart';
@@ -37,7 +35,7 @@ void main() {
       },
       act: (cubit) => cubit.fetchImageDetails(),
       expect: [
-        ImageDetailsLoadingState(),
+        const ImageDetailsLoadingState(),
         ImageDetailsLoadedState(mockApod),
       ],
     );
@@ -52,7 +50,7 @@ void main() {
       },
       act: (cubit) => cubit.fetchImageDetails(),
       expect: [
-        ImageDetailsLoadingState(),
+        const ImageDetailsLoadingState(),
         ImageDetailsLoadedState(mockApod),
       ],
       verify: (cubit) {
@@ -66,14 +64,14 @@ void main() {
     blocTest<ImageDetailsCubit, ImageDetailsState>(
       'Test fetch failed',
       build: () {
-        when(mockNasaApodRepository.fetchPictureOfDay()).thenThrow(
-            (_) async => Exception('Fake exception!'));
+        when(mockNasaApodRepository.fetchPictureOfDay())
+            .thenThrow((_) async => Exception('Fake exception!'));
 
         return imageDetailsCubit;
       },
       act: (cubit) => cubit.fetchImageDetails(),
       expect: [
-        ImageDetailsLoadingState(),
+        const ImageDetailsLoadingState(),
         ImageDetailsFetchFailedState(mockNasaApodApiErrorMessage),
       ],
     );
