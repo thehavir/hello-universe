@@ -10,10 +10,10 @@ class ImageDetailsCubit extends Cubit<ImageDetailsState> {
   final NasaApodRepository nasaApodRepository;
 
   ImageDetailsCubit(this.nasaApodRepository)
-      : super(ImageDetailsInitialState());
+      : super(const ImageDetailsInitialState());
 
   Future<void> fetchImageDetails() async {
-    emit(ImageDetailsLoadingState());
+    emit(const ImageDetailsLoadingState());
 
     try {
       final PictureOfDay pictureOfDay =
