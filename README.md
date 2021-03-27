@@ -1,3 +1,3 @@
 # hello_universe
 
-This app shows Nasa Astrohomy Picture Of Day (APOD) using Nasa api.
+This app shows Nasa Astronomy Picture Of Day (APOD) using Nasa API.

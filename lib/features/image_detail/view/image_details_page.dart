@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hello_universe/api/models/apod.dart';
-import 'package:hello_universe/image_detail/cubit/image_details_cubit.dart';
+import 'package:hello_universe/features/image_detail/cubit/image_details_cubit.dart';
 import 'package:hello_universe/repository/fake_nasa_apod_repository.dart';
 
 class MyApp extends StatelessWidget {
@@ -13,14 +13,20 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Image details'),
+      home: MyHomePage(
+        title: 'Image details',
+      ),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
   final String title;
+
+  MyHomePage({
+    Key key,
+    this.title,
+  }) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -33,14 +39,14 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
 
-    _imageDetailsCubit = ImageDetailsCubit(FakeNasaApodRepository())
+    _imageDetailsCubit = ImageDetailsCubit(const FakeNasaApodRepository())
       ..fetchImageDetails();
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ImageDetailsCubit, ImageDetailsState>(
-      cubit: _imageDetailsCubit,
+      bloc: _imageDetailsCubit,
       builder: (BuildContext context, ImageDetailsState state) {
         if (state is ImageDetailsLoadedState) {
           return _buildImageDetailsPage(state.pictureOfDay);
@@ -79,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget _buildLoading() => Center(
+  Widget _buildLoading() => const Center(
         child: CircularProgressIndicator(),
       );
 }
