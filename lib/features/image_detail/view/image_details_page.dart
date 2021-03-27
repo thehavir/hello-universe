@@ -46,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ImageDetailsCubit, ImageDetailsState>(
-      cubit: _imageDetailsCubit,
+      bloc: _imageDetailsCubit,
       builder: (BuildContext context, ImageDetailsState state) {
         if (state is ImageDetailsLoadedState) {
           return _buildImageDetailsPage(state.pictureOfDay);

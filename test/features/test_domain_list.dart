@@ -33,7 +33,7 @@ void main() {
         return imageDetailsCubit;
       },
       act: (cubit) => cubit.fetchImageDetails(),
-      expect: [
+      expect: () => [
         const ImageDetailsLoadingState(),
         ImageDetailsLoadedState(mockApod),
       ],
@@ -48,7 +48,7 @@ void main() {
         return imageDetailsCubit;
       },
       act: (cubit) => cubit.fetchImageDetails(),
-      expect: [
+      expect: () => [
         const ImageDetailsLoadingState(),
         ImageDetailsLoadedState(mockApod),
       ],
@@ -69,7 +69,7 @@ void main() {
         return imageDetailsCubit;
       },
       act: (cubit) => cubit.fetchImageDetails(),
-      expect: [
+      expect: () => [
         const ImageDetailsLoadingState(),
         ImageDetailsFetchFailedState(mockNasaApodApiErrorMessage),
       ],
