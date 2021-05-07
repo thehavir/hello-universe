@@ -7,10 +7,12 @@ part 'image_details_state.dart';
 
 /// Bloc (Cubit) that handles fetching image from Nasa repository.
 class ImageDetailsCubit extends Cubit<ImageDetailsState> {
-  final NasaApodRepository nasaApodRepository;
-
+  ///
   ImageDetailsCubit(this.nasaApodRepository)
       : super(const ImageDetailsInitialState());
+
+  ///
+  final NasaApodRepository nasaApodRepository;
 
   Future<void> fetchImageDetails() async {
     emit(const ImageDetailsLoadingState());

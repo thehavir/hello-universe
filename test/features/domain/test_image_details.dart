@@ -2,7 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hello_universe/features/image_detail/cubit/image_details_cubit.dart';
-import 'package:hello_universe/repository/fake_nasa_apod_repository.dart';
+import 'package:hello_universe/repository/fake_api_data.dart';
 import 'package:hello_universe/repository/nasa_apod_repository.dart';
 import 'package:mockito/mockito.dart';
 
@@ -32,8 +32,8 @@ void main() {
 
         return imageDetailsCubit;
       },
-      act: (cubit) => cubit.fetchImageDetails(),
-      expect: () => [
+      act: (ImageDetailsCubit cubit) => cubit.fetchImageDetails(),
+      expect: () => <ImageDetailsState>[
         const ImageDetailsLoadingState(),
         ImageDetailsLoadedState(mockApod),
       ],
@@ -47,12 +47,12 @@ void main() {
 
         return imageDetailsCubit;
       },
-      act: (cubit) => cubit.fetchImageDetails(),
-      expect: () => [
+      act: (ImageDetailsCubit cubit) => cubit.fetchImageDetails(),
+      expect: () => <ImageDetailsState>[
         const ImageDetailsLoadingState(),
         ImageDetailsLoadedState(mockApod),
       ],
-      verify: (cubit) {
+      verify: (ImageDetailsCubit cubit) {
         final ImageDetailsLoadedState state =
             cubit.state as ImageDetailsLoadedState;
 
@@ -64,14 +64,15 @@ void main() {
       'Test fetch image (APOD) is failed',
       build: () {
         when(mockNasaApodRepository.fetchPictureOfDay()).thenThrow(
-            (_) async => Exception('Fake exception: Fetch image is failed'));
+            (Object _) async =>
+                Exception('Fake exception: Fetch image is failed'));
 
         return imageDetailsCubit;
       },
-      act: (cubit) => cubit.fetchImageDetails(),
-      expect: () => [
+      act: (ImageDetailsCubit cubit) => cubit.fetchImageDetails(),
+      expect: () => <ImageDetailsState>[
         const ImageDetailsLoadingState(),
-        ImageDetailsFetchFailedState(mockNasaApodApiErrorMessage),
+        const ImageDetailsFetchFailedState(mockNasaApodApiErrorMessage),
       ],
     );
 

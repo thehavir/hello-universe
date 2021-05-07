@@ -1,13 +1,6 @@
+/// Data model class for Nasa astronomy picture of day.
 class PictureOfDay {
-  String copyright;
-  String date;
-  String explanation;
-  String hdurl;
-  String mediaType;
-  String serviceVersion;
-  String title;
-  String url;
-
+  /// Constructor of `PictureOfDay` class.
   PictureOfDay({
     this.copyright,
     this.date,
@@ -19,6 +12,8 @@ class PictureOfDay {
     this.url,
   });
 
+  /// Constructs a `PictureOfDay` instance from a json that is the response of
+  /// the server.
   PictureOfDay.fromJson(Map<String, dynamic> json) {
     copyright = json['copyright'];
     date = json['date'];
@@ -30,43 +25,43 @@ class PictureOfDay {
     url = json['url'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+  /// The copyright of the image/video.
+  String copyright;
 
-    data['copyright'] = this.copyright;
-    data['date'] = this.date;
-    data['explanation'] = this.explanation;
-    data['hdurl'] = this.hdurl;
-    data['media_type'] = this.mediaType;
-    data['service_version'] = this.serviceVersion;
-    data['title'] = this.title;
-    data['url'] = this.url;
+  /// The date of the APOD image/video that is posted on the Nasa website.
+  String date;
+
+  /// The explanation of the image/video.
+  String explanation;
+
+  /// The HD url of the image/video.
+  String hdurl;
+
+  /// The media type. It can be `image` or `video`.
+  String mediaType;
+
+  /// The api service version.
+  String serviceVersion;
+
+  /// The title of the image/video.
+  String title;
+
+  /// The url of the image/video.
+  String url;
+
+  /// Creates a json object from a `PictureOfDay` object.
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+
+    data['copyright'] = copyright;
+    data['date'] = date;
+    data['explanation'] = explanation;
+    data['hdurl'] = hdurl;
+    data['media_type'] = mediaType;
+    data['service_version'] = serviceVersion;
+    data['title'] = title;
+    data['url'] = url;
 
     return data;
   }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is PictureOfDay &&
-          runtimeType == other.runtimeType &&
-          copyright == other.copyright &&
-          date == other.date &&
-          explanation == other.explanation &&
-          hdurl == other.hdurl &&
-          mediaType == other.mediaType &&
-          serviceVersion == other.serviceVersion &&
-          title == other.title &&
-          url == other.url;
-
-  @override
-  int get hashCode =>
-      copyright.hashCode ^
-      date.hashCode ^
-      explanation.hashCode ^
-      hdurl.hashCode ^
-      mediaType.hashCode ^
-      serviceVersion.hashCode ^
-      title.hashCode ^
-      url.hashCode;
 }
