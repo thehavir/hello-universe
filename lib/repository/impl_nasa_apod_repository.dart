@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:hello_universe/api/models/apod.dart';
 import 'package:hello_universe/network/http_client.dart';
 import 'package:hello_universe/network/properties.dart';
@@ -9,7 +10,7 @@ import 'package:http/http.dart';
 /// Real implementation of [NasaApodRepository] interface.
 class ImplNasaApodRepository extends NasaApodRepository {
   static const String _baseNasaApiUrl = 'api.nasa.gov';
-  static const String _ApodPath = '/planetary/apod';
+  static const String _apodPath = '/planetary/apod';
   static final HttpClient _client = HttpClient(Client());
 
   @override
@@ -20,7 +21,7 @@ class ImplNasaApodRepository extends NasaApodRepository {
       final Map<String, String> parameterQueries = {'api_key': NASA_API_KEY};
       final Response response = await _client.request(
         authority: _baseNasaApiUrl,
-        path: _ApodPath,
+        path: _apodPath,
         parameter: parameterQueries,
       );
 
@@ -28,10 +29,42 @@ class ImplNasaApodRepository extends NasaApodRepository {
         return PictureOfDay.fromJson(jsonDecode(response.body));
       } else {
         return throw Exception(
-            'Apod is not available. Response status code is: ${response.statusCode}');
+            'APOD is not available. Response status code is: ${response.statusCode}');
       }
     } catch (error) {
-      return throw Exception('Something went wrong! $error');
+      return throw Exception('Something went wrong on fetching APOD! $error');
+    }
+  }
+
+  @override
+  Future<List<PictureOfDay>> fetchImageList({
+    @required String startDate,
+    @required String endDate,
+  }) async {
+    try {
+      final Map<String, String> parameterQueries = {
+        'api_key': NASA_API_KEY,
+        'start_date': startDate,
+        'end_date': endDate,
+      };
+      final Response response = await _client.request(
+        authority: _baseNasaApiUrl,
+        path: _apodPath,
+        parameter: parameterQueries,
+      );
+
+      if (response.statusCode == 200) {
+        final Iterable decodedJsonList = json.decode(response.body);
+        return List<PictureOfDay>.from(
+          decodedJsonList.map((model) => PictureOfDay.fromJson(model)),
+        );
+      } else {
+        return throw Exception(
+            'APOD list is not available. Response status code is: ${response.statusCode}');
+      }
+    } catch (error) {
+      return throw Exception(
+          'Something went wrong on fetching APOD list! $error');
     }
   }
 }

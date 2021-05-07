@@ -2,7 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hello_universe/features/image_detail/cubit/image_details_cubit.dart';
-import 'package:hello_universe/repository/fake_nasa_apod_repository.dart';
+import 'package:hello_universe/repository/fake_api_data.dart';
 import 'package:hello_universe/repository/nasa_apod_repository.dart';
 import 'package:mockito/mockito.dart';
 
