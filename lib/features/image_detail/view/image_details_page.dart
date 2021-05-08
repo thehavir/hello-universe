@@ -2,50 +2,25 @@ import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hello_universe/api/models/apod.dart';
-import 'package:hello_universe/features/image_detail/cubit/image_details_cubit.dart';
-import 'package:hello_universe/repository/impl_nasa_apod_repository.dart';
 
 class ImageDetailsPage extends StatefulWidget {
-  final String title;
-
   ImageDetailsPage({
-    Key key,
-    this.title,
-  }) : super(key: key);
+    this.apod,
+  });
+
+  final PictureOfDay apod;
 
   @override
   _ImageDetailsPageState createState() => _ImageDetailsPageState();
 }
 
 class _ImageDetailsPageState extends State<ImageDetailsPage> {
-  ImageDetailsCubit _imageDetailsCubit;
-
-  @override
-  void initState() {
-    super.initState();
-
-    _imageDetailsCubit = ImageDetailsCubit(ImplNasaApodRepository())
-      ..fetchImageDetails();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xff212121),
-      body: BlocBuilder<ImageDetailsCubit, ImageDetailsState>(
-        bloc: _imageDetailsCubit,
-        builder: (BuildContext context, ImageDetailsState state) {
-          if (state is ImageDetailsLoadedState) {
-            return _buildBody(state.pictureOfDay);
-          } else if (state is ImageDetailsFetchFailedState) {
-            return _buildErrorPage(state.error);
-          }
-
-          return _buildLoading();
-        },
-      ),
+      body: _buildBody(widget.apod),
     );
   }
 
@@ -136,19 +111,5 @@ class _ImageDetailsPageState extends State<ImageDetailsPage> {
             ),
           ],
         ),
-      );
-
-  Widget _buildErrorPage(String error) => Center(
-        child: const Text(
-          'Oops, something went wrong!',
-          style: TextStyle(
-            color: Colors.red,
-            fontSize: 16,
-          ),
-        ),
-      );
-
-  Widget _buildLoading() => const Center(
-        child: CircularProgressIndicator(),
       );
 }

@@ -18,7 +18,9 @@ class ImplNasaApodRepository extends NasaApodRepository {
     try {
       /// Get a valid key from Nasa API website (https://api.nasa.gov/) or
       /// use the demo key [DEMO_KEY].
-      final Map<String, String> parameterQueries = {'api_key': NASA_API_KEY};
+      final Map<String, String> parameterQueries = {
+        'api_key': NASA_API_KEY,
+      };
       final Response response = await _client.request(
         authority: _baseNasaApiUrl,
         path: _apodPath,
@@ -46,6 +48,7 @@ class ImplNasaApodRepository extends NasaApodRepository {
         'api_key': NASA_API_KEY,
         'start_date': startDate,
         'end_date': endDate,
+        'thumbs': 'True',
       };
       final Response response = await _client.request(
         authority: _baseNasaApiUrl,
