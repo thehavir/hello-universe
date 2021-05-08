@@ -14,12 +14,14 @@ class ImplNasaApodRepository extends NasaApodRepository {
   static final HttpClient _client = HttpClient(Client());
 
   @override
-  Future<PictureOfDay> fetchPictureOfDay() async {
+  Future<PictureOfDay> fetchPictureOfDay({String date}) async {
     try {
       /// Get a valid key from Nasa API website (https://api.nasa.gov/) or
       /// use the demo key [DEMO_KEY].
       final Map<String, String> parameterQueries = {
         'api_key': NASA_API_KEY,
+        'thumbs': 'True',
+        if (date != null) 'date': date,
       };
       final Response response = await _client.request(
         authority: _baseNasaApiUrl,

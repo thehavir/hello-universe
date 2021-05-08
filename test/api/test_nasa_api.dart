@@ -28,6 +28,20 @@ void main() {
       expect(imageList.length, 32);
     });
 
+    test('Test fetch Apod of a specific date', () async {
+      final PictureOfDay pictureOfDay =
+          await nasaApodRepository.fetchPictureOfDay(date: '2016-02-06');
+
+      expect(pictureOfDay.url, isNotNull);
+    });
+
+    test('Test thumbnail url is not null for Apod videos', () async {
+      final PictureOfDay pictureOfDay =
+          await nasaApodRepository.fetchPictureOfDay(date: '2016-02-09');
+
+      expect(pictureOfDay.thumbnailUrl, isNotNull);
+    });
+
     tearDown(() {
       nasaApodRepository = null;
     });
