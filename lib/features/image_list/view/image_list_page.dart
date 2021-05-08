@@ -55,6 +55,7 @@ class _ImageListPageState extends State<ImageListPage> {
         itemCount: state.imageList.length,
         itemBuilder: (BuildContext context, int index) {
           final PictureOfDay apod = state.imageList[index];
+
           return Card(
             child: InkWell(
               splashColor: Colors.blue.withAlpha(30),
@@ -69,7 +70,10 @@ class _ImageListPageState extends State<ImageListPage> {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Expanded(child: _buildImage(apod.url)),
+                  Expanded(
+                      child: _buildImage(apod.mediaType == ApodMediaType.image
+                          ? apod.url
+                          : apod.thumbnailUrl)),
                   // const SizedBox(height: 8),
                   ListTile(
                     title: Text(apod.title),

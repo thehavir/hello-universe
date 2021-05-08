@@ -36,7 +36,9 @@ class _ImageDetailsPageState extends State<ImageDetailsPage> {
         expandedHeight: MediaQuery.of(context).size.height / 2,
         pinned: true,
         flexibleSpace: FlexibleSpaceBar(
-          background: _buildImage(image.url),
+          background: _buildImage(image.mediaType == ApodMediaType.image
+              ? image.url
+              : image.thumbnailUrl),
         ),
       );
 
