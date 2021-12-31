@@ -1,12 +1,10 @@
-import 'dart:ui';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:hello_universe/api/models/apod.dart';
+import 'package:hello_universe/models/model.dart';
 
 class ImageDetailsPage extends StatefulWidget {
   ImageDetailsPage({
-    this.apod,
+    required this.apod,
   });
 
   final PictureOfDay apod;
@@ -32,13 +30,15 @@ class _ImageDetailsPageState extends State<ImageDetailsPage> {
       );
 
   Widget _buildAppBar(PictureOfDay image) => SliverAppBar(
-        title: Text(image.title),
+        title: Text(image.title!),
         expandedHeight: MediaQuery.of(context).size.height / 2,
         pinned: true,
         flexibleSpace: FlexibleSpaceBar(
-          background: _buildImage(image.mediaType == ApodMediaType.image
-              ? image.url
-              : image.thumbnailUrl),
+          background: _buildImage(
+            image.mediaType == MediaType.image
+                ? image.url!
+                : image.thumbnailUrl!,
+          ),
         ),
       );
 
@@ -78,8 +78,8 @@ class _ImageDetailsPageState extends State<ImageDetailsPage> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            _buildDescription(image.explanation),
-            _buildCreditAndDate(credit: image.copyright, date: image.date),
+            _buildDescription(image.explanation!),
+            _buildCreditAndDate(credit: image.copyright!, date: image.date!),
           ],
         ),
       ),
@@ -97,7 +97,11 @@ class _ImageDetailsPageState extends State<ImageDetailsPage> {
         ),
       );
 
-  Widget _buildCreditAndDate({String credit, String date}) => Padding(
+  Widget _buildCreditAndDate({
+    required String credit,
+    required String date,
+  }) =>
+      Padding(
         padding: const EdgeInsets.all(8),
         child: Column(
           children: [

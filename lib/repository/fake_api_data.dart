@@ -1,4 +1,4 @@
-import 'package:hello_universe/api/models/apod.dart';
+import 'package:hello_universe/models/model.dart';
 
 /// Mock data for the response of fetching picture of day api
 /// (https://api.nasa.gov/planetary/apod).
@@ -7,7 +7,7 @@ final PictureOfDay mockApod = PictureOfDay(
   date: 'mock1 date',
   explanation: 'mock1 explanation',
   hdurl: 'mock1 hdurl',
-  mediaType: ApodMediaType.image,
+  mediaType: MediaType.image,
   serviceVersion: 'mock1 serviceVersion',
   title: 'mock1 title',
   url: 'mock1 url',
@@ -20,7 +20,7 @@ final PictureOfDay mockApod2 = PictureOfDay(
   date: 'mock2 date',
   explanation: 'mock2 explanation',
   hdurl: 'mock2 hdurl',
-  mediaType: ApodMediaType.image,
+  mediaType: MediaType.image,
   serviceVersion: 'mock2 serviceVersion',
   title: 'mock2 title',
   url: 'mock2 url',
@@ -33,7 +33,7 @@ final PictureOfDay mockApod3 = PictureOfDay(
   date: 'mock3 date',
   explanation: 'mock3 explanation',
   hdurl: 'mock3 hdurl',
-  mediaType: ApodMediaType.image,
+  mediaType: MediaType.image,
   serviceVersion: 'mock3 serviceVersion',
   title: 'mock3 title',
   url: 'mock3 url',

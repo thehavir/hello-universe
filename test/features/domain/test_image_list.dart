@@ -1,19 +1,19 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hello_universe/api/models/apod.dart';
 import 'package:hello_universe/features/image_list/cubit/image_list_cubit.dart';
+import 'package:hello_universe/models/model.dart';
 import 'package:hello_universe/repository/fake_api_data.dart';
 import 'package:hello_universe/repository/nasa_apod_repository.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 
 class MockNasaApodRepository extends Mock implements NasaApodRepository {}
 
 void main() {
-  NasaApodRepository mockNasaApodRepository;
+  late NasaApodRepository mockNasaApodRepository;
 
   group('Test image list cubit', () {
-    ImageListCubit imageListCubit;
+    late ImageListCubit imageListCubit;
 
     setUp(() {
       EquatableConfig.stringify = true;
@@ -28,7 +28,7 @@ void main() {
     blocTest<ImageListCubit, ImageListState>(
       'Test fetch image list from a specific date is successful',
       build: () {
-        when(mockNasaApodRepository.fetchImageList(
+        when(() => mockNasaApodRepository.fetchImageList(
           startDate: 'mock2 date',
           endDate: 'mock3 date',
         )).thenAnswer((_) async => mockApodList);
@@ -48,7 +48,7 @@ void main() {
     blocTest<ImageListCubit, ImageListState>(
       'Test fetched image list is a valid image list',
       build: () {
-        when(mockNasaApodRepository.fetchImageList(
+        when(() => mockNasaApodRepository.fetchImageList(
           startDate: 'mock1 date',
           endDate: 'mock3 date',
         )).thenAnswer((_) async => mockApodList);
@@ -79,7 +79,7 @@ void main() {
     blocTest<ImageListCubit, ImageListState>(
       'Test fetch image list is failed',
       build: () {
-        when(mockNasaApodRepository.fetchImageList(
+        when(() => mockNasaApodRepository.fetchImageList(
           startDate: 'startDate',
           endDate: 'endDate',
         )).thenThrow(mockNasaApodApiErrorMessage);
@@ -97,8 +97,7 @@ void main() {
     );
 
     tearDown(() {
-      imageListCubit?.close();
-      mockNasaApodRepository = null;
+      imageListCubit.close();
     });
   });
 }

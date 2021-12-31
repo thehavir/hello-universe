@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
-import 'package:hello_universe/api/models/apod.dart';
+import 'package:hello_universe/models/model.dart';
 import 'package:hello_universe/repository/nasa_apod_repository.dart';
 
 part 'image_list_state.dart';
@@ -21,8 +20,8 @@ class ImageListCubit extends Cubit<ImageListState> {
   /// It gets two parameter, [startDate] and [endDate], and will return a list
   /// of `PictureOfDay` images between these dates.
   Future<void> fetchImageList({
-    @required String startDate,
-    @required String endDate,
+    required String startDate,
+    required String endDate,
   }) async {
     emit(const ImageListStateLoading());
 

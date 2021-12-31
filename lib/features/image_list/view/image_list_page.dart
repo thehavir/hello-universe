@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hello_universe/api/models/apod.dart';
 import 'package:hello_universe/features/image_detail/view/image_details_page.dart';
 import 'package:hello_universe/features/image_list/cubit/image_list_cubit.dart';
+import 'package:hello_universe/models/model.dart';
 import 'package:hello_universe/repository/impl_nasa_apod_repository.dart';
 
 class ImageListPage extends StatefulWidget {
@@ -12,7 +12,7 @@ class ImageListPage extends StatefulWidget {
 }
 
 class _ImageListPageState extends State<ImageListPage> {
-  ImageListCubit _imageListCubit;
+  late ImageListCubit _imageListCubit;
 
   @override
   void initState() {
@@ -71,13 +71,16 @@ class _ImageListPageState extends State<ImageListPage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Expanded(
-                      child: _buildImage(apod.mediaType == ApodMediaType.image
-                          ? apod.url
-                          : apod.thumbnailUrl)),
+                    child: _buildImage(
+                      apod.mediaType == MediaType.image
+                          ? apod.url!
+                          : apod.thumbnailUrl!,
+                    ),
+                  ),
                   // const SizedBox(height: 8),
                   ListTile(
-                    title: Text(apod.title),
-                    subtitle: Text(apod.date),
+                    title: Text(apod.title!),
+                    subtitle: Text(apod.date!),
                   ),
                 ],
               ),

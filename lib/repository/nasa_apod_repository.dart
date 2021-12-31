@@ -1,5 +1,4 @@
-import 'package:flutter/foundation.dart';
-import 'package:hello_universe/api/models/apod.dart';
+import 'package:hello_universe/models/model.dart';
 
 /// Contract for the Nasa Apod repository.
 ///
@@ -14,7 +13,7 @@ abstract class NasaApodRepository {
   /// Abstract method for fetching list of images (APOD). The list is contains
   /// images from [startDate] to [endDate].
   Future<List<PictureOfDay>> fetchImageList({
-    @required String startDate,
-    @required String endDate,
+    required String startDate,
+    required String endDate,
   });
 }
