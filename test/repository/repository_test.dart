@@ -1,14 +1,14 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hello_universe/api/models/apod.dart';
-import 'package:hello_universe/repository/impl_nasa_apod_repository.dart';
-import 'package:hello_universe/repository/nasa_apod_repository.dart';
+import 'package:hello_universe/models/model.dart';
+import 'package:hello_universe/repository/impl_repository.dart';
+import 'package:hello_universe/repository/base_repository.dart';
 
 void main() {
   group('Test fetching image', () {
-    NasaApodRepository nasaApodRepository;
+    late BaseRepository nasaApodRepository;
 
     setUp(() {
-      nasaApodRepository = ImplNasaApodRepository();
+      nasaApodRepository = ImplRepository();
     });
 
     test('Test fetch image (APOD) successful', () async {
@@ -40,10 +40,6 @@ void main() {
           await nasaApodRepository.fetchPictureOfDay(date: '2016-02-09');
 
       expect(pictureOfDay.thumbnailUrl, isNotNull);
-    });
-
-    tearDown(() {
-      nasaApodRepository = null;
     });
   });
 }

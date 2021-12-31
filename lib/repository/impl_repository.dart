@@ -1,20 +1,23 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
-import 'package:hello_universe/api/models/apod.dart';
-import 'package:hello_universe/network/http_client.dart';
-import 'package:hello_universe/network/properties.dart';
-import 'package:hello_universe/repository/nasa_apod_repository.dart';
+import 'package:hello_universe/models/model.dart';
+import 'package:hello_universe/repository/base_repository.dart';
+import 'package:hello_universe/utils/network/network.dart';
 import 'package:http/http.dart';
 
-/// Real implementation of [NasaApodRepository] interface.
-class ImplNasaApodRepository extends NasaApodRepository {
+/// This file contains Nasa API key.
+/// Get a valid key from Nasa API website (https://api.nasa.gov/) or
+/// use the demo key [DEMO_KEY].
+import 'package:hello_universe/keys.dart';
+
+/// Real implementation of [BaseRepository] interface.
+class ImplRepository extends BaseRepository {
   static const String _baseNasaApiUrl = 'api.nasa.gov';
   static const String _apodPath = '/planetary/apod';
   static final HttpClient _client = HttpClient(Client());
 
   @override
-  Future<PictureOfDay> fetchPictureOfDay({String date}) async {
+  Future<PictureOfDay> fetchPictureOfDay({String? date}) async {
     try {
       /// Get a valid key from Nasa API website (https://api.nasa.gov/) or
       /// use the demo key [DEMO_KEY].
@@ -42,8 +45,8 @@ class ImplNasaApodRepository extends NasaApodRepository {
 
   @override
   Future<List<PictureOfDay>> fetchImageList({
-    @required String startDate,
-    @required String endDate,
+    required String startDate,
+    required String endDate,
   }) async {
     try {
       final Map<String, String> parameterQueries = {

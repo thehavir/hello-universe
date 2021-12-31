@@ -1,23 +1,23 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hello_universe/api/models/apod.dart';
 import 'package:hello_universe/features/image_list/cubit/image_list_cubit.dart';
-import 'package:hello_universe/repository/fake_api_data.dart';
-import 'package:hello_universe/repository/nasa_apod_repository.dart';
-import 'package:mockito/mockito.dart';
+import 'package:hello_universe/models/model.dart';
+import 'package:hello_universe/repository/base_repository.dart';
+import 'package:mocktail/mocktail.dart';
 
-class MockNasaApodRepository extends Mock implements NasaApodRepository {}
+import '../../../mock_data/mock_api_model.dart';
+import '../../../repository/mock_repository.dart';
 
 void main() {
-  NasaApodRepository mockNasaApodRepository;
+  late BaseRepository mockNasaApodRepository;
 
   group('Test image list cubit', () {
-    ImageListCubit imageListCubit;
+    late ImageListCubit imageListCubit;
 
     setUp(() {
       EquatableConfig.stringify = true;
-      mockNasaApodRepository = MockNasaApodRepository();
+      mockNasaApodRepository = MockRepository();
       imageListCubit = ImageListCubit(mockNasaApodRepository);
     });
 
@@ -28,10 +28,10 @@ void main() {
     blocTest<ImageListCubit, ImageListState>(
       'Test fetch image list from a specific date is successful',
       build: () {
-        when(mockNasaApodRepository.fetchImageList(
-          startDate: 'mock2 date',
-          endDate: 'mock3 date',
-        )).thenAnswer((_) async => mockApodList);
+        when(() => mockNasaApodRepository.fetchImageList(
+              startDate: 'mock2 date',
+              endDate: 'mock3 date',
+            )).thenAnswer((_) async => mockApodList);
 
         return imageListCubit;
       },
@@ -48,10 +48,10 @@ void main() {
     blocTest<ImageListCubit, ImageListState>(
       'Test fetched image list is a valid image list',
       build: () {
-        when(mockNasaApodRepository.fetchImageList(
-          startDate: 'mock1 date',
-          endDate: 'mock3 date',
-        )).thenAnswer((_) async => mockApodList);
+        when(() => mockNasaApodRepository.fetchImageList(
+              startDate: 'mock1 date',
+              endDate: 'mock3 date',
+            )).thenAnswer((_) async => mockApodList);
 
         return imageListCubit;
       },
@@ -79,10 +79,10 @@ void main() {
     blocTest<ImageListCubit, ImageListState>(
       'Test fetch image list is failed',
       build: () {
-        when(mockNasaApodRepository.fetchImageList(
-          startDate: 'startDate',
-          endDate: 'endDate',
-        )).thenThrow(mockNasaApodApiErrorMessage);
+        when(() => mockNasaApodRepository.fetchImageList(
+              startDate: 'startDate',
+              endDate: 'endDate',
+            )).thenThrow(mockNasaApodApiErrorMessage);
 
         return imageListCubit;
       },
@@ -97,8 +97,7 @@ void main() {
     );
 
     tearDown(() {
-      imageListCubit?.close();
-      mockNasaApodRepository = null;
+      imageListCubit.close();
     });
   });
 }

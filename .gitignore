@@ -128,4 +128,4 @@ app.*.symbols
 !/dev/ci/**/Gemfile.lock
 
 # Credentials
-lib/network/properties.dart
+lib/keys.dart
