@@ -3,11 +3,11 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hello_universe/features/image_list/cubit/image_list_cubit.dart';
 import 'package:hello_universe/models/model.dart';
-import '../../mock_data/mock_api_model.dart';
 import 'package:hello_universe/repository/base_repository.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockNasaApodRepository extends Mock implements BaseRepository {}
+import '../../../mock_data/mock_api_model.dart';
+import '../../../repository/mock_repository.dart';
 
 void main() {
   late BaseRepository mockNasaApodRepository;
@@ -17,7 +17,7 @@ void main() {
 
     setUp(() {
       EquatableConfig.stringify = true;
-      mockNasaApodRepository = MockNasaApodRepository();
+      mockNasaApodRepository = MockRepository();
       imageListCubit = ImageListCubit(mockNasaApodRepository);
     });
 
@@ -29,9 +29,9 @@ void main() {
       'Test fetch image list from a specific date is successful',
       build: () {
         when(() => mockNasaApodRepository.fetchImageList(
-          startDate: 'mock2 date',
-          endDate: 'mock3 date',
-        )).thenAnswer((_) async => mockApodList);
+              startDate: 'mock2 date',
+              endDate: 'mock3 date',
+            )).thenAnswer((_) async => mockApodList);
 
         return imageListCubit;
       },
@@ -49,9 +49,9 @@ void main() {
       'Test fetched image list is a valid image list',
       build: () {
         when(() => mockNasaApodRepository.fetchImageList(
-          startDate: 'mock1 date',
-          endDate: 'mock3 date',
-        )).thenAnswer((_) async => mockApodList);
+              startDate: 'mock1 date',
+              endDate: 'mock3 date',
+            )).thenAnswer((_) async => mockApodList);
 
         return imageListCubit;
       },
@@ -80,9 +80,9 @@ void main() {
       'Test fetch image list is failed',
       build: () {
         when(() => mockNasaApodRepository.fetchImageList(
-          startDate: 'startDate',
-          endDate: 'endDate',
-        )).thenThrow(mockNasaApodApiErrorMessage);
+              startDate: 'startDate',
+              endDate: 'endDate',
+            )).thenThrow(mockNasaApodApiErrorMessage);
 
         return imageListCubit;
       },
