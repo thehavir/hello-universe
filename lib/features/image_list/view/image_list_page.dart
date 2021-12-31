@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hello_universe/features/image_detail/view/image_details_page.dart';
 import 'package:hello_universe/features/image_list/cubit/image_list_cubit.dart';
 import 'package:hello_universe/models/model.dart';
-import 'package:hello_universe/repository/impl_nasa_apod_repository.dart';
+import 'package:hello_universe/repository/impl_repository.dart';
 
 class ImageListPage extends StatefulWidget {
   @override
@@ -18,7 +18,7 @@ class _ImageListPageState extends State<ImageListPage> {
   void initState() {
     super.initState();
 
-    _imageListCubit = ImageListCubit(ImplNasaApodRepository())
+    _imageListCubit = ImageListCubit(ImplRepository())
       ..fetchImageList(
         startDate: '2016-01-25',
         endDate: '2016-02-25',

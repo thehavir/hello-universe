@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hello_universe/models/model.dart';
-import 'package:hello_universe/repository/nasa_apod_repository.dart';
+import 'package:hello_universe/repository/base_repository.dart';
 
 part 'image_list_state.dart';
 
@@ -13,7 +13,7 @@ class ImageListCubit extends Cubit<ImageListState> {
 
   /// It's our repository that is an interface for communicating with server
   /// (Like fetching image, and etc).
-  final NasaApodRepository nasaApodRepository;
+  final BaseRepository nasaApodRepository;
 
   /// Method for fetching list of `PictureOfDay` images.
   ///

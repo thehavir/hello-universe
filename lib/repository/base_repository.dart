@@ -4,7 +4,7 @@ import 'package:hello_universe/models/model.dart';
 ///
 /// With this interface we are able to implement fake/mock repository in order
 /// to test the business logic.
-abstract class NasaApodRepository {
+abstract class BaseRepository {
   /// Abstract method for fetching the picture of day from Nasa APOD repository.
   Future<PictureOfDay> fetchPictureOfDay({
     String date,

@@ -3,14 +3,14 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hello_universe/features/image_list/cubit/image_list_cubit.dart';
 import 'package:hello_universe/models/model.dart';
-import 'package:hello_universe/repository/fake_api_data.dart';
-import 'package:hello_universe/repository/nasa_apod_repository.dart';
+import '../../mock_data/mock_api_model.dart';
+import 'package:hello_universe/repository/base_repository.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockNasaApodRepository extends Mock implements NasaApodRepository {}
+class MockNasaApodRepository extends Mock implements BaseRepository {}
 
 void main() {
-  late NasaApodRepository mockNasaApodRepository;
+  late BaseRepository mockNasaApodRepository;
 
   group('Test image list cubit', () {
     late ImageListCubit imageListCubit;

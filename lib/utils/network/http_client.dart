@@ -1,7 +1,5 @@
 import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
-import 'package:hello_universe/network/network.dart';
+import 'package:hello_universe/utils/network/network.dart';
 import 'package:http/http.dart';
 
 /// This is a wrapper for [Client] that removes boilerplate and duplicate code
@@ -16,8 +14,8 @@ class HttpClient {
 
   /// Send a http request.
   Future<Response> request({
-    @required String? authority,
-    @required String? path,
+    required String? authority,
+    required String? path,
     Map<String, String>? parameter,
     RequestType requestType = RequestType.get,
   }) async {
