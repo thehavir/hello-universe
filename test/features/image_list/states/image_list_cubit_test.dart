@@ -14,6 +14,11 @@ void main() {
     late BaseRepository repository;
     late ImageListCubit imageListCubit;
 
+    final DateFormat formatter = DateFormat('yyyy-MM-dd');
+    final DateTime now = DateTime.now();
+    final DateTime twentyDaysBefore = _subtractTwentyDays(now);
+    final DateTime fortyDaysBefore = _subtractTwentyDays(twentyDaysBefore);
+
     setUp(() {
       repository = MockRepository();
       imageListCubit = ImageListCubit(repository);
@@ -27,15 +32,19 @@ void main() {
       'Test fetch apod list successfully',
       build: () {
         when(() => repository.fetchImageList(
-            startDate: '2016-01-25',
-            endDate: '2016-02-25')).thenAnswer((_) async => mockApodList);
+              startDate: formatter.format(now),
+              endDate: formatter.format(twentyDaysBefore),
+            )).thenAnswer((_) async => mockApodList);
 
         return imageListCubit;
       },
       act: (ImageListCubit cubit) => cubit.fetch(),
       expect: () => <ImageListState>[
         const ImageListState(status: StateStatus.loading),
-        ImageListState(status: StateStatus.success, data: mockApodList),
+        ImageListState(
+            status: StateStatus.success,
+            data: mockApodList,
+            startDate: twentyDaysBefore),
       ],
     );
 
@@ -43,8 +52,9 @@ void main() {
       'Test fetch apod list failed',
       build: () {
         when(() => repository.fetchImageList(
-            startDate: '2016-01-25',
-            endDate: '2016-02-25')).thenThrow(mockFetchNasaApodException);
+              startDate: formatter.format(now),
+              endDate: formatter.format(twentyDaysBefore),
+            )).thenThrow(mockFetchNasaApodException);
 
         return imageListCubit;
       },
@@ -58,22 +68,17 @@ void main() {
       ],
     );
 
-    final DateFormat _formatter = DateFormat('yyyy-MM-dd');
-    final DateTime startDate1 = DateTime.now();
-    final DateTime startDate2 = _endDate(startDate1);
-    final DateTime startDate3 = _endDate(startDate2);
-
     blocTest(
       'Test nasa apod image list with pagination',
       build: () {
         when(() => repository.fetchImageList(
-              startDate: _formatter.format(startDate1),
-              endDate: _formatter.format(startDate2),
+              startDate: formatter.format(now),
+              endDate: formatter.format(twentyDaysBefore),
             )).thenAnswer((_) async => mockApodList);
 
         when(() => repository.fetchImageList(
-              startDate: _formatter.format(startDate2),
-              endDate: _formatter.format(startDate3),
+              startDate: formatter.format(twentyDaysBefore),
+              endDate: formatter.format(fortyDaysBefore),
             )).thenAnswer((_) async => mockApodList2);
 
         return imageListCubit;
@@ -89,21 +94,22 @@ void main() {
         ImageListState(
           status: StateStatus.success,
           data: mockApodList,
-          startDate: startDate2,
+          startDate: twentyDaysBefore,
         ),
         ImageListState(
           status: StateStatus.loading,
           data: mockApodList,
-          startDate: startDate2,
+          startDate: twentyDaysBefore,
         ),
         ImageListState(
           status: StateStatus.success,
           data: mockApodList2,
-          startDate: startDate3,
+          startDate: fortyDaysBefore,
         ),
       ],
     );
   });
 }
 
-DateTime _endDate(DateTime startDate) => startDate.subtract(Duration(days: 20));
+DateTime _subtractTwentyDays(DateTime startDate) =>
+    startDate.subtract(Duration(days: 20));

@@ -1,14 +1,13 @@
 import 'dart:convert';
 
-import 'package:hello_universe/models/model.dart';
-import 'package:hello_universe/repository/base_repository.dart';
-import 'package:hello_universe/utils/network/network.dart';
-import 'package:http/http.dart';
-
 /// This file contains Nasa API key.
 /// Get a valid key from Nasa API website (https://api.nasa.gov/) or
 /// use the demo key [DEMO_KEY].
 import 'package:hello_universe/keys.dart';
+import 'package:hello_universe/models/model.dart';
+import 'package:hello_universe/repository/base_repository.dart';
+import 'package:hello_universe/utils/network/network.dart';
+import 'package:http/http.dart';
 
 /// Real implementation of [BaseRepository] interface.
 class ImplRepository extends BaseRepository {
@@ -51,8 +50,8 @@ class ImplRepository extends BaseRepository {
     try {
       final Map<String, String> parameterQueries = {
         'api_key': NASA_API_KEY,
-        'start_date': startDate,
-        'end_date': endDate,
+        'start_date': endDate,
+        'end_date': startDate,
         'thumbs': 'True',
       };
       final Response response = await _client.request(
@@ -65,7 +64,9 @@ class ImplRepository extends BaseRepository {
         final Iterable decodedJsonList = json.decode(response.body);
         return List<PictureOfDay>.from(
           decodedJsonList.map((model) => PictureOfDay.fromJson(model)),
-        );
+          // We want a list with the opposite order of what we get from the API,
+          // so, we return the reversed list.
+        ).reversed.toList();
       } else {
         return throw Exception(
             'APOD list is not available. Response status code is: ${response.statusCode}');
