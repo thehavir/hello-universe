@@ -50,6 +50,8 @@ class ImplRepository extends BaseRepository {
     try {
       final Map<String, String> parameterQueries = {
         'api_key': NASA_API_KEY,
+        // The order of start/end dates is not what we want. So dates will be
+        // sent in the opposite order.
         'start_date': endDate,
         'end_date': startDate,
         'thumbs': 'True',

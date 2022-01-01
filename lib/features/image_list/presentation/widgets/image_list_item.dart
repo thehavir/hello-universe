@@ -41,10 +41,11 @@ class ImageListItem extends StatelessWidget {
         borderRadius: const BorderRadius.vertical(
           top: Radius.circular(8),
         ),
-        child: (pictureOfDay.thumbnailUrl?.isEmpty ?? false)
+        // Todo(Havir): handle videos (they have thumbnail).
+        child: (pictureOfDay.url?.isEmpty ?? true)
             ? const NoImage(key: Key('ImageListItemNoResultImage'))
             : FadeInNetworkImage(
-                url: pictureOfDay.thumbnailUrl!,
+                url: pictureOfDay.url!,
                 key: const Key('ImageListItemNetworkImage'),
               ),
       );
@@ -52,7 +53,7 @@ class ImageListItem extends StatelessWidget {
   Widget _buildText() => Padding(
         padding: const EdgeInsets.all(8),
         child: Text(
-          pictureOfDay.title!,
+          pictureOfDay.date!,
           textAlign: TextAlign.center,
           style: const TextStyle(
             fontWeight: FontWeight.w500,

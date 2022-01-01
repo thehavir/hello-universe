@@ -24,4 +24,10 @@ dev_dependencies:
   mocktail: ^0.2.0
 
 flutter:
+  uses-material-design: true
 
+  assets:
+    - assets/error.png
+    - assets/no-results.png
+    - assets/no-image.png
+    - assets/placeholder.png

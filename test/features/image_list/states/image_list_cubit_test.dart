@@ -77,8 +77,10 @@ void main() {
             )).thenAnswer((_) async => mockApodList);
 
         when(() => repository.fetchImageList(
-              startDate: formatter.format(twentyDaysBefore),
-              endDate: formatter.format(fortyDaysBefore),
+              startDate: formatter
+                  .format(twentyDaysBefore.subtract(Duration(days: 1))),
+              endDate:
+                  formatter.format(fortyDaysBefore.subtract(Duration(days: 1))),
             )).thenAnswer((_) async => mockApodList2);
 
         return imageListCubit;
@@ -103,7 +105,7 @@ void main() {
         ),
         ImageListState(
           status: StateStatus.success,
-          data: mockApodList2,
+          data: mockApodList + mockApodList2,
           startDate: fortyDaysBefore,
         ),
       ],
@@ -112,4 +114,4 @@ void main() {
 }
 
 DateTime _subtractTwentyDays(DateTime startDate) =>
-    startDate.subtract(Duration(days: 20));
+    startDate.subtract(Duration(days: 19));

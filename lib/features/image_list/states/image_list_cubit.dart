@@ -29,8 +29,9 @@ class ImageListCubit extends Cubit<ImageListState> {
         // Todo(Havir): Check the first APOD and set `hasMore`.
         emit(state.copyWith(
           status: StateStatus.success,
-          data: imageList,
-          startDate: _endDate,
+          data: state.data != null ? state.data! + imageList : imageList,
+          // Subtract one day in order to prevent duplication of last item.
+          startDate: _endDate.subtract(Duration(days: 1)),
           // hasMore: _endDate.difference().inDays == 0,
         ));
       }
@@ -52,5 +53,5 @@ class ImageListCubit extends Cubit<ImageListState> {
     return state.startDate!;
   }
 
-  DateTime get _endDate => _startDate.subtract(Duration(days: 20));
+  DateTime get _endDate => _startDate.subtract(Duration(days: 19));
 }

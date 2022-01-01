@@ -93,19 +93,19 @@ class _ImageListPageState extends State<ImageListPage> {
   }
 
   Widget _buildImageList(ImageListState state) {
-    final List<PictureOfDay> Images = state.data!;
+    final List<PictureOfDay> images = state.data!;
 
     return ListView.builder(
       key: const Key('ImageListPageListView'),
-      itemBuilder: (BuildContext context, int index) => index >= Images.length
+      itemBuilder: (BuildContext context, int index) => index >= images.length
           ? state.isFailure
               ? _buildRetryButton()
               : const BottomLoader()
           : ImageListItem(
-              Images[index],
+              images[index],
               key: Key('ImageListItem$index'),
             ),
-      itemCount: !state.hasMore ? Images.length : Images.length + 1,
+      itemCount: !state.hasMore ? images.length : images.length + 1,
       controller: _scrollController,
     );
   }
