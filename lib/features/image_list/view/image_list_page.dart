@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hello_universe/features/image_detail/view/image_details_page.dart';
-import 'package:hello_universe/features/image_list/cubit/image_list_cubit.dart';
 import 'package:hello_universe/models/model.dart';
 import 'package:hello_universe/repository/impl_repository.dart';
 

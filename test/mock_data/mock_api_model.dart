@@ -47,6 +47,10 @@ final List<PictureOfDay> mockApodList = <PictureOfDay>[
   mockApod3,
 ];
 
-/// Mock error message for fetching picture of day.
-const String mockNasaApodApiErrorMessage =
-    'An error occurred while fetching Nasa Apod';
+/// Mock data for the response of fetching list of the picture of day api
+/// (https://api.nasa.gov/planetary/apod).
+final List<PictureOfDay> mockApodList2 = <PictureOfDay>[
+  mockApod3,
+  mockApod2,
+  mockApod,
+];
