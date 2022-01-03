@@ -21,7 +21,7 @@ class ImplRepository extends BaseRepository {
       /// Get a valid key from Nasa API website (https://api.nasa.gov/) or
       /// use the demo key [DEMO_KEY].
       final Map<String, String> parameterQueries = {
-        'api_key': NASA_API_KEY,
+        'api_key': 'DEMO_KEY',
         'thumbs': 'True',
         if (date != null) 'date': date,
       };
@@ -64,6 +64,7 @@ class ImplRepository extends BaseRepository {
 
       if (response.statusCode == 200) {
         final Iterable decodedJsonList = json.decode(response.body);
+
         return List<PictureOfDay>.from(
           decodedJsonList.map((model) => PictureOfDay.fromJson(model)),
           // We want a list with the opposite order of what we get from the API,

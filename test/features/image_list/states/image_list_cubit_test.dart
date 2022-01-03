@@ -110,6 +110,30 @@ void main() {
         ),
       ],
     );
+
+    // Todo(Havir): Find a way to test this:
+    /*blocTest(
+      'Test nasa apod image list limitation (hasMore)',
+      build: () {
+        final DateTime july1995 = DateTime(1995, 7, 20);
+
+        when(() => repository.fetchImageList(
+              startDate: formatter.format(july1995),
+              endDate: formatter.format(_subtractTwentyDays(july1995)),
+            )).thenAnswer((_) async => mockApodList);
+
+        return imageListCubit;
+      },
+      act: (ImageListCubit cubit) {
+        for(int index = 0; index < 1000; index++) {
+          cubit.fetch();
+        }
+      },
+      verify: (ImageListCubit cubit) => {
+        print(cubit.state.startDate),
+        expect(cubit.state.hasMore, true)
+      },
+    );*/
   });
 }
 
