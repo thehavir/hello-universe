@@ -21,7 +21,7 @@ class ImplRepository extends BaseRepository {
       /// Get a valid key from Nasa API website (https://api.nasa.gov/) or
       /// use the demo key [DEMO_KEY].
       final Map<String, String> parameterQueries = {
-        'api_key': 'DEMO_KEY',
+        'api_key': NASA_API_KEY,
         'thumbs': 'True',
         if (date != null) 'date': date,
       };
@@ -35,7 +35,7 @@ class ImplRepository extends BaseRepository {
         return PictureOfDay.fromJson(jsonDecode(response.body));
       } else {
         return throw Exception(
-            'APOD is not available. Response status code is: ${response.statusCode}');
+            'APOD is not available. Response status code is: ${response.body}');
       }
     } catch (error) {
       return throw Exception('Something went wrong on fetching APOD! $error');
@@ -72,7 +72,7 @@ class ImplRepository extends BaseRepository {
         ).reversed.toList();
       } else {
         return throw Exception(
-            'APOD list is not available. Response status code is: ${response.statusCode}');
+            'APOD list is not available. Response body is: ${response.body}');
       }
     } catch (error) {
       return throw Exception(
