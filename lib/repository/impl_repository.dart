@@ -35,7 +35,7 @@ class ImplRepository extends BaseRepository {
         return PictureOfDay.fromJson(jsonDecode(response.body));
       } else {
         return throw Exception(
-            'APOD is not available. Response status code is: ${response.statusCode}');
+            'APOD is not available. Response status code is: ${response.body}');
       }
     } catch (error) {
       return throw Exception('Something went wrong on fetching APOD! $error');
@@ -64,6 +64,7 @@ class ImplRepository extends BaseRepository {
 
       if (response.statusCode == 200) {
         final Iterable decodedJsonList = json.decode(response.body);
+
         return List<PictureOfDay>.from(
           decodedJsonList.map((model) => PictureOfDay.fromJson(model)),
           // We want a list with the opposite order of what we get from the API,
@@ -71,7 +72,7 @@ class ImplRepository extends BaseRepository {
         ).reversed.toList();
       } else {
         return throw Exception(
-            'APOD list is not available. Response status code is: ${response.statusCode}');
+            'APOD list is not available. Response body is: ${response.body}');
       }
     } catch (error) {
       return throw Exception(

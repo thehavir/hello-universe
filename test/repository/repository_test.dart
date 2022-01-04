@@ -35,6 +35,49 @@ void main() {
       expect(imageList.length, 32);
     });
 
+    test('Test fetch image list in boundaries successful', () async {
+      final List<PictureOfDay> imageList =
+          await nasaApodRepository.fetchImageList(
+        startDate: '1995-06-27',
+        endDate: '1995-06-20',
+      );
+
+      expect(imageList.length, 8);
+
+      final List<PictureOfDay> imageList2 =
+          await nasaApodRepository.fetchImageList(
+        startDate: '1995-06-27',
+        endDate: '1995-06-16',
+      );
+
+      expect(imageList2.length, 9);
+
+      final List<PictureOfDay> imageList3 =
+          await nasaApodRepository.fetchImageList(
+        startDate: '1995-06-16',
+        endDate: '1995-06-16',
+      );
+
+      expect(imageList3.length, 1);
+      final List<PictureOfDay> imageList4 =
+          await nasaApodRepository.fetchImageList(
+        startDate: '1995-06-20',
+        endDate: '1995-06-17',
+      );
+
+      expect(imageList4.length, 1);
+    });
+
+    test('Test fetch image list in boundaries failure', () async {
+      expect(
+        () async => await nasaApodRepository.fetchImageList(
+          startDate: '1995-06-27',
+          endDate: '1995-06-15',
+        ),
+        throwsException,
+      );
+    });
+
     test('Test fetch image list successful between now till 19 days ago',
         () async {
       final List<PictureOfDay> imageList =

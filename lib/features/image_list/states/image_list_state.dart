@@ -25,7 +25,8 @@ class ImageListState extends BaseState<List<PictureOfDay>> {
   /// is reached to the end of the merchant list.
   final bool hasMore;
 
-  /// Start date for fetch Nasa Apod list.
+  /// Start date for fetch next Nasa Apod list from the API.
+  /// It's the end date of previous Nasa APOD list.
   final DateTime? startDate;
 
   @override
