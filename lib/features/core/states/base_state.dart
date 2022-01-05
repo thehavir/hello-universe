@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-/// The base class for other cubit classes. Other states should extend from this
+/// Contract for other cubit classes. Other states should extend from this
 /// and provide the generic type as the type of data.
 abstract class BaseState<T> extends Equatable {
   /// Constructs a BaseState.
