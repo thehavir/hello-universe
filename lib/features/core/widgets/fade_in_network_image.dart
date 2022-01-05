@@ -24,5 +24,6 @@ class FadeInNetworkImage extends StatelessWidget {
         ),
         height: 210,
         fit: BoxFit.cover,
+        width: double.infinity,
       );
 }
