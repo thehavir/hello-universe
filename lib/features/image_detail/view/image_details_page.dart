@@ -30,14 +30,14 @@ class _ImageDetailsPageState extends State<ImageDetailsPage> {
       );
 
   Widget _buildAppBar(PictureOfDay image) => SliverAppBar(
-        title: Text(image.title!),
+        title: Text('${image.title}'),
         expandedHeight: MediaQuery.of(context).size.height / 2,
         pinned: true,
         flexibleSpace: FlexibleSpaceBar(
           background: _buildImage(
             image.mediaType == MediaType.image
-                ? image.url!
-                : image.thumbnailUrl!,
+                ? image.url ?? ''
+                : image.thumbnailUrl ?? '',
           ),
         ),
       );
@@ -78,8 +78,8 @@ class _ImageDetailsPageState extends State<ImageDetailsPage> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            _buildDescription(image.explanation!),
-            _buildCreditAndDate(credit: image.copyright!, date: image.date!),
+            _buildDescription('${image.explanation}'),
+            _buildCreditAndDate(credit: image.copyright, date: image.date),
           ],
         ),
       ),
@@ -98,8 +98,8 @@ class _ImageDetailsPageState extends State<ImageDetailsPage> {
       );
 
   Widget _buildCreditAndDate({
-    required String credit,
-    required String date,
+    String? credit,
+    String? date,
   }) =>
       Padding(
         padding: const EdgeInsets.all(8),
