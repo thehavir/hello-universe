@@ -6,10 +6,6 @@ abstract class NavigationState extends Equatable {
   List<Object> get props => <Object>[];
 }
 
-class NavigationStateInitial extends NavigationState {
-  const NavigationStateInitial();
-}
-
 class NavigationStateImageDetailsPage extends NavigationState {
   const NavigationStateImageDetailsPage(this.pictureOfDay);
 

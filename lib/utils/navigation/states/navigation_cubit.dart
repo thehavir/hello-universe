@@ -5,7 +5,7 @@ import 'package:hello_universe/models/apod.dart';
 part 'navigation_state.dart';
 
 class NavigationCubit extends Cubit<NavigationState> {
-  NavigationCubit() : super(const NavigationStateInitial());
+  NavigationCubit() : super(const NavigationStateImageListPage());
 
   Future<void> navigateToImageDetailsPage(PictureOfDay pictureOfDay) async =>
       emit(NavigationStateImageDetailsPage(pictureOfDay));

@@ -14,8 +14,8 @@ void main() {
       navigationCubit = NavigationCubit();
     });
 
-    test('Test first state is initial state', () {
-      expect(navigationCubit.state, const NavigationStateInitial());
+    test('Test first state is NavigationStateImageListPage', () {
+      expect(navigationCubit.state, const NavigationStateImageListPage());
     });
 
     blocTest(
