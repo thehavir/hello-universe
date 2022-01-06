@@ -40,8 +40,7 @@ class _ImageListPageState extends State<ImageListPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: const Text('Quandoo restaurant browser'),
-          backgroundColor: Colors.white,
+          title: const Text('Hello Universe!'),
         ),
         body: BlocConsumer<ImageListCubit, ImageListState>(
           listener: (BuildContext context, ImageListState state) {
