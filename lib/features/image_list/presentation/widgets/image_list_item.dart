@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hello_universe/features/core/widgets/widgets.dart';
 import 'package:hello_universe/models/model.dart';
+import 'package:hello_universe/utils/navigation/states/navigation_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// An item from the Nasa APOD list.
 class ImageListItem extends StatelessWidget {
@@ -33,8 +35,9 @@ class ImageListItem extends StatelessWidget {
             _buildText(),
           ],
         ),
-        // onTap: () =>
-        //     context.read<NavigationCubit>().goToMerchantDetailsPage(merchant),
+        onTap: () => context
+            .read<NavigationCubit>()
+            .navigateToImageDetailsPage(pictureOfDay),
       );
 
   Widget _buildImage() => ClipRRect(
