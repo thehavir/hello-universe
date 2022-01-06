@@ -5,13 +5,18 @@ import 'package:hello_universe/features/image_list/presentation/image_list_page.
 import 'package:hello_universe/utils/navigation/states/navigation_cubit.dart';
 
 class AppNavigator extends StatelessWidget {
-  const AppNavigator({Key? key}) : super(key: key);
+  const AppNavigator({
+    this.navigatorKey,
+    Key? key,
+  }) : super(key: key);
+
+  final GlobalKey<NavigatorState>? navigatorKey;
 
   @override
   Widget build(BuildContext context) =>
       BlocBuilder<NavigationCubit, NavigationState>(
         builder: (BuildContext context, NavigationState state) => Navigator(
-          key: key,
+          key: navigatorKey,
           pages: [
             const MaterialPage<bool>(child: ImageListPage()),
             if (state is NavigationStateImageDetailsPage)

@@ -15,6 +15,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -32,7 +34,16 @@ class _MyAppState extends State<MyApp> {
             create: (_) => ImageListCubit(ImplRepository()),
           ),
         ],
-        child: AppNavigator(),
+        child: WillPopScope(
+          // In order to prevent closing app when back button is pressed.
+          // Inspired from here:
+          // https://github.com/flutter/flutter/issues/66349.
+          // Todo(Havir): Make use of [BackButtonDispatcher] instead.
+          onWillPop: () async => !await _navigatorKey.currentState!.maybePop(),
+          child: AppNavigator(
+            navigatorKey: _navigatorKey,
+          ),
+        ),
       ),
     );
   }
