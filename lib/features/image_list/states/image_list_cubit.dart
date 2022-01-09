@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:hello_universe/features/core/states/states.dart';
+import 'package:hello_universe/features/image_list/extensions/extension.dart';
 import 'package:hello_universe/models/apod.dart';
 import 'package:hello_universe/repository/repository.dart';
-import 'package:intl/intl.dart';
 
 part 'image_list_state.dart';
 
@@ -22,15 +22,15 @@ class ImageListCubit extends Cubit<ImageListState> {
         emit(state.copyWith(status: StateStatus.loading));
 
         final List<PictureOfDay> imageList = await repository.fetchImageList(
-          startDate: _formatter.format(_startDate),
-          endDate: _formatter.format(_endDate),
+          startDate: _startDate.format(),
+          endDate: _endDate.format(),
         );
 
         emit(state.copyWith(
           status: StateStatus.success,
           data: state.data != null ? state.data! + imageList : imageList,
           // Subtract one day in order to prevent duplication of last item.
-          startDate: _endDate.subtract(Duration(days: 1)),
+          startDate: _endDate.xDaysBefore(1),
           hasMore: _endDate.difference(firstImageDate).inDays > 0,
         ));
       }
@@ -41,9 +41,6 @@ class ImageListCubit extends Cubit<ImageListState> {
     }
   }
 
-  // Todo(Havir): Add extension for this part (e.g. _startDate.format()).
-  final DateFormat _formatter = DateFormat('yyyy-MM-dd');
-
   DateTime get _startDate {
     if (state.startDate == null) {
       return DateTime.now();
@@ -53,7 +50,7 @@ class ImageListCubit extends Cubit<ImageListState> {
   }
 
   DateTime get _endDate {
-    final DateTime potentialEndDate = _startDate.subtract(Duration(days: 19));
+    final DateTime potentialEndDate = _startDate.xDaysBefore();
 
     if (potentialEndDate.difference(firstImageDate).inDays <= 0) {
       return firstImageDate;

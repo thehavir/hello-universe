@@ -1,9 +1,9 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hello_universe/features/core/states/states.dart';
+import 'package:hello_universe/features/image_list/extensions/extension.dart';
 import 'package:hello_universe/features/image_list/states/image_list_cubit.dart';
 import 'package:hello_universe/repository/repository.dart';
-import 'package:intl/intl.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../mock_data/mock_data.dart';
@@ -14,10 +14,9 @@ void main() {
     late BaseRepository repository;
     late ImageListCubit imageListCubit;
 
-    final DateFormat formatter = DateFormat('yyyy-MM-dd');
     final DateTime now = DateTime.now();
-    final DateTime twentyDaysBefore = _subtractTwentyDays(now);
-    final DateTime fortyDaysBefore = _subtractTwentyDays(twentyDaysBefore);
+    final DateTime twentyDaysBefore = now.xDaysBefore();
+    final DateTime fortyDaysBefore = twentyDaysBefore.xDaysBefore();
 
     setUp(() {
       repository = MockRepository();
@@ -32,8 +31,8 @@ void main() {
       'Test fetch apod list successfully',
       build: () {
         when(() => repository.fetchImageList(
-              startDate: formatter.format(now),
-              endDate: formatter.format(twentyDaysBefore),
+              startDate: now.format(),
+              endDate: twentyDaysBefore.format(),
             )).thenAnswer((_) async => mockApodList);
 
         return imageListCubit;
@@ -52,8 +51,8 @@ void main() {
       'Test fetch apod list failed',
       build: () {
         when(() => repository.fetchImageList(
-              startDate: formatter.format(now),
-              endDate: formatter.format(twentyDaysBefore),
+              startDate: now.format(),
+              endDate: twentyDaysBefore.format(),
             )).thenThrow(mockFetchNasaApodException);
 
         return imageListCubit;
@@ -72,15 +71,13 @@ void main() {
       'Test nasa apod image list with pagination',
       build: () {
         when(() => repository.fetchImageList(
-              startDate: formatter.format(now),
-              endDate: formatter.format(twentyDaysBefore),
+              startDate: now.format(),
+              endDate: twentyDaysBefore.format(),
             )).thenAnswer((_) async => mockApodList);
 
         when(() => repository.fetchImageList(
-              startDate: formatter
-                  .format(twentyDaysBefore.subtract(Duration(days: 1))),
-              endDate:
-                  formatter.format(fortyDaysBefore.subtract(Duration(days: 1))),
+              startDate: twentyDaysBefore.xDaysBefore(1).format(),
+              endDate: fortyDaysBefore.xDaysBefore(1).format(),
             )).thenAnswer((_) async => mockApodList2);
 
         return imageListCubit;
@@ -110,32 +107,5 @@ void main() {
         ),
       ],
     );
-
-    // Todo(Havir): Find a way to test this:
-    /*blocTest(
-      'Test nasa apod image list limitation (hasMore)',
-      build: () {
-        final DateTime july1995 = DateTime(1995, 7, 20);
-
-        when(() => repository.fetchImageList(
-              startDate: formatter.format(july1995),
-              endDate: formatter.format(_subtractTwentyDays(july1995)),
-            )).thenAnswer((_) async => mockApodList);
-
-        return imageListCubit;
-      },
-      act: (ImageListCubit cubit) {
-        for(int index = 0; index < 1000; index++) {
-          cubit.fetch();
-        }
-      },
-      verify: (ImageListCubit cubit) => {
-        print(cubit.state.startDate),
-        expect(cubit.state.hasMore, true)
-      },
-    );*/
   });
 }
-
-DateTime _subtractTwentyDays(DateTime startDate) =>
-    startDate.subtract(Duration(days: 19));
