@@ -1,18 +1,17 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:hello_universe/features/image_list/extensions/extension.dart';
 import 'package:hello_universe/models/model.dart';
 import 'package:hello_universe/repository/base_repository.dart';
 import 'package:hello_universe/repository/impl_repository.dart';
-import 'package:intl/intl.dart';
 
 void main() {
   group('Test fetching image', () {
     late BaseRepository nasaApodRepository;
 
-    final DateFormat formatter = DateFormat('yyyy-MM-dd');
     final DateTime now = DateTime.now();
-    final xDaysBefore = now.subtract(Duration(days: 19));
-    final String startDate = formatter.format(now);
-    final String endDate = formatter.format(xDaysBefore);
+    final xDaysBefore = now.xDaysBefore();
+    final String startDate = now.format();
+    final String endDate = xDaysBefore.format();
 
     setUp(() {
       nasaApodRepository = ImplRepository();
@@ -95,8 +94,7 @@ void main() {
 
       expect(imageList.length, 20);
 
-      expect(imageList[0].date,
-          formatter.format(now.subtract(Duration(days: 19 - 19))));
+      expect(imageList[0].date, now.xDaysBefore(19 - 19).format());
     });
 
     test('Test fetch Apod of a specific date', () async {
