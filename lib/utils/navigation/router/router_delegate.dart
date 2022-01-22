@@ -40,6 +40,7 @@ class AppRouterDelegate extends RouterDelegate<PageConfiguration>
   @override
   Widget build(BuildContext context) => Navigator(
         key: navigatorKey,
+        observers: [HeroController()],
         onPopPage: _onPopPage,
         pages: _buildPages(),
       );
