@@ -37,7 +37,7 @@ class ImageListItem extends StatelessWidget {
         ),
         onTap: () => context
             .read<NavigationCubit>()
-            .navigateToImageDetailsPage(pictureOfDay),
+            .navigateToDetailsPage(pictureOfDay),
       );
 
   Widget _buildImage() => ClipRRect(

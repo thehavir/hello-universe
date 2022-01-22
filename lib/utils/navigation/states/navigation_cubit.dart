@@ -1,15 +1,37 @@
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
+import 'package:hello_universe/features/core/states/states.dart';
 import 'package:hello_universe/models/apod.dart';
+import 'package:hello_universe/utils/navigation/router/router.dart';
 
 part 'navigation_state.dart';
 
 class NavigationCubit extends Cubit<NavigationState> {
-  NavigationCubit() : super(const NavigationStateImageListPage());
+  NavigationCubit() : super(NavigationState());
 
-  Future<void> navigateToImageDetailsPage(PictureOfDay pictureOfDay) async =>
-      emit(NavigationStateImageDetailsPage(pictureOfDay));
+  /// Resets the page state to none.
+  Future<void> resetCurrentAction() async {
+    emit(state.copyWith(data: PageAction()));
+  }
 
-  Future<void> navigateToImageListPage() async =>
-      emit(const NavigationStateImageListPage());
+  /// Navigates to `ImageListPage`.
+  Future<void> navigateToImageListPage() async {
+    emit(state.copyWith(
+      data: PageAction(
+        pageState: PageState.replaceAll,
+        page: imageListPageConfig,
+      ),
+    ));
+  }
+
+  /// Navigates to `ImageDetailsPage`.
+  Future<void> navigateToDetailsPage(PictureOfDay pictureOfDay) async {
+    emit(state.copyWith(
+      data: PageAction(
+        pageState: PageState.addPage,
+        page: imageDetailsPageConfig,
+        pageData: pictureOfDay,
+      ),
+    ));
+  }
 }
