@@ -35,9 +35,12 @@ class _ImageDetailsPageState extends State<ImageDetailsPage> {
         ),
       );
 
-  Widget _buildImage() => FadeInNetworkImage(
-        url: '${widget.apod.url}',
-        height: MediaQuery.of(context).size.height / 3,
+  Widget _buildImage() => Hero(
+        tag: '${widget.apod.url}',
+        child: FadeInNetworkImage(
+          url: '${widget.apod.url}',
+          height: MediaQuery.of(context).size.height / 3,
+        ),
       );
 
   Widget _buildDescription() => Padding(

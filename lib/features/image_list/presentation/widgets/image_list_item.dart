@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hello_universe/features/core/widgets/widgets.dart';
 import 'package:hello_universe/models/model.dart';
 import 'package:hello_universe/utils/navigation/states/navigation_cubit.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// An item from the Nasa APOD list.
 class ImageListItem extends StatelessWidget {
@@ -35,22 +35,24 @@ class ImageListItem extends StatelessWidget {
             _buildText(),
           ],
         ),
-        onTap: () => context
-            .read<NavigationCubit>()
-            .navigateToDetailsPage(pictureOfDay),
+        onTap: () =>
+            context.read<NavigationCubit>().navigateToDetailsPage(pictureOfDay),
       );
 
-  Widget _buildImage() => ClipRRect(
-        borderRadius: const BorderRadius.vertical(
-          top: Radius.circular(8),
+  Widget _buildImage() => Hero(
+        tag: '${pictureOfDay.url}',
+        child: ClipRRect(
+          borderRadius: const BorderRadius.vertical(
+            top: Radius.circular(8),
+          ),
+          // Todo(Havir): handle videos (they have thumbnail).
+          child: (pictureOfDay.url?.isEmpty ?? true)
+              ? const NoImage(key: Key('ImageListItemNoResultImage'))
+              : FadeInNetworkImage(
+                  url: pictureOfDay.url!,
+                  key: const Key('ImageListItemNetworkImage'),
+                ),
         ),
-        // Todo(Havir): handle videos (they have thumbnail).
-        child: (pictureOfDay.url?.isEmpty ?? true)
-            ? const NoImage(key: Key('ImageListItemNoResultImage'))
-            : FadeInNetworkImage(
-                url: pictureOfDay.url!,
-                key: const Key('ImageListItemNetworkImage'),
-              ),
       );
 
   Widget _buildText() => Padding(
