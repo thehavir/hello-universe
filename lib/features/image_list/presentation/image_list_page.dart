@@ -24,7 +24,6 @@ class _ImageListPageState extends State<ImageListPage> {
   void initState() {
     super.initState();
 
-    context.read<ImageListCubit>().fetch();
     _scrollController.addListener(_onScroll);
   }
 

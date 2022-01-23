@@ -27,7 +27,7 @@ class _RootWidgetState extends State<RootWidget> {
     );
     _backButtonDispatcher = AppBackButtonDispatcher(_routerDelegate);
 
-    _routerDelegate.setNewRoutePath(imageListPageConfig);
+    _routerDelegate.setNewRoutePath(splashPageConfig);
   }
 
   @override
