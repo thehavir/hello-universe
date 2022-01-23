@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hello_universe/features/image_detail/view/image_details_page.dart';
 import 'package:hello_universe/features/image_list/presentation/image_list_page.dart';
+import 'package:hello_universe/features/splash/presentation/splash_page.dart';
 import 'package:hello_universe/utils/navigation/router/ui_pages.dart';
 import 'package:hello_universe/utils/navigation/states/navigation_cubit.dart';
 
@@ -31,7 +32,7 @@ class AppRouterDelegate extends RouterDelegate<PageConfiguration>
   /// Number of pages function
   int get numPages => _pages.length;
 
-  final List<Page> _pages = [];
+  final List<Page> _pages = <Page>[];
 
   @override
   PageConfiguration get currentConfiguration =>
@@ -132,6 +133,9 @@ class AppRouterDelegate extends RouterDelegate<PageConfiguration>
 
   void _setPageAction(PageAction action) {
     switch (action.page!.uiPage) {
+      case Pages.splash:
+        splashPageConfig.currentPageAction = action;
+        break;
       case Pages.imageList:
         imageListPageConfig.currentPageAction = action;
         break;
@@ -151,6 +155,9 @@ class AppRouterDelegate extends RouterDelegate<PageConfiguration>
 
     if (shouldAddPage) {
       switch (pageConfig.uiPage) {
+        case Pages.splash:
+          _addPageData(SplashPage(), splashPageConfig);
+          break;
         case Pages.imageList:
           _addPageData(ImageListPage(), imageListPageConfig);
           break;

@@ -1,6 +1,9 @@
 import 'package:hello_universe/utils/navigation/states/navigation_cubit.dart';
 
 /// Define the paths or routes of each screen.
+/// Path of the `SplashPage`.
+const String splashPath = '/splash';
+
 /// Path of the `ImageListPage`.
 const String imageListPath = '/imageList';
 
@@ -9,6 +12,7 @@ const String imageDetailsPath = '/imageDetails';
 
 /// Represents the UI for each page as enum.
 enum Pages {
+  splash,
   imageList,
   imageDetails,
 }
@@ -38,6 +42,13 @@ class PageConfiguration {
   /// Current `PageAction`.
   PageAction? currentPageAction;
 }
+
+/// Route configuration of `SplashPage`.
+final PageConfiguration splashPageConfig = PageConfiguration(
+  key: 'Splash',
+  path: splashPath,
+  uiPage: Pages.splash,
+);
 
 /// Route configuration of `ImageListPage`.
 final PageConfiguration imageListPageConfig = PageConfiguration(

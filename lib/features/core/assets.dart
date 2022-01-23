@@ -6,4 +6,5 @@ class Assets {
   static const String noResultIcon = 'assets/no-results.png';
   static const String noImageIcon = 'assets/no-image.png';
   static const String placeholder = 'assets/placeholder.png';
+  static const String splash = 'assets/splash.png';
 }
