@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hello_universe/features/image_list/states/image_list_cubit.dart';
 import 'package:hello_universe/repository/repository.dart';
-import 'package:hello_universe/utils/navigation/router/router.dart';
-import 'package:hello_universe/utils/navigation/states/navigation_cubit.dart';
+import 'package:hello_universe/utils/navigation/navigation.dart';
 
 class RootWidget extends StatefulWidget {
   @override

@@ -21,7 +21,7 @@ class ImageListCubit extends Cubit<ImageListState> {
       if (state.hasMore && !state.isLoading) {
         emit(state.copyWith(status: StateStatus.loading));
 
-        final List<PictureOfDay> imageList = await repository.fetchImageList(
+        final List<Apod> imageList = await repository.fetchImageList(
           startDate: _startDate.format(),
           endDate: _endDate.format(),
         );

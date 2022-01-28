@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:hello_universe/features/core/states/states.dart';
-import 'package:hello_universe/models/apod.dart';
+import 'package:hello_universe/models/models.dart';
 import 'package:hello_universe/utils/navigation/router/router.dart';
 
 part 'navigation_state.dart';
@@ -28,12 +28,12 @@ class NavigationCubit extends Cubit<NavigationState> {
   }
 
   /// Navigates to `ImageDetailsPage`.
-  Future<void> navigateToDetailsPage(PictureOfDay pictureOfDay) async {
+  Future<void> navigateToDetailsPage(Apod apod) async {
     emit(state.copyWith(
       data: PageAction(
         pageState: PageState.addPage,
         page: imageDetailsPageConfig,
-        pageData: pictureOfDay,
+        pageData: apod,
       ),
     ));
   }

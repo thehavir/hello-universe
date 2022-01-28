@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hello_universe/features/core/widgets/play_icon.dart';
 import 'package:hello_universe/features/core/widgets/widgets.dart';
-import 'package:hello_universe/models/model.dart';
-import 'package:hello_universe/utils/navigation/states/navigation_cubit.dart';
+import 'package:hello_universe/models/models.dart';
+import 'package:hello_universe/utils/navigation/navigation.dart';
 
 /// An item from the Nasa APOD list.
 class ImageListItem extends StatelessWidget {
   /// Constructs a `ImageListItem`.
   const ImageListItem(
-    this.pictureOfDay, {
+    this.apod, {
     Key? key,
   }) : super(key: key);
 
   /// The current `Merchant` in the list.
-  final PictureOfDay pictureOfDay;
+  final Apod apod;
 
   @override
   Widget build(BuildContext context) => Padding(
@@ -37,26 +36,26 @@ class ImageListItem extends StatelessWidget {
           ],
         ),
         onTap: () =>
-            context.read<NavigationCubit>().navigateToDetailsPage(pictureOfDay),
+            context.read<NavigationCubit>().navigateToDetailsPage(apod),
       );
 
   Widget _buildImage() => Hero(
-        tag: '${pictureOfDay.imageUrl}',
+        tag: '${apod.imageUrl}',
         child: ClipRRect(
           borderRadius: const BorderRadius.vertical(
             top: Radius.circular(8),
           ),
           // Todo(Havir): handle videos (they have thumbnail).
-          child: (pictureOfDay.imageUrl?.isEmpty ?? true)
+          child: (apod.imageUrl?.isEmpty ?? true)
               ? const NoImage(key: Key('ImageListItemNoResultImage'))
               : Stack(
                   alignment: Alignment.center,
                   children: <Widget>[
                     FadeInNetworkImage(
-                      url: pictureOfDay.imageUrl!,
+                      url: apod.imageUrl!,
                       key: const Key('ImageListItemNetworkImage'),
                     ),
-                    if (pictureOfDay.isVideo) const PlayIcon(),
+                    if (apod.isVideo) const PlayIcon(),
                   ],
                 ),
         ),
@@ -65,7 +64,7 @@ class ImageListItem extends StatelessWidget {
   Widget _buildText() => Padding(
         padding: const EdgeInsets.all(8),
         child: Text(
-          pictureOfDay.date!,
+          apod.date!,
           textAlign: TextAlign.center,
           style: const TextStyle(
             fontWeight: FontWeight.w500,

@@ -1,4 +1,4 @@
-/// Media type of the `PictureOfDay`.
+/// Media type of the `Apod`.
 enum MediaType {
   /// Represent an image.
   image,

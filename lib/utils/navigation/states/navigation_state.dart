@@ -43,7 +43,7 @@ class PageAction {
 }
 
 /// The state of the navigation
-/// It's data is `PageAction`. Also, it holds extra data (`PictureOfDay` in this
+/// It's data is `PageAction`. Also, it holds extra data (`Apod` in this
 /// case), in order to pass it to the page.
 class NavigationState extends BaseState<PageAction> {
   /// Constructs a `NavigationState`.

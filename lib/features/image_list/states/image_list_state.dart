@@ -1,11 +1,11 @@
 part of 'image_list_cubit.dart';
 
 /// State of `ImageListCubit`.
-class ImageListState extends BaseState<List<PictureOfDay>> {
+class ImageListState extends BaseState<List<Apod>> {
   /// Constructs a new ImageListState with the given parameters.
   const ImageListState({
     StateStatus? status = StateStatus.initial,
-    List<PictureOfDay>? data,
+    List<Apod>? data,
     Object? error,
     this.offset = 0,
     this.hasMore = true,
@@ -32,7 +32,7 @@ class ImageListState extends BaseState<List<PictureOfDay>> {
   @override
   ImageListState copyWith({
     StateStatus? status = StateStatus.initial,
-    List<PictureOfDay>? data,
+    List<Apod>? data,
     Object? error,
     int? offset,
     bool? hasMore,

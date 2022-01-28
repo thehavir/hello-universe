@@ -4,7 +4,7 @@ import 'package:hello_universe/features/core/assets.dart';
 import 'package:hello_universe/features/core/widgets/widgets.dart';
 import 'package:hello_universe/features/image_list/presentation/widgets/widgets.dart';
 import 'package:hello_universe/features/image_list/states/image_list_cubit.dart';
-import 'package:hello_universe/models/model.dart';
+import 'package:hello_universe/models/models.dart';
 
 /// Widget for showing Nasa APOD list.
 /// It is the main page of the application.
@@ -91,7 +91,7 @@ class _ImageListPageState extends State<ImageListPage> {
   }
 
   Widget _buildImageList(ImageListState state) {
-    final List<PictureOfDay> images = state.data!;
+    final List<Apod> images = state.data!;
 
     return ListView.builder(
       key: const Key('ImageListPageListView'),
