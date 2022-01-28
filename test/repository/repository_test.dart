@@ -8,7 +8,9 @@ void main() {
   group('Test fetching image', () {
     late BaseRepository nasaApodRepository;
 
-    final DateTime now = DateTime.now();
+    // There is no exact time for update APOD from NASA each day, so we always
+    // fetch the yesterday APOD as the first APOD.
+    final DateTime now = DateTime.now().xDaysBefore(1);
     final DateTime xDaysBefore = now.xDaysBefore();
     final String startDate = now.format();
     final String endDate = xDaysBefore.format();
@@ -69,7 +71,7 @@ void main() {
 
     test('Test fetch image list in boundaries failure', () async {
       expect(
-        () async => await nasaApodRepository.fetchImageList(
+        () => nasaApodRepository.fetchImageList(
           startDate: '1995-06-27',
           endDate: '1995-06-15',
         ),
@@ -85,16 +87,19 @@ void main() {
         endDate: endDate,
       );
 
-      expect(imageList.length, 20);
+      expect(imageList.length, 21);
     });
 
     test('Test order of the image list', () async {
-      final List<PictureOfDay> imageList = await nasaApodRepository
-          .fetchImageList(startDate: startDate, endDate: endDate);
+      final List<PictureOfDay> imageList =
+          await nasaApodRepository.fetchImageList(
+        startDate: startDate,
+        endDate: endDate,
+      );
 
-      expect(imageList.length, 20);
+      expect(imageList.length, 21);
 
-      expect(imageList[0].date, now.xDaysBefore(19 - 19).format());
+      expect(imageList[0].date, now.xDaysBefore(20 - 20).format());
     });
 
     test('Test fetch Apod of a specific date', () async {

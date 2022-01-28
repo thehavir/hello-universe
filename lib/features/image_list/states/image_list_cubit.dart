@@ -41,7 +41,9 @@ class ImageListCubit extends Cubit<ImageListState> {
 
   DateTime get _startDate {
     if (state.startDate == null) {
-      return DateTime.now();
+      // There is no exact time for update APOD from NASA each day, so we always
+      // fetch the yesterday APOD as the first APOD.
+      return DateTime.now().xDaysBefore(1);
     }
 
     return state.startDate!;
