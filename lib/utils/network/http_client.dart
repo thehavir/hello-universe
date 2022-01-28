@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:hello_universe/utils/network/network.dart';
 import 'package:http/http.dart';
 
@@ -25,7 +26,7 @@ class HttpClient {
       case RequestType.post:
         return client.post(
           Uri.https(authority!, path!),
-          headers: {'Content-Type': 'application/json'},
+          headers: <String, String>{'Content-Type': 'application/json'},
           body: json.encode(parameter),
         );
       case RequestType.delete:

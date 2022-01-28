@@ -35,8 +35,6 @@ class ImageListCubit extends Cubit<ImageListState> {
         ));
       }
     } on Exception catch (error) {
-      print(error);
-
       emit(state.copyWith(status: StateStatus.failure, error: error));
     }
   }

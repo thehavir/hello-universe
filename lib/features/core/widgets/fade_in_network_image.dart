@@ -13,6 +13,7 @@ class FadeInNetworkImage extends StatelessWidget {
   /// Url of the image.
   final String url;
 
+  /// Height of the Image.
   final double height;
 
   @override

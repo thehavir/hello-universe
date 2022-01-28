@@ -6,8 +6,11 @@ import 'package:hello_universe/utils/navigation/router/router.dart';
 
 part 'navigation_state.dart';
 
+/// Cubit for navigation.
 class NavigationCubit extends Cubit<NavigationState> {
-  NavigationCubit() : super(NavigationState());
+  /// Constructs a `NavigatorCubit` and calls super with a `NavigatorState`
+  /// object.
+  NavigationCubit() : super(const NavigationState());
 
   /// Resets the page state to none.
   Future<void> resetCurrentAction() async {

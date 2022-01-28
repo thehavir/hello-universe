@@ -46,6 +46,7 @@ class PageAction {
 /// It's data is `PageAction`. Also, it holds extra data (`PictureOfDay` in this
 /// case), in order to pass it to the page.
 class NavigationState extends BaseState<PageAction> {
+  /// Constructs a `NavigationState`.
   const NavigationState({
     PageAction? pageAction,
   }) : super(data: pageAction);

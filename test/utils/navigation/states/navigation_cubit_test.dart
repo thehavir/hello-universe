@@ -18,7 +18,7 @@ void main() {
       expect(navigationCubit.state.status, StateStatus.initial);
     });
 
-    blocTest(
+    blocTest<NavigationCubit, NavigationState>(
       'Test navigateToImageList method',
       build: () => navigationCubit,
       act: (NavigationCubit cubit) => cubit.navigateToImageListPage(),
@@ -28,7 +28,7 @@ void main() {
       },
     );
 
-    blocTest(
+    blocTest<NavigationCubit, NavigationState>(
       'Test `navigateToImageDetailsPage` method',
       // Todo(Havir): If we use `navigationCubit`, we get an error. Investigate
       // What is the issue and see why cubit will be closed.
@@ -41,7 +41,7 @@ void main() {
       },
     );
 
-    blocTest(
+    blocTest<NavigationCubit, NavigationState>(
       'Test `resetCurrentAction` method',
       // Todo(Havir): If we use `navigationCubit`, we get an error. Investigate
       // What is the issue and see why cubit will be closed.
