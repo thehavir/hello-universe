@@ -27,7 +27,7 @@ void main() {
       expect(imageListCubit.state.status, StateStatus.initial);
     });
 
-    blocTest(
+    blocTest<ImageListCubit, ImageListState>(
       'Test fetch apod list successfully',
       build: () {
         when(() => repository.fetchImageList(
@@ -47,7 +47,7 @@ void main() {
       ],
     );
 
-    blocTest(
+    blocTest<ImageListCubit, ImageListState>(
       'Test fetch apod list failed',
       build: () {
         when(() => repository.fetchImageList(
@@ -67,7 +67,7 @@ void main() {
       ],
     );
 
-    blocTest(
+    blocTest<ImageListCubit, ImageListState>(
       'Test nasa apod image list with pagination',
       build: () {
         when(() => repository.fetchImageList(

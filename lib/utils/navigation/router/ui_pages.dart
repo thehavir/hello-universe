@@ -12,17 +12,23 @@ const String imageDetailsPath = '/imageDetails';
 
 /// Represents the UI for each page as enum.
 enum Pages {
+  /// Represent `SplashPage`.
   splash,
+
+  /// Represent `ImageListPage`.
   imageList,
+
+  /// Represent `ImageDetailsPage`.
   imageDetails,
 }
 
 /// Wraps all information about each page together.
 /// Holds two Strings, which represent the page’s `key` and `path`. And then a
-/// third parameter which represents the UI associated th that page using thePageAction
+/// third parameter which represents the UI associated th that page using the
 /// `Pages` enum. The fourth item remembers the current page action that was
 /// used for this page.
 class PageConfiguration {
+  /// Constructs a `PageConfiguration`.
   PageConfiguration({
     required this.key,
     required this.path,

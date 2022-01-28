@@ -33,7 +33,7 @@ abstract class BaseState<T> extends Equatable {
   /// data if we had any.
   BaseState<T> loading() => copyWith(
         status: StateStatus.loading,
-        data: this.data,
+        data: data,
       );
 
   /// Returns a copy of the current state with success status and given data.
@@ -46,7 +46,7 @@ abstract class BaseState<T> extends Equatable {
   /// and the current data if we had any.
   BaseState<T> failure([Object? error]) => copyWith(
         status: StateStatus.failure,
-        data: this.data,
+        data: data,
         error: error,
       );
 

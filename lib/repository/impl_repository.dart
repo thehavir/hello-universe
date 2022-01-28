@@ -2,7 +2,7 @@ import 'dart:convert';
 
 /// This file contains Nasa API key.
 /// Get a valid key from Nasa API website (https://api.nasa.gov/) or
-/// use the demo key [DEMO_KEY].
+/// use the demo key `DEMO_KEY`.
 import 'package:hello_universe/keys.dart';
 import 'package:hello_universe/models/model.dart';
 import 'package:hello_universe/repository/base_repository.dart';
@@ -20,7 +20,7 @@ class ImplRepository extends BaseRepository {
     try {
       /// Get a valid key from Nasa API website (https://api.nasa.gov/) or
       /// use the demo key [DEMO_KEY].
-      final Map<String, String> parameterQueries = {
+      final Map<String, String> parameterQueries = <String, String>{
         'api_key': NASA_API_KEY,
         'thumbs': 'True',
         if (date != null) 'date': date,
@@ -37,7 +37,7 @@ class ImplRepository extends BaseRepository {
         return throw Exception(
             'APOD is not available. Response status code is: ${response.body}');
       }
-    } catch (error) {
+    } on Exception catch (error) {
       return throw Exception('Something went wrong on fetching APOD! $error');
     }
   }
@@ -48,7 +48,7 @@ class ImplRepository extends BaseRepository {
     required String endDate,
   }) async {
     try {
-      final Map<String, String> parameterQueries = {
+      final Map<String, String> parameterQueries = <String, String>{
         'api_key': NASA_API_KEY,
         // The order of start/end dates is not what we want. So dates will be
         // sent in the opposite order.
@@ -63,10 +63,12 @@ class ImplRepository extends BaseRepository {
       );
 
       if (response.statusCode == 200) {
-        final Iterable decodedJsonList = json.decode(response.body);
+        final Iterable<dynamic> decodedJsonList =
+            json.decode(response.body);
 
         return List<PictureOfDay>.from(
-          decodedJsonList.map((model) => PictureOfDay.fromJson(model)),
+          decodedJsonList.map<PictureOfDay>(
+              (dynamic model) => PictureOfDay.fromJson(model)),
           // We want a list with the opposite order of what we get from the API,
           // so, we return the reversed list.
         ).reversed.toList();
@@ -74,7 +76,7 @@ class ImplRepository extends BaseRepository {
         return throw Exception(
             'APOD list is not available. Response body is: ${response.body}');
       }
-    } catch (error) {
+    } on Exception catch (error) {
       return throw Exception(
           'Something went wrong on fetching APOD list! $error');
     }

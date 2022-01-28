@@ -27,12 +27,13 @@ class AppRouterDelegate extends RouterDelegate<PageConfiguration>
   final NavigationCubit navigationCubit;
 
   /// Getter for a list that cannot be changed
-  List<MaterialPage> get pages => List.unmodifiable(_pages);
+  List<MaterialPage<dynamic>> get pages =>
+      List<MaterialPage<dynamic>>.unmodifiable(_pages);
 
   /// Number of pages function
   int get numPages => _pages.length;
 
-  final List<Page> _pages = <Page>[];
+  final List<Page<dynamic>> _pages = <Page<dynamic>>[];
 
   @override
   PageConfiguration get currentConfiguration =>
@@ -41,14 +42,14 @@ class AppRouterDelegate extends RouterDelegate<PageConfiguration>
   @override
   Widget build(BuildContext context) => Navigator(
         key: navigatorKey,
-        observers: [HeroController()],
+        observers: <NavigatorObserver>[HeroController()],
         onPopPage: _onPopPage,
         pages: _buildPages(),
       );
 
   /// Will be called on AppBar's back button.
-  bool _onPopPage(Route<dynamic> route, result) {
-    final didPop = route.didPop(result);
+  bool _onPopPage(Route<dynamic> route, dynamic result) {
+    final bool didPop = route.didPop(result);
 
     if (!didPop) {
       return false;
@@ -73,7 +74,7 @@ class AppRouterDelegate extends RouterDelegate<PageConfiguration>
   /// removed.
   bool canPop() => _pages.length > 1;
 
-  void _removePage(Page page) {
+  void _removePage(Page<dynamic> page) {
     _pages.remove(page);
 
     navigationCubit.resetCurrentAction();
@@ -85,13 +86,13 @@ class AppRouterDelegate extends RouterDelegate<PageConfiguration>
     if (canPop()) {
       _removePage(_pages.last);
 
-      return Future.value(true);
+      return Future<bool>.value(true);
     }
 
-    return Future.value(false);
+    return Future<bool>.value(false);
   }
 
-  List<Page> _buildPages() {
+  List<Page<dynamic>> _buildPages() {
     final PageState? pageState = navigationCubit.state.pageState;
 
     if (pageState != null) {
@@ -128,7 +129,7 @@ class AppRouterDelegate extends RouterDelegate<PageConfiguration>
       navigationCubit.resetCurrentAction();
     }
 
-    return List.of(_pages);
+    return List<Page<dynamic>>.of(_pages);
   }
 
   void _setPageAction(PageAction action) {
@@ -149,17 +150,17 @@ class AppRouterDelegate extends RouterDelegate<PageConfiguration>
 
   /// Adds a page to the pages.
   void addPage(PageConfiguration pageConfig) {
-    final shouldAddPage = _pages.isEmpty ||
+    final bool shouldAddPage = _pages.isEmpty ||
         (_pages.last.arguments as PageConfiguration).uiPage !=
             pageConfig.uiPage;
 
     if (shouldAddPage) {
       switch (pageConfig.uiPage) {
         case Pages.splash:
-          _addPageData(SplashPage(), splashPageConfig);
+          _addPageData(const SplashPage(), splashPageConfig);
           break;
         case Pages.imageList:
-          _addPageData(ImageListPage(), imageListPageConfig);
+          _addPageData(const ImageListPage(), imageListPageConfig);
           break;
         case Pages.imageDetails:
           if (pageConfig.currentPageAction?.pageData != null) {
@@ -179,10 +180,11 @@ class AppRouterDelegate extends RouterDelegate<PageConfiguration>
         _createPage(child, pageConfig),
       );
 
-  MaterialPage _createPage(Widget child, PageConfiguration pageConfig) =>
-      MaterialPage(
+  MaterialPage<dynamic> _createPage(
+          Widget child, PageConfiguration pageConfig) =>
+      MaterialPage<dynamic>(
         child: child,
-        key: ValueKey(pageConfig.key),
+        key: ValueKey<String>(pageConfig.key),
         name: pageConfig.path,
         arguments: pageConfig,
       );
@@ -201,7 +203,7 @@ class AppRouterDelegate extends RouterDelegate<PageConfiguration>
 
   @override
   Future<void> setNewRoutePath(PageConfiguration configuration) {
-    final shouldAddPage = _pages.isEmpty ||
+    final bool shouldAddPage = _pages.isEmpty ||
         (_pages.last.arguments as PageConfiguration).uiPage !=
             configuration.uiPage;
 
@@ -210,7 +212,7 @@ class AppRouterDelegate extends RouterDelegate<PageConfiguration>
       addPage(configuration);
     }
 
-    return SynchronousFuture(null);
+    return SynchronousFuture<void>(null);
   }
 
   /// Adds new page on top of the pages.
@@ -224,18 +226,15 @@ class AppRouterDelegate extends RouterDelegate<PageConfiguration>
   void addAll(List<PageConfiguration> routes) {
     _pages.clear();
 
-    routes.forEach((route) {
-      addPage(route);
-    });
+    routes.forEach(addPage);
   }
 
   /// Clears the entire navigation stack, i.e. the _pages list, and adds all the
   /// new pages provided as the argument.
   /// When we want to go to a page and change the path, we use this method.
-  void setPath(List<MaterialPage> path) {
-    _pages.clear();
-    _pages.addAll(path);
-  }
+  void setPath(List<MaterialPage<dynamic>> path) => _pages
+    ..clear()
+    ..addAll(path);
 
   /// Because states are managed by Cubit, there is no need for this.
   @override

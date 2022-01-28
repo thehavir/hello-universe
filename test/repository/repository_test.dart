@@ -9,7 +9,7 @@ void main() {
     late BaseRepository nasaApodRepository;
 
     final DateTime now = DateTime.now();
-    final xDaysBefore = now.xDaysBefore();
+    final DateTime xDaysBefore = now.xDaysBefore();
     final String startDate = now.format();
     final String endDate = xDaysBefore.format();
 
