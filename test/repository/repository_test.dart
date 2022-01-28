@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hello_universe/features/image_list/extensions/extensions.dart';
-import 'package:hello_universe/models/model.dart';
+import 'package:hello_universe/models/models.dart';
 import 'package:hello_universe/repository/base_repository.dart';
 import 'package:hello_universe/repository/impl_repository.dart';
 
@@ -20,14 +20,14 @@ void main() {
     });
 
     test('Test fetch image (APOD) successful', () async {
-      final PictureOfDay pictureOfDay =
-          await nasaApodRepository.fetchPictureOfDay();
+      final Apod apod =
+          await nasaApodRepository.fetchApod();
 
-      expect(pictureOfDay.url, isNotNull);
+      expect(apod.url, isNotNull);
     });
 
     test('Test fetch image list successful', () async {
-      final List<PictureOfDay> imageList =
+      final List<Apod> imageList =
           await nasaApodRepository.fetchImageList(
         startDate: '2016-02-25',
         endDate: '2016-01-25',
@@ -37,7 +37,7 @@ void main() {
     });
 
     test('Test fetch image list in boundaries successful', () async {
-      final List<PictureOfDay> imageList =
+      final List<Apod> imageList =
           await nasaApodRepository.fetchImageList(
         startDate: '1995-06-27',
         endDate: '1995-06-20',
@@ -45,7 +45,7 @@ void main() {
 
       expect(imageList.length, 8);
 
-      final List<PictureOfDay> imageList2 =
+      final List<Apod> imageList2 =
           await nasaApodRepository.fetchImageList(
         startDate: '1995-06-27',
         endDate: '1995-06-16',
@@ -53,14 +53,14 @@ void main() {
 
       expect(imageList2.length, 9);
 
-      final List<PictureOfDay> imageList3 =
+      final List<Apod> imageList3 =
           await nasaApodRepository.fetchImageList(
         startDate: '1995-06-16',
         endDate: '1995-06-16',
       );
 
       expect(imageList3.length, 1);
-      final List<PictureOfDay> imageList4 =
+      final List<Apod> imageList4 =
           await nasaApodRepository.fetchImageList(
         startDate: '1995-06-20',
         endDate: '1995-06-17',
@@ -81,7 +81,7 @@ void main() {
 
     test('Test fetch image list successful between now till 19 days ago',
         () async {
-      final List<PictureOfDay> imageList =
+      final List<Apod> imageList =
           await nasaApodRepository.fetchImageList(
         startDate: startDate,
         endDate: endDate,
@@ -91,7 +91,7 @@ void main() {
     });
 
     test('Test order of the image list', () async {
-      final List<PictureOfDay> imageList =
+      final List<Apod> imageList =
           await nasaApodRepository.fetchImageList(
         startDate: startDate,
         endDate: endDate,
@@ -103,17 +103,17 @@ void main() {
     });
 
     test('Test fetch Apod of a specific date', () async {
-      final PictureOfDay pictureOfDay =
-          await nasaApodRepository.fetchPictureOfDay(date: '2016-02-06');
+      final Apod apod =
+          await nasaApodRepository.fetchApod(date: '2016-02-06');
 
-      expect(pictureOfDay.url, isNotNull);
+      expect(apod.url, isNotNull);
     });
 
     test('Test thumbnail url is not null for Apod videos', () async {
-      final PictureOfDay pictureOfDay =
-          await nasaApodRepository.fetchPictureOfDay(date: '2016-02-09');
+      final Apod apod =
+          await nasaApodRepository.fetchApod(date: '2016-02-09');
 
-      expect(pictureOfDay.thumbnailUrl, isNotNull);
+      expect(apod.thumbnailUrl, isNotNull);
     });
   });
 }

@@ -1,8 +1,8 @@
-import 'package:hello_universe/models/model.dart';
+import 'package:hello_universe/models/models.dart';
 
 /// Mock data for the response of fetching picture of day api
 /// (https://api.nasa.gov/planetary/apod).
-final PictureOfDay mockApod = PictureOfDay(
+final Apod mockApod = Apod(
   copyright: 'mock1 copyright',
   date: 'mock1 date',
   explanation: 'mock1 explanation',
@@ -15,7 +15,7 @@ final PictureOfDay mockApod = PictureOfDay(
 
 /// Mock data for the response of fetching picture of day api
 /// (https://api.nasa.gov/planetary/apod).
-final PictureOfDay mockApod2 = PictureOfDay(
+final Apod mockApod2 = Apod(
   copyright: 'mock2 copyright',
   date: 'mock2 date',
   explanation: 'mock2 explanation',
@@ -28,7 +28,7 @@ final PictureOfDay mockApod2 = PictureOfDay(
 
 /// Mock data for the response of fetching picture of day api
 /// (https://api.nasa.gov/planetary/apod).
-final PictureOfDay mockApod3 = PictureOfDay(
+final Apod mockApod3 = Apod(
   copyright: 'mock3 copyright',
   date: 'mock3 date',
   explanation: 'mock3 explanation',
@@ -41,7 +41,7 @@ final PictureOfDay mockApod3 = PictureOfDay(
 
 /// Mock data for the response of fetching list of the picture of day api
 /// (https://api.nasa.gov/planetary/apod).
-final List<PictureOfDay> mockApodList = <PictureOfDay>[
+final List<Apod> mockApodList = <Apod>[
   mockApod,
   mockApod2,
   mockApod3,
@@ -49,7 +49,7 @@ final List<PictureOfDay> mockApodList = <PictureOfDay>[
 
 /// Mock data for the response of fetching list of the picture of day api
 /// (https://api.nasa.gov/planetary/apod).
-final List<PictureOfDay> mockApodList2 = <PictureOfDay>[
+final List<Apod> mockApodList2 = <Apod>[
   mockApod3,
   mockApod2,
   mockApod,

@@ -1,7 +1,7 @@
-import 'package:hello_universe/models/apod.dart';
+import 'package:hello_universe/models/models.dart';
 
-/// Extensions on `PictureOfDay`.
-extension ApodExtension on PictureOfDay {
+/// Extensions on `Apod`.
+extension ApodExtension on Apod {
   /// Determine if it is video by checking `thumbnailUrl`.
   bool get isVideo => thumbnailUrl != null;
 

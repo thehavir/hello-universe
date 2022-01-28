@@ -1,4 +1,4 @@
-import 'package:hello_universe/models/model.dart';
+import 'package:hello_universe/models/models.dart';
 
 /// Contract for the Nasa Apod repository.
 ///
@@ -6,13 +6,13 @@ import 'package:hello_universe/models/model.dart';
 /// to test the business logic.
 abstract class BaseRepository {
   /// Abstract method for fetching the picture of day from Nasa APOD repository.
-  Future<PictureOfDay> fetchPictureOfDay({
+  Future<Apod> fetchApod({
     String date,
   });
 
   /// Abstract method for fetching list of images (APOD). The list is contains
   /// images from [startDate] to [endDate].
-  Future<List<PictureOfDay>> fetchImageList({
+  Future<List<Apod>> fetchImageList({
     required String startDate,
     required String endDate,
   });

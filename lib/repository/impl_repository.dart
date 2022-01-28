@@ -4,8 +4,8 @@ import 'dart:convert';
 /// Get a valid key from Nasa API website (https://api.nasa.gov/) or
 /// use the demo key `DEMO_KEY`.
 import 'package:hello_universe/keys.dart';
-import 'package:hello_universe/models/model.dart';
-import 'package:hello_universe/repository/base_repository.dart';
+import 'package:hello_universe/models/models.dart';
+import 'package:hello_universe/repository/repository.dart';
 import 'package:hello_universe/utils/network/network.dart';
 import 'package:http/http.dart';
 
@@ -16,7 +16,7 @@ class ImplRepository extends BaseRepository {
   static final HttpClient _client = HttpClient(Client());
 
   @override
-  Future<PictureOfDay> fetchPictureOfDay({String? date}) async {
+  Future<Apod> fetchApod({String? date}) async {
     try {
       /// Get a valid key from Nasa API website (https://api.nasa.gov/) or
       /// use the demo key [DEMO_KEY].
@@ -32,7 +32,7 @@ class ImplRepository extends BaseRepository {
       );
 
       if (response.statusCode == 200) {
-        return PictureOfDay.fromJson(jsonDecode(response.body));
+        return Apod.fromJson(jsonDecode(response.body));
       } else {
         return throw Exception(
             'APOD is not available. Response status code is: ${response.body}');
@@ -43,7 +43,7 @@ class ImplRepository extends BaseRepository {
   }
 
   @override
-  Future<List<PictureOfDay>> fetchImageList({
+  Future<List<Apod>> fetchImageList({
     required String startDate,
     required String endDate,
   }) async {
@@ -63,12 +63,10 @@ class ImplRepository extends BaseRepository {
       );
 
       if (response.statusCode == 200) {
-        final Iterable<dynamic> decodedJsonList =
-            json.decode(response.body);
+        final Iterable<dynamic> decodedJsonList = json.decode(response.body);
 
-        return List<PictureOfDay>.from(
-          decodedJsonList.map<PictureOfDay>(
-              (dynamic model) => PictureOfDay.fromJson(model)),
+        return List<Apod>.from(
+          decodedJsonList.map<Apod>((dynamic model) => Apod.fromJson(model)),
           // We want a list with the opposite order of what we get from the API,
           // so, we return the reversed list.
         ).reversed.toList();

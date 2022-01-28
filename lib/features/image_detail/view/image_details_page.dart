@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:hello_universe/features/core/widgets/fade_in_network_image.dart';
-import 'package:hello_universe/features/core/widgets/play_icon.dart';
-import 'package:hello_universe/models/model.dart';
+import 'package:hello_universe/features/core/widgets/widgets.dart';
+import 'package:hello_universe/models/models.dart';
 
 class ImageDetailsPage extends StatefulWidget {
   ImageDetailsPage({
     required this.apod,
   });
 
-  final PictureOfDay apod;
+  final Apod apod;
 
   @override
   _ImageDetailsPageState createState() => _ImageDetailsPageState();

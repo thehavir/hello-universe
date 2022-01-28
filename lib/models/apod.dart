@@ -1,9 +1,9 @@
-import 'package:hello_universe/models/media_type.dart';
+import 'package:hello_universe/models/models.dart';
 
 /// Data model class for Nasa astronomy picture of day.
-class PictureOfDay {
-  /// Constructs a `PictureOfDay`.
-  PictureOfDay({
+class Apod {
+  /// Constructs a `Apod`.
+  Apod({
     this.copyright,
     this.date,
     this.explanation,
@@ -15,15 +15,14 @@ class PictureOfDay {
     this.thumbnailUrl,
   });
 
-  /// Constructs a `PictureOfDay` instance from a json file.
-  PictureOfDay.fromJson(Map<String, dynamic> json) {
+  /// Constructs a `Apod` instance from a json file.
+  Apod.fromJson(Map<String, dynamic> json) {
     copyright = json['copyright'];
     date = json['date'];
     explanation = json['explanation'];
     hdurl = json['hdurl'];
-    mediaType = json['media_type'] == 'image'
-        ? MediaType.image
-        : MediaType.video;
+    mediaType =
+        json['media_type'] == 'image' ? MediaType.image : MediaType.video;
     serviceVersion = json['service_version'];
     title = json['title'];
     url = json['url'];
@@ -57,7 +56,7 @@ class PictureOfDay {
   /// If Apod was a video, then this shows the thumbnail of that video.
   String? thumbnailUrl;
 
-  /// Creates a json object from a `PictureOfDay` object.
+  /// Creates a json object from a `Apod` object.
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
 
@@ -74,4 +73,3 @@ class PictureOfDay {
     return data;
   }
 }
-
