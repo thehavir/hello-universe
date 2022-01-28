@@ -14,7 +14,7 @@ void main() {
     late BaseRepository repository;
     late ImageListCubit imageListCubit;
 
-    final DateTime now = DateTime.now();
+    final DateTime now = DateTime.now().xDaysBefore(1);
     final DateTime twentyDaysBefore = now.xDaysBefore();
     final DateTime fortyDaysBefore = twentyDaysBefore.xDaysBefore();
 
