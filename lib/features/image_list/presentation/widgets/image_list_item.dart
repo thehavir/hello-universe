@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hello_universe/features/core/widgets/play_icon.dart';
 import 'package:hello_universe/features/core/widgets/widgets.dart';
 import 'package:hello_universe/models/model.dart';
 import 'package:hello_universe/utils/navigation/states/navigation_cubit.dart';
@@ -40,17 +41,23 @@ class ImageListItem extends StatelessWidget {
       );
 
   Widget _buildImage() => Hero(
-        tag: '${pictureOfDay.url}',
+        tag: '${pictureOfDay.imageUrl}',
         child: ClipRRect(
           borderRadius: const BorderRadius.vertical(
             top: Radius.circular(8),
           ),
           // Todo(Havir): handle videos (they have thumbnail).
-          child: (pictureOfDay.url?.isEmpty ?? true)
+          child: (pictureOfDay.imageUrl?.isEmpty ?? true)
               ? const NoImage(key: Key('ImageListItemNoResultImage'))
-              : FadeInNetworkImage(
-                  url: pictureOfDay.url!,
-                  key: const Key('ImageListItemNetworkImage'),
+              : Stack(
+                  alignment: Alignment.center,
+                  children: <Widget>[
+                    FadeInNetworkImage(
+                      url: pictureOfDay.imageUrl!,
+                      key: const Key('ImageListItemNetworkImage'),
+                    ),
+                    if (pictureOfDay.isVideo) const PlayIcon(),
+                  ],
                 ),
         ),
       );

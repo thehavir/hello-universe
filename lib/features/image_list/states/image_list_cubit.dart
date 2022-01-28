@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:hello_universe/features/core/states/states.dart';
-import 'package:hello_universe/features/image_list/extensions/extension.dart';
+import 'package:hello_universe/features/image_list/extensions/extensions.dart';
 import 'package:hello_universe/models/apod.dart';
 import 'package:hello_universe/repository/repository.dart';
 

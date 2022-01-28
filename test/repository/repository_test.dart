@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hello_universe/features/image_list/extensions/extension.dart';
+import 'package:hello_universe/features/image_list/extensions/extensions.dart';
 import 'package:hello_universe/models/model.dart';
 import 'package:hello_universe/repository/base_repository.dart';
 import 'package:hello_universe/repository/impl_repository.dart';
