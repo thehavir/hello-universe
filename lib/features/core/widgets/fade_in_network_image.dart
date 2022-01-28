@@ -16,6 +16,7 @@ class FadeInNetworkImage extends StatelessWidget {
   /// Height of the Image.
   final double height;
 
+  // Todo(Havir): Cache the image (Maybe use of [CachedNetworkImage]).
   @override
   Widget build(BuildContext context) => FadeInImage.assetNetwork(
         key: key,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hello_universe/features/core/widgets/fade_in_network_image.dart';
+import 'package:hello_universe/features/core/widgets/play_icon.dart';
 import 'package:hello_universe/models/model.dart';
 
 class ImageDetailsPage extends StatefulWidget {
@@ -36,10 +37,19 @@ class _ImageDetailsPageState extends State<ImageDetailsPage> {
       );
 
   Widget _buildImage() => Hero(
-        tag: '${widget.apod.url}',
-        child: FadeInNetworkImage(
-          url: '${widget.apod.url}',
-          height: MediaQuery.of(context).size.height / 3,
+        tag: '${widget.apod.imageUrl}',
+        child: Stack(
+          alignment: Alignment.center,
+          children: <Widget>[
+            FadeInNetworkImage(
+              url: '${widget.apod.imageUrl}',
+              height: MediaQuery.of(context).size.height / 3,
+            ),
+            if (widget.apod.isVideo)
+              const PlayIcon(
+                size: 120,
+              ),
+          ],
         ),
       );
 

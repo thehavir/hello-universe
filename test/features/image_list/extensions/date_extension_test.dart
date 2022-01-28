@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hello_universe/features/image_list/extensions/extension.dart';
+import 'package:hello_universe/features/image_list/extensions/extensions.dart';
 import 'package:intl/intl.dart';
 
 void main() {
