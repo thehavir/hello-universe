@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hello_universe/features/core/widgets/widgets.dart';
 import 'package:hello_universe/models/models.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ImageDetailsPage extends StatefulWidget {
   ImageDetailsPage({
@@ -15,15 +16,13 @@ class ImageDetailsPage extends StatefulWidget {
 
 class _ImageDetailsPageState extends State<ImageDetailsPage> {
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xff212121),
-      appBar: AppBar(
-        title: Text('${widget.apod.title}'),
-      ),
-      body: _buildBody(),
-    );
-  }
+  Widget build(BuildContext context) => Scaffold(
+        backgroundColor: const Color(0xff212121),
+        appBar: AppBar(
+          title: Text('${widget.apod.title}'),
+        ),
+        body: _buildBody(),
+      );
 
   Widget _buildBody() => SingleChildScrollView(
         child: Column(
@@ -37,18 +36,21 @@ class _ImageDetailsPageState extends State<ImageDetailsPage> {
 
   Widget _buildImage() => Hero(
         tag: '${widget.apod.imageUrl}',
-        child: Stack(
-          alignment: Alignment.center,
-          children: <Widget>[
-            FadeInNetworkImage(
-              url: '${widget.apod.imageUrl}',
-              height: MediaQuery.of(context).size.height / 3,
-            ),
-            if (widget.apod.isVideo)
-              const PlayIcon(
-                size: 120,
+        child: GestureDetector(
+          onTap: _onImageTap,
+          child: Stack(
+            alignment: Alignment.center,
+            children: <Widget>[
+              FadeInNetworkImage(
+                url: '${widget.apod.imageUrl}',
+                height: MediaQuery.of(context).size.height / 3,
               ),
-          ],
+              if (widget.apod.isVideo)
+                const PlayIcon(
+                  size: 120,
+                ),
+            ],
+          ),
         ),
       );
 
@@ -80,4 +82,16 @@ class _ImageDetailsPageState extends State<ImageDetailsPage> {
           ],
         ),
       );
+
+  void _onImageTap() {
+    if (widget.apod.isVideo) {
+      _launchYoutube();
+    }
+  }
+
+  Future<void> _launchYoutube() async {
+    if (!await launch(widget.apod.url!)) {
+      throw Exception('Could not launch ${widget.apod.url!}');
+    }
+  }
 }
