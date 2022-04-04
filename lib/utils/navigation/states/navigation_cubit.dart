@@ -37,4 +37,15 @@ class NavigationCubit extends Cubit<NavigationState> {
       ),
     ));
   }
+
+  /// Navigates to `FullScreenImagePage`.
+  Future<void> navigateToFullScreenImagePage(String imageUrl) async {
+    emit(state.copyWith(
+      data: PageAction(
+        pageState: PageState.addPage,
+        page: fullScreenImagePageConfig,
+        pageData: imageUrl,
+      ),
+    ));
+  }
 }
