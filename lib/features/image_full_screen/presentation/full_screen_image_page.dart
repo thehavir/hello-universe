@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
+/// Shows image in full screen with zoom capability.
 class FullScreenImagePage extends StatefulWidget {
+  /// Constructs a `FullScreenImagePage`.
   const FullScreenImagePage(
     this.imageUrl, {
     Key? key,
   }) : super(key: key);
 
+  /// Url of the image.
   final String imageUrl;
 
   @override
