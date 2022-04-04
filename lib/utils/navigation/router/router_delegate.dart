@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:hello_universe/features/image_detail/view/image_details_page.dart';
+import 'package:hello_universe/features/image_detail/presentation/image_details_page.dart';
+import 'package:hello_universe/features/image_full_screen/presentation/full_screen_image_page.dart';
 import 'package:hello_universe/features/image_list/presentation/image_list_page.dart';
 import 'package:hello_universe/features/splash/presentation/splash_page.dart';
 import 'package:hello_universe/utils/navigation/router/ui_pages.dart';
@@ -15,6 +16,7 @@ class AppRouterDelegate extends RouterDelegate<PageConfiguration>
   AppRouterDelegate({
     required this.navigatorKey,
     required this.navigationCubit,
+    required this.heroController,
   });
 
   /// Key of the navigator that used for retrieving the current navigator of
@@ -26,11 +28,20 @@ class AppRouterDelegate extends RouterDelegate<PageConfiguration>
   /// Instance of `NavigationCubit` that manage navigation state.
   final NavigationCubit navigationCubit;
 
-  /// Getter for a list that cannot be changed
+  /// [Hero] relies on a [HeroController] which the navigator in MaterialApp has
+  /// but the custom one does not. It should be defined in the init state of the
+  /// root widget and pass it to the [RouterDelegate] and use in `observers`
+  /// field in the [Navigator].
+  /// Note: If create it directly here in the [RouterDelegate] class, hero
+  /// animation doesn't work properly when user clicks on back button on the
+  /// AppBar.
+  final HeroController heroController;
+
+  /// Getter for a list that cannot be changed.
   List<MaterialPage<dynamic>> get pages =>
       List<MaterialPage<dynamic>>.unmodifiable(_pages);
 
-  /// Number of pages function
+  /// Number of pages function.
   int get numPages => _pages.length;
 
   final List<Page<dynamic>> _pages = <Page<dynamic>>[];
@@ -42,7 +53,7 @@ class AppRouterDelegate extends RouterDelegate<PageConfiguration>
   @override
   Widget build(BuildContext context) => Navigator(
         key: navigatorKey,
-        observers: <NavigatorObserver>[HeroController()],
+        observers: <NavigatorObserver>[heroController],
         onPopPage: _onPopPage,
         pages: _buildPages(),
       );
@@ -143,6 +154,9 @@ class AppRouterDelegate extends RouterDelegate<PageConfiguration>
       case Pages.imageDetails:
         imageDetailsPageConfig.currentPageAction = action;
         break;
+      case Pages.fullScreenImage:
+        fullScreenImagePageConfig.currentPageAction = action;
+        break;
       default:
         break;
     }
@@ -166,6 +180,14 @@ class AppRouterDelegate extends RouterDelegate<PageConfiguration>
           if (pageConfig.currentPageAction?.pageData != null) {
             _addPageData(
               ImageDetailsPage(apod: pageConfig.currentPageAction!.pageData!),
+              pageConfig,
+            );
+          }
+          break;
+        case Pages.fullScreenImage:
+          if (pageConfig.currentPageAction?.pageData != null) {
+            _addPageData(
+              FullScreenImagePage(pageConfig.currentPageAction!.pageData!),
               pageConfig,
             );
           }

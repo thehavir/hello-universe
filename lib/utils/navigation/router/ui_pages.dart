@@ -10,6 +10,9 @@ const String imageListPath = '/imageList';
 /// Path of the `ImageDetailsPage`.
 const String imageDetailsPath = '/imageDetails';
 
+/// Path of the `FullScreenImagePage`.
+const String fullScreenImagePath = '/fullScreenImage';
+
 /// Represents the UI for each page as enum.
 enum Pages {
   /// Represent `SplashPage`.
@@ -20,6 +23,9 @@ enum Pages {
 
   /// Represent `ImageDetailsPage`.
   imageDetails,
+
+  /// Represent `FullScreenImagePage`.
+  fullScreenImage,
 }
 
 /// Wraps all information about each page together.
@@ -68,4 +74,11 @@ final PageConfiguration imageDetailsPageConfig = PageConfiguration(
   key: 'ImageDetails',
   path: imageDetailsPath,
   uiPage: Pages.imageDetails,
+);
+
+/// Route configuration of `FullScreenImagePage`.
+final PageConfiguration fullScreenImagePageConfig = PageConfiguration(
+  key: 'FullScreenImage',
+  path: fullScreenImagePath,
+  uiPage: Pages.fullScreenImage,
 );

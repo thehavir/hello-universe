@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hello_universe/features/core/widgets/widgets.dart';
 import 'package:hello_universe/models/models.dart';
+import 'package:hello_universe/utils/navigation/navigation.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ImageDetailsPage extends StatefulWidget {
@@ -86,6 +88,10 @@ class _ImageDetailsPageState extends State<ImageDetailsPage> {
   void _onImageTap() {
     if (widget.apod.isVideo) {
       _launchYoutube();
+    } else {
+      context
+          .read<NavigationCubit>()
+          .navigateToFullScreenImagePage(widget.apod.imageUrl!);
     }
   }
 

@@ -14,15 +14,18 @@ class _RootWidgetState extends State<RootWidget> {
   late AppRouterDelegate _routerDelegate;
   late AppBackButtonDispatcher _backButtonDispatcher;
   late NavigationCubit _navigationCubit;
+  late HeroController _heroController;
 
   @override
   void initState() {
     super.initState();
 
+    _heroController = HeroController();
     _navigationCubit = NavigationCubit();
     _routerDelegate = AppRouterDelegate(
       navigatorKey: _navigatorKey,
       navigationCubit: _navigationCubit,
+      heroController: _heroController,
     );
     _backButtonDispatcher = AppBackButtonDispatcher(_routerDelegate);
 
