@@ -3,7 +3,7 @@ import 'dart:convert';
 /// This file contains Nasa API key.
 /// Get a valid key from Nasa API website (https://api.nasa.gov/) or
 /// use the demo key `DEMO_KEY`.
-import 'package:hello_universe/keys.dart';
+// import 'package:hello_universe/keys.dart';
 import 'package:hello_universe/models/models.dart';
 import 'package:hello_universe/repository/repository.dart';
 import 'package:hello_universe/utils/network/network.dart';
@@ -21,7 +21,7 @@ class ImplRepository extends BaseRepository {
       /// Get a valid key from Nasa API website (https://api.nasa.gov/) or
       /// use the demo key [DEMO_KEY].
       final Map<String, String> parameterQueries = <String, String>{
-        'api_key': NASA_API_KEY,
+        'api_key': 'DEMO_KEY',
         'thumbs': 'True',
         if (date != null) 'date': date,
       };
@@ -49,7 +49,7 @@ class ImplRepository extends BaseRepository {
   }) async {
     try {
       final Map<String, String> parameterQueries = <String, String>{
-        'api_key': NASA_API_KEY,
+        'api_key': 'DEMO_KEY',
         // The order of start/end dates is not what we want. So dates will be
         // sent in the opposite order.
         'start_date': endDate,
