@@ -1,8 +1,8 @@
 import 'package:go_router/go_router.dart';
-import 'package:hello_universe/features/image_detail/presentation/image_details_page.dart';
-import 'package:hello_universe/features/image_full_screen/presentation/full_screen_image_page.dart';
-import 'package:hello_universe/features/image_list/presentation/image_list_page.dart';
-import 'package:hello_universe/features/splash/presentation/splash_page.dart';
+import 'package:hello_universe/src/features/image_detail/presentation/image_details_page.dart';
+import 'package:hello_universe/src/features/image_full_screen/presentation/full_screen_image_page.dart';
+import 'package:hello_universe/src/features/image_list/presentation/image_list_page.dart';
+import 'package:hello_universe/src/features/splash/presentation/splash_page.dart';
 import 'package:hello_universe/src/navigation/nullable_object_extension.dart';
 import 'package:hello_universe/src/navigation/paths.dart';
 import 'package:hello_universe/src/navigation/router_provider.dart';

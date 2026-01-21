@@ -1,4 +1,4 @@
-import 'package:hello_universe/models/models.dart';
+import 'package:hello_universe/src/models/models.dart';
 
 /// Mock data for the response of fetching picture of day api
 /// (https://api.nasa.gov/planetary/apod).

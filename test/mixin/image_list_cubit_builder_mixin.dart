@@ -1,4 +1,4 @@
-import 'package:hello_universe/features/image_list/states/image_list_cubit.dart';
+import 'package:hello_universe/src/features/image_list/states/image_list_cubit.dart';
 import 'package:mocktail/mocktail.dart';
 
 mixin ImageListCubitBuilderMixin {
