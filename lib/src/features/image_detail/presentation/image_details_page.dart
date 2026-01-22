@@ -6,7 +6,7 @@ import 'package:hello_universe/src/navigation/routes.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ImageDetailsPage extends StatefulWidget {
-  ImageDetailsPage({required this.apod});
+  const ImageDetailsPage({super.key, required this.apod});
 
   final Apod apod;
 
@@ -80,7 +80,7 @@ class _ImageDetailsPageState extends State<ImageDetailsPage> {
   }
 
   Future<void> _launchYoutube() async {
-    if (!await launch(widget.apod.url!)) {
+    if (!await launchUrl(Uri.parse(widget.apod.url!))) {
       throw Exception('Could not launch ${widget.apod.url!}');
     }
   }

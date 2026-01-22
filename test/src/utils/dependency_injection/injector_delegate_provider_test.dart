@@ -10,12 +10,12 @@ void main() {
     '$InjectorDelegate can be obtained through ${InjectorDelegateProvider.of} method',
     (tester) async {
       final injectorDelegate = InjectorDelegate(Injector([]));
-      Injector? gettedInjector;
+      Injector? gotInjector;
       final testWidget = InjectorDelegateProvider(
         injectorDelegate: injectorDelegate,
         child: Builder(
           builder: (context) {
-            gettedInjector = InjectorDelegateProvider.of(context);
+            gotInjector = InjectorDelegateProvider.of(context);
             return const SizedBox();
           },
         ),
@@ -23,7 +23,7 @@ void main() {
 
       await tester.pumpWidget(testWidget);
 
-      expect(gettedInjector, injectorDelegate);
+      expect(gotInjector, injectorDelegate);
     },
   );
 
@@ -34,12 +34,12 @@ void main() {
       final resolverDelegate = InjectorDelegate(
         Injector([SingletonInjection<String>((resolver) => value)]),
       );
-      String? gettedValue;
+      String? gotValue;
       final testWidget = InjectorDelegateProvider(
         injectorDelegate: resolverDelegate,
         child: Builder(
           builder: (context) {
-            gettedValue = context.resolve<String>();
+            gotValue = context.resolve<String>();
             return const SizedBox();
           },
         ),
@@ -47,7 +47,7 @@ void main() {
 
       await tester.pumpWidget(testWidget);
 
-      expect(gettedValue, value);
+      expect(gotValue, value);
     },
   );
 
@@ -62,12 +62,12 @@ void main() {
         ]),
       );
       const number = 2042;
-      String? gettedValue;
+      String? gotValue;
       final testWidget = InjectorDelegateProvider(
         injectorDelegate: resolverDelegate,
         child: Builder(
           builder: (context) {
-            gettedValue = context.resolveWithParams<String, int>(number);
+            gotValue = context.resolveWithParams<String, int>(number);
             return const SizedBox();
           },
         ),
@@ -75,7 +75,7 @@ void main() {
 
       await tester.pumpWidget(testWidget);
 
-      expect(gettedValue, '$number');
+      expect(gotValue, '$number');
     },
   );
 }

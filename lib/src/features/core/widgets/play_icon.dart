@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class PlayIcon extends StatelessWidget {
-  const PlayIcon({Key? key, this.size = 100}) : super(key: key);
+  const PlayIcon({super.key, this.size = 100});
 
   final double size;
 

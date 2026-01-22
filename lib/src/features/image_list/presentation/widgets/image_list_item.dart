@@ -7,7 +7,7 @@ import 'package:hello_universe/src/navigation/routes.dart';
 /// An item from the Nasa APOD list.
 class ImageListItem extends StatelessWidget {
   /// Constructs a `ImageListItem`.
-  const ImageListItem(this.apod, {Key? key}) : super(key: key);
+  const ImageListItem(this.apod, {super.key});
 
   /// The current `Merchant` in the list.
   final Apod apod;

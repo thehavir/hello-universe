@@ -59,7 +59,7 @@ class Apod {
 
   /// Creates a json object from a `Apod` object.
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
+    final data = <String, dynamic>{};
 
     data['copyright'] = copyright;
     data['date'] = date;

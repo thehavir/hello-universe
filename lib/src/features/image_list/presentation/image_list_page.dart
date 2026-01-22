@@ -4,13 +4,12 @@ import 'package:hello_universe/src/assets.dart';
 import 'package:hello_universe/src/features/core/widgets/widgets.dart';
 import 'package:hello_universe/src/features/image_list/presentation/widgets/widgets.dart';
 import 'package:hello_universe/src/features/image_list/states/image_list_cubit.dart';
-import 'package:hello_universe/src/models/models.dart';
 
 /// Widget for showing Nasa APOD list.
 /// It is the main page of the application.
 class ImageListPage extends StatefulWidget {
   /// Constructs a `ImageListPage`.
-  const ImageListPage({Key? key}) : super(key: key);
+  const ImageListPage({super.key});
 
   @override
   _ImageListPageState createState() => _ImageListPageState();
@@ -28,8 +27,8 @@ class _ImageListPageState extends State<ImageListPage> {
   }
 
   void _onScroll() {
-    final double maxScroll = _scrollController.position.maxScrollExtent;
-    final double currentScroll = _scrollController.position.pixels;
+    final maxScroll = _scrollController.position.maxScrollExtent;
+    final currentScroll = _scrollController.position.pixels;
 
     if (maxScroll - currentScroll <= _scrollThreshold) {
       context.read<ImageListCubit>().fetch();
@@ -87,7 +86,7 @@ class _ImageListPageState extends State<ImageListPage> {
   }
 
   Widget _buildImageList(ImageListState state) {
-    final List<Apod> images = state.data!;
+    final images = state.data!;
 
     return ListView.builder(
       key: const Key('ImageListPageListView'),

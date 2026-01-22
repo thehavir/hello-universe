@@ -8,7 +8,7 @@ import 'package:hello_universe/src/features/image_list/states/image_list_cubit.d
 import 'package:hello_universe/src/navigation/routes.dart';
 
 class SplashPage extends StatelessWidget {
-  const SplashPage({Key? key}) : super(key: key);
+  const SplashPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class SplashPage extends StatelessWidget {
 
     _setTimer(context);
 
-    return Container(child: Image.asset(Assets.splash, fit: BoxFit.cover));
+    return Image.asset(Assets.splash, fit: BoxFit.cover);
   }
 
   void _setTimer(BuildContext context) => Timer(

@@ -14,9 +14,9 @@ void main() {
     late BaseRepository repository;
     late ImageListCubit imageListCubit;
 
-    final DateTime now = DateTime.now().xDaysBefore(1);
-    final DateTime twentyDaysBefore = now.xDaysBefore();
-    final DateTime fortyDaysBefore = twentyDaysBefore.xDaysBefore();
+    final now = DateTime.now().xDaysBefore(1);
+    final twentyDaysBefore = now.xDaysBefore();
+    final fortyDaysBefore = twentyDaysBefore.xDaysBefore();
 
     setUp(() {
       repository = MockRepository();

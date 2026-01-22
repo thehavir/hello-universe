@@ -7,8 +7,8 @@ class EmptyPage extends StatelessWidget {
     required this.title,
     this.assetsImage,
     this.actionButton,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// The text that is shown on the page.
   final String title;

@@ -22,7 +22,7 @@ class ImageListCubit extends Cubit<ImageListState> {
       if (state.hasMore && !state.isLoading) {
         emit(state.copyWith(status: StateStatus.loading));
 
-        final List<Apod> imageList = await repository.fetchImageList(
+        final imageList = await repository.fetchImageList(
           startDate: _startDate.format(),
           endDate: _endDate.format(),
         );
@@ -53,7 +53,7 @@ class ImageListCubit extends Cubit<ImageListState> {
   }
 
   DateTime get _endDate {
-    final DateTime potentialEndDate = _startDate.xDaysBefore();
+    final potentialEndDate = _startDate.xDaysBefore();
 
     if (potentialEndDate.difference(firstImageDate).inDays <= 0) {
       return firstImageDate;

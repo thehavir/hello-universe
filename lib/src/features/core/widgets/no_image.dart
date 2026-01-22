@@ -4,7 +4,7 @@ import 'package:hello_universe/src/assets.dart';
 /// Widget that is used as placeholder image when there is no image.
 class NoImage extends StatelessWidget {
   /// Constructs a `NoImage` widget.
-  const NoImage({Key? key}) : super(key: key);
+  const NoImage({super.key});
 
   @override
   Widget build(BuildContext context) => Image.asset(

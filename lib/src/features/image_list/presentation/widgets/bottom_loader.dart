@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 /// A widget that shows a loader at the bottom of the page.
 class BottomLoader extends StatelessWidget {
   /// Constructs a `BottomLoader`.
-  const BottomLoader();
+  const BottomLoader({super.key});
 
   @override
   Widget build(BuildContext context) => Container(

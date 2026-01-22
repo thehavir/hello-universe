@@ -6,9 +6,8 @@ import 'dart:convert';
 // import 'package:hello_universe/keys.dart';
 import 'package:hello_universe/src/models/models.dart';
 import 'package:hello_universe/src/repository/base_repository.dart';
+import 'package:hello_universe/src/utils/network/http_client.dart';
 import 'package:http/http.dart';
-
-import '../utils/network/http_client.dart';
 
 /// Real implementation of [BaseRepository] interface.
 class ImplRepository extends BaseRepository {
@@ -21,12 +20,12 @@ class ImplRepository extends BaseRepository {
     try {
       /// Get a valid key from Nasa API website (https://api.nasa.gov/) or
       /// use the demo key [DEMO_KEY].
-      final Map<String, String> parameterQueries = <String, String>{
+      final parameterQueries = <String, String>{
         'api_key': 'DEMO_KEY',
         'thumbs': 'True',
         if (date != null) 'date': date,
       };
-      final Response response = await _client.request(
+      final response = await _client.request(
         authority: _baseNasaApiUrl,
         path: _apodPath,
         parameter: parameterQueries,
@@ -50,7 +49,7 @@ class ImplRepository extends BaseRepository {
     required String endDate,
   }) async {
     try {
-      final Map<String, String> parameterQueries = <String, String>{
+      final parameterQueries = <String, String>{
         'api_key': 'DEMO_KEY',
         // The order of start/end dates is not what we want. So dates will be
         // sent in the opposite order.
@@ -58,7 +57,7 @@ class ImplRepository extends BaseRepository {
         'end_date': startDate,
         'thumbs': 'True',
       };
-      final Response response = await _client.request(
+      final response = await _client.request(
         authority: _baseNasaApiUrl,
         path: _apodPath,
         parameter: parameterQueries,
@@ -68,7 +67,7 @@ class ImplRepository extends BaseRepository {
         final Iterable<dynamic> decodedJsonList = json.decode(response.body);
 
         return List<Apod>.from(
-          decodedJsonList.map<Apod>((dynamic model) => Apod.fromJson(model)),
+          decodedJsonList.map<Apod>((model) => Apod.fromJson(model)),
           // We want a list with the opposite order of what we get from the API,
           // so, we return the reversed list.
         ).reversed.toList();

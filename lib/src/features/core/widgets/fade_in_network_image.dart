@@ -4,8 +4,7 @@ import 'package:hello_universe/src/assets.dart';
 /// Widget that is used as a `FadeInImage.assetNetwork` template.
 class FadeInNetworkImage extends StatelessWidget {
   /// Constructs a `FadeInNetworkImage`.
-  const FadeInNetworkImage({required this.url, this.height = 210, Key? key})
-    : super(key: key);
+  const FadeInNetworkImage({required this.url, this.height = 210, super.key});
 
   /// Url of the image.
   final String url;

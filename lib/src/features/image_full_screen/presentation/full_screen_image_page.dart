@@ -4,7 +4,7 @@ import 'package:hello_universe/src/assets.dart';
 /// Shows image in full screen with zoom capability.
 class FullScreenImagePage extends StatefulWidget {
   /// Constructs a `FullScreenImagePage`.
-  const FullScreenImagePage(this.imageUrl, {Key? key}) : super(key: key);
+  const FullScreenImagePage(this.imageUrl, {super.key});
 
   /// Url of the image.
   final String imageUrl;
@@ -42,7 +42,7 @@ class _FullScreenImagePageState extends State<FullScreenImagePage> {
 
   Widget _buildImage() => Hero(
     tag: widget.imageUrl,
-    child: Container(
+    child: ColoredBox(
       color: const Color(0xff212121),
       child: Center(
         child: InteractiveViewer(

@@ -1,7 +1,7 @@
-import 'package:hello_universe/src/utils/dependency_injection/injector_delegate.dart';
 import 'package:hello_universe/src/real_injector_delegate.dart';
 import 'package:hello_universe/src/repository/base_repository.dart';
 import 'package:hello_universe/src/repository/impl_repository.dart';
+import 'package:hello_universe/src/utils/dependency_injection/injector_delegate.dart';
 import 'package:test/test.dart';
 
 late _ArrangeBuilder _builder;

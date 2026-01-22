@@ -4,13 +4,13 @@ part of 'image_list_cubit.dart';
 class ImageListState extends BaseState<List<Apod>> {
   /// Constructs a new ImageListState with the given parameters.
   const ImageListState({
-    StateStatus? status = StateStatus.initial,
-    List<Apod>? data,
-    Object? error,
+    super.status,
+    super.data,
+    super.error,
     this.offset = 0,
     this.hasMore = true,
     this.startDate,
-  }) : super(status: status, data: data, error: error);
+  });
 
   /// It is used for pagination.
   /// Offset of each repository call.
