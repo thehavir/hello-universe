@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hello_universe/src/assets.dart';
 import 'package:hello_universe/src/features/image_list/states/image_list_cubit.dart';
-import 'package:hello_universe/src/navigation/routes.dart';
+import 'package:hello_universe/src/routes.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});

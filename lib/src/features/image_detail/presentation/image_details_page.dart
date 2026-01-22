@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hello_universe/src/features/core/widgets/widgets.dart';
 import 'package:hello_universe/src/models/models.dart';
-import 'package:hello_universe/src/navigation/routes.dart';
+import 'package:hello_universe/src/routes.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ImageDetailsPage extends StatefulWidget {

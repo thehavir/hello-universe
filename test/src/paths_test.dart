@@ -1,4 +1,4 @@
-import 'package:hello_universe/src/navigation/paths.dart';
+import 'package:hello_universe/src/paths.dart';
 import 'package:test/test.dart';
 
 void main() {

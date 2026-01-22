@@ -3,10 +3,10 @@ import 'package:hello_universe/src/features/image_detail/presentation/image_deta
 import 'package:hello_universe/src/features/image_full_screen/presentation/full_screen_image_page.dart';
 import 'package:hello_universe/src/features/image_list/presentation/image_list_page.dart';
 import 'package:hello_universe/src/features/splash/presentation/splash_page.dart';
-import 'package:hello_universe/src/navigation/nullable_object_extension.dart';
-import 'package:hello_universe/src/navigation/paths.dart';
-import 'package:hello_universe/src/navigation/router_provider.dart';
-import 'package:hello_universe/src/navigation/routes.dart';
+import 'package:hello_universe/src/utils/navigation/nullable_object_extension.dart';
+import 'package:hello_universe/src/paths.dart';
+import 'package:hello_universe/src/utils/navigation/router_provider.dart';
+import 'package:hello_universe/src/routes.dart';
 
 class RealRouterProvider implements RouterProvider {
   const RealRouterProvider();

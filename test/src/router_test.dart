@@ -8,12 +8,12 @@ import 'package:hello_universe/src/features/image_list/presentation/image_list_p
 import 'package:hello_universe/src/features/image_list/states/image_list_cubit.dart';
 import 'package:hello_universe/src/features/splash/presentation/splash_page.dart';
 import 'package:hello_universe/src/models/models.dart';
-import 'package:hello_universe/src/navigation/paths.dart';
-import 'package:hello_universe/src/navigation/router.dart';
-import 'package:hello_universe/src/navigation/router_provider.dart';
-import 'package:hello_universe/src/navigation/routes.dart';
+import 'package:hello_universe/src/paths.dart';
+import 'package:hello_universe/src/router.dart';
+import 'package:hello_universe/src/utils/navigation/router_provider.dart';
+import 'package:hello_universe/src/routes.dart';
 
-import '../../mixin/image_list_cubit_builder_mixin.dart';
+import '../mixin/image_list_cubit_builder_mixin.dart';
 
 late _ArrangeBuilder _builder;
 

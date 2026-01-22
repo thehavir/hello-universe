@@ -1,4 +1,4 @@
-import 'package:hello_universe/src/navigation/nullable_object_extension.dart';
+import 'package:hello_universe/src/utils/navigation/nullable_object_extension.dart';
 import 'package:test/test.dart';
 
 void main() {

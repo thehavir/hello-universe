@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:hello_universe/src/disposable.dart';
+import 'package:hello_universe/src/utils/disposable.dart';
 import 'package:hello_universe/src/utils/dependency_injection/injection.dart';
 import 'package:hello_universe/src/utils/dependency_injection/injector.dart';
 import 'package:mocktail/mocktail.dart';

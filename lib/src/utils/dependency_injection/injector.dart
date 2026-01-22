@@ -1,5 +1,5 @@
 // ignore_for_file: avoid_print
-import 'package:hello_universe/src/disposable.dart';
+import 'package:hello_universe/src/utils/disposable.dart';
 import 'package:hello_universe/src/utils/dependency_injection/injection.dart';
 
 /// Used to resolve dependencies.
