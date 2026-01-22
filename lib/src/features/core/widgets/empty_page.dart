@@ -21,30 +21,28 @@ class EmptyPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            if (assetsImage != null) _buildImage(),
-            const SizedBox(height: 32),
-            _buildTitle(),
-            const SizedBox(height: 16),
-            if (actionButton != null) actionButton!,
-          ],
-        ),
-      );
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        if (assetsImage != null) _buildImage(),
+        const SizedBox(height: 32),
+        _buildTitle(),
+        const SizedBox(height: 16),
+        if (actionButton != null) actionButton!,
+      ],
+    ),
+  );
 
   Widget _buildTitle() => Text(
-        title,
-        textAlign: TextAlign.center,
-        style: const TextStyle(
-          fontSize: 18,
-        ),
-      );
+    title,
+    textAlign: TextAlign.center,
+    style: const TextStyle(fontSize: 18),
+  );
 
   Widget _buildImage() => Image.asset(
-        assetsImage!,
-        key: const Key('EmptyPageAssetImage'),
-        height: 128,
-        fit: BoxFit.fitWidth,
-      );
+    assetsImage!,
+    key: const Key('EmptyPageAssetImage'),
+    height: 128,
+    fit: BoxFit.fitWidth,
+  );
 }

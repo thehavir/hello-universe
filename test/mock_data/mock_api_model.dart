@@ -41,16 +41,8 @@ final Apod mockApod3 = Apod(
 
 /// Mock data for the response of fetching list of the picture of day api
 /// (https://api.nasa.gov/planetary/apod).
-final List<Apod> mockApodList = <Apod>[
-  mockApod,
-  mockApod2,
-  mockApod3,
-];
+final List<Apod> mockApodList = <Apod>[mockApod, mockApod2, mockApod3];
 
 /// Mock data for the response of fetching list of the picture of day api
 /// (https://api.nasa.gov/planetary/apod).
-final List<Apod> mockApodList2 = <Apod>[
-  mockApod3,
-  mockApod2,
-  mockApod,
-];
+final List<Apod> mockApodList2 = <Apod>[mockApod3, mockApod2, mockApod];

@@ -7,14 +7,14 @@ class BottomLoader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        alignment: Alignment.center,
-        padding: const EdgeInsets.all(8),
-        child: const Center(
-          child: SizedBox(
-            width: 33,
-            height: 33,
-            child: CircularProgressIndicator(),
-          ),
-        ),
-      );
+    alignment: Alignment.center,
+    padding: const EdgeInsets.all(8),
+    child: const Center(
+      child: SizedBox(
+        width: 33,
+        height: 33,
+        child: CircularProgressIndicator(),
+      ),
+    ),
+  );
 }

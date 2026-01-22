@@ -10,8 +10,5 @@ extension DateExtension on DateTime {
 
   /// Subtracts this [DateTime] by `days`.
   /// By default it subtracts 20 days.
-  DateTime xDaysBefore([
-    int days = 20,
-  ]) =>
-      subtract(Duration(days: days));
+  DateTime xDaysBefore([int days = 20]) => subtract(Duration(days: days));
 }

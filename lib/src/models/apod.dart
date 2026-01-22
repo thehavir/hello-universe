@@ -21,8 +21,9 @@ class Apod {
     date = json['date'];
     explanation = json['explanation'];
     hdurl = json['hdurl'];
-    mediaType =
-        json['media_type'] == 'image' ? MediaType.image : MediaType.video;
+    mediaType = json['media_type'] == 'image'
+        ? MediaType.image
+        : MediaType.video;
     serviceVersion = json['service_version'];
     title = json['title'];
     url = json['url'];

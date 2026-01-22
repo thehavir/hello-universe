@@ -33,7 +33,8 @@ class HttpClient {
         return client.delete(Uri.https(authority!, path!));
       default:
         return throw RequestTypeNotFoundException(
-            'The HTTP request method is not found: $requestType');
+          'The HTTP request method is not found: $requestType',
+        );
     }
   }
 }

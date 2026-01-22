@@ -4,11 +4,7 @@ import 'package:equatable/equatable.dart';
 /// and provide the generic type as the type of data.
 abstract class BaseState<T> extends Equatable {
   /// Constructs a BaseState.
-  const BaseState({
-    this.status = StateStatus.initial,
-    this.data,
-    this.error,
-  });
+  const BaseState({this.status = StateStatus.initial, this.data, this.error});
 
   /// The current state.
   final StateStatus? status;
@@ -20,35 +16,23 @@ abstract class BaseState<T> extends Equatable {
   final Object? error;
 
   /// Returns a copy of the current state with given override parameters.
-  BaseState<T> copyWith({
-    StateStatus? status,
-    T? data,
-    Object? error,
-  });
+  BaseState<T> copyWith({StateStatus? status, T? data, Object? error});
 
   /// Returns a copy of the current state with initial status.
   BaseState<T> initial() => copyWith(status: StateStatus.initial);
 
   /// Returns a copy of the current state with loading status and the current
   /// data if we had any.
-  BaseState<T> loading() => copyWith(
-        status: StateStatus.loading,
-        data: data,
-      );
+  BaseState<T> loading() => copyWith(status: StateStatus.loading, data: data);
 
   /// Returns a copy of the current state with success status and given data.
-  BaseState<T> success([T? data]) => copyWith(
-        status: StateStatus.success,
-        data: data,
-      );
+  BaseState<T> success([T? data]) =>
+      copyWith(status: StateStatus.success, data: data);
 
   /// Returns a copy of the current state with failure status and given error
   /// and the current data if we had any.
-  BaseState<T> failure([Object? error]) => copyWith(
-        status: StateStatus.failure,
-        data: data,
-        error: error,
-      );
+  BaseState<T> failure([Object? error]) =>
+      copyWith(status: StateStatus.failure, data: data, error: error);
 
   /// Returns true if the state contains data.
   bool get hasData => data != null;

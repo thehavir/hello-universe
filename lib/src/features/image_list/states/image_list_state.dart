@@ -10,11 +10,7 @@ class ImageListState extends BaseState<List<Apod>> {
     this.offset = 0,
     this.hasMore = true,
     this.startDate,
-  }) : super(
-          status: status,
-          data: data,
-          error: error,
-        );
+  }) : super(status: status, data: data, error: error);
 
   /// It is used for pagination.
   /// Offset of each repository call.
@@ -37,13 +33,12 @@ class ImageListState extends BaseState<List<Apod>> {
     int? offset,
     bool? hasMore,
     DateTime? startDate,
-  }) =>
-      ImageListState(
-        status: status,
-        data: data ?? this.data,
-        error: error ?? this.error,
-        offset: offset ?? this.offset,
-        hasMore: hasMore ?? this.hasMore,
-        startDate: startDate ?? this.startDate,
-      );
+  }) => ImageListState(
+    status: status,
+    data: data ?? this.data,
+    error: error ?? this.error,
+    offset: offset ?? this.offset,
+    hasMore: hasMore ?? this.hasMore,
+    startDate: startDate ?? this.startDate,
+  );
 }
