@@ -1,3 +1,7 @@
+import 'package:chopper/chopper.dart';
+import 'package:chopper_built_value/chopper_built_value.dart';
+import 'package:hello_universe/src/data/apod_service.dart';
+import 'package:hello_universe/src/data/serializer.dart';
 import 'package:hello_universe/src/repository/base_repository.dart';
 import 'package:hello_universe/src/repository/impl_repository.dart';
 import 'package:hello_universe/src/utils/dependency_injection/injection.dart';
@@ -16,6 +20,18 @@ class RealInjectorDelegate extends InjectorDelegate {
   }
 
   static List<Injection> get _createInjections => [
-    SingletonInjection<BaseRepository>((_) => ImplRepository()),
+    SingletonInjection<BaseRepository>((resolver) => ImplRepository()),
+    SingletonInjection<ApodServiceProvider>(
+      (resolver) => RealApodServiceProvider(chopperClient: resolver.resolve()),
+    ),
+    SingletonInjection<ApodService>(
+      (resolver) => resolver.resolve<ApodServiceProvider>().create(),
+    ),
+    SingletonInjection<ChopperClient>(
+      (_) => ChopperClient(
+        baseUrl: Uri.parse('https://api.nasa.gov/'),
+        converter: BuiltValueConverter(serializers),
+      ),
+    ),
   ];
 }
