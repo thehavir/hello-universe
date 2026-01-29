@@ -66,7 +66,7 @@ void main() {
   group('fetchImageList', () {
     test('has correct path', () async {
       _builder.withHttpClientSend(
-        Stream.fromIterable([utf8.encode(json.encode(apodListJson))]),
+        Stream.fromIterable([utf8.encode(apodListJson)]),
       );
       final tested = _builder.createTested(chopperClient);
 
@@ -85,7 +85,7 @@ void main() {
 
     test('has http GET method', () async {
       _builder.withHttpClientSend(
-        Stream.fromIterable([utf8.encode(json.encode(apodListJson))]),
+        Stream.fromIterable([utf8.encode(apodListJson)]),
       );
       final tested = _builder.createTested(chopperClient);
 
@@ -104,7 +104,7 @@ void main() {
 
     test('has api key as query parameter', () async {
       _builder.withHttpClientSend(
-        Stream.fromIterable([utf8.encode(json.encode(apodListJson))]),
+        Stream.fromIterable([utf8.encode(apodListJson)]),
       );
       final tested = _builder.createTested(chopperClient);
 
@@ -123,7 +123,7 @@ void main() {
 
     test('has start date as query parameter', () async {
       _builder.withHttpClientSend(
-        Stream.fromIterable([utf8.encode(json.encode(apodListJson))]),
+        Stream.fromIterable([utf8.encode(apodListJson)]),
       );
       final tested = _builder.createTested(chopperClient);
 
@@ -142,7 +142,7 @@ void main() {
 
     test('has end date as query parameter', () async {
       _builder.withHttpClientSend(
-        Stream.fromIterable([utf8.encode(json.encode(apodListJson))]),
+        Stream.fromIterable([utf8.encode(apodListJson)]),
       );
       final tested = _builder.createTested(chopperClient);
 
@@ -161,7 +161,7 @@ void main() {
 
     test('has thumbs as query parameter', () async {
       _builder.withHttpClientSend(
-        Stream.fromIterable([utf8.encode(json.encode(apodListJson))]),
+        Stream.fromIterable([utf8.encode(apodListJson)]),
       );
       final tested = _builder.createTested(chopperClient);
 
