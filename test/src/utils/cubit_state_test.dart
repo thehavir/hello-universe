@@ -3,22 +3,26 @@ import 'package:hello_universe/src/utils/cubit_state.dart';
 import 'package:test/test.dart';
 
 void main() {
+  const _testData = _TestData(name: 'Spinoza');
+  const _testError =
+      'Many errors, of a truth, consist merely in the application of the wrong names of things.';
+
   group('$LoadingCubitState', () {
     test('can be created', () {
-      final state = CubitState.loading<void, Object>();
+      const state = LoadingCubitState<void, Object>();
 
       expect(state, const LoadingCubitState<void, Object>());
     });
 
     test('two instances with same data are equal', () {
-      final state1 = CubitState.loading<_FakeData, Object>();
-      final state2 = CubitState.loading<_FakeData, Object>();
+      const state1 = LoadingCubitState<void, Object>();
+      const state2 = LoadingCubitState<void, Object>();
 
       expect(state1, state2);
     });
 
     test('to loading returns same loading state', () {
-      final state = CubitState.loading<_FakeData, Object>();
+      const state = LoadingCubitState<void, Object>();
 
       final tested = state.toLoading();
 
@@ -26,225 +30,160 @@ void main() {
     });
 
     test('to error returns error state', () {
-      final state = CubitState.loading<_FakeData, String>();
+      const state = LoadingCubitState<void, Object>();
 
-      final tested = state.toError('The error');
+      final tested = state.toError(_testError);
 
       expect(
         tested,
-        isA<CubitState<_FakeData, void>>().having(
-          (state) => state.match(
-            onLoading: () => fail('expected error but got loading'),
-            onError: (error) => error,
-            onLoaded: (data) => fail('expected error state but got loaded'),
-          ),
+        isA<ErrorCubitState>().having(
+          (state) => state.error,
           'error',
-          'The error',
+          _testError,
         ),
       );
     });
 
     test('to loaded returns loaded state', () {
-      final state = CubitState.loading<_FakeData, Object>();
+      const state = LoadingCubitState<void, Object>();
 
-      final tested = state.toLoaded(_defaultFakeData);
+      final tested = state.toLoaded(_testData);
 
       expect(
         tested,
-        isA<CubitState<_FakeData, void>>().having(
-          (state) => state.match(
-            onLoading: () => fail('expected loaded but got loading'),
-            onError: (error) => fail('expected loaded but got error'),
-            onLoaded: (data) => data,
-          ),
+        isA<LoadedCubitState>().having(
+          (state) => state.data,
           'data',
-          _defaultFakeData,
+          _testData,
         ),
       );
-    });
-
-    test('match executes onLoading callback', () {
-      final state = CubitState.loading<_FakeData, Object>();
-
-      final tested = state.match(
-        onLoading: () => 'loading...',
-        onError: (error) => fail('expected loading but got error'),
-        onLoaded: (data) => fail('expected loading but got loaded'),
-      );
-
-      expect(tested, 'loading...');
     });
   });
 
   group('$ErrorCubitState', () {
     test('can be created', () {
-      final state = CubitState.error<void, String>('error1');
+      const state = ErrorCubitState<void, Object>(_testError);
 
-      expect(state, const ErrorCubitState<void, String>('error1'));
+      expect(
+        state,
+        isA<ErrorCubitState>().having(
+          (state) => state.error,
+          'error',
+          _testError,
+        ),
+      );
     });
 
-    test('two instances with same data are equal', () {
-      final state1 = CubitState.error<_FakeData, String>('error1');
-      final state2 = CubitState.error<_FakeData, String>('error1');
+    test('two instances with same error are equal', () {
+      const state1 = ErrorCubitState<void, Object>(_testError);
+      const state2 = ErrorCubitState<void, Object>(_testError);
 
       expect(state1, state2);
     });
 
-    test('is created with correct values', () {
-      final state = CubitState.error<_FakeData, String>('The error');
-
-      expect(
-        state,
-        isA<CubitState<_FakeData, String>>().having(
-          (state) => state.match(
-            onLoading: () => fail('expected error but got loading'),
-            onError: (error) => error,
-            onLoaded: (data) => fail('expected error but got loaded'),
-          ),
-          'error',
-          'The error',
-        ),
-      );
-    });
-
     test('to loading returns loading state', () {
-      final state = CubitState.error<_FakeData, String>('error1');
+      const state = ErrorCubitState<void, Object>(_testError);
 
       final tested = state.toLoading();
 
-      expect(tested, isA<LoadingCubitState<_FakeData, String>>());
+      expect(tested, isA<LoadingCubitState>());
     });
 
-    test('to error returns same error state', () {
-      final state = CubitState.error<_FakeData, String>('error1');
+    test('to error returns error state with the new error', () {
+      const newError = 'new error22';
+      const state = ErrorCubitState<void, Object>(_testError);
 
-      final tested = state.toError('error1');
-
-      expect(tested, state);
-    });
-
-    test('to loaded returns loaded state', () {
-      final state = CubitState.error<_FakeData, String>('error');
-
-      final tested = state.toLoaded(_defaultFakeData);
+      final tested = state.toError(newError);
 
       expect(
         tested,
-        isA<CubitState<_FakeData, void>>().having(
-          (state) => state.match(
-            onLoading: () => fail('expected loaded but got loading'),
-            onError: (error) => fail('expected loaded but got error'),
-            onLoaded: (data) => data,
-          ),
-          'data',
-          _defaultFakeData,
+        isA<ErrorCubitState>().having(
+          (state) => state.error,
+          'error',
+          newError,
         ),
       );
     });
 
-    test('match executes onError callback', () {
-      final state = CubitState.error<_FakeData, String>('error-x2');
+    test('to loaded returns loaded state', () {
+      const state = ErrorCubitState<void, Object>(_testError);
 
-      final tested = state.match(
-        onLoading: () => fail('expected error but got loading'),
-        onError: (error) => 'error-x2',
-        onLoaded: (data) => fail('expected error but got loaded'),
+      final tested = state.toLoaded(_testData);
+
+      expect(
+        tested,
+        isA<LoadedCubitState>().having(
+          (state) => state.data,
+          'data',
+          _testData,
+        ),
       );
-
-      expect(tested, 'error-x2');
     });
   });
 
   group('$LoadedCubitState', () {
     test('can be created', () {
-      final state = CubitState.loaded<_FakeData, Object>(_defaultFakeData);
+      const state = LoadedCubitState<_TestData, Object>(_testData);
 
       expect(
         state,
-        const LoadedCubitState<_FakeData, Object>(_defaultFakeData),
+        isA<LoadedCubitState>().having(
+          (state) => state.data,
+          'data',
+          _testData,
+        ),
       );
     });
 
     test('two instances with same data are equal', () {
-      final state1 = CubitState.loaded<_FakeData, Object>(_defaultFakeData);
-      final state2 = CubitState.loaded<_FakeData, Object>(_defaultFakeData);
+      const state1 = LoadedCubitState<_TestData, Object>(_testData);
+      const state2 = LoadedCubitState<_TestData, Object>(_testData);
 
       expect(state1, state2);
     });
 
-    test('is created with correct values', () {
-      final state = CubitState.loaded<_FakeData, String>(_defaultFakeData);
-
-      expect(
-        state,
-        isA<CubitState<_FakeData, String>>().having(
-          (state) => state.match(
-            onLoading: () => fail('expected loaded but got loading'),
-            onError: (error) => fail('expected loaded but got error'),
-            onLoaded: (data) => data,
-          ),
-          'data',
-          _defaultFakeData,
-        ),
-      );
-    });
-
     test('to loading returns loading state', () {
-      final state = CubitState.loaded<_FakeData, Object>(_defaultFakeData);
+      const state = LoadedCubitState<_TestData, Object>(_testData);
 
       final tested = state.toLoading();
 
-      expect(tested, isA<LoadingCubitState<_FakeData, Object>>());
+      expect(tested, isA<LoadingCubitState>());
     });
 
     test('to error returns error state', () {
-      final state = CubitState.loaded<_FakeData, Object>(_defaultFakeData);
+      const state = LoadedCubitState<_TestData, Object>(_testData);
 
-      final tested = state.toError('The error');
+      final tested = state.toError(_testError);
 
       expect(
         tested,
-        isA<CubitState<_FakeData, Object>>().having(
-          (state) => state.match(
-            onLoading: () => fail('expected error but got loading'),
-            onError: (error) => error,
-            onLoaded: (data) => fail('expected error but got loaded'),
-          ),
+        isA<ErrorCubitState>().having(
+          (state) => state.error,
           'error',
-          'The error',
+          _testError,
         ),
       );
     });
 
-    test('to loaded returns same loaded state', () {
-      final state = CubitState.loaded<_FakeData, Object>(_defaultFakeData);
+    test('to loaded returns loaded state with the new data', () {
+      const newData = _TestData(name: 'new data44');
+      const state = LoadedCubitState<_TestData, Object>(_testData);
 
-      final tested = state.toLoaded(_defaultFakeData);
+      final tested = state.toLoaded(newData);
 
-      expect(tested, state);
-    });
-
-    test('match executes onLoaded callback', () {
-      final state = CubitState.loaded<_FakeData, String>(_defaultFakeData);
-
-      final tested = state.match<_FakeData>(
-        onLoading: () => fail('onLoading should not have been executed'),
-        onError: (error) => fail('onError should not have been executed'),
-        onLoaded: (data) => data,
+      expect(
+        tested,
+        isA<LoadedCubitState>().having((state) => state.data, 'data', newData),
       );
-
-      expect(tested, equals(_defaultFakeData));
     });
   });
 }
 
-const _defaultFakeData = _FakeData(bobsName: 'Bob');
+class _TestData extends Equatable {
+  final String name;
 
-class _FakeData extends Equatable {
-  final String bobsName;
-
-  const _FakeData({required this.bobsName});
+  const _TestData({required this.name});
 
   @override
-  List<Object?> get props => [bobsName];
+  List<Object?> get props => [name];
 }
