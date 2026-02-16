@@ -1,5 +1,6 @@
 import 'package:chopper/chopper.dart';
 import 'package:chopper_built_value/chopper_built_value.dart';
+import 'package:hello_universe/src/data/api_config_interceptor.dart';
 import 'package:hello_universe/src/data/apod_service.dart';
 import 'package:hello_universe/src/real_injector_delegate.dart';
 import 'package:hello_universe/src/repository/base_repository.dart';
@@ -74,6 +75,22 @@ void main() {
 
       expect(injected.converter, isA<BuiltValueConverter>());
     });
+
+    test('has $ConfigRequestInterceptor as $Interceptor', () {
+      final tested = _builder.createTested();
+
+      final injected = tested.resolve<ChopperClient>();
+
+      expect(injected.interceptors, [isA<ConfigRequestInterceptor>()]);
+    });
+  });
+
+  test('$ConfigRequestInterceptor is injected', () {
+    final tested = _builder.createTested();
+
+    final injected = tested.resolve<ConfigRequestInterceptor>();
+
+    expect(injected, isA<ConfigRequestInterceptorImpl>());
   });
 }
 

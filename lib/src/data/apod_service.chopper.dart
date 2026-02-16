@@ -19,13 +19,9 @@ final class _$ApodService extends ApodService {
   final Type definitionType = ApodService;
 
   @override
-  Future<Response<Apod>> fetchImage({
-    required String apiKey,
-    required bool includeThumbnails,
-  }) {
+  Future<Response<Apod>> fetchImage({required bool includeThumbnails}) {
     final Uri $url = Uri.parse('/planetary/apod');
     final Map<String, dynamic> $params = <String, dynamic>{
-      'api_key': apiKey,
       'thumbs': includeThumbnails,
     };
     final Request $request = Request(
@@ -39,14 +35,12 @@ final class _$ApodService extends ApodService {
 
   @override
   Future<Response<BuiltList<Apod>>> fetchImageList({
-    required String apiKey,
     required String startDate,
     required String endDate,
     required bool includeThumbnails,
   }) {
     final Uri $url = Uri.parse('/planetary/apod');
     final Map<String, dynamic> $params = <String, dynamic>{
-      'api_key': apiKey,
       'start_date': startDate,
       'end_date': endDate,
       'thumbs': includeThumbnails,

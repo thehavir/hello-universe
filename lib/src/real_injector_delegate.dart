@@ -1,6 +1,7 @@
 import 'package:chopper/chopper.dart';
 import 'package:chopper_built_value/chopper_built_value.dart';
 import 'package:hello_universe/src/data/apod_service.dart';
+import 'package:hello_universe/src/data/api_config_interceptor.dart';
 import 'package:hello_universe/src/data/serializer.dart';
 import 'package:hello_universe/src/repository/base_repository.dart';
 import 'package:hello_universe/src/repository/impl_repository.dart';
@@ -28,10 +29,14 @@ class RealInjectorDelegate extends InjectorDelegate {
       (resolver) => resolver.resolve<ApodServiceProvider>().create(),
     ),
     SingletonInjection<ChopperClient>(
-      (_) => ChopperClient(
+      (resolver) => ChopperClient(
         baseUrl: Uri.parse('https://api.nasa.gov/'),
         converter: BuiltValueConverter(serializers),
+        interceptors: [resolver.resolve<ConfigRequestInterceptor>()],
       ),
+    ),
+    SingletonInjection<ConfigRequestInterceptor>(
+      (_) => const ConfigRequestInterceptorImpl(),
     ),
   ];
 }

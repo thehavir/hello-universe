@@ -71,7 +71,6 @@ void main() {
       final tested = _builder.createTested(chopperClient);
 
       await tested.fetchImageList(
-        apiKey: 'TEST_KEY',
         startDate: '2020-01-23',
         endDate: '2030-01-23',
         includeThumbnails: true,
@@ -90,7 +89,6 @@ void main() {
       final tested = _builder.createTested(chopperClient);
 
       await tested.fetchImageList(
-        apiKey: 'TEST_KEY',
         startDate: '2020-01-23',
         endDate: '2030-01-23',
         includeThumbnails: true,
@@ -102,25 +100,6 @@ void main() {
       expect(request.method, 'GET');
     });
 
-    test('has api key as query parameter', () async {
-      _builder.withHttpClientSend(
-        Stream.fromIterable([utf8.encode(apodListJson)]),
-      );
-      final tested = _builder.createTested(chopperClient);
-
-      await tested.fetchImageList(
-        apiKey: 'TEST_KEY-xx1',
-        startDate: '2020-01-23',
-        endDate: '2030-01-23',
-        includeThumbnails: true,
-      );
-
-      final request =
-          verify(_builder.mockHttpClient.send(captureAny)).captured.single
-              as http.BaseRequest;
-      expect(request.url.queryParameters['api_key'], 'TEST_KEY-xx1');
-    });
-
     test('has start date as query parameter', () async {
       _builder.withHttpClientSend(
         Stream.fromIterable([utf8.encode(apodListJson)]),
@@ -128,7 +107,6 @@ void main() {
       final tested = _builder.createTested(chopperClient);
 
       await tested.fetchImageList(
-        apiKey: 'TEST_KEY-xx1',
         startDate: '2000-01-01',
         endDate: '2026-01-23',
         includeThumbnails: true,
@@ -147,7 +125,6 @@ void main() {
       final tested = _builder.createTested(chopperClient);
 
       await tested.fetchImageList(
-        apiKey: 'TEST_KEY-xx1',
         startDate: '2026-01-23',
         endDate: '2050-01-01',
         includeThumbnails: true,
@@ -166,7 +143,6 @@ void main() {
       final tested = _builder.createTested(chopperClient);
 
       await tested.fetchImageList(
-        apiKey: 'TEST_KEY-xx1',
         startDate: '2020-01-23',
         endDate: '2030-01-23',
         includeThumbnails: true,
@@ -187,7 +163,6 @@ void main() {
         final tested = _builder.createTested(chopperClient);
 
         final response = await tested.fetchImageList(
-          apiKey: 'TEST_KEY',
           startDate: '2026-01-23',
           endDate: '2026-01-23',
           includeThumbnails: true,
@@ -204,7 +179,6 @@ void main() {
 
         expect(
           () => tested.fetchImageList(
-            apiKey: 'TEST_KEY',
             startDate: '2026-01-23',
             endDate: '2026-01-23',
             includeThumbnails: true,
@@ -223,7 +197,6 @@ void main() {
         final tested = _builder.createTested(chopperClient);
 
         final response = await tested.fetchImageList(
-          apiKey: 'TEST_KEY',
           startDate: '2026-01-23',
           endDate: '2026-01-23',
           includeThumbnails: true,
@@ -240,7 +213,6 @@ void main() {
         final tested = _builder.createTested(chopperClient);
 
         final response = await tested.fetchImageList(
-          apiKey: 'TEST_KEY',
           startDate: '2026-01-23',
           endDate: '2026-01-23',
           includeThumbnails: true,
@@ -256,7 +228,7 @@ void main() {
       _builder.withHttpClientSend(Stream.fromIterable([utf8.encode(apodJson)]));
       final tested = _builder.createTested(chopperClient);
 
-      await tested.fetchImage(apiKey: 'TEST_KEY', includeThumbnails: true);
+      await tested.fetchImage(includeThumbnails: true);
 
       final request =
           verify(_builder.mockHttpClient.send(captureAny)).captured.single
@@ -268,7 +240,7 @@ void main() {
       _builder.withHttpClientSend(Stream.fromIterable([utf8.encode(apodJson)]));
       final tested = _builder.createTested(chopperClient);
 
-      await tested.fetchImage(apiKey: 'TEST_KEY', includeThumbnails: true);
+      await tested.fetchImage(includeThumbnails: true);
 
       final request =
           verify(_builder.mockHttpClient.send(captureAny)).captured.single
@@ -276,23 +248,11 @@ void main() {
       expect(request.method, 'GET');
     });
 
-    test('has api key as query parameter', () async {
-      _builder.withHttpClientSend(Stream.fromIterable([utf8.encode(apodJson)]));
-      final tested = _builder.createTested(chopperClient);
-
-      await tested.fetchImage(apiKey: 'TEST_KEY-x2', includeThumbnails: true);
-
-      final request =
-          verify(_builder.mockHttpClient.send(captureAny)).captured.single
-              as http.BaseRequest;
-      expect(request.url.queryParameters['api_key'], 'TEST_KEY-x2');
-    });
-
     test('has thumbs as query parameter', () async {
       _builder.withHttpClientSend(Stream.fromIterable([utf8.encode(apodJson)]));
       final tested = _builder.createTested(chopperClient);
 
-      await tested.fetchImage(apiKey: 'TEST_KEY', includeThumbnails: true);
+      await tested.fetchImage(includeThumbnails: true);
 
       final request =
           verify(_builder.mockHttpClient.send(captureAny)).captured.single
@@ -308,10 +268,7 @@ void main() {
         );
         final tested = _builder.createTested(chopperClient);
 
-        final response = await tested.fetchImage(
-          apiKey: 'TEST_KEY',
-          includeThumbnails: true,
-        );
+        final response = await tested.fetchImage(includeThumbnails: true);
 
         expect(response.isSuccessful, isFalse);
         expect(response.statusCode, 400);
@@ -323,7 +280,7 @@ void main() {
         final tested = _builder.createTested(chopperClient);
 
         expect(
-          () => tested.fetchImage(apiKey: 'TEST_KEY', includeThumbnails: true),
+          () => tested.fetchImage(includeThumbnails: true),
           throwsA(error),
         );
       });
@@ -337,10 +294,7 @@ void main() {
         );
         final tested = _builder.createTested(chopperClient);
 
-        final response = await tested.fetchImage(
-          apiKey: 'TEST_KEY',
-          includeThumbnails: true,
-        );
+        final response = await tested.fetchImage(includeThumbnails: true);
 
         expect(response, isA<Response<Apod>>());
       });
@@ -352,10 +306,7 @@ void main() {
         );
         final tested = _builder.createTested(chopperClient);
 
-        final response = await tested.fetchImage(
-          apiKey: 'TEST_KEY',
-          includeThumbnails: true,
-        );
+        final response = await tested.fetchImage(includeThumbnails: true);
 
         expect(response.body, apod);
       });
