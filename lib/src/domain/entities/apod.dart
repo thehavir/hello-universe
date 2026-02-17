@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hello_universe/src/data/media_type.dart';
+import 'package:hello_universe/src/domain/entities/media_type.dart';
 
 part 'apod.freezed.dart';
 

@@ -1,15 +1,15 @@
-import 'package:hello_universe/src/data/apod.dart';
-import 'package:hello_universe/src/data/media_type.dart';
+import 'package:hello_universe/src/data/models/apod_dto.dart';
+import 'package:hello_universe/src/data/models/media_type_dto.dart';
 import 'package:test/test.dart';
 
 void main() {
-  final apod = Apod(
+  final apod = ApodDto(
     (builder) => builder
       ..copyright = '@zx11'
       ..date = '11/11/2030'
       ..explanation = 'awesome image'
       ..hdUrl = 'xyz.com/image2'
-      ..mediaType = MediaType.image
+      ..mediaType = MediaTypeDto.image
       ..serviceVersion = '1.33.5811'
       ..title = 'title-z5'
       ..url = 'xyz.com'
@@ -28,19 +28,19 @@ void main() {
   };
 
   test('can be crated', () {
-    final tested = Apod();
+    final tested = ApodDto();
 
-    expect(tested, isA<Apod>());
+    expect(tested, isA<ApodDto>());
   });
 
   test('sets fields usings its builder', () {
-    final tested = Apod(
+    final tested = ApodDto(
       (builder) => builder
         ..copyright = 'copyright1'
         ..date = 'date1'
         ..explanation = 'explanation1'
         ..hdUrl = 'hdUrl1'
-        ..mediaType = MediaType.video
+        ..mediaType = MediaTypeDto.video
         ..serviceVersion = 'serviceVersion1'
         ..title = 'title1'
         ..url = 'url1'
@@ -49,12 +49,12 @@ void main() {
 
     expect(
       tested,
-      isA<Apod>()
+      isA<ApodDto>()
           .having((p) => p.copyright, 'copyright', 'copyright1')
           .having((p) => p.date, 'date', 'date1')
           .having((p) => p.explanation, 'explanation', 'explanation1')
           .having((p) => p.hdUrl, 'hdUrl', 'hdUrl1')
-          .having((p) => p.mediaType, 'mediaType', MediaType.video)
+          .having((p) => p.mediaType, 'mediaType', MediaTypeDto.video)
           .having((p) => p.serviceVersion, 'serviceVersion', 'serviceVersion1')
           .having((p) => p.title, 'title', 'title1')
           .having((p) => p.url, 'url', 'url1')
@@ -62,14 +62,14 @@ void main() {
     );
   });
 
-  test('toJson creates a map from $Apod', () {
+  test('toJson creates a map from $ApodDto', () {
     final json = apod.toJson();
 
     expect(json, serializedApod);
   });
 
-  test('fromJson creates an $Apod from a map', () {
-    final result = Apod.fromJson(serializedApod);
+  test('fromJson creates an $ApodDto from a map', () {
+    final result = ApodDto.fromJson(serializedApod);
 
     expect(result, apod);
   });

@@ -1,23 +1,23 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'apod.dart';
+part of 'apod_dto.dart';
 
 // **************************************************************************
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<Apod> _$apodSerializer = _$ApodSerializer();
+Serializer<ApodDto> _$apodDtoSerializer = _$ApodDtoSerializer();
 
-class _$ApodSerializer implements StructuredSerializer<Apod> {
+class _$ApodDtoSerializer implements StructuredSerializer<ApodDto> {
   @override
-  final Iterable<Type> types = const [Apod, _$Apod];
+  final Iterable<Type> types = const [ApodDto, _$ApodDto];
   @override
-  final String wireName = 'Apod';
+  final String wireName = 'ApodDto';
 
   @override
   Iterable<Object?> serialize(
     Serializers serializers,
-    Apod object, {
+    ApodDto object, {
     FullType specifiedType = FullType.unspecified,
   }) {
     final result = <Object?>[];
@@ -61,7 +61,7 @@ class _$ApodSerializer implements StructuredSerializer<Apod> {
         ..add(
           serializers.serialize(
             value,
-            specifiedType: const FullType(MediaType),
+            specifiedType: const FullType(MediaTypeDto),
           ),
         );
     }
@@ -101,12 +101,12 @@ class _$ApodSerializer implements StructuredSerializer<Apod> {
   }
 
   @override
-  Apod deserialize(
+  ApodDto deserialize(
     Serializers serializers,
     Iterable<Object?> serialized, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    final result = ApodBuilder();
+    final result = ApodDtoBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -150,9 +150,9 @@ class _$ApodSerializer implements StructuredSerializer<Apod> {
           result.mediaType =
               serializers.deserialize(
                     value,
-                    specifiedType: const FullType(MediaType),
+                    specifiedType: const FullType(MediaTypeDto),
                   )
-                  as MediaType?;
+                  as MediaTypeDto?;
           break;
         case 'service_version':
           result.serviceVersion =
@@ -193,7 +193,7 @@ class _$ApodSerializer implements StructuredSerializer<Apod> {
   }
 }
 
-class _$Apod extends Apod {
+class _$ApodDto extends ApodDto {
   @override
   final String? copyright;
   @override
@@ -203,7 +203,7 @@ class _$Apod extends Apod {
   @override
   final String? hdUrl;
   @override
-  final MediaType? mediaType;
+  final MediaTypeDto? mediaType;
   @override
   final String? serviceVersion;
   @override
@@ -213,10 +213,10 @@ class _$Apod extends Apod {
   @override
   final String? thumbnailUrl;
 
-  factory _$Apod([void Function(ApodBuilder)? updates]) =>
-      (ApodBuilder()..update(updates))._build();
+  factory _$ApodDto([void Function(ApodDtoBuilder)? updates]) =>
+      (ApodDtoBuilder()..update(updates))._build();
 
-  _$Apod._({
+  _$ApodDto._({
     this.copyright,
     this.date,
     this.explanation,
@@ -228,16 +228,16 @@ class _$Apod extends Apod {
     this.thumbnailUrl,
   }) : super._();
   @override
-  Apod rebuild(void Function(ApodBuilder) updates) =>
+  ApodDto rebuild(void Function(ApodDtoBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  ApodBuilder toBuilder() => ApodBuilder()..replace(this);
+  ApodDtoBuilder toBuilder() => ApodDtoBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is Apod &&
+    return other is ApodDto &&
         copyright == other.copyright &&
         date == other.date &&
         explanation == other.explanation &&
@@ -267,7 +267,7 @@ class _$Apod extends Apod {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(r'Apod')
+    return (newBuiltValueToStringHelper(r'ApodDto')
           ..add('copyright', copyright)
           ..add('date', date)
           ..add('explanation', explanation)
@@ -281,8 +281,8 @@ class _$Apod extends Apod {
   }
 }
 
-class ApodBuilder implements Builder<Apod, ApodBuilder> {
-  _$Apod? _$v;
+class ApodDtoBuilder implements Builder<ApodDto, ApodDtoBuilder> {
+  _$ApodDto? _$v;
 
   String? _copyright;
   String? get copyright => _$this._copyright;
@@ -300,9 +300,9 @@ class ApodBuilder implements Builder<Apod, ApodBuilder> {
   String? get hdUrl => _$this._hdUrl;
   set hdUrl(String? hdUrl) => _$this._hdUrl = hdUrl;
 
-  MediaType? _mediaType;
-  MediaType? get mediaType => _$this._mediaType;
-  set mediaType(MediaType? mediaType) => _$this._mediaType = mediaType;
+  MediaTypeDto? _mediaType;
+  MediaTypeDto? get mediaType => _$this._mediaType;
+  set mediaType(MediaTypeDto? mediaType) => _$this._mediaType = mediaType;
 
   String? _serviceVersion;
   String? get serviceVersion => _$this._serviceVersion;
@@ -321,9 +321,9 @@ class ApodBuilder implements Builder<Apod, ApodBuilder> {
   String? get thumbnailUrl => _$this._thumbnailUrl;
   set thumbnailUrl(String? thumbnailUrl) => _$this._thumbnailUrl = thumbnailUrl;
 
-  ApodBuilder();
+  ApodDtoBuilder();
 
-  ApodBuilder get _$this {
+  ApodDtoBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _copyright = $v.copyright;
@@ -341,22 +341,22 @@ class ApodBuilder implements Builder<Apod, ApodBuilder> {
   }
 
   @override
-  void replace(Apod other) {
-    _$v = other as _$Apod;
+  void replace(ApodDto other) {
+    _$v = other as _$ApodDto;
   }
 
   @override
-  void update(void Function(ApodBuilder)? updates) {
+  void update(void Function(ApodDtoBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  Apod build() => _build();
+  ApodDto build() => _build();
 
-  _$Apod _build() {
+  _$ApodDto _build() {
     final _$result =
         _$v ??
-        _$Apod._(
+        _$ApodDto._(
           copyright: copyright,
           date: date,
           explanation: explanation,

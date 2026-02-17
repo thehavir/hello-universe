@@ -8,8 +8,8 @@ part of 'serializer.dart';
 
 Serializers _$serializers =
     (Serializers().toBuilder()
-          ..add(Apod.serializer)
-          ..add(MediaType.serializer))
+          ..add(ApodDto.serializer)
+          ..add(MediaTypeDto.serializer))
         .build();
 
 // ignore_for_file: deprecated_member_use_from_same_package,type=lint

@@ -1,18 +1,18 @@
-import 'package:hello_universe/src/data/apod.dart';
-import 'package:hello_universe/src/data/media_type.dart';
+import 'package:hello_universe/src/data/models/apod_dto.dart';
+import 'package:hello_universe/src/data/models/media_type_dto.dart';
 
 abstract final class TestModels {
-  static Apod apod({
+  static ApodDto apod({
     String? copyright,
     String? date,
     String? explanation,
     String? hdUrl,
-    MediaType? mediaType,
+    MediaTypeDto? mediaType,
     String? serviceVersion,
     String? title,
     String? url,
     String? thumbnailUrl,
-  }) => Apod(
+  }) => ApodDto(
     (b) => b
       ..copyright = copyright
       ..date = date

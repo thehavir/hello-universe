@@ -1,16 +1,16 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'media_type.dart';
+part of 'media_type_dto.dart';
 
 // **************************************************************************
 // BuiltValueGenerator
 // **************************************************************************
 
-const MediaType _$image = const MediaType._('image');
-const MediaType _$video = const MediaType._('video');
-const MediaType _$other = const MediaType._('other');
+const MediaTypeDto _$image = const MediaTypeDto._('image');
+const MediaTypeDto _$video = const MediaTypeDto._('video');
+const MediaTypeDto _$other = const MediaTypeDto._('other');
 
-MediaType _$valueOf(String name) {
+MediaTypeDto _$valueOf(String name) {
   switch (name) {
     case 'image':
       return _$image;
@@ -23,33 +23,31 @@ MediaType _$valueOf(String name) {
   }
 }
 
-final BuiltSet<MediaType> _$values = BuiltSet<MediaType>(const <MediaType>[
-  _$image,
-  _$video,
-  _$other,
-]);
+final BuiltSet<MediaTypeDto> _$values = BuiltSet<MediaTypeDto>(
+  const <MediaTypeDto>[_$image, _$video, _$other],
+);
 
-Serializer<MediaType> _$mediaTypeSerializer = _$MediaTypeSerializer();
+Serializer<MediaTypeDto> _$mediaTypeDtoSerializer = _$MediaTypeDtoSerializer();
 
-class _$MediaTypeSerializer implements PrimitiveSerializer<MediaType> {
+class _$MediaTypeDtoSerializer implements PrimitiveSerializer<MediaTypeDto> {
   @override
-  final Iterable<Type> types = const <Type>[MediaType];
+  final Iterable<Type> types = const <Type>[MediaTypeDto];
   @override
-  final String wireName = 'MediaType';
+  final String wireName = 'MediaTypeDto';
 
   @override
   Object serialize(
     Serializers serializers,
-    MediaType object, {
+    MediaTypeDto object, {
     FullType specifiedType = FullType.unspecified,
   }) => object.name;
 
   @override
-  MediaType deserialize(
+  MediaTypeDto deserialize(
     Serializers serializers,
     Object serialized, {
     FullType specifiedType = FullType.unspecified,
-  }) => MediaType.valueOf(serialized as String);
+  }) => MediaTypeDto.valueOf(serialized as String);
 }
 
 // ignore_for_file: deprecated_member_use_from_same_package,type=lint

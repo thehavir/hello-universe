@@ -2,15 +2,15 @@ library apod;
 
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
-import 'package:hello_universe/src/data/media_type.dart';
+import 'package:hello_universe/src/data/models/media_type_dto.dart';
 import 'package:hello_universe/src/data/serializer.dart';
 
-part 'apod.g.dart';
+part 'apod_dto.g.dart';
 
-abstract class Apod implements Built<Apod, ApodBuilder> {
-  factory Apod([void Function(ApodBuilder) updates]) = _$Apod;
+abstract class ApodDto implements Built<ApodDto, ApodDtoBuilder> {
+  factory ApodDto([void Function(ApodDtoBuilder) updates]) = _$ApodDto;
 
-  Apod._();
+  ApodDto._();
 
   String? get copyright;
 
@@ -25,7 +25,7 @@ abstract class Apod implements Built<Apod, ApodBuilder> {
   String? get hdUrl;
 
   @BuiltValueField(wireName: 'media_type')
-  MediaType? get mediaType;
+  MediaTypeDto? get mediaType;
 
   @BuiltValueField(wireName: 'service_version')
   String? get serviceVersion;
@@ -37,11 +37,12 @@ abstract class Apod implements Built<Apod, ApodBuilder> {
   @BuiltValueField(wireName: 'thumbnail_url')
   String? get thumbnailUrl;
 
-  static Serializer<Apod> get serializer => _$apodSerializer;
+  static Serializer<ApodDto> get serializer => _$apodDtoSerializer;
 
   Map<String, dynamic>? toJson() =>
-      serializers.serializeWith(Apod.serializer, this) as Map<String, dynamic>?;
+      serializers.serializeWith(ApodDto.serializer, this)
+          as Map<String, dynamic>?;
 
-  static Apod? fromJson(Map<String, dynamic> json) =>
-      serializers.deserializeWith(Apod.serializer, json);
+  static ApodDto? fromJson(Map<String, dynamic> json) =>
+      serializers.deserializeWith(ApodDto.serializer, json);
 }

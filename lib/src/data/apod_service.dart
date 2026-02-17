@@ -3,19 +3,19 @@ import 'dart:async';
 
 import 'package:built_collection/built_collection.dart';
 import 'package:chopper/chopper.dart';
-import 'package:hello_universe/src/data/apod.dart';
+import 'package:hello_universe/src/data/models/apod_dto.dart';
 
 part 'apod_service.chopper.dart';
 
 @ChopperApi()
 abstract class ApodService extends ChopperService {
   @Get(path: '/planetary/apod')
-  Future<Response<Apod>> fetchImage({
+  Future<Response<ApodDto>> fetchImage({
     @Query('thumbs') required bool includeThumbnails,
   });
 
   @Get(path: '/planetary/apod')
-  Future<Response<BuiltList<Apod>>> fetchImageList({
+  Future<Response<BuiltList<ApodDto>>> fetchImageList({
     @Query('start_date') required String startDate,
     @Query('end_date') required String endDate,
     @Query('thumbs') required bool includeThumbnails,

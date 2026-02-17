@@ -4,9 +4,9 @@ import 'dart:convert';
 import 'package:built_collection/built_collection.dart';
 import 'package:chopper/chopper.dart';
 import 'package:chopper_built_value/chopper_built_value.dart';
-import 'package:hello_universe/src/data/apod.dart';
+import 'package:hello_universe/src/data/models/apod_dto.dart';
 import 'package:hello_universe/src/data/apod_service.dart';
-import 'package:hello_universe/src/data/media_type.dart';
+import 'package:hello_universe/src/data/models/media_type_dto.dart';
 import 'package:hello_universe/src/data/serializer.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/annotations.dart';
@@ -20,8 +20,8 @@ late _ArrangeBuilder _builder;
 
 @GenerateMocks([], customMocks: [MockSpec<http.Client>(as: #MockHttpClient)])
 void main() {
-  final apod = TestModels.apod(title: 'x-1', mediaType: MediaType.other);
-  final apod2 = TestModels.apod(title: 'y-2', mediaType: MediaType.image);
+  final apod = TestModels.apod(title: 'x-1', mediaType: MediaTypeDto.other);
+  final apod2 = TestModels.apod(title: 'y-2', mediaType: MediaTypeDto.image);
   final apodListJson = json.encode([apod.toJson(), apod2.toJson()]);
   final apodJson = json.encode(apod.toJson());
 
@@ -189,7 +189,7 @@ void main() {
     });
 
     group('on success', () {
-      test('returns a ${Response<BuiltList<Apod>>}', () async {
+      test('returns a ${Response<BuiltList<ApodDto>>}', () async {
         _builder.withHttpClientSend(
           Stream.fromIterable([utf8.encode(apodListJson)]),
           statusCode: 200,
@@ -202,7 +202,7 @@ void main() {
           includeThumbnails: true,
         );
 
-        expect(response, isA<Response<BuiltList<Apod>>>());
+        expect(response, isA<Response<BuiltList<ApodDto>>>());
       });
 
       test('maps response correctly', () async {
@@ -287,7 +287,7 @@ void main() {
     });
 
     group('on success', () {
-      test('returns a ${Response<Apod>}', () async {
+      test('returns a ${Response<ApodDto>}', () async {
         _builder.withHttpClientSend(
           Stream.fromIterable([utf8.encode(apodJson)]),
           statusCode: 200,
@@ -296,7 +296,7 @@ void main() {
 
         final response = await tested.fetchImage(includeThumbnails: true);
 
-        expect(response, isA<Response<Apod>>());
+        expect(response, isA<Response<ApodDto>>());
       });
 
       test('maps response correctly', () async {

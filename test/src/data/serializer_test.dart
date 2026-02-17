@@ -1,16 +1,16 @@
-import 'package:hello_universe/src/data/apod.dart';
-import 'package:hello_universe/src/data/media_type.dart';
+import 'package:hello_universe/src/data/models/apod_dto.dart';
+import 'package:hello_universe/src/data/models/media_type_dto.dart';
 import 'package:hello_universe/src/data/serializer.dart';
 import 'package:test/test.dart';
 
 void main() {
-  final apod = Apod(
+  final apod = ApodDto(
     (builder) => builder
       ..copyright = '@zx11'
       ..date = '11/11/2030'
       ..explanation = 'awesome image'
       ..hdUrl = 'xyz.com/image2'
-      ..mediaType = MediaType.image
+      ..mediaType = MediaTypeDto.image
       ..serviceVersion = '1.33.5811'
       ..title = 'title-z5'
       ..url = 'xyz.com'
@@ -28,16 +28,16 @@ void main() {
     'thumbnail_url': 'xyz.com/thumbnail',
   };
 
-  group('$Apod', () {
-    test('serializes $Apod to a map', () {
-      final serialized = serializers.serializeWith(Apod.serializer, apod);
+  group('$ApodDto', () {
+    test('serializes $ApodDto to a map', () {
+      final serialized = serializers.serializeWith(ApodDto.serializer, apod);
 
       expect(serialized, serializedApod);
     });
 
-    test('deserialized $Apod from a map', () {
+    test('deserialized $ApodDto from a map', () {
       final deserialized = serializers.deserializeWith(
-        Apod.serializer,
+        ApodDto.serializer,
         serializedApod,
       );
 
@@ -45,15 +45,15 @@ void main() {
     });
   });
 
-  group('$MediaType', () {
-    <MediaType, String>{
-      MediaType.image: 'image',
-      MediaType.video: 'video',
-      MediaType.other: 'other',
+  group('$MediaTypeDto', () {
+    <MediaTypeDto, String>{
+      MediaTypeDto.image: 'image',
+      MediaTypeDto.video: 'video',
+      MediaTypeDto.other: 'other',
     }.forEach((type, value) {
       test('serializes $type into $value', () {
         final serialized = serializers.serializeWith(
-          MediaType.serializer,
+          MediaTypeDto.serializer,
           type,
         );
         expect(serialized, value);
@@ -61,7 +61,7 @@ void main() {
 
       test('deserialized $value into $type', () {
         final deserialized = serializers.deserializeWith(
-          MediaType.serializer,
+          MediaTypeDto.serializer,
           value,
         );
         expect(deserialized, type);
