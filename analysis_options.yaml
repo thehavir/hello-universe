@@ -5,6 +5,7 @@ analyzer:
   errors:
     missing_required_param: error
     missing_return: error
+    invalid_annotation_target: ignore
 
   exclude:
     - "**/*.g.dart"

@@ -24,6 +24,7 @@ dependencies:
   chopper_built_value: ^3.3.0
   built_value: ^8.12.0
   built_collection: ^5.1.1
+  freezed: ^3.2.3
 
 dev_dependencies:
   flutter_test:
