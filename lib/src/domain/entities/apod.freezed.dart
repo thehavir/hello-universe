@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Apod {
 
- DateTime? get date; String? get title; String? get explanation; String? get copyright; MediaType get mediaType; String? get url; String? get hdUrl; String? get thumbnailUrl; String? get serviceVersion;
+ DateTime? get date; String? get title; String? get explanation; String? get copyright; MediaType? get mediaType; String? get url; String? get hdUrl; String? get thumbnailUrl; String? get serviceVersion;
 /// Create a copy of Apod
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -45,7 +45,7 @@ abstract mixin class $ApodCopyWith<$Res>  {
   factory $ApodCopyWith(Apod value, $Res Function(Apod) _then) = _$ApodCopyWithImpl;
 @useResult
 $Res call({
- DateTime? date, String? title, String? explanation, String? copyright, MediaType mediaType, String? url, String? hdUrl, String? thumbnailUrl, String? serviceVersion
+ DateTime? date, String? title, String? explanation, String? copyright, MediaType? mediaType, String? url, String? hdUrl, String? thumbnailUrl, String? serviceVersion
 });
 
 
@@ -62,14 +62,14 @@ class _$ApodCopyWithImpl<$Res>
 
 /// Create a copy of Apod
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? date = freezed,Object? title = freezed,Object? explanation = freezed,Object? copyright = freezed,Object? mediaType = null,Object? url = freezed,Object? hdUrl = freezed,Object? thumbnailUrl = freezed,Object? serviceVersion = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? date = freezed,Object? title = freezed,Object? explanation = freezed,Object? copyright = freezed,Object? mediaType = freezed,Object? url = freezed,Object? hdUrl = freezed,Object? thumbnailUrl = freezed,Object? serviceVersion = freezed,}) {
   return _then(_self.copyWith(
 date: freezed == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
 as DateTime?,title: freezed == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String?,explanation: freezed == explanation ? _self.explanation : explanation // ignore: cast_nullable_to_non_nullable
 as String?,copyright: freezed == copyright ? _self.copyright : copyright // ignore: cast_nullable_to_non_nullable
-as String?,mediaType: null == mediaType ? _self.mediaType : mediaType // ignore: cast_nullable_to_non_nullable
-as MediaType,url: freezed == url ? _self.url : url // ignore: cast_nullable_to_non_nullable
+as String?,mediaType: freezed == mediaType ? _self.mediaType : mediaType // ignore: cast_nullable_to_non_nullable
+as MediaType?,url: freezed == url ? _self.url : url // ignore: cast_nullable_to_non_nullable
 as String?,hdUrl: freezed == hdUrl ? _self.hdUrl : hdUrl // ignore: cast_nullable_to_non_nullable
 as String?,thumbnailUrl: freezed == thumbnailUrl ? _self.thumbnailUrl : thumbnailUrl // ignore: cast_nullable_to_non_nullable
 as String?,serviceVersion: freezed == serviceVersion ? _self.serviceVersion : serviceVersion // ignore: cast_nullable_to_non_nullable
@@ -158,7 +158,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( DateTime? date,  String? title,  String? explanation,  String? copyright,  MediaType mediaType,  String? url,  String? hdUrl,  String? thumbnailUrl,  String? serviceVersion)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( DateTime? date,  String? title,  String? explanation,  String? copyright,  MediaType? mediaType,  String? url,  String? hdUrl,  String? thumbnailUrl,  String? serviceVersion)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Apod() when $default != null:
 return $default(_that.date,_that.title,_that.explanation,_that.copyright,_that.mediaType,_that.url,_that.hdUrl,_that.thumbnailUrl,_that.serviceVersion);case _:
@@ -179,7 +179,7 @@ return $default(_that.date,_that.title,_that.explanation,_that.copyright,_that.m
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( DateTime? date,  String? title,  String? explanation,  String? copyright,  MediaType mediaType,  String? url,  String? hdUrl,  String? thumbnailUrl,  String? serviceVersion)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( DateTime? date,  String? title,  String? explanation,  String? copyright,  MediaType? mediaType,  String? url,  String? hdUrl,  String? thumbnailUrl,  String? serviceVersion)  $default,) {final _that = this;
 switch (_that) {
 case _Apod():
 return $default(_that.date,_that.title,_that.explanation,_that.copyright,_that.mediaType,_that.url,_that.hdUrl,_that.thumbnailUrl,_that.serviceVersion);case _:
@@ -199,7 +199,7 @@ return $default(_that.date,_that.title,_that.explanation,_that.copyright,_that.m
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( DateTime? date,  String? title,  String? explanation,  String? copyright,  MediaType mediaType,  String? url,  String? hdUrl,  String? thumbnailUrl,  String? serviceVersion)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( DateTime? date,  String? title,  String? explanation,  String? copyright,  MediaType? mediaType,  String? url,  String? hdUrl,  String? thumbnailUrl,  String? serviceVersion)?  $default,) {final _that = this;
 switch (_that) {
 case _Apod() when $default != null:
 return $default(_that.date,_that.title,_that.explanation,_that.copyright,_that.mediaType,_that.url,_that.hdUrl,_that.thumbnailUrl,_that.serviceVersion);case _:
@@ -221,7 +221,7 @@ class _Apod implements Apod {
 @override final  String? title;
 @override final  String? explanation;
 @override final  String? copyright;
-@override final  MediaType mediaType;
+@override final  MediaType? mediaType;
 @override final  String? url;
 @override final  String? hdUrl;
 @override final  String? thumbnailUrl;
@@ -257,7 +257,7 @@ abstract mixin class _$ApodCopyWith<$Res> implements $ApodCopyWith<$Res> {
   factory _$ApodCopyWith(_Apod value, $Res Function(_Apod) _then) = __$ApodCopyWithImpl;
 @override @useResult
 $Res call({
- DateTime? date, String? title, String? explanation, String? copyright, MediaType mediaType, String? url, String? hdUrl, String? thumbnailUrl, String? serviceVersion
+ DateTime? date, String? title, String? explanation, String? copyright, MediaType? mediaType, String? url, String? hdUrl, String? thumbnailUrl, String? serviceVersion
 });
 
 
@@ -274,14 +274,14 @@ class __$ApodCopyWithImpl<$Res>
 
 /// Create a copy of Apod
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? date = freezed,Object? title = freezed,Object? explanation = freezed,Object? copyright = freezed,Object? mediaType = null,Object? url = freezed,Object? hdUrl = freezed,Object? thumbnailUrl = freezed,Object? serviceVersion = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? date = freezed,Object? title = freezed,Object? explanation = freezed,Object? copyright = freezed,Object? mediaType = freezed,Object? url = freezed,Object? hdUrl = freezed,Object? thumbnailUrl = freezed,Object? serviceVersion = freezed,}) {
   return _then(_Apod(
 date: freezed == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
 as DateTime?,title: freezed == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String?,explanation: freezed == explanation ? _self.explanation : explanation // ignore: cast_nullable_to_non_nullable
 as String?,copyright: freezed == copyright ? _self.copyright : copyright // ignore: cast_nullable_to_non_nullable
-as String?,mediaType: null == mediaType ? _self.mediaType : mediaType // ignore: cast_nullable_to_non_nullable
-as MediaType,url: freezed == url ? _self.url : url // ignore: cast_nullable_to_non_nullable
+as String?,mediaType: freezed == mediaType ? _self.mediaType : mediaType // ignore: cast_nullable_to_non_nullable
+as MediaType?,url: freezed == url ? _self.url : url // ignore: cast_nullable_to_non_nullable
 as String?,hdUrl: freezed == hdUrl ? _self.hdUrl : hdUrl // ignore: cast_nullable_to_non_nullable
 as String?,thumbnailUrl: freezed == thumbnailUrl ? _self.thumbnailUrl : thumbnailUrl // ignore: cast_nullable_to_non_nullable
 as String?,serviceVersion: freezed == serviceVersion ? _self.serviceVersion : serviceVersion // ignore: cast_nullable_to_non_nullable

@@ -19,7 +19,7 @@ final class _$ApodService extends ApodService {
   final Type definitionType = ApodService;
 
   @override
-  Future<Response<ApodDto>> fetchImage({required bool includeThumbnails}) {
+  Future<ApodDto> fetchImage({required bool includeThumbnails}) async {
     final Uri $url = Uri.parse('/planetary/apod');
     final Map<String, dynamic> $params = <String, dynamic>{
       'thumbs': includeThumbnails,
@@ -30,15 +30,16 @@ final class _$ApodService extends ApodService {
       client.baseUrl,
       parameters: $params,
     );
-    return client.send<ApodDto, ApodDto>($request);
+    final Response $response = await client.send<ApodDto, ApodDto>($request);
+    return $response.bodyOrThrow;
   }
 
   @override
-  Future<Response<BuiltList<ApodDto>>> fetchImageList({
+  Future<BuiltList<ApodDto>> fetchImageList({
     required String startDate,
     required String endDate,
     required bool includeThumbnails,
-  }) {
+  }) async {
     final Uri $url = Uri.parse('/planetary/apod');
     final Map<String, dynamic> $params = <String, dynamic>{
       'start_date': startDate,
@@ -51,6 +52,9 @@ final class _$ApodService extends ApodService {
       client.baseUrl,
       parameters: $params,
     );
-    return client.send<BuiltList<ApodDto>, ApodDto>($request);
+    final Response $response = await client.send<BuiltList<ApodDto>, ApodDto>(
+      $request,
+    );
+    return $response.bodyOrThrow;
   }
 }

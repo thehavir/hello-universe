@@ -10,12 +10,12 @@ part 'apod_service.chopper.dart';
 @ChopperApi()
 abstract class ApodService extends ChopperService {
   @Get(path: '/planetary/apod')
-  Future<Response<ApodDto>> fetchImage({
+  Future<ApodDto> fetchImage({
     @Query('thumbs') required bool includeThumbnails,
   });
 
   @Get(path: '/planetary/apod')
-  Future<Response<BuiltList<ApodDto>>> fetchImageList({
+  Future<BuiltList<ApodDto>> fetchImageList({
     @Query('start_date') required String startDate,
     @Query('end_date') required String endDate,
     @Query('thumbs') required bool includeThumbnails,

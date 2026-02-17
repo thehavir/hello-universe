@@ -1,13 +1,13 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:built_collection/built_collection.dart';
 import 'package:chopper/chopper.dart';
 import 'package:chopper_built_value/chopper_built_value.dart';
-import 'package:hello_universe/src/data/models/apod_dto.dart';
 import 'package:hello_universe/src/data/apod_service.dart';
+import 'package:hello_universe/src/data/models/apod_dto.dart';
 import 'package:hello_universe/src/data/models/media_type_dto.dart';
 import 'package:hello_universe/src/data/serializer.dart';
+import 'package:hello_universe/src/domain/entities/apod.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -20,8 +20,8 @@ late _ArrangeBuilder _builder;
 
 @GenerateMocks([], customMocks: [MockSpec<http.Client>(as: #MockHttpClient)])
 void main() {
-  final apod = TestModels.apod(title: 'x-1', mediaType: MediaTypeDto.other);
-  final apod2 = TestModels.apod(title: 'y-2', mediaType: MediaTypeDto.image);
+  final apod = TestModels.apodDto(title: 'x-1', mediaType: MediaTypeDto.other);
+  final apod2 = TestModels.apodDto(title: 'y-2', mediaType: MediaTypeDto.image);
   final apodListJson = json.encode([apod.toJson(), apod2.toJson()]);
   final apodJson = json.encode(apod.toJson());
 
@@ -154,72 +154,35 @@ void main() {
       expect(request.url.queryParameters['thumbs'], 'true');
     });
 
-    group('on error', () {
-      test('is not successful', () async {
-        _builder.withHttpClientSend(
-          Stream.fromIterable([utf8.encode('')]),
-          statusCode: 400,
-        );
-        final tested = _builder.createTested(chopperClient);
+    test('throws error on error', () async {
+      const error = 'error-xx3';
+      _builder.withHttpClientSend(Stream.error(error), statusCode: 404);
+      final tested = _builder.createTested(chopperClient);
 
-        final response = await tested.fetchImageList(
+      expect(
+        () => tested.fetchImageList(
           startDate: '2026-01-23',
           endDate: '2026-01-23',
           includeThumbnails: true,
-        );
-
-        expect(response.isSuccessful, isFalse);
-        expect(response.statusCode, 400);
-      });
-
-      test('throws error', () async {
-        const error = 'error-xx3';
-        _builder.withHttpClientSend(Stream.error(error), statusCode: 404);
-        final tested = _builder.createTested(chopperClient);
-
-        expect(
-          () => tested.fetchImageList(
-            startDate: '2026-01-23',
-            endDate: '2026-01-23',
-            includeThumbnails: true,
-          ),
-          throwsA(error),
-        );
-      });
+        ),
+        throwsA(error),
+      );
     });
 
-    group('on success', () {
-      test('returns a ${Response<BuiltList<ApodDto>>}', () async {
-        _builder.withHttpClientSend(
-          Stream.fromIterable([utf8.encode(apodListJson)]),
-          statusCode: 200,
-        );
-        final tested = _builder.createTested(chopperClient);
+    test('return ${List<Apod>} on success', () async {
+      _builder.withHttpClientSend(
+        Stream.fromIterable([utf8.encode(apodListJson)]),
+        statusCode: 200,
+      );
+      final tested = _builder.createTested(chopperClient);
 
-        final response = await tested.fetchImageList(
-          startDate: '2026-01-23',
-          endDate: '2026-01-23',
-          includeThumbnails: true,
-        );
+      final result = await tested.fetchImageList(
+        startDate: '2026-01-23',
+        endDate: '2026-01-23',
+        includeThumbnails: true,
+      );
 
-        expect(response, isA<Response<BuiltList<ApodDto>>>());
-      });
-
-      test('maps response correctly', () async {
-        _builder.withHttpClientSend(
-          Stream.fromIterable([utf8.encode(apodListJson)]),
-          statusCode: 200,
-        );
-        final tested = _builder.createTested(chopperClient);
-
-        final response = await tested.fetchImageList(
-          startDate: '2026-01-23',
-          endDate: '2026-01-23',
-          includeThumbnails: true,
-        );
-
-        expect(response.body, [apod, apod2]);
-      });
+      expect(result, [apod, apod2]);
     });
   });
 
@@ -260,56 +223,24 @@ void main() {
       expect(request.url.queryParameters['thumbs'], 'true');
     });
 
-    group('on error', () {
-      test('is not successful', () async {
-        _builder.withHttpClientSend(
-          Stream.fromIterable([utf8.encode('')]),
-          statusCode: 400,
-        );
-        final tested = _builder.createTested(chopperClient);
+    test('throws error on error', () async {
+      const error = 'error-x7';
+      _builder.withHttpClientSend(Stream.error(error), statusCode: 400);
+      final tested = _builder.createTested(chopperClient);
 
-        final response = await tested.fetchImage(includeThumbnails: true);
-
-        expect(response.isSuccessful, isFalse);
-        expect(response.statusCode, 400);
-      });
-
-      test('throws error', () async {
-        const error = 'error-x7';
-        _builder.withHttpClientSend(Stream.error(error), statusCode: 400);
-        final tested = _builder.createTested(chopperClient);
-
-        expect(
-          () => tested.fetchImage(includeThumbnails: true),
-          throwsA(error),
-        );
-      });
+      expect(() => tested.fetchImage(includeThumbnails: true), throwsA(error));
     });
 
-    group('on success', () {
-      test('returns a ${Response<ApodDto>}', () async {
-        _builder.withHttpClientSend(
-          Stream.fromIterable([utf8.encode(apodJson)]),
-          statusCode: 200,
-        );
-        final tested = _builder.createTested(chopperClient);
+    test('returns a $ApodDto on success', () async {
+      _builder.withHttpClientSend(
+        Stream.fromIterable([utf8.encode(apodJson)]),
+        statusCode: 200,
+      );
+      final tested = _builder.createTested(chopperClient);
 
-        final response = await tested.fetchImage(includeThumbnails: true);
+      final result = await tested.fetchImage(includeThumbnails: true);
 
-        expect(response, isA<Response<ApodDto>>());
-      });
-
-      test('maps response correctly', () async {
-        _builder.withHttpClientSend(
-          Stream.fromIterable([utf8.encode(apodJson)]),
-          statusCode: 200,
-        );
-        final tested = _builder.createTested(chopperClient);
-
-        final response = await tested.fetchImage(includeThumbnails: true);
-
-        expect(response.body, apod);
-      });
+      expect(result, apod);
     });
   });
 }

@@ -37,6 +37,7 @@ dev_dependencies:
   analyzer: ^8.4.1
   built_value_generator: ^8.12.0
   chopper_generator: ^8.5.0
+  fpdart: ^1.2.0
 
 flutter:
   uses-material-design: true
