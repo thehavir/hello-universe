@@ -9,48 +9,48 @@ import 'package:hello_universe/src/presentation/apods_data.dart';
 
 abstract final class TestModels {
   static ApodDto apodDto({
-    String? copyright,
     String? date,
-    String? explanation,
-    String? hdUrl,
-    MediaTypeDto? mediaType,
-    String? serviceVersion,
     String? title,
+    String? explanation,
+    MediaTypeDto? mediaType,
+    String? hdUrl,
     String? url,
     String? thumbnailUrl,
+    String? copyright,
+    String? serviceVersion,
   }) => ApodDto(
     (b) => b
+      ..date = date ?? '2030-01-25'
+      ..title = title ?? 'title-test1'
+      ..explanation = explanation ?? 'explanation-test1'
+      ..mediaType = mediaType ?? .image
+      ..url = url ?? 'url-test1'
+      ..hdUrl = hdUrl ?? 'hdUrl-test1'
+      ..thumbnailUrl = thumbnailUrl
       ..copyright = copyright
-      ..date = date
-      ..explanation = explanation
-      ..hdUrl = hdUrl
-      ..mediaType = mediaType
-      ..serviceVersion = serviceVersion
-      ..title = title
-      ..url = url
-      ..thumbnailUrl = thumbnailUrl,
+      ..serviceVersion = serviceVersion ?? 'serviceVersion-test1',
   );
 
   static Apod apod({
-    String? copyright,
     DateTime? date,
-    String? explanation,
-    String? hdUrl,
-    MediaType? mediaType,
-    String? serviceVersion,
     String? title,
+    String? explanation,
+    MediaType? mediaType,
+    String? hdUrl,
     String? url,
     String? thumbnailUrl,
+    String? copyright,
+    String? serviceVersion,
   }) => Apod(
-    date: date,
-    title: title,
-    explanation: explanation,
-    copyright: copyright,
-    serviceVersion: serviceVersion,
-    url: url,
-    hdUrl: hdUrl,
+    date: date ?? DateTime(2030, 01, 25),
+    title: title ?? 'title-test1',
+    explanation: explanation ?? 'explanation-test1',
+    mediaType: mediaType ?? .image,
+    url: url ?? 'url-test1',
+    hdUrl: hdUrl ?? 'hdUrl-test1',
     thumbnailUrl: thumbnailUrl,
-    mediaType: mediaType,
+    copyright: copyright,
+    serviceVersion: serviceVersion ?? 'serviceVersion-test1',
   );
 
   static ApodsPageKey apodsPageKey({

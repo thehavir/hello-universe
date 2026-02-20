@@ -6,11 +6,11 @@ extension ApodDtoExtension on ApodDto {
   Apod toEntity() {
     final date = this.date;
     return Apod(
-      date: date == null ? null : DateTime.tryParse(date),
+      date: DateTime.parse(date),
       title: title,
       explanation: explanation,
       copyright: copyright,
-      mediaType: mediaType?.toEntity(),
+      mediaType: mediaType.toEntity(),
       url: url,
       hdUrl: hdUrl,
       thumbnailUrl: thumbnailUrl,

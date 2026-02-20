@@ -12,30 +12,45 @@ abstract class ApodDto implements Built<ApodDto, ApodDtoBuilder> {
 
   ApodDto._();
 
-  String? get copyright;
-
-  /// date of the APOD.
+  /// Date of the APOD.
   ///
-  /// format: YYYY-MM-DD.
-  String? get date;
+  /// Format: YYYY-MM-DD.
+  String get date;
 
-  String? get explanation;
+  String get title;
 
-  @BuiltValueField(wireName: 'hdurl')
-  String? get hdUrl;
+  String get explanation;
 
   @BuiltValueField(wireName: 'media_type')
-  MediaTypeDto? get mediaType;
+  MediaTypeDto get mediaType;
 
-  @BuiltValueField(wireName: 'service_version')
-  String? get serviceVersion;
+  String get url;
 
-  String? get title;
+  @BuiltValueField(wireName: 'hdurl')
+  String get hdUrl;
 
-  String? get url;
-
+  /// Thumbnail url for videos.
+  /// Possible values when [MediaTypeDto] is [MediaTypeDto.video]:
+  ///   - Url.
+  ///     Exapmle:
+  ///        Nasa page: https://apod.nasa.gov/apod/ap240630.html
+  ///        Complete request: https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&thumbs=true&date=2024-06-30
+  ///        JSON response: "thumbnail_url": "https://img.youtube.com/vi/1R5QqhPq1Ik/0.jpg",
+  ///   - Empty string.
+  ///     Example:
+  ///        Nasa page: https://apod.nasa.gov/apod/ap260113.html
+  ///        Complete request: https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&thumbs=true&date=2026-01-13
+  ///        JSON response: "thumbnail_url": ""
+  ///
+  /// For other [MediaTypeDto]s is null.
   @BuiltValueField(wireName: 'thumbnail_url')
   String? get thumbnailUrl;
+
+  /// It is null when the image is public domain.
+  String? get copyright;
+
+  @BuiltValueField(wireName: 'service_version')
+  String get serviceVersion;
 
   static Serializer<ApodDto> get serializer => _$apodDtoSerializer;
 

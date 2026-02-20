@@ -6,14 +6,14 @@ part 'apod.freezed.dart';
 @freezed
 abstract class Apod with _$Apod {
   const factory Apod({
-    required DateTime? date,
-    required String? title,
-    required String? explanation,
-    required String? copyright,
-    required MediaType? mediaType,
-    required String? url,
-    required String? hdUrl,
+    required DateTime date,
+    required String title,
+    required String explanation,
+    required MediaType mediaType,
+    required String url,
+    required String hdUrl,
     required String? thumbnailUrl,
-    required String? serviceVersion,
+    required String? copyright,
+    required String serviceVersion,
   }) = _Apod;
 }

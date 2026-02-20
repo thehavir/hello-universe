@@ -10,15 +10,15 @@ import '../../../test_doubles/test_models.dart';
 
 void main() {
   test('toEntity maps $ApodDto to $Apod', () {
-    const copyright = 'GPG-3';
     const date = '2010-05-18';
-    const explanation = 'Earth from outside';
     const title = 'Blue pale dot';
+    const explanation = 'Earth from outside';
     const mediaType = MediaTypeDto.image;
-    const serviceVersion = 'v114.7825';
     const url = 'https://www.nasa.org/image1';
     const hdUrl = 'https://www.nasa.org/image1-hd';
     const thumbnailUrl = 'https://www.nasa.org/image1-thumbnail';
+    const copyright = 'GPG-3';
+    const serviceVersion = 'v114.7825';
     final dto = TestModels.apodDto(
       date: date,
       title: title,
@@ -47,13 +47,5 @@ void main() {
         serviceVersion: serviceVersion,
       ),
     );
-  });
-
-  test('toEntity maps $ApodDto to $Apod with null date when it is null', () {
-    final dto = TestModels.apodDto(date: null);
-
-    final entity = dto.toEntity();
-
-    expect(entity, isA<Apod>().having((p) => p.date, 'date', isNull));
   });
 }
