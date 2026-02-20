@@ -5,6 +5,7 @@ import 'package:hello_universe/src/domain/apods_error.dart';
 import 'package:hello_universe/src/domain/apods_page_key.dart';
 import 'package:hello_universe/src/domain/entities/apod.dart';
 import 'package:hello_universe/src/domain/entities/media_type.dart';
+import 'package:hello_universe/src/presentation/apods_data.dart';
 
 abstract final class TestModels {
   static ApodDto apodDto({
@@ -67,4 +68,18 @@ abstract final class TestModels {
 
   static ApodsError apodsError({Object? error}) =>
       ApodsError(error ?? 'error', StackTrace.current);
+
+  static ApodsData apodsData({
+    List<List<Apod>>? apodPages,
+    List<ApodsPageKey>? apodPageKeys,
+    bool? hasNextPage,
+  }) => ApodsData(
+    apodPages:
+        apodPages ??
+        [
+          [apod()],
+        ],
+    apodPageKeys: apodPageKeys ?? [apodsPageKey()],
+    hasNextPage: hasNextPage ?? true,
+  );
 }
