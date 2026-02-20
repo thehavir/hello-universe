@@ -25,7 +25,7 @@ abstract final class TestModels {
       ..explanation = explanation ?? 'explanation-test1'
       ..mediaType = mediaType ?? .image
       ..url = url ?? 'url-test1'
-      ..hdUrl = hdUrl ?? 'hdUrl-test1'
+      ..hdUrl = hdUrl
       ..thumbnailUrl = thumbnailUrl
       ..copyright = copyright
       ..serviceVersion = serviceVersion ?? 'serviceVersion-test1',
@@ -47,7 +47,7 @@ abstract final class TestModels {
     explanation: explanation ?? 'explanation-test1',
     mediaType: mediaType ?? .image,
     url: url ?? 'url-test1',
-    hdUrl: hdUrl ?? 'hdUrl-test1',
+    hdUrl: hdUrl,
     thumbnailUrl: thumbnailUrl,
     copyright: copyright,
     serviceVersion: serviceVersion ?? 'serviceVersion-test1',

@@ -40,11 +40,6 @@ class _$ApodDtoSerializer implements StructuredSerializer<ApodDto> {
       ),
       'url',
       serializers.serialize(object.url, specifiedType: const FullType(String)),
-      'hdurl',
-      serializers.serialize(
-        object.hdUrl,
-        specifiedType: const FullType(String),
-      ),
       'service_version',
       serializers.serialize(
         object.serviceVersion,
@@ -52,6 +47,14 @@ class _$ApodDtoSerializer implements StructuredSerializer<ApodDto> {
       ),
     ];
     Object? value;
+    value = object.hdUrl;
+    if (value != null) {
+      result
+        ..add('hdurl')
+        ..add(
+          serializers.serialize(value, specifiedType: const FullType(String)),
+        );
+    }
     value = object.thumbnailUrl;
     if (value != null) {
       result
@@ -130,8 +133,8 @@ class _$ApodDtoSerializer implements StructuredSerializer<ApodDto> {
               serializers.deserialize(
                     value,
                     specifiedType: const FullType(String),
-                  )!
-                  as String;
+                  )
+                  as String?;
           break;
         case 'thumbnail_url':
           result.thumbnailUrl =
@@ -176,7 +179,7 @@ class _$ApodDto extends ApodDto {
   @override
   final String url;
   @override
-  final String hdUrl;
+  final String? hdUrl;
   @override
   final String? thumbnailUrl;
   @override
@@ -193,7 +196,7 @@ class _$ApodDto extends ApodDto {
     required this.explanation,
     required this.mediaType,
     required this.url,
-    required this.hdUrl,
+    this.hdUrl,
     this.thumbnailUrl,
     this.copyright,
     required this.serviceVersion,
@@ -345,11 +348,7 @@ class ApodDtoBuilder implements Builder<ApodDto, ApodDtoBuilder> {
             'mediaType',
           ),
           url: BuiltValueNullFieldError.checkNotNull(url, r'ApodDto', 'url'),
-          hdUrl: BuiltValueNullFieldError.checkNotNull(
-            hdUrl,
-            r'ApodDto',
-            'hdUrl',
-          ),
+          hdUrl: hdUrl,
           thumbnailUrl: thumbnailUrl,
           copyright: copyright,
           serviceVersion: BuiltValueNullFieldError.checkNotNull(

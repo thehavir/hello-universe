@@ -11,7 +11,7 @@ abstract class Apod with _$Apod {
     required String explanation,
     required MediaType mediaType,
     required String url,
-    required String hdUrl,
+    required String? hdUrl,
     required String? thumbnailUrl,
     required String? copyright,
     required String serviceVersion,

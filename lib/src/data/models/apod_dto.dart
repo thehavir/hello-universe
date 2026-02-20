@@ -27,7 +27,7 @@ abstract class ApodDto implements Built<ApodDto, ApodDtoBuilder> {
   String get url;
 
   @BuiltValueField(wireName: 'hdurl')
-  String get hdUrl;
+  String? get hdUrl;
 
   /// Thumbnail url for videos.
   /// Possible values when [MediaTypeDto] is [MediaTypeDto.video]:
