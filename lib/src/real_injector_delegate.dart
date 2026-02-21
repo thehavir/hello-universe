@@ -2,12 +2,18 @@ import 'package:chopper/chopper.dart';
 import 'package:chopper_built_value/chopper_built_value.dart';
 import 'package:hello_universe/src/data/apod_service.dart';
 import 'package:hello_universe/src/data/api_config_interceptor.dart';
+import 'package:hello_universe/src/data/apods_repository_impl.dart';
 import 'package:hello_universe/src/data/serializer.dart';
+import 'package:hello_universe/src/domain/apods_pagination_handler.dart';
+import 'package:hello_universe/src/domain/apods_repository.dart';
+import 'package:hello_universe/src/domain/fetch_apods_use_case.dart';
+import 'package:hello_universe/src/presentation/apods_cubit.dart';
 import 'package:hello_universe/src/repository/base_repository.dart';
 import 'package:hello_universe/src/repository/impl_repository.dart';
 import 'package:hello_universe/src/utils/dependency_injection/injection.dart';
 import 'package:hello_universe/src/utils/dependency_injection/injector.dart';
 import 'package:hello_universe/src/utils/dependency_injection/injector_delegate.dart';
+import 'package:clock/clock.dart';
 
 /// Dependency graph for the app.
 class RealInjectorDelegate extends InjectorDelegate {
@@ -37,6 +43,24 @@ class RealInjectorDelegate extends InjectorDelegate {
     ),
     SingletonInjection<ConfigRequestInterceptor>(
       (_) => const ConfigRequestInterceptorImpl(),
+    ),
+    SingletonInjection<ApodsRepository>(
+      (resolver) => ApodsRepositoryImpl(
+        apodService: resolver.resolve<ApodServiceProvider>().create(),
+      ),
+    ),
+    SingletonInjection<Clock>((_) => const Clock()),
+    SingletonInjection<ApodsPaginationHandler>(
+      (resolver) => ApodsPaginationHandlerImpl(clock: resolver.resolve()),
+    ),
+    SingletonInjection<FetchApodsUseCase>(
+      (resolver) => FetchApodsUseCaseImpl(
+        apodsRepository: resolver.resolve(),
+        apodsPaginationHandler: resolver.resolve(),
+      ),
+    ),
+    FactoryInjection<ApodsCubit>(
+      (resolver) => ApodsCubit(fetchApodsUseCase: resolver.resolve()),
     ),
   ];
 }

@@ -13,7 +13,7 @@ class ConfigRequestInterceptorImpl implements ConfigRequestInterceptor {
   FutureOr<Response<BodyType>> intercept<BodyType>(Chain<BodyType> chain) {
     final request = chain.request;
     final parameters = Map<String, dynamic>.from(request.parameters)
-      ..addAll({_apiKey: 'DEMO_KEY'});
+      ..addAll({_apiKey: '9nYkpIbzx45SPXpXC7TzDj8qYMshH9zODzEJ1UXf'});
     final newRequest = request.copyWith(parameters: parameters);
 
     return chain.proceed(newRequest);

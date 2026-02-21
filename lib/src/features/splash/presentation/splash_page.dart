@@ -1,10 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hello_universe/src/assets.dart';
-import 'package:hello_universe/src/features/image_list/states/image_list_cubit.dart';
 import 'package:hello_universe/src/routes.dart';
 
 class SplashPage extends StatelessWidget {
@@ -13,8 +11,6 @@ class SplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Start fetch the image list.
-    context.read<ImageListCubit>().fetch();
-
     _setTimer(context);
 
     return Image.asset(Assets.splash, fit: BoxFit.cover);
@@ -22,6 +18,6 @@ class SplashPage extends StatelessWidget {
 
   void _setTimer(BuildContext context) => Timer(
     const Duration(seconds: 3),
-    () => context.goNamed(Routes.imageList),
+    () => context.goNamed(Routes.apodsScreen),
   );
 }

@@ -1,8 +1,8 @@
 import 'package:go_router/go_router.dart';
 import 'package:hello_universe/src/features/image_detail/presentation/image_details_page.dart';
 import 'package:hello_universe/src/features/image_full_screen/presentation/full_screen_image_page.dart';
-import 'package:hello_universe/src/features/image_list/presentation/image_list_page.dart';
 import 'package:hello_universe/src/features/splash/presentation/splash_page.dart';
+import 'package:hello_universe/src/presentation/apods_screen.dart';
 import 'package:hello_universe/src/utils/navigation/nullable_object_extension.dart';
 import 'package:hello_universe/src/paths.dart';
 import 'package:hello_universe/src/utils/navigation/router_provider.dart';
@@ -19,9 +19,9 @@ class RealRouterProvider implements RouterProvider {
       builder: (_, __) => const SplashPage(),
     ),
     GoRoute(
-      name: Routes.imageList,
+      name: Routes.apodsScreen,
       path: Paths.imageList,
-      builder: (_, __) => const ImageListPage(),
+      builder: (_, __) => const ApodsScreen(),
     ),
     GoRoute(
       name: Routes.imageDetails,

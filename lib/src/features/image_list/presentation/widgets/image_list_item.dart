@@ -1,62 +1,55 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hello_universe/src/domain/entities/apod.dart';
 import 'package:hello_universe/src/features/core/widgets/widgets.dart';
-import 'package:hello_universe/src/models/models.dart';
+import 'package:hello_universe/src/features/image_list/extensions/date_extension.dart';
 import 'package:hello_universe/src/routes.dart';
 
-/// An item from the Nasa APOD list.
 class ImageListItem extends StatelessWidget {
-  /// Constructs a `ImageListItem`.
   const ImageListItem(this.apod, {super.key});
 
-  /// The current `Merchant` in the list.
   final Apod apod;
 
   @override
   Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 8),
+    padding: const .symmetric(horizontal: 8),
     child: Card(
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(8)),
-      ),
-      child: _buildCardContent(context),
-    ),
-  );
-
-  Widget _buildCardContent(BuildContext context) => InkWell(
-    child: Column(children: <Widget>[_buildImage(), _buildText()]),
-    onTap: () => context.pushNamed(Routes.imageDetails, extra: apod),
-  );
-
-  Widget _buildImage() => Hero(
-    tag: '${apod.imageUrl}',
-    child: ClipRRect(
-      borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
-      // Todo(Havir): handle videos (they have thumbnail).
-      child: (apod.imageUrl?.isEmpty ?? true)
-          ? const NoImage(key: Key('ImageListItemNoResultImage'))
-          : Stack(
-              alignment: Alignment.center,
-              children: <Widget>[
-                FadeInNetworkImage(
-                  url: apod.imageUrl!,
-                  key: const Key('ImageListItemNetworkImage'),
+      shape: const RoundedRectangleBorder(borderRadius: .all(.circular(8))),
+      child: InkWell(
+        child: Column(
+          children: <Widget>[
+            Hero(
+              tag: apod.url,
+              child: ClipRRect(
+                borderRadius: const .vertical(top: Radius.circular(8)),
+                // Todo(Havir): handle videos (they have thumbnail).
+                child: Stack(
+                  alignment: .center,
+                  children: <Widget>[
+                    FadeInNetworkImage(
+                      url: apod.url,
+                      key: const Key('ImageListItemNetworkImage'),
+                    ),
+                    if (apod.mediaType == .video) const PlayIcon(),
+                  ],
                 ),
-                if (apod.isVideo) const PlayIcon(),
-              ],
+              ),
             ),
-    ),
-  );
-
-  Widget _buildText() => Padding(
-    padding: const EdgeInsets.all(8),
-    child: Text(
-      apod.date!,
-      textAlign: TextAlign.center,
-      style: const TextStyle(
-        fontWeight: FontWeight.w500,
-        fontSize: 20,
-        color: Colors.black87,
+            Padding(
+              padding: const .all(8),
+              child: Text(
+                apod.date.format(),
+                textAlign: .center,
+                style: const TextStyle(
+                  fontWeight: .w500,
+                  fontSize: 20,
+                  color: Colors.black87,
+                ),
+              ),
+            ),
+          ],
+        ),
+        onTap: () => context.pushNamed(Routes.imageDetails, extra: apod),
       ),
     ),
   );

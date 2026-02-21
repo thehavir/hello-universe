@@ -1,9 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hello_universe/src/domain/apods_error.dart';
 import 'package:hello_universe/src/domain/fetch_apods_use_case.dart';
 import 'package:hello_universe/src/presentation/apods_data.dart';
 import 'package:hello_universe/src/utils/persistent_cubit_state.dart';
 
-typedef ApodsState = PersistentCubitState<ApodsData, Object>;
+typedef ApodsState = PersistentCubitState<ApodsData, ApodsError>;
 
 class ApodsCubit extends Cubit<ApodsState> {
   ApodsCubit({required FetchApodsUseCase fetchApodsUseCase})

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hello_universe/src/domain/entities/apod.dart';
 import 'package:hello_universe/src/features/core/widgets/widgets.dart';
-import 'package:hello_universe/src/models/models.dart';
 import 'package:hello_universe/src/routes.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -18,7 +18,7 @@ class _ImageDetailsPageState extends State<ImageDetailsPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
     backgroundColor: const Color(0xff212121),
-    appBar: AppBar(title: Text('${widget.apod.title}')),
+    appBar: AppBar(title: Text(widget.apod.title)),
     body: _buildBody(),
   );
 
@@ -29,17 +29,17 @@ class _ImageDetailsPageState extends State<ImageDetailsPage> {
   );
 
   Widget _buildImage() => Hero(
-    tag: '${widget.apod.imageUrl}',
+    tag: widget.apod.url,
     child: GestureDetector(
       onTap: _onImageTap,
       child: Stack(
         alignment: Alignment.center,
         children: <Widget>[
           FadeInNetworkImage(
-            url: '${widget.apod.imageUrl}',
+            url: widget.apod.url,
             height: MediaQuery.of(context).size.height / 3,
           ),
-          if (widget.apod.isVideo) const PlayIcon(size: 120),
+          if (widget.apod.mediaType == .video) const PlayIcon(size: 120),
         ],
       ),
     ),
@@ -72,16 +72,16 @@ class _ImageDetailsPageState extends State<ImageDetailsPage> {
   );
 
   void _onImageTap() {
-    if (widget.apod.isVideo) {
+    if (widget.apod.mediaType == .video) {
       _launchYoutube();
     } else {
-      context.pushNamed(Routes.imageFullScreen, extra: widget.apod.imageUrl!);
+      context.pushNamed(Routes.imageFullScreen, extra: widget.apod.url);
     }
   }
 
   Future<void> _launchYoutube() async {
-    if (!await launchUrl(Uri.parse(widget.apod.url!))) {
-      throw Exception('Could not launch ${widget.apod.url!}');
+    if (!await launchUrl(Uri.parse(widget.apod.url))) {
+      throw Exception('Could not launch ${widget.apod.url}');
     }
   }
 }

@@ -6,8 +6,8 @@ void main() {
     expect(Routes.splash, 'splash');
   });
 
-  test('${Routes.imageList} is set to image-list', () {
-    expect(Routes.imageList, 'image-list');
+  test('${Routes.apodsScreen} is set to image-list', () {
+    expect(Routes.apodsScreen, 'apods-screen');
   });
 
   test('${Routes.imageDetails} is set to image-details', () {
