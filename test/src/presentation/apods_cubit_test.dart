@@ -7,6 +7,7 @@ import 'package:hello_universe/src/domain/apods_error.dart';
 import 'package:hello_universe/src/domain/apods_page_key.dart';
 import 'package:hello_universe/src/domain/fetch_apods_use_case.dart';
 import 'package:hello_universe/src/presentation/apods_cubit.dart';
+import 'package:hello_universe/src/presentation/apods_data.dart';
 import 'package:hello_universe/src/utils/persistent_cubit_state.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -72,7 +73,7 @@ void main() {
         currentPageKey: TestModels.apodsPageKey(startDate: DateTime(2050)),
       ),
       build: () => _builder.createTested(),
-      seed: () => PersistentLoadedCubitState(
+      seed: () => PersistentLoadedCubitState<ApodsData, ApodsError>(
         TestModels.apodsData(
           apodPageKeys: [
             TestModels.apodsPageKey(startDate: DateTime(1999)),
@@ -135,7 +136,7 @@ void main() {
         ),
       ),
       build: () => _builder.createTested(),
-      seed: () => PersistentLoadedCubitState(
+      seed: () => PersistentLoadedCubitState<ApodsData, ApodsError>(
         TestModels.apodsData(
           apodPages: [
             // first page
@@ -182,7 +183,7 @@ void main() {
         ),
       ),
       build: () => _builder.createTested(),
-      seed: () => PersistentLoadedCubitState(
+      seed: () => PersistentLoadedCubitState<ApodsData, ApodsError>(
         TestModels.apodsData(
           apodPageKeys: [
             // first page's pageKey

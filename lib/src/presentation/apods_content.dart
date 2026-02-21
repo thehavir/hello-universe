@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:hello_universe/src/assets.dart';
 import 'package:hello_universe/src/domain/apods_page_key.dart';
 import 'package:hello_universe/src/domain/entities/apod.dart';
-import 'package:hello_universe/src/features/core/widgets/empty_page.dart';
-import 'package:hello_universe/src/features/image_list/presentation/widgets/bottom_loader.dart';
-import 'package:hello_universe/src/features/image_list/presentation/widgets/image_list_item.dart';
+import 'package:hello_universe/src/presentation/components/apod_card.dart';
+import 'package:hello_universe/src/presentation/components/bottom_loader.dart';
+import 'package:hello_universe/src/presentation/components/empty_content.dart';
+import 'package:hello_universe/src/presentation/components/error_content.dart';
+import 'package:hello_universe/src/presentation/components/first_page_progress_indicator.dart';
+import 'package:hello_universe/src/presentation/components/new_page_error_indicator.dart';
+import 'package:hello_universe/src/presentation/components/no_more_item_indicator.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class ApodsContent extends StatelessWidget {
@@ -16,6 +19,7 @@ class ApodsContent extends StatelessWidget {
     required this.error,
     required this.onFetchNextPage,
     required this.onRetry,
+    required this.onApodTap,
     super.key,
   });
 
@@ -26,9 +30,11 @@ class ApodsContent extends StatelessWidget {
   final Object? error;
   final VoidCallback onFetchNextPage;
   final VoidCallback onRetry;
+  final ValueSetter<Apod> onApodTap;
 
   @override
   Widget build(BuildContext context) => PagedListView<ApodsPageKey, Apod>(
+    padding: const .symmetric(horizontal: 16),
     state: PagingState<ApodsPageKey, Apod>(
       error: error,
       hasNextPage: hasNextPage,
@@ -38,30 +44,22 @@ class ApodsContent extends StatelessWidget {
     ),
     fetchNextPage: onFetchNextPage,
     builderDelegate: PagedChildBuilderDelegate(
-      itemBuilder: (_, apod, __) => ImageListItem(apod),
-      firstPageErrorIndicatorBuilder: (context) => EmptyPage(
-        title: 'Something went wrong\nFailed to load!\nerror:$error',
-        assetsImage: Assets.errorIcon,
-        actionButton: TextButton(
-          onPressed: onRetry,
-          child: const Text('Try again'),
-        ),
+      itemBuilder: (_, apod, index) => Column(
+        children: [
+          if (index == 0) const SizedBox(height: 16),
+          ApodCard(apod: apod, onApodTap: () => onApodTap(apod)),
+          const SizedBox(height: 8),
+        ],
       ),
+      firstPageErrorIndicatorBuilder: (context) =>
+          ErrorContent(error: error, onRetry: onRetry),
       firstPageProgressIndicatorBuilder: (context) =>
-          const Center(child: CircularProgressIndicator()),
-      newPageErrorIndicatorBuilder: (context) {
-        print('*** Spinoza - error: $error');
-        return TextButton(onPressed: onRetry, child: const Text('Retry'));
-      },
+          const FirstPageProgressIndicator(),
+      newPageErrorIndicatorBuilder: (context) =>
+          NewPageErrorIndicator(onRetry: onRetry),
       newPageProgressIndicatorBuilder: (context) => const BottomLoader(),
-      noItemsFoundIndicatorBuilder: (context) => const EmptyPage(
-        title: 'There is no Image!',
-        assetsImage: Assets.noResultIcon,
-      ),
-      noMoreItemsIndicatorBuilder: (context) => const Padding(
-        padding: .all(8),
-        child: Center(child: Text('That was the last APOD!')),
-      ),
+      noItemsFoundIndicatorBuilder: (context) => const EmptyContent(),
+      noMoreItemsIndicatorBuilder: (context) => const NoMoreItemsIndicator(),
     ),
   );
 }

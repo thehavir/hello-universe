@@ -12,8 +12,6 @@ late _ArrangeBuilder _builder;
 
 @GenerateMocks([Clock])
 void main() {
-  final firstImageDate = DateTime(1995, 6, 16);
-
   setUp(() => _builder = _ArrangeBuilder());
 
   test('can be created', () {

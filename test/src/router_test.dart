@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hello_universe/src/domain/apods_error.dart';
-import 'package:hello_universe/src/features/image_detail/presentation/image_details_page.dart';
-import 'package:hello_universe/src/features/image_full_screen/presentation/full_screen_image_page.dart';
-import 'package:hello_universe/src/features/splash/presentation/splash_page.dart';
-import 'package:hello_universe/src/models/models.dart';
+import 'package:hello_universe/src/features/image_detail/image_details_page.dart';
+import 'package:hello_universe/src/features/image_full_screen/full_screen_image_page.dart';
+import 'package:hello_universe/src/features/splash/splash_page.dart';
 import 'package:hello_universe/src/paths.dart';
 import 'package:hello_universe/src/presentation/apods_cubit.dart';
 import 'package:hello_universe/src/presentation/apods_data.dart';
@@ -21,19 +20,22 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
 
+import '../test_doubles/test_models.dart';
 import 'router_test.mocks.dart';
 
 late _ArrangeBuilder _builder;
 
-@GenerateNiceMocks([MockSpec<ApodsCubit>()])
+@GenerateMocks([ApodsCubit])
 void main() {
+  provideDummy<PersistentCubitState<ApodsData, ApodsError>>(
+    const PersistentLoadingCubitState<ApodsData, ApodsError>(),
+  );
+
   setUp(() {
     _builder = _ArrangeBuilder();
   });
 
   test('is a $RouterProvider', () {
-    provideDummy(const PersistentLoadingCubitState<ApodsData, ApodsError>());
-    _builder.arrangeApodsCubit();
     final tested = _builder.createTested();
 
     expect(tested, isA<RouterProvider>());
@@ -97,7 +99,7 @@ void main() {
     });
 
     testWidgets('builds ImageDetailsPage', (tester) async {
-      final apod = Apod(title: 'abc', url: 'abcd');
+      final apod = TestModels.apod(title: 'aa2');
       final router = GoRouter(
         initialLocation: Paths.imageList,
         routes: const RealRouterProvider().routes,
@@ -141,7 +143,9 @@ void main() {
 }
 
 class _ArrangeBuilder {
-  _ArrangeBuilder();
+  _ArrangeBuilder() {
+    arrangeApodsCubit();
+  }
 
   final apodsCubit = MockApodsCubit();
 
@@ -158,25 +162,22 @@ class _ArrangeBuilder {
 }
 
 extension on WidgetTester {
-  Future<void> pumpTested({GoRouter? routerConfig, String? initialRoute}) {
-    final injector = InjectorDelegate(
-      Injector([
-        FactoryInjection<ApodsCubit>((resolver) => _builder.apodsCubit),
-      ]),
-    );
-
-    return pumpWidget(
-      Provider.value(
-        value: injector,
-        child: MaterialApp.router(
-          routerConfig:
-              routerConfig ??
-              GoRouter(
-                initialLocation: initialRoute ?? Paths.splash,
-                routes: const RealRouterProvider().routes,
-              ),
+  Future<void> pumpTested({GoRouter? routerConfig, String? initialRoute}) =>
+      pumpWidget(
+        Provider.value(
+          value: InjectorDelegate(
+            Injector([
+              FactoryInjection<ApodsCubit>((_) => _builder.apodsCubit),
+            ]),
+          ),
+          child: MaterialApp.router(
+            routerConfig:
+                routerConfig ??
+                GoRouter(
+                  initialLocation: initialRoute ?? Paths.splash,
+                  routes: const RealRouterProvider().routes,
+                ),
+          ),
         ),
-      ),
-    );
-  }
+      );
 }

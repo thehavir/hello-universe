@@ -32,15 +32,15 @@ import 'package:mockito/src/dummies.dart' as _i6;
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockApodsCubit extends _i1.Mock implements _i2.ApodsCubit {
+  MockApodsCubit() {
+    _i1.throwOnMissingStub(this);
+  }
+
   @override
   _i3.PersistentCubitState<_i4.ApodsData, _i5.ApodsError> get state =>
       (super.noSuchMethod(
             Invocation.getter(#state),
             returnValue: _i6
-                .dummyValue<
-                  _i3.PersistentCubitState<_i4.ApodsData, _i5.ApodsError>
-                >(this, Invocation.getter(#state)),
-            returnValueForMissingStub: _i6
                 .dummyValue<
                   _i3.PersistentCubitState<_i4.ApodsData, _i5.ApodsError>
                 >(this, Invocation.getter(#state)),
@@ -56,10 +56,6 @@ class MockApodsCubit extends _i1.Mock implements _i2.ApodsCubit {
                 _i7.Stream<
                   _i3.PersistentCubitState<_i4.ApodsData, _i5.ApodsError>
                 >.empty(),
-            returnValueForMissingStub:
-                _i7.Stream<
-                  _i3.PersistentCubitState<_i4.ApodsData, _i5.ApodsError>
-                >.empty(),
           )
           as _i7.Stream<
             _i3.PersistentCubitState<_i4.ApodsData, _i5.ApodsError>
@@ -67,11 +63,7 @@ class MockApodsCubit extends _i1.Mock implements _i2.ApodsCubit {
 
   @override
   bool get isClosed =>
-      (super.noSuchMethod(
-            Invocation.getter(#isClosed),
-            returnValue: false,
-            returnValueForMissingStub: false,
-          )
+      (super.noSuchMethod(Invocation.getter(#isClosed), returnValue: false)
           as bool);
 
   @override

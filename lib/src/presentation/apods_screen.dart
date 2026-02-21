@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hello_universe/src/domain/apods_error.dart';
 import 'package:hello_universe/src/presentation/apods_content.dart';
 import 'package:hello_universe/src/presentation/apods_cubit.dart';
+import 'package:hello_universe/src/routes.dart';
 import 'package:hello_universe/src/utils/dependency_injection/injector_delegate_provider.dart';
 import 'package:hello_universe/src/utils/persistent_cubit_state.dart';
 
@@ -32,6 +34,8 @@ class _Consumer extends StatelessWidget {
           error: state.apodsError?.error,
           onFetchNextPage: () => context.apodsCubit.fetchApods(),
           onRetry: () => context.apodsCubit.refresh(),
+          onApodTap: (apod) =>
+              context.pushNamed(Routes.imageDetails, extra: apod),
         ),
       ),
     ),

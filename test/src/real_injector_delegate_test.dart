@@ -3,8 +3,6 @@ import 'package:chopper_built_value/chopper_built_value.dart';
 import 'package:hello_universe/src/data/api_config_interceptor.dart';
 import 'package:hello_universe/src/data/apod_service.dart';
 import 'package:hello_universe/src/real_injector_delegate.dart';
-import 'package:hello_universe/src/repository/base_repository.dart';
-import 'package:hello_universe/src/repository/impl_repository.dart';
 import 'package:hello_universe/src/utils/dependency_injection/injector_delegate.dart';
 import 'package:test/test.dart';
 
@@ -25,14 +23,6 @@ void main() {
     final tested = _builder.createTested();
 
     expect(tested, isA<InjectorDelegate>());
-  });
-
-  test('$BaseRepository is injected', () {
-    final tested = _builder.createTested();
-
-    final injected = tested.resolve<BaseRepository>();
-
-    expect(injected, isA<ImplRepository>());
   });
 
   test('$ApodServiceProvider is injected', () {
