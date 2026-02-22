@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:hello_universe/src/domain/apods_page_key.dart';
 import 'package:hello_universe/src/domain/entities/apod.dart';
-import 'package:hello_universe/src/presentation/components/apod_card.dart';
-import 'package:hello_universe/src/presentation/components/bottom_loader.dart';
-import 'package:hello_universe/src/presentation/components/empty_content.dart';
-import 'package:hello_universe/src/presentation/components/error_content.dart';
-import 'package:hello_universe/src/presentation/components/first_page_progress_indicator.dart';
-import 'package:hello_universe/src/presentation/components/new_page_error_indicator.dart';
-import 'package:hello_universe/src/presentation/components/no_more_item_indicator.dart';
+import 'package:hello_universe/src/presentation/apods_list/components/apod_card.dart';
+import 'package:hello_universe/src/presentation/apods_list/components/bottom_loader.dart';
+import 'package:hello_universe/src/presentation/apods_list/components/empty_content.dart';
+import 'package:hello_universe/src/presentation/apods_list/components/error_content.dart';
+import 'package:hello_universe/src/presentation/apods_list/components/first_page_progress_indicator.dart';
+import 'package:hello_universe/src/presentation/apods_list/components/new_page_error_indicator.dart';
+import 'package:hello_universe/src/presentation/apods_list/components/no_more_item_indicator.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
-class ApodsContent extends StatelessWidget {
-  const ApodsContent({
+class ApodsListContent extends StatelessWidget {
+  const ApodsListContent({
     required this.apodPages,
     required this.apodPageKeys,
     required this.hasNextPage,

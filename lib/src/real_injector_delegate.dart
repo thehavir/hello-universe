@@ -7,7 +7,7 @@ import 'package:hello_universe/src/data/serializer.dart';
 import 'package:hello_universe/src/domain/apods_pagination_handler.dart';
 import 'package:hello_universe/src/domain/apods_repository.dart';
 import 'package:hello_universe/src/domain/fetch_apods_use_case.dart';
-import 'package:hello_universe/src/presentation/apods_cubit.dart';
+import 'package:hello_universe/src/presentation/apods_list/apods_list_cubit.dart';
 import 'package:hello_universe/src/utils/dependency_injection/injection.dart';
 import 'package:hello_universe/src/utils/dependency_injection/injector.dart';
 import 'package:hello_universe/src/utils/dependency_injection/injector_delegate.dart';
@@ -56,8 +56,8 @@ class RealInjectorDelegate extends InjectorDelegate {
         apodsPaginationHandler: resolver.resolve(),
       ),
     ),
-    FactoryInjection<ApodsCubit>(
-      (resolver) => ApodsCubit(fetchApodsUseCase: resolver.resolve()),
+    FactoryInjection<ApodsListCubit>(
+      (resolver) => ApodsListCubit(fetchApodsUseCase: resolver.resolve()),
     ),
   ];
 }

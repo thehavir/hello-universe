@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hello_universe/src/presentation/components/no_more_item_indicator.dart';
+import 'package:hello_universe/src/presentation/apods_list/components/no_more_item_indicator.dart';
 import 'package:mockito/mockito.dart';
 
 void main() {

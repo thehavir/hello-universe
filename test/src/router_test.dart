@@ -6,9 +6,9 @@ import 'package:hello_universe/src/features/image_detail/image_details_page.dart
 import 'package:hello_universe/src/features/image_full_screen/full_screen_image_page.dart';
 import 'package:hello_universe/src/features/splash/splash_page.dart';
 import 'package:hello_universe/src/paths.dart';
-import 'package:hello_universe/src/presentation/apods_cubit.dart';
-import 'package:hello_universe/src/presentation/apods_data.dart';
-import 'package:hello_universe/src/presentation/apods_screen.dart';
+import 'package:hello_universe/src/presentation/apods_list/apods_list_cubit.dart';
+import 'package:hello_universe/src/presentation/apods_list/apods_list_data.dart';
+import 'package:hello_universe/src/presentation/apods_list/apods_list_screen.dart';
 import 'package:hello_universe/src/router.dart';
 import 'package:hello_universe/src/utils/dependency_injection/injection.dart';
 import 'package:hello_universe/src/utils/dependency_injection/injector.dart';
@@ -25,10 +25,10 @@ import 'router_test.mocks.dart';
 
 late _ArrangeBuilder _builder;
 
-@GenerateMocks([ApodsCubit])
+@GenerateMocks([ApodsListCubit])
 void main() {
-  provideDummy<PersistentCubitState<ApodsData, ApodsError>>(
-    const PersistentLoadingCubitState<ApodsData, ApodsError>(),
+  provideDummy<PersistentCubitState<ApodsListData, ApodsError>>(
+    const PersistentLoadingCubitState<ApodsListData, ApodsError>(),
   );
 
   setUp(() {
@@ -63,7 +63,7 @@ void main() {
     });
   });
 
-  group('route to $ApodsScreen', () {
+  group('route to $ApodsListScreen', () {
     test('has correct parameters', () {
       final tested = _builder.createTested();
 
@@ -80,7 +80,7 @@ void main() {
     testWidgets('builds ImageListPage', (tester) async {
       await tester.pumpTested(initialRoute: Paths.imageList);
 
-      expect(find.byType(ApodsScreen), findsOneWidget);
+      expect(find.byType(ApodsListScreen), findsOneWidget);
     });
   });
 
@@ -147,11 +147,11 @@ class _ArrangeBuilder {
     arrangeApodsCubit();
   }
 
-  final apodsCubit = MockApodsCubit();
+  final apodsCubit = MockApodsListCubit();
 
   void arrangeApodsCubit() {
     when(apodsCubit.state).thenAnswer(
-      (_) => const PersistentLoadingCubitState<ApodsData, ApodsError>(),
+      (_) => const PersistentLoadingCubitState<ApodsListData, ApodsError>(),
     );
     when(apodsCubit.stream).thenAnswer((_) => const Stream.empty());
     when(apodsCubit.close()).thenAnswer((_) async {});
@@ -167,7 +167,7 @@ extension on WidgetTester {
         Provider.value(
           value: InjectorDelegate(
             Injector([
-              FactoryInjection<ApodsCubit>((_) => _builder.apodsCubit),
+              FactoryInjection<ApodsListCubit>((_) => _builder.apodsCubit),
             ]),
           ),
           child: MaterialApp.router(

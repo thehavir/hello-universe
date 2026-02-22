@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hello_universe/src/presentation/components/first_page_progress_indicator.dart';
+import 'package:hello_universe/src/presentation/apods_list/components/bottom_loader.dart';
 
 void main() {
   testWidgets('can be created', (tester) async {
     await tester.pumpTested();
 
-    expect(find.byType(FirstPageProgressIndicator), findsOneWidget);
+    expect(find.byType(BottomLoader), findsOneWidget);
   });
 
   testWidgets('has $CircularProgressIndicator', (tester) async {
@@ -18,5 +18,5 @@ void main() {
 
 extension on WidgetTester {
   Future<void> pumpTested() =>
-      pumpWidget(const MaterialApp(home: FirstPageProgressIndicator()));
+      pumpWidget(const MaterialApp(home: BottomLoader()));
 }

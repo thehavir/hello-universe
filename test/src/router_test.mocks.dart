@@ -7,8 +7,10 @@ import 'dart:async' as _i7;
 
 import 'package:flutter_bloc/flutter_bloc.dart' as _i8;
 import 'package:hello_universe/src/domain/apods_error.dart' as _i5;
-import 'package:hello_universe/src/presentation/apods_cubit.dart' as _i2;
-import 'package:hello_universe/src/presentation/apods_data.dart' as _i4;
+import 'package:hello_universe/src/presentation/apods_list/apods_list_cubit.dart'
+    as _i2;
+import 'package:hello_universe/src/presentation/apods_list/apods_list_data.dart'
+    as _i4;
 import 'package:hello_universe/src/utils/persistent_cubit_state.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i6;
@@ -28,37 +30,37 @@ import 'package:mockito/src/dummies.dart' as _i6;
 // ignore_for_file: subtype_of_sealed_class
 // ignore_for_file: invalid_use_of_internal_member
 
-/// A class which mocks [ApodsCubit].
+/// A class which mocks [ApodsListCubit].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockApodsCubit extends _i1.Mock implements _i2.ApodsCubit {
-  MockApodsCubit() {
+class MockApodsListCubit extends _i1.Mock implements _i2.ApodsListCubit {
+  MockApodsListCubit() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i3.PersistentCubitState<_i4.ApodsData, _i5.ApodsError> get state =>
+  _i3.PersistentCubitState<_i4.ApodsListData, _i5.ApodsError> get state =>
       (super.noSuchMethod(
             Invocation.getter(#state),
             returnValue: _i6
                 .dummyValue<
-                  _i3.PersistentCubitState<_i4.ApodsData, _i5.ApodsError>
+                  _i3.PersistentCubitState<_i4.ApodsListData, _i5.ApodsError>
                 >(this, Invocation.getter(#state)),
           )
-          as _i3.PersistentCubitState<_i4.ApodsData, _i5.ApodsError>);
+          as _i3.PersistentCubitState<_i4.ApodsListData, _i5.ApodsError>);
 
   @override
-  _i7.Stream<_i3.PersistentCubitState<_i4.ApodsData, _i5.ApodsError>>
+  _i7.Stream<_i3.PersistentCubitState<_i4.ApodsListData, _i5.ApodsError>>
   get stream =>
       (super.noSuchMethod(
             Invocation.getter(#stream),
             returnValue:
                 _i7.Stream<
-                  _i3.PersistentCubitState<_i4.ApodsData, _i5.ApodsError>
+                  _i3.PersistentCubitState<_i4.ApodsListData, _i5.ApodsError>
                 >.empty(),
           )
           as _i7.Stream<
-            _i3.PersistentCubitState<_i4.ApodsData, _i5.ApodsError>
+            _i3.PersistentCubitState<_i4.ApodsListData, _i5.ApodsError>
           >);
 
   @override
@@ -85,15 +87,17 @@ class MockApodsCubit extends _i1.Mock implements _i2.ApodsCubit {
           as _i7.Future<void>);
 
   @override
-  void emit(_i3.PersistentCubitState<_i4.ApodsData, _i5.ApodsError>? state) =>
-      super.noSuchMethod(
-        Invocation.method(#emit, [state]),
-        returnValueForMissingStub: null,
-      );
+  void emit(
+    _i3.PersistentCubitState<_i4.ApodsListData, _i5.ApodsError>? state,
+  ) => super.noSuchMethod(
+    Invocation.method(#emit, [state]),
+    returnValueForMissingStub: null,
+  );
 
   @override
   void onChange(
-    _i8.Change<_i3.PersistentCubitState<_i4.ApodsData, _i5.ApodsError>>? change,
+    _i8.Change<_i3.PersistentCubitState<_i4.ApodsListData, _i5.ApodsError>>?
+    change,
   ) => super.noSuchMethod(
     Invocation.method(#onChange, [change]),
     returnValueForMissingStub: null,

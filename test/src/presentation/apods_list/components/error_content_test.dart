@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hello_universe/src/assets.dart';
-import 'package:hello_universe/src/presentation/components/error_content.dart';
+import 'package:hello_universe/src/presentation/apods_list/components/error_content.dart';
 import 'package:mockito/mockito.dart';
 
 void main() {

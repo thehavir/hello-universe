@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hello_universe/src/domain/apods_page_key.dart';
 import 'package:hello_universe/src/domain/entities/apod.dart';
-import 'package:hello_universe/src/presentation/apods_content.dart';
-import 'package:hello_universe/src/presentation/components/apod_card.dart';
-import 'package:hello_universe/src/presentation/components/bottom_loader.dart';
-import 'package:hello_universe/src/presentation/components/empty_content.dart';
-import 'package:hello_universe/src/presentation/components/error_content.dart';
-import 'package:hello_universe/src/presentation/components/first_page_progress_indicator.dart';
-import 'package:hello_universe/src/presentation/components/new_page_error_indicator.dart';
-import 'package:hello_universe/src/presentation/components/no_more_item_indicator.dart';
+import 'package:hello_universe/src/presentation/apods_list/apods_list_content.dart';
+import 'package:hello_universe/src/presentation/apods_list/components/apod_card.dart';
+import 'package:hello_universe/src/presentation/apods_list/components/bottom_loader.dart';
+import 'package:hello_universe/src/presentation/apods_list/components/empty_content.dart';
+import 'package:hello_universe/src/presentation/apods_list/components/error_content.dart';
+import 'package:hello_universe/src/presentation/apods_list/components/first_page_progress_indicator.dart';
+import 'package:hello_universe/src/presentation/apods_list/components/new_page_error_indicator.dart';
+import 'package:hello_universe/src/presentation/apods_list/components/no_more_item_indicator.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../test_doubles/test_models.dart';
+import '../../../test_doubles/test_models.dart';
 
 void main() {
   late BuildContext context;
@@ -23,7 +23,7 @@ void main() {
   testWidgets('can be created', (tester) async {
     await tester.pumpTested();
 
-    expect(find.byType(ApodsContent), findsOneWidget);
+    expect(find.byType(ApodsListContent), findsOneWidget);
   });
 
   testWidgets('has $PagedListView', (tester) async {
@@ -298,7 +298,7 @@ extension on WidgetTester {
     ValueSetter<Apod>? onApodTap,
   }) => pumpWidget(
     MaterialApp(
-      home: ApodsContent(
+      home: ApodsListContent(
         apodPages: apodPages,
         apodPageKeys: apodPageKeys,
         hasNextPage: hasNextPage ?? false,

@@ -6,14 +6,14 @@ import 'package:hello_universe/src/domain/apod_page.dart';
 import 'package:hello_universe/src/domain/apods_error.dart';
 import 'package:hello_universe/src/domain/apods_page_key.dart';
 import 'package:hello_universe/src/domain/fetch_apods_use_case.dart';
-import 'package:hello_universe/src/presentation/apods_cubit.dart';
-import 'package:hello_universe/src/presentation/apods_data.dart';
+import 'package:hello_universe/src/presentation/apods_list/apods_list_cubit.dart';
+import 'package:hello_universe/src/presentation/apods_list/apods_list_data.dart';
 import 'package:hello_universe/src/utils/persistent_cubit_state.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
-import '../../test_doubles/test_models.dart';
+import '../../../test_doubles/test_models.dart';
 import 'apods_cubit_test.mocks.dart';
 
 late _ArrangeBuilder _builder;
@@ -29,7 +29,7 @@ void main() {
   test('can be created', () async {
     final tested = _builder.createTested();
 
-    expect(tested, isA<ApodsCubit>());
+    expect(tested, isA<ApodsListCubit>());
   });
 
   test('has $PersistentLoadingCubitState as initial state', () async {
@@ -73,7 +73,7 @@ void main() {
         currentPageKey: TestModels.apodsPageKey(startDate: DateTime(2050)),
       ),
       build: () => _builder.createTested(),
-      seed: () => PersistentLoadedCubitState<ApodsData, ApodsError>(
+      seed: () => PersistentLoadedCubitState<ApodsListData, ApodsError>(
         TestModels.apodsData(
           apodPageKeys: [
             TestModels.apodsPageKey(startDate: DateTime(1999)),
@@ -116,7 +116,7 @@ void main() {
 
         expect(
           tested.state,
-          isA<ApodsState>().having((p) => p.data?.apodPages, 'apodPages', [
+          isA<ApodsListState>().having((p) => p.data?.apodPages, 'apodPages', [
             [apod2, apod1],
           ]),
         );
@@ -136,7 +136,7 @@ void main() {
         ),
       ),
       build: () => _builder.createTested(),
-      seed: () => PersistentLoadedCubitState<ApodsData, ApodsError>(
+      seed: () => PersistentLoadedCubitState<ApodsListData, ApodsError>(
         TestModels.apodsData(
           apodPages: [
             // first page
@@ -148,7 +148,7 @@ void main() {
       ),
       act: (cubit) => cubit.fetchApods(),
       expect: () => [
-        isA<ApodsState>().having((p) => p.data?.apodPages, 'apodPages', [
+        isA<ApodsListState>().having((p) => p.data?.apodPages, 'apodPages', [
           [TestModels.apod(title: 'old-1'), TestModels.apod(title: 'old-2')],
           [TestModels.apod(title: 'old-3'), TestModels.apod(title: 'old-4')],
           [TestModels.apod(title: '2'), TestModels.apod(title: '1')],
@@ -167,9 +167,11 @@ void main() {
 
       expect(
         tested.state,
-        isA<ApodsState>().having((p) => p.data?.apodPageKeys, 'apodPageKeys', [
-          pageKey,
-        ]),
+        isA<ApodsListState>().having(
+          (p) => p.data?.apodPageKeys,
+          'apodPageKeys',
+          [pageKey],
+        ),
       );
     });
 
@@ -183,7 +185,7 @@ void main() {
         ),
       ),
       build: () => _builder.createTested(),
-      seed: () => PersistentLoadedCubitState<ApodsData, ApodsError>(
+      seed: () => PersistentLoadedCubitState<ApodsListData, ApodsError>(
         TestModels.apodsData(
           apodPageKeys: [
             // first page's pageKey
@@ -195,11 +197,12 @@ void main() {
       ),
       act: (cubit) => cubit.fetchApods(),
       expect: () => [
-        isA<ApodsState>().having((p) => p.data?.apodPageKeys, 'apodPageKeys', [
-          TestModels.apodsPageKey(startDate: DateTime(1800)),
-          TestModels.apodsPageKey(startDate: DateTime(1999)),
-          TestModels.apodsPageKey(startDate: DateTime(2066)),
-        ]),
+        isA<ApodsListState>()
+            .having((p) => p.data?.apodPageKeys, 'apodPageKeys', [
+              TestModels.apodsPageKey(startDate: DateTime(1800)),
+              TestModels.apodsPageKey(startDate: DateTime(1999)),
+              TestModels.apodsPageKey(startDate: DateTime(2066)),
+            ]),
       ],
     );
 
@@ -216,7 +219,7 @@ void main() {
 
       expect(
         tested.state,
-        isA<ApodsState>().having(
+        isA<ApodsListState>().having(
           (p) => p.data?.hasNextPage,
           'hasNextPage',
           isTrue,
@@ -237,7 +240,7 @@ void main() {
 
       expect(
         tested.state,
-        isA<ApodsState>().having(
+        isA<ApodsListState>().having(
           (p) => p.data?.hasNextPage,
           'hasNextPage',
           isFalse,
@@ -252,7 +255,7 @@ void main() {
       setUp: () => _builder.withFetchApodsUseCaseSuccess(),
       build: () => _builder.createTested(),
       act: (cubit) => cubit.refresh(),
-      expect: () => [isA<PersistentLoadingCubitState>(), isA<ApodsState>()],
+      expect: () => [isA<PersistentLoadingCubitState>(), isA<ApodsListState>()],
     );
   });
 
@@ -299,5 +302,6 @@ class _ArrangeBuilder {
     );
   }
 
-  ApodsCubit createTested() => ApodsCubit(fetchApodsUseCase: fetchApodsUseCase);
+  ApodsListCubit createTested() =>
+      ApodsListCubit(fetchApodsUseCase: fetchApodsUseCase);
 }

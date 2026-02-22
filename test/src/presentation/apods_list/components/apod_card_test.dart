@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hello_universe/src/domain/entities/apod.dart';
 import 'package:hello_universe/src/domain/entities/media_type.dart';
-import 'package:hello_universe/src/presentation/components/apod_card.dart';
-import 'package:hello_universe/src/presentation/components/fade_in_network_image.dart';
+import 'package:hello_universe/src/presentation/apods_list/components/apod_card.dart';
+import 'package:hello_universe/src/presentation/apods_list/components/fade_in_network_image.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../../test_doubles/test_models.dart';
+import '../../../../test_doubles/test_models.dart';
 
 void main() {
   final context = _MockContext();

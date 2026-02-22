@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hello_universe/src/presentation/components/new_page_error_indicator.dart';
+import 'package:hello_universe/src/presentation/apods_list/components/new_page_error_indicator.dart';
 
 void main() {
   testWidgets('can be created', (tester) async {
