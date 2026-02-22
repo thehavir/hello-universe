@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:hello_universe/src/domain/apods_error.dart';
 import 'package:hello_universe/src/features/image_detail/image_details_page.dart';
 import 'package:hello_universe/src/features/image_full_screen/full_screen_image_page.dart';
-import 'package:hello_universe/src/features/splash/splash_page.dart';
 import 'package:hello_universe/src/paths.dart';
 import 'package:hello_universe/src/presentation/apods_list/apods_list_cubit.dart';
 import 'package:hello_universe/src/presentation/apods_list/apods_list_data.dart';
@@ -41,28 +40,6 @@ void main() {
     expect(tested, isA<RouterProvider>());
   });
 
-  group('route to $SplashPage', () {
-    test('has correct parameters', () {
-      final tested = _builder.createTested();
-
-      expect(
-        tested.routes,
-        contains(
-          isA<GoRoute>()
-              .having((p) => p.name, 'name', Routes.splash)
-              .having((p) => p.path, 'path', Paths.splash),
-        ),
-      );
-    });
-
-    testWidgets('builds SplashPage', (tester) async {
-      await tester.pumpTested(initialRoute: Paths.splash);
-      await tester.pump(const Duration(seconds: 4));
-
-      expect(find.byType(SplashPage), findsOneWidget);
-    });
-  });
-
   group('route to $ApodsListScreen', () {
     test('has correct parameters', () {
       final tested = _builder.createTested();
@@ -71,14 +48,14 @@ void main() {
         tested.routes,
         contains(
           isA<GoRoute>()
-              .having((p) => p.name, 'name', Routes.apodsScreen)
-              .having((p) => p.path, 'path', Paths.imageList),
+              .having((p) => p.name, 'name', Routes.apodsListScreen)
+              .having((p) => p.path, 'path', Paths.apodsListScreen),
         ),
       );
     });
 
     testWidgets('builds ImageListPage', (tester) async {
-      await tester.pumpTested(initialRoute: Paths.imageList);
+      await tester.pumpTested(initialRoute: Paths.apodsListScreen);
 
       expect(find.byType(ApodsListScreen), findsOneWidget);
     });
@@ -101,7 +78,7 @@ void main() {
     testWidgets('builds ImageDetailsPage', (tester) async {
       final apod = TestModels.apod(title: 'aa2');
       final router = GoRouter(
-        initialLocation: Paths.imageList,
+        initialLocation: Paths.apodsListScreen,
         routes: const RealRouterProvider().routes,
       );
       await tester.pumpTested(routerConfig: router);
@@ -129,7 +106,7 @@ void main() {
 
     testWidgets('builds FullScreenImagePage', (tester) async {
       final router = GoRouter(
-        initialLocation: Paths.imageList,
+        initialLocation: Paths.apodsListScreen,
         routes: const RealRouterProvider().routes,
       );
       await tester.pumpTested(routerConfig: router);
@@ -174,7 +151,7 @@ extension on WidgetTester {
             routerConfig:
                 routerConfig ??
                 GoRouter(
-                  initialLocation: initialRoute ?? Paths.splash,
+                  initialLocation: initialRoute ?? Paths.apodsListScreen,
                   routes: const RealRouterProvider().routes,
                 ),
           ),

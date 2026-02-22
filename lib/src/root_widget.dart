@@ -24,7 +24,7 @@ class _RootWidgetState extends State<RootWidget> {
   @override
   Widget build(BuildContext context) => MaterialApp.router(
     routerConfig: GoRouter(
-      initialLocation: Paths.splash,
+      initialLocation: Paths.apodsListScreen,
       routes: _routerProvider.routes,
     ),
     title: 'Hello Universe!',

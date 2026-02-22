@@ -1,7 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:hello_universe/src/features/image_detail/image_details_page.dart';
 import 'package:hello_universe/src/features/image_full_screen/full_screen_image_page.dart';
-import 'package:hello_universe/src/features/splash/splash_page.dart';
 import 'package:hello_universe/src/presentation/apods_list/apods_list_screen.dart';
 import 'package:hello_universe/src/utils/navigation/nullable_object_extension.dart';
 import 'package:hello_universe/src/paths.dart';
@@ -14,13 +13,8 @@ class RealRouterProvider implements RouterProvider {
   @override
   List<RouteBase> get routes => [
     GoRoute(
-      name: Routes.splash,
-      path: Paths.splash,
-      builder: (_, __) => const SplashPage(),
-    ),
-    GoRoute(
-      name: Routes.apodsScreen,
-      path: Paths.imageList,
+      name: Routes.apodsListScreen,
+      path: Paths.apodsListScreen,
       builder: (_, __) => const ApodsListScreen(),
     ),
     GoRoute(
