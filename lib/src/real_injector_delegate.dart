@@ -12,6 +12,7 @@ import 'package:hello_universe/src/utils/dependency_injection/injection.dart';
 import 'package:hello_universe/src/utils/dependency_injection/injector.dart';
 import 'package:hello_universe/src/utils/dependency_injection/injector_delegate.dart';
 import 'package:clock/clock.dart';
+import 'package:hello_universe/src/utils/uri_launcher/uri_launcher.dart';
 
 /// Dependency graph for the app.
 class RealInjectorDelegate extends InjectorDelegate {
@@ -59,5 +60,6 @@ class RealInjectorDelegate extends InjectorDelegate {
     FactoryInjection<ApodsListCubit>(
       (resolver) => ApodsListCubit(fetchApodsUseCase: resolver.resolve()),
     ),
+    SingletonInjection<UriLauncher>((_) => UriLauncherImpl()),
   ];
 }

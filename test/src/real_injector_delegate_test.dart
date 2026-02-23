@@ -4,6 +4,7 @@ import 'package:hello_universe/src/data/api_config_interceptor.dart';
 import 'package:hello_universe/src/data/apod_service.dart';
 import 'package:hello_universe/src/real_injector_delegate.dart';
 import 'package:hello_universe/src/utils/dependency_injection/injector_delegate.dart';
+import 'package:hello_universe/src/utils/uri_launcher/uri_launcher.dart';
 import 'package:test/test.dart';
 
 late _ArrangeBuilder _builder;
@@ -81,6 +82,14 @@ void main() {
     final injected = tested.resolve<ConfigRequestInterceptor>();
 
     expect(injected, isA<ConfigRequestInterceptorImpl>());
+  });
+
+  test('$UriLauncher is injected', () {
+    final tested = _builder.createTested();
+
+    final injected = tested.resolve<UriLauncher>();
+
+    expect(injected, isA<UriLauncherImpl>());
   });
 }
 
