@@ -117,13 +117,6 @@ void main() {
     expect(find.text('Blue Earth'), findsOneWidget);
   });
 
-  testWidgets('has explanation', (tester) async {
-    final apod = TestModels.apod(explanation: 'Blue Earth');
-    await tester.pumpTested(apod: apod);
-
-    expect(find.text('Blue Earth'), findsOneWidget);
-  });
-
   testWidgets('explanation has bodyLarge text theme', (tester) async {
     final apod = TestModels.apod(explanation: 'Blue Earth');
     await tester.pumpTested(apod: apod);
@@ -140,7 +133,7 @@ void main() {
     expect(widget.style?.color, theme.colorScheme.onSurface);
   });
 
-  testWidgets('shows whole copyrigth '
+  testWidgets('shows whole copyright '
       'when it does not have semicolon', (tester) async {
     final apod = TestModels.apod(copyright: 'CC-BY');
     await tester.pumpTested(apod: apod);
@@ -148,7 +141,7 @@ void main() {
     expect(find.text('Copyright: CC-BY'), findsOneWidget);
   });
 
-  testWidgets('shows part of copyrigth before semicolon '
+  testWidgets('shows part of copyright before semicolon '
       'when it does not have semicolon', (tester) async {
     final apod = TestModels.apod(copyright: 'CC-BY; extra data');
     await tester.pumpTested(apod: apod);
@@ -156,7 +149,7 @@ void main() {
     expect(find.text('Copyright: CC-BY'), findsOneWidget);
   });
 
-  testWidgets('shows PUBLIC as copyrigth when it is null', (tester) async {
+  testWidgets('shows PUBLIC as copyright when it is null', (tester) async {
     final apod = TestModels.apod(copyright: null);
     await tester.pumpTested(apod: apod);
 
@@ -176,7 +169,7 @@ void main() {
     );
   });
 
-  testWidgets('explanation has onSurface color', (tester) async {
+  testWidgets('copyright has onSurface color', (tester) async {
     final apod = TestModels.apod(copyright: 'CC-BY');
     await tester.pumpTested(apod: apod);
 
@@ -191,7 +184,7 @@ void main() {
     expect(find.text('2040-04-07'), findsOneWidget);
   });
 
-  testWidgets('explanation has bodyLarge text theme with ${FontStyle.italic}', (
+  testWidgets('date has bodyLarge text theme with ${FontStyle.italic}', (
     tester,
   ) async {
     final apod = TestModels.apod(date: DateTime(2040, 4, 7));
@@ -204,7 +197,7 @@ void main() {
     );
   });
 
-  testWidgets('explanation has onSurface color', (tester) async {
+  testWidgets('date has onSurface color', (tester) async {
     final apod = TestModels.apod(date: DateTime(2040, 4, 7));
     await tester.pumpTested(apod: apod);
 

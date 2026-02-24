@@ -6,7 +6,7 @@ void main() {
     expect(Routes.apodsListScreen, 'apods-list-screen');
   });
 
-  test('${Routes.apodDetailsScreen} is set to image-details', () {
+  test('${Routes.apodDetailsScreen} is set to apod-details-screen', () {
     expect(Routes.apodDetailsScreen, 'apod-details-screen');
   });
 

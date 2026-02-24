@@ -63,7 +63,7 @@ void main() {
   });
 
   group('onApodTap', () {
-    testWidgets('calls launch on the $UriLauncher wiht URI from Apod\'s url '
+    testWidgets('calls launch on the $UriLauncher with URI from Apod\'s url '
         'when $MediaType is ${MediaType.video}', (tester) async {
       final apod = TestModels.apod(mediaType: .video, url: 'fsf.org');
       await tester.pumpTested(apod: apod);
