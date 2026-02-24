@@ -23,7 +23,7 @@ class _Consumer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: const Text('Hello Universe!')),
+    appBar: AppBar(title: const Text('Hello Universe')),
     body: SafeArea(
       child: BlocBuilder<ApodsListCubit, ApodsListState>(
         builder: (context, state) => ApodsListContent(
