@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hello_universe/src/assets.dart';
-import 'package:hello_universe/src/presentation/apods_list/components/fade_in_network_image.dart';
+import 'package:hello_universe/src/presentation/components/fade_in_network_image.dart';
 
 void main() {
   testWidgets('can be created', (tester) async {

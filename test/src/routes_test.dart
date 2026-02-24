@@ -6,8 +6,8 @@ void main() {
     expect(Routes.apodsListScreen, 'apods-list-screen');
   });
 
-  test('${Routes.imageDetails} is set to image-details', () {
-    expect(Routes.imageDetails, 'image-details');
+  test('${Routes.apodDetailsScreen} is set to image-details', () {
+    expect(Routes.apodDetailsScreen, 'apod-details-screen');
   });
 
   test('${Routes.imageFullScreen} is set to image-full-screen', () {

@@ -35,7 +35,7 @@ class _Consumer extends StatelessWidget {
           onFetchNextPage: () => context.apodsCubit.fetchApods(),
           onRetry: () => context.apodsCubit.refresh(),
           onApodTap: (apod) =>
-              context.pushNamed(Routes.imageDetails, extra: apod),
+              context.pushNamed(Routes.apodDetailsScreen, extra: apod),
         ),
       ),
     ),
