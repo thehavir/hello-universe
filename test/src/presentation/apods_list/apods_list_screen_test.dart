@@ -455,7 +455,7 @@ void main() {
         .widget<ApodsListContent>(find.byType(ApodsListContent))
         .onFetchNextPage();
 
-    // First call is the inital call that happens on the screen build
+    // First call is the initial call that happens on the screen build
     verify(_builder.apodsListCubit.fetchApods()).called(2);
   });
 
