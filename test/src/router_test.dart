@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hello_universe/src/domain/apods_error.dart';
-import 'package:hello_universe/src/features/image_detail/image_details_page.dart';
+import 'package:hello_universe/src/presentation/apod_details/apod_details_screen.dart';
 import 'package:hello_universe/src/features/image_full_screen/full_screen_image_page.dart';
 import 'package:hello_universe/src/paths.dart';
 import 'package:hello_universe/src/presentation/apods_list/apods_list_cubit.dart';
@@ -15,6 +15,7 @@ import 'package:hello_universe/src/utils/dependency_injection/injector_delegate.
 import 'package:hello_universe/src/utils/navigation/router_provider.dart';
 import 'package:hello_universe/src/routes.dart';
 import 'package:hello_universe/src/utils/persistent_cubit_state.dart';
+import 'package:hello_universe/src/utils/uri_launcher/uri_launcher.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
@@ -24,10 +25,10 @@ import 'router_test.mocks.dart';
 
 late _ArrangeBuilder _builder;
 
-@GenerateMocks([ApodsListCubit])
+@GenerateNiceMocks([MockSpec<ApodsListCubit>(), MockSpec<UriLauncher>()])
 void main() {
   provideDummy<PersistentCubitState<ApodsListData, ApodsError>>(
-    const PersistentLoadingCubitState<ApodsListData, ApodsError>(),
+    const PersistentLoadingCubitState(),
   );
 
   setUp(() {
@@ -61,7 +62,7 @@ void main() {
     });
   });
 
-  group('route to $ImageDetailsPage', () {
+  group('route to $ApodDetailsScreen', () {
     test('has correct parameters', () {
       final tested = _builder.createTested();
 
@@ -69,13 +70,13 @@ void main() {
         tested.routes,
         contains(
           isA<GoRoute>()
-              .having((p) => p.name, 'name', Routes.imageDetails)
-              .having((p) => p.path, 'path', Paths.imageDetails),
+              .having((p) => p.name, 'name', Routes.apodDetailsScreen)
+              .having((p) => p.path, 'path', Paths.apodDetailsScreen),
         ),
       );
     });
 
-    testWidgets('builds ImageDetailsPage', (tester) async {
+    testWidgets('builds ApodDetailsScreen', (tester) async {
       final apod = TestModels.apod(title: 'aa2');
       final router = GoRouter(
         initialLocation: Paths.apodsListScreen,
@@ -83,10 +84,10 @@ void main() {
       );
       await tester.pumpTested(routerConfig: router);
 
-      router.goNamed(Routes.imageDetails, extra: apod);
+      router.goNamed(Routes.apodDetailsScreen, extra: apod);
       await tester.pumpAndSettle();
 
-      expect(find.byType(ImageDetailsPage), findsOneWidget);
+      expect(find.byType(ApodDetailsScreen), findsOneWidget);
     });
   });
 
@@ -120,20 +121,8 @@ void main() {
 }
 
 class _ArrangeBuilder {
-  _ArrangeBuilder() {
-    arrangeApodsCubit();
-  }
-
   final apodsCubit = MockApodsListCubit();
-
-  void arrangeApodsCubit() {
-    when(apodsCubit.state).thenAnswer(
-      (_) => const PersistentLoadingCubitState<ApodsListData, ApodsError>(),
-    );
-    when(apodsCubit.stream).thenAnswer((_) => const Stream.empty());
-    when(apodsCubit.close()).thenAnswer((_) async {});
-    when(apodsCubit.fetchApods()).thenAnswer((_) async {});
-  }
+  final uriLauncher = MockUriLauncher();
 
   RouterProvider createTested() => const RealRouterProvider();
 }
@@ -145,6 +134,7 @@ extension on WidgetTester {
           value: InjectorDelegate(
             Injector([
               FactoryInjection<ApodsListCubit>((_) => _builder.apodsCubit),
+              SingletonInjection<UriLauncher>((_) => _builder.uriLauncher),
             ]),
           ),
           child: MaterialApp.router(

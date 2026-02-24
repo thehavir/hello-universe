@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:hello_universe/src/domain/entities/apod.dart';
 import 'package:hello_universe/src/domain/entities/media_type.dart';
 import 'package:hello_universe/src/presentation/apods_list/components/apod_card.dart';
-import 'package:hello_universe/src/presentation/apods_list/components/fade_in_network_image.dart';
+import 'package:hello_universe/src/presentation/components/fade_in_network_image.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../../../test_doubles/test_models.dart';
@@ -38,6 +38,14 @@ void main() {
     await tester.pumpTested();
 
     expect(find.byType(Hero), findsOneWidget);
+  });
+
+  testWidgets('$Hero has apod\'s url as tag', (tester) async {
+    final apod = TestModels.apod(url: 'torproject.org');
+    await tester.pumpTested(apod: apod);
+
+    final widget = tester.widget<Hero>(find.byType(Hero));
+    expect(widget.tag, 'torproject.org');
   });
 
   testWidgets('has a $FadeInNetworkImage', (tester) async {

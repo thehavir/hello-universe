@@ -12,6 +12,9 @@ import 'package:hello_universe/src/presentation/apods_list/apods_list_cubit.dart
 import 'package:hello_universe/src/presentation/apods_list/apods_list_data.dart'
     as _i4;
 import 'package:hello_universe/src/utils/persistent_cubit_state.dart' as _i3;
+import 'package:hello_universe/src/utils/uri_launcher/uri_launch_mode.dart'
+    as _i10;
+import 'package:hello_universe/src/utils/uri_launcher/uri_launcher.dart' as _i9;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i6;
 
@@ -34,15 +37,15 @@ import 'package:mockito/src/dummies.dart' as _i6;
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockApodsListCubit extends _i1.Mock implements _i2.ApodsListCubit {
-  MockApodsListCubit() {
-    _i1.throwOnMissingStub(this);
-  }
-
   @override
   _i3.PersistentCubitState<_i4.ApodsListData, _i5.ApodsError> get state =>
       (super.noSuchMethod(
             Invocation.getter(#state),
             returnValue: _i6
+                .dummyValue<
+                  _i3.PersistentCubitState<_i4.ApodsListData, _i5.ApodsError>
+                >(this, Invocation.getter(#state)),
+            returnValueForMissingStub: _i6
                 .dummyValue<
                   _i3.PersistentCubitState<_i4.ApodsListData, _i5.ApodsError>
                 >(this, Invocation.getter(#state)),
@@ -58,6 +61,10 @@ class MockApodsListCubit extends _i1.Mock implements _i2.ApodsListCubit {
                 _i7.Stream<
                   _i3.PersistentCubitState<_i4.ApodsListData, _i5.ApodsError>
                 >.empty(),
+            returnValueForMissingStub:
+                _i7.Stream<
+                  _i3.PersistentCubitState<_i4.ApodsListData, _i5.ApodsError>
+                >.empty(),
           )
           as _i7.Stream<
             _i3.PersistentCubitState<_i4.ApodsListData, _i5.ApodsError>
@@ -65,7 +72,11 @@ class MockApodsListCubit extends _i1.Mock implements _i2.ApodsListCubit {
 
   @override
   bool get isClosed =>
-      (super.noSuchMethod(Invocation.getter(#isClosed), returnValue: false)
+      (super.noSuchMethod(
+            Invocation.getter(#isClosed),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
           as bool);
 
   @override
@@ -123,4 +134,18 @@ class MockApodsListCubit extends _i1.Mock implements _i2.ApodsListCubit {
             returnValueForMissingStub: _i7.Future<void>.value(),
           )
           as _i7.Future<void>);
+}
+
+/// A class which mocks [UriLauncher].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockUriLauncher extends _i1.Mock implements _i9.UriLauncher {
+  @override
+  _i7.Future<bool> launch(Uri? uri, {_i10.UriLaunchMode? mode}) =>
+      (super.noSuchMethod(
+            Invocation.method(#launch, [uri], {#mode: mode}),
+            returnValue: _i7.Future<bool>.value(false),
+            returnValueForMissingStub: _i7.Future<bool>.value(false),
+          )
+          as _i7.Future<bool>);
 }

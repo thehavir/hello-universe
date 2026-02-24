@@ -6,8 +6,8 @@ void main() {
     expect(Paths.apodsListScreen, '/apods-list-screen');
   });
 
-  test('${Paths.imageDetails} is set to /image-details', () {
-    expect(Paths.imageDetails, '/image-details');
+  test('${Paths.apodDetailsScreen} is set to /apod-details-screen', () {
+    expect(Paths.apodDetailsScreen, '/apod-details-screen');
   });
 
   test('${Paths.imageFullScreen} is set to /image-full-screen', () {
