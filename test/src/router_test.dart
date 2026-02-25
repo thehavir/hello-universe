@@ -8,7 +8,7 @@ import 'package:hello_universe/src/paths.dart';
 import 'package:hello_universe/src/presentation/apods_list/apods_list_cubit.dart';
 import 'package:hello_universe/src/presentation/apods_list/apods_list_data.dart';
 import 'package:hello_universe/src/presentation/apods_list/apods_list_screen.dart';
-import 'package:hello_universe/src/router.dart';
+import 'package:hello_universe/src/router_provider_impl.dart';
 import 'package:hello_universe/src/utils/dependency_injection/injection.dart';
 import 'package:hello_universe/src/utils/dependency_injection/injector.dart';
 import 'package:hello_universe/src/utils/dependency_injection/injector_delegate.dart';
@@ -80,7 +80,7 @@ void main() {
       final apod = TestModels.apod(title: 'aa2');
       final router = GoRouter(
         initialLocation: Paths.apodsListScreen,
-        routes: const RealRouterProvider().routes,
+        routes: const RouterProviderImpl().routes,
       );
       await tester.pumpTested(routerConfig: router);
 
@@ -108,7 +108,7 @@ void main() {
     testWidgets('builds FullScreenImagePage', (tester) async {
       final router = GoRouter(
         initialLocation: Paths.apodsListScreen,
-        routes: const RealRouterProvider().routes,
+        routes: const RouterProviderImpl().routes,
       );
       await tester.pumpTested(routerConfig: router);
 
@@ -124,7 +124,7 @@ class _ArrangeBuilder {
   final apodsCubit = MockApodsListCubit();
   final uriLauncher = MockUriLauncher();
 
-  RouterProvider createTested() => const RealRouterProvider();
+  RouterProvider createTested() => const RouterProviderImpl();
 }
 
 extension on WidgetTester {
@@ -142,7 +142,7 @@ extension on WidgetTester {
                 routerConfig ??
                 GoRouter(
                   initialLocation: initialRoute ?? Paths.apodsListScreen,
-                  routes: const RealRouterProvider().routes,
+                  routes: const RouterProviderImpl().routes,
                 ),
           ),
         ),

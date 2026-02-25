@@ -1,36 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hello_universe/src/paths.dart';
-import 'package:hello_universe/src/router.dart';
+import 'package:hello_universe/src/utils/dependency_injection/injector_delegate_provider.dart';
 import 'package:hello_universe/src/utils/navigation/router_provider.dart';
 
-class RootWidget extends StatefulWidget {
+final _navigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root-navigator');
+
+class RootWidget extends StatelessWidget {
   const RootWidget({super.key});
 
   @override
-  State<RootWidget> createState() => _RootWidgetState();
+  Widget build(BuildContext context) =>
+      _Consumer(routerProvider: context.resolve<RouterProvider>());
 }
 
-class _RootWidgetState extends State<RootWidget> {
-  late final RouterProvider _routerProvider;
+class _Consumer extends StatelessWidget {
+  const _Consumer({required this.routerProvider});
 
-  @override
-  void initState() {
-    super.initState();
-
-    _routerProvider = const RealRouterProvider();
-  }
+  final RouterProvider routerProvider;
 
   @override
   Widget build(BuildContext context) => MaterialApp.router(
     routerConfig: GoRouter(
+      navigatorKey: _navigatorKey,
       initialLocation: Paths.apodsListScreen,
-      routes: _routerProvider.routes,
+      routes: routerProvider.routes,
     ),
-    title: 'Hello Universe!',
-    theme: ThemeData(
-      primarySwatch: Colors.blue,
-      visualDensity: VisualDensity.adaptivePlatformDensity,
-    ),
+    title: 'Hello Universe',
   );
 }

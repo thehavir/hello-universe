@@ -8,10 +8,12 @@ import 'package:hello_universe/src/domain/apods_pagination_handler.dart';
 import 'package:hello_universe/src/domain/apods_repository.dart';
 import 'package:hello_universe/src/domain/fetch_apods_use_case.dart';
 import 'package:hello_universe/src/presentation/apods_list/apods_list_cubit.dart';
+import 'package:hello_universe/src/router_provider_impl.dart';
 import 'package:hello_universe/src/utils/dependency_injection/injection.dart';
 import 'package:hello_universe/src/utils/dependency_injection/injector.dart';
 import 'package:hello_universe/src/utils/dependency_injection/injector_delegate.dart';
 import 'package:clock/clock.dart';
+import 'package:hello_universe/src/utils/navigation/router_provider.dart';
 import 'package:hello_universe/src/utils/uri_launcher/uri_launcher.dart';
 
 /// Dependency graph for the app.
@@ -61,5 +63,6 @@ class RealInjectorDelegate extends InjectorDelegate {
       (resolver) => ApodsListCubit(fetchApodsUseCase: resolver.resolve()),
     ),
     SingletonInjection<UriLauncher>((_) => UriLauncherImpl()),
+    SingletonInjection<RouterProvider>((_) => const RouterProviderImpl()),
   ];
 }

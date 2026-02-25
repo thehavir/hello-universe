@@ -7,8 +7,8 @@ import 'package:hello_universe/src/paths.dart';
 import 'package:hello_universe/src/utils/navigation/router_provider.dart';
 import 'package:hello_universe/src/routes.dart';
 
-class RealRouterProvider implements RouterProvider {
-  const RealRouterProvider();
+class RouterProviderImpl implements RouterProvider {
+  const RouterProviderImpl();
 
   @override
   List<RouteBase> get routes => [
