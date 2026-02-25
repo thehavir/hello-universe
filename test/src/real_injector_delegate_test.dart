@@ -3,7 +3,9 @@ import 'package:chopper_built_value/chopper_built_value.dart';
 import 'package:hello_universe/src/data/api_config_interceptor.dart';
 import 'package:hello_universe/src/data/apod_service.dart';
 import 'package:hello_universe/src/real_injector_delegate.dart';
+import 'package:hello_universe/src/router_provider_impl.dart';
 import 'package:hello_universe/src/utils/dependency_injection/injector_delegate.dart';
+import 'package:hello_universe/src/utils/navigation/router_provider.dart';
 import 'package:hello_universe/src/utils/uri_launcher/uri_launcher.dart';
 import 'package:test/test.dart';
 
@@ -90,6 +92,14 @@ void main() {
     final injected = tested.resolve<UriLauncher>();
 
     expect(injected, isA<UriLauncherImpl>());
+  });
+
+  test('$RouterProvider is injected', () {
+    final tested = _builder.createTested();
+
+    final injected = tested.resolve<RouterProvider>();
+
+    expect(injected, isA<RouterProviderImpl>());
   });
 }
 
