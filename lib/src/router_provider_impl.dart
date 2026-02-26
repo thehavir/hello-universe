@@ -11,7 +11,7 @@ class RouterProviderImpl implements RouterProvider {
   const RouterProviderImpl();
 
   @override
-  List<RouteBase> get routes => [
+  List<GoRoute> get routes => [
     GoRoute(
       name: Routes.apodsListScreen,
       path: Paths.apodsListScreen,
