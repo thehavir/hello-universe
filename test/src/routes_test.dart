@@ -10,7 +10,7 @@ void main() {
     expect(Routes.apodDetailsScreen, 'apod-details-screen');
   });
 
-  test('${Routes.imageFullScreen} is set to image-full-screen', () {
-    expect(Routes.imageFullScreen, 'image-full-screen');
+  test('${Routes.apodFullSizeScreen} is set to apod-full-size-screen', () {
+    expect(Routes.apodFullSizeScreen, 'apod-full-size-screen');
   });
 }

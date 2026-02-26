@@ -32,7 +32,7 @@ class _Consumer extends StatelessWidget {
     if (apod.mediaType == .video) {
       await uriLauncher.launch(Uri.parse(apod.url));
     } else {
-      await context.pushNamed(Routes.imageFullScreen, extra: apod.url);
+      await context.pushNamed(Routes.apodFullSizeScreen, extra: apod.url);
     }
   }
 }

@@ -10,7 +10,7 @@ void main() {
     expect(Paths.apodDetailsScreen, '/apod-details-screen');
   });
 
-  test('${Paths.imageFullScreen} is set to /image-full-screen', () {
-    expect(Paths.imageFullScreen, '/image-full-screen');
+  test('${Paths.apodFullSizeScreen} is set to /apod-full-size-screen', () {
+    expect(Paths.apodFullSizeScreen, '/apod-full-size-screen');
   });
 }
