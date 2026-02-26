@@ -2,7 +2,7 @@ import 'package:chopper/chopper.dart';
 import 'package:chopper_built_value/chopper_built_value.dart';
 import 'package:hello_universe/src/data/api_config_interceptor.dart';
 import 'package:hello_universe/src/data/apod_service.dart';
-import 'package:hello_universe/src/real_injector_delegate.dart';
+import 'package:hello_universe/src/injector_delegate_impl.dart';
 import 'package:hello_universe/src/router_provider_impl.dart';
 import 'package:hello_universe/src/utils/dependency_injection/injector_delegate.dart';
 import 'package:hello_universe/src/utils/navigation/router_provider.dart';
@@ -19,7 +19,7 @@ void main() {
   test('can be created', () {
     final tested = _builder.createTested();
 
-    expect(tested, isA<RealInjectorDelegate>());
+    expect(tested, isA<InjectorDelegateImpl>());
   });
 
   test('is a $InjectorDelegate', () {
@@ -33,7 +33,7 @@ void main() {
 
     final injected = tested.resolve<ApodServiceProvider>();
 
-    expect(injected, isA<RealApodServiceProvider>());
+    expect(injected, isA<ApodServiceProviderImpl>());
   });
 
   test('$ApodService is injected', () {
@@ -104,5 +104,5 @@ void main() {
 }
 
 class _ArrangeBuilder {
-  RealInjectorDelegate createTested() => RealInjectorDelegate();
+  InjectorDelegate createTested() => InjectorDelegateImpl();
 }

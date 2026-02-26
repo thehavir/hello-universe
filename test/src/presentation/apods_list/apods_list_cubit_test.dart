@@ -2,9 +2,9 @@
 
 import 'package:bloc_test/bloc_test.dart';
 import 'package:fpdart/fpdart.dart';
-import 'package:hello_universe/src/domain/apod_page.dart';
-import 'package:hello_universe/src/domain/apods_error.dart';
-import 'package:hello_universe/src/domain/apods_page_key.dart';
+import 'package:hello_universe/src/domain/entities/apod_page.dart';
+import 'package:hello_universe/src/domain/entities/apods_error.dart';
+import 'package:hello_universe/src/domain/entities/apods_page_key.dart';
 import 'package:hello_universe/src/domain/fetch_apods_use_case.dart';
 import 'package:hello_universe/src/presentation/apods_list/apods_list_cubit.dart';
 import 'package:hello_universe/src/presentation/apods_list/apods_list_data.dart';
@@ -14,11 +14,11 @@ import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
 import '../../../test_doubles/test_models.dart';
-import 'apods_cubit_test.mocks.dart';
+import 'apods_list_cubit_test.mocks.dart';
 
 late _ArrangeBuilder _builder;
 
-@GenerateMocks([FetchApodsUseCase])
+@GenerateNiceMocks([MockSpec<FetchApodsUseCase>()])
 void main() {
   provideDummy(
     TaskEither<ApodsError, ApodPage>.fromEither(Right(TestModels.apodPage())),
@@ -41,7 +41,6 @@ void main() {
   group('on fetchApods', () {
     test('calls execute on $FetchApodsUseCase and pass null to it '
         'when data on the cubit is null', () async {
-      _builder.withFetchApodsUseCaseSuccess(currentPageKey: null);
       final tested = _builder.createTested();
 
       await tested.fetchApods();
@@ -51,27 +50,9 @@ void main() {
       ).called(1);
     });
 
-    test(
-      'calls execute on $FetchApodsUseCase and pass last $ApodsPageKey to it '
-      'when data on the cubit is not null',
-      () async {
-        _builder.withFetchApodsUseCaseSuccess(currentPageKey: null);
-        final tested = _builder.createTested();
-
-        await tested.fetchApods();
-
-        verify(
-          _builder.fetchApodsUseCase.execute(currentPageKey: null),
-        ).called(1);
-      },
-    );
-
     blocTest(
       'calls execute on $FetchApodsUseCase and pass last $ApodsPageKey to it '
       'when data on the cubit is not null',
-      setUp: () => _builder.withFetchApodsUseCaseSuccess(
-        currentPageKey: TestModels.apodsPageKey(startDate: DateTime(2050)),
-      ),
       build: () => _builder.createTested(),
       seed: () => PersistentLoadedCubitState<ApodsListData, ApodsError>(
         TestModels.apodsData(
@@ -272,13 +253,10 @@ void main() {
 class _ArrangeBuilder {
   final fetchApodsUseCase = MockFetchApodsUseCase();
 
-  void withFetchApodsUseCaseSuccess({
-    ApodsPageKey? currentPageKey,
-    ApodPage? result,
-  }) {
+  void withFetchApodsUseCaseSuccess({ApodPage? result}) {
     when(
       _builder.fetchApodsUseCase.execute(
-        currentPageKey: currentPageKey ?? anyNamed('currentPageKey'),
+        currentPageKey: anyNamed('currentPageKey'),
       ),
     ).thenAnswer(
       (_) => TaskEither<ApodsError, ApodPage>.fromEither(
@@ -287,13 +265,10 @@ class _ArrangeBuilder {
     );
   }
 
-  void withFetchApodsUseCaseFailure({
-    ApodsPageKey? currentPageKey,
-    ApodsError? error,
-  }) {
+  void withFetchApodsUseCaseFailure({ApodsError? error}) {
     when(
       _builder.fetchApodsUseCase.execute(
-        currentPageKey: currentPageKey ?? anyNamed('currentPageKey'),
+        currentPageKey: anyNamed('currentPageKey'),
       ),
     ).thenAnswer(
       (_) => TaskEither<ApodsError, ApodPage>.fromEither(

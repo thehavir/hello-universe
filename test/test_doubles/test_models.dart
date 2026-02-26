@@ -1,8 +1,8 @@
 import 'package:hello_universe/src/data/models/apod_dto.dart';
 import 'package:hello_universe/src/data/models/media_type_dto.dart';
-import 'package:hello_universe/src/domain/apod_page.dart';
-import 'package:hello_universe/src/domain/apods_error.dart';
-import 'package:hello_universe/src/domain/apods_page_key.dart';
+import 'package:hello_universe/src/domain/entities/apod_page.dart';
+import 'package:hello_universe/src/domain/entities/apods_error.dart';
+import 'package:hello_universe/src/domain/entities/apods_page_key.dart';
 import 'package:hello_universe/src/domain/entities/apod.dart';
 import 'package:hello_universe/src/domain/entities/media_type.dart';
 import 'package:hello_universe/src/presentation/apods_list/apods_list_data.dart';

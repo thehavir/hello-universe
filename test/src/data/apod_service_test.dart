@@ -18,7 +18,7 @@ import 'apod_service_test.mocks.dart';
 
 late _ArrangeBuilder _builder;
 
-@GenerateMocks([], customMocks: [MockSpec<http.Client>(as: #MockHttpClient)])
+@GenerateNiceMocks([MockSpec<http.Client>(as: #MockHttpClient)])
 void main() {
   final apod = TestModels.apodDto(title: 'x-1', mediaType: MediaTypeDto.other);
   final apod2 = TestModels.apodDto(title: 'y-2', mediaType: MediaTypeDto.image);
@@ -41,13 +41,13 @@ void main() {
 
   group('$ApodServiceProvider', () {
     test('can be created', () {
-      final tested = RealApodServiceProvider(chopperClient: chopperClient);
+      final tested = ApodServiceProviderImpl(chopperClient: chopperClient);
 
       expect(tested, isA<ApodServiceProvider>());
     });
 
     test('returns an $ApodService on create', () {
-      final tested = RealApodServiceProvider(chopperClient: chopperClient);
+      final tested = ApodServiceProviderImpl(chopperClient: chopperClient);
 
       final service = tested.create();
 
@@ -55,7 +55,7 @@ void main() {
     });
 
     test('passes $ChopperClient to the $ApodService', () {
-      final tested = RealApodServiceProvider(chopperClient: chopperClient);
+      final tested = ApodServiceProviderImpl(chopperClient: chopperClient);
 
       final service = tested.create();
 
@@ -255,5 +255,5 @@ class _ArrangeBuilder {
   }
 
   ApodService createTested(ChopperClient chopperClient) =>
-      RealApodServiceProvider(chopperClient: chopperClient).create();
+      ApodServiceProviderImpl(chopperClient: chopperClient).create();
 }

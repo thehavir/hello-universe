@@ -1,5 +1,5 @@
 import 'package:clock/clock.dart';
-import 'package:hello_universe/src/domain/apods_page_key.dart';
+import 'package:hello_universe/src/domain/entities/apods_page_key.dart';
 
 /// The first Nasa APOD date.
 ///

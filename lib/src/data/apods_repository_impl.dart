@@ -1,7 +1,7 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:hello_universe/src/data/apod_service.dart';
 import 'package:hello_universe/src/data/models/apod_dto_extension.dart';
-import 'package:hello_universe/src/domain/apods_error.dart';
+import 'package:hello_universe/src/domain/entities/apods_error.dart';
 import 'package:hello_universe/src/domain/apods_repository.dart';
 import 'package:hello_universe/src/domain/entities/apod.dart';
 

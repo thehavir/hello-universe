@@ -2,43 +2,47 @@ import 'package:bloc/bloc.dart';
 import 'package:hello_universe/src/utils/disposable.dart';
 import 'package:hello_universe/src/utils/dependency_injection/injection.dart';
 import 'package:hello_universe/src/utils/dependency_injection/injector.dart';
-import 'package:mocktail/mocktail.dart';
+import 'package:mockito/annotations.dart';
 import 'package:test/test.dart';
 
+import 'injection_test.mocks.dart';
+
+@GenerateNiceMocks([MockSpec<Injector>()])
 void main() {
+  late MockInjector injector;
+
+  setUp(() => injector = MockInjector());
+
   group('factory injection', () {
     test('is created', () async {
       final injection = FactoryInjection<String>((resolver) => 'test');
 
-      expect(injection.create(_MockInjector()), isNotNull);
+      expect(injection.create(injector), isNotNull);
     });
 
     test('throws when disposable object is injected', () async {
       final injection = FactoryInjection<Disposable>(
-        (resolver) => DisposableImpl(),
+        (resolver) => _TestDisposableImpl(),
       );
 
-      expect(
-        () => injection.create(_MockInjector()),
-        throwsA(isA<StateError>()),
-      );
+      expect(() => injection.create(injector), throwsA(isA<StateError>()));
     });
 
     test(
       'throws verbose error message when disposable object is injected',
       () async {
         final injection = FactoryInjection<Disposable>(
-          (resolver) => DisposableImpl(),
+          (resolver) => _TestDisposableImpl(),
         );
 
         expect(
-          () => injection.create(_MockInjector()),
+          () => injection.create(injector),
           throwsA(
             isA<StateError>().having(
               (e) => e.toString(),
               'toString',
               contains(
-                'Disposable object of exact type DisposableImpl should not be factory injected.',
+                'Disposable object of exact type _TestDisposableImpl should not be factory injected.',
               ),
             ),
           ),
@@ -50,10 +54,10 @@ void main() {
       'returns normally for block as it will be disposed in its scope',
       () async {
         final injection = FactoryInjection<BlocBase>(
-          (resolver) => BlocBaseImpl(''),
+          (resolver) => _TestBaseImpl(''),
         );
 
-        expect(injection.create(_MockInjector()), isNotNull);
+        expect(injection.create(injector), isNotNull);
       },
     );
   });
@@ -64,16 +68,16 @@ void main() {
         (resolver, param) => 'test 1',
       );
 
-      expect(injection.create(_MockInjector(), 'test 2'), isNotNull);
+      expect(injection.create(injector, 'test 2'), isNotNull);
     });
 
     test('throws when disposable object is injected', () async {
       final injection = AssistedFactoryInjection<Disposable, String>(
-        (resolver, param) => DisposableImpl(),
+        (resolver, param) => _TestDisposableImpl(),
       );
 
       expect(
-        () => injection.create(_MockInjector(), 'test'),
+        () => injection.create(injector, 'test'),
         throwsA(isA<StateError>()),
       );
     });
@@ -82,17 +86,17 @@ void main() {
       'throws verbose error message when disposable object is injected',
       () async {
         final injection = AssistedFactoryInjection<Disposable, String>(
-          (resolver, param) => DisposableImpl(),
+          (resolver, param) => _TestDisposableImpl(),
         );
 
         expect(
-          () => injection.create(_MockInjector(), 'test'),
+          () => injection.create(injector, 'test'),
           throwsA(
             isA<StateError>().having(
               (e) => e.toString(),
               'toString',
               contains(
-                'Disposable object of exact type DisposableImpl should not be factory injected',
+                'Disposable object of exact type _TestDisposableImpl should not be factory injected',
               ),
             ),
           ),
@@ -101,12 +105,12 @@ void main() {
     );
 
     test('throws when object implementing disposable is injected', () async {
-      final injection = AssistedFactoryInjection<DisposableImpl, String>(
-        (resolver, param) => DisposableImpl(),
+      final injection = AssistedFactoryInjection<_TestDisposableImpl, String>(
+        (resolver, param) => _TestDisposableImpl(),
       );
 
       expect(
-        () => injection.create(_MockInjector(), 'test'),
+        () => injection.create(injector, 'test'),
         throwsA(isA<StateError>()),
       );
     });
@@ -115,10 +119,10 @@ void main() {
       'returns normally for block as it will be disposed in its scope',
       () async {
         final injection = AssistedFactoryInjection<BlocBase, String>(
-          (resolver, param) => BlocBaseImpl(''),
+          (resolver, param) => _TestBaseImpl(''),
         );
 
-        expect(injection.create(_MockInjector(), 'test'), isNotNull);
+        expect(injection.create(injector, 'test'), isNotNull);
       },
     );
   });
@@ -127,38 +131,35 @@ void main() {
     test('is created', () async {
       final injection = SingletonInjection<String>((resolver) => 'test');
 
-      expect(injection.create(_MockInjector()), isNotNull);
+      expect(injection.create(injector), isNotNull);
     });
 
     test(
       'returns normally for disposable as it will be disposed automatically',
       () async {
         final injection = SingletonInjection<Disposable>(
-          (resolver) => DisposableImpl(),
+          (resolver) => _TestDisposableImpl(),
         );
 
-        expect(() => injection.create(_MockInjector()), isNotNull);
+        expect(() => injection.create(injector), isNotNull);
       },
     );
 
     test('throws as blocks should be factory injected', () async {
       final injection = SingletonInjection<BlocBase>(
-        (resolver) => BlocBaseImpl(''),
+        (resolver) => _TestBaseImpl(''),
       );
 
-      expect(
-        () => injection.create(_MockInjector()),
-        throwsA(isA<StateError>()),
-      );
+      expect(() => injection.create(injector), throwsA(isA<StateError>()));
     });
 
     test('throws verbose error message when bloc object is injected', () async {
       final injection = SingletonInjection<BlocBase>(
-        (resolver) => BlocBaseImpl(''),
+        (resolver) => _TestBaseImpl(''),
       );
 
       expect(
-        () => injection.create(_MockInjector()),
+        () => injection.create(injector),
         throwsA(
           isA<StateError>().having(
             (e) => e.toString(),
@@ -176,38 +177,35 @@ void main() {
         (resolver, _) => 'test',
       );
 
-      expect(injection.create(_MockInjector(), ''), isNotNull);
+      expect(injection.create(injector, ''), isNotNull);
     });
 
     test(
       'returns normally for disposable as it will be disposed automatically',
       () async {
         final injection = AssistedSingletonInjection<Disposable, String>(
-          (resolver, _) => DisposableImpl(),
+          (resolver, _) => _TestDisposableImpl(),
         );
 
-        expect(() => injection.create(_MockInjector(), ''), isNotNull);
+        expect(() => injection.create(injector, ''), isNotNull);
       },
     );
 
     test('throws as blocks should be factory injected', () async {
       final injection = AssistedSingletonInjection<BlocBase, String>(
-        (resolver, _) => BlocBaseImpl(''),
+        (resolver, _) => _TestBaseImpl(''),
       );
 
-      expect(
-        () => injection.create(_MockInjector(), ''),
-        throwsA(isA<StateError>()),
-      );
+      expect(() => injection.create(injector, ''), throwsA(isA<StateError>()));
     });
 
     test('throws verbose error message when bloc object is injected', () async {
       final injection = AssistedSingletonInjection<BlocBase, String>(
-        (resolver, _) => BlocBaseImpl(''),
+        (resolver, _) => _TestBaseImpl(''),
       );
 
       expect(
-        () => injection.create(_MockInjector(), ''),
+        () => injection.create(injector, ''),
         throwsA(
           isA<StateError>().having(
             (e) => e.toString(),
@@ -220,13 +218,11 @@ void main() {
   });
 }
 
-class DisposableImpl implements Disposable {
+class _TestDisposableImpl implements Disposable {
   @override
   void dispose() {}
 }
 
-class BlocBaseImpl extends BlocBase {
-  BlocBaseImpl(super._state);
+class _TestBaseImpl extends BlocBase {
+  _TestBaseImpl(super._state);
 }
-
-class _MockInjector extends Mock implements Injector {}

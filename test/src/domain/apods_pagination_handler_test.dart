@@ -1,5 +1,5 @@
 import 'package:clock/clock.dart';
-import 'package:hello_universe/src/domain/apods_page_key.dart';
+import 'package:hello_universe/src/domain/entities/apods_page_key.dart';
 import 'package:hello_universe/src/domain/apods_pagination_handler.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -19,6 +19,7 @@ void main() {
 
     expect(tested, isA<ApodsPaginationHandlerImpl>());
   });
+
   group('on nextPageKey', () {
     group('when current pageKey is null', () {
       test('returns $ApodsPageKey with endDate as yesterday '

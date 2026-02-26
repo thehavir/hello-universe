@@ -4,10 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hello_universe/src/assets.dart';
 import 'package:hello_universe/src/presentation/apods_list/components/error_content.dart';
-import 'package:mockito/mockito.dart';
+
+import '../../../../test_utils/mock_context.mocks.dart';
 
 void main() {
-  final textTheme = TextTheme.of(_MockContext());
+  late MockBuildContext context;
+  late ThemeData theme;
+
+  setUp(() {
+    context = MockBuildContext();
+    theme = Theme.of(context);
+  });
 
   testWidgets('can be created', (tester) async {
     await tester.pumpTested();
@@ -33,7 +40,7 @@ void main() {
     await tester.pumpTested();
 
     final widget = tester.widget<Text>(find.text('Something went wrong'));
-    expect(widget.style, textTheme.titleLarge);
+    expect(widget.style, theme.textTheme.titleLarge);
   });
 
   testWidgets('has subtitle when error is null', (tester) async {
@@ -61,7 +68,7 @@ void main() {
     final widget = tester.widget<Text>(
       find.text('Failed to load! Please try again\nError: null'),
     );
-    expect(widget.style, textTheme.bodyMedium);
+    expect(widget.style, theme.textTheme.bodyMedium);
   });
 
   testWidgets('has $ElevatedButton', (tester) async {
@@ -99,5 +106,3 @@ extension on WidgetTester {
     ),
   );
 }
-
-class _MockContext extends Mock implements BuildContext {}

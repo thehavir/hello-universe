@@ -26,8 +26,8 @@ abstract class ApodServiceProvider {
   ApodService create();
 }
 
-class RealApodServiceProvider implements ApodServiceProvider {
-  RealApodServiceProvider({required ChopperClient chopperClient})
+class ApodServiceProviderImpl implements ApodServiceProvider {
+  ApodServiceProviderImpl({required ChopperClient chopperClient})
     : _chopperClient = chopperClient;
 
   final ChopperClient _chopperClient;
