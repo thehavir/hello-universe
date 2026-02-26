@@ -3,8 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hello_universe/src/domain/apods_error.dart';
 import 'package:hello_universe/src/presentation/apod_details/apod_details_screen.dart';
-import 'package:hello_universe/src/features/image_full_screen/full_screen_image_page.dart';
 import 'package:hello_universe/src/paths.dart';
+import 'package:hello_universe/src/presentation/apod_full_size/apod_full_size_screen.dart';
 import 'package:hello_universe/src/presentation/apods_list/apods_list_cubit.dart';
 import 'package:hello_universe/src/presentation/apods_list/apods_list_data.dart';
 import 'package:hello_universe/src/presentation/apods_list/apods_list_screen.dart';
@@ -91,7 +91,7 @@ void main() {
     });
   });
 
-  group('route to $FullScreenImagePage', () {
+  group('route to $ApodFullSizeScreen', () {
     test('has correct parameters', () {
       final tested = _builder.createTested();
 
@@ -99,23 +99,23 @@ void main() {
         tested.routes,
         contains(
           isA<GoRoute>()
-              .having((p) => p.name, 'name', Routes.imageFullScreen)
-              .having((p) => p.path, 'path', Paths.imageFullScreen),
+              .having((p) => p.name, 'name', Routes.apodFullSizeScreen)
+              .having((p) => p.path, 'path', Paths.apodFullSizeScreen),
         ),
       );
     });
 
-    testWidgets('builds FullScreenImagePage', (tester) async {
+    testWidgets('builds ApodFullSizeScreen', (tester) async {
       final router = GoRouter(
         initialLocation: Paths.apodsListScreen,
         routes: const RouterProviderImpl().routes,
       );
       await tester.pumpTested(routerConfig: router);
 
-      router.goNamed(Routes.imageFullScreen, extra: 'url');
+      router.goNamed(Routes.apodFullSizeScreen, extra: 'url');
       await tester.pumpAndSettle();
 
-      expect(find.byType(FullScreenImagePage), findsOneWidget);
+      expect(find.byType(ApodFullSizeScreen), findsOneWidget);
     });
   });
 }

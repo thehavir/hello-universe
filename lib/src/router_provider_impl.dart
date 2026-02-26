@@ -1,6 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:hello_universe/src/presentation/apod_details/apod_details_screen.dart';
-import 'package:hello_universe/src/features/image_full_screen/full_screen_image_page.dart';
+import 'package:hello_universe/src/presentation/apod_full_size/apod_full_size_screen.dart';
 import 'package:hello_universe/src/presentation/apods_list/apods_list_screen.dart';
 import 'package:hello_universe/src/utils/navigation/nullable_object_extension.dart';
 import 'package:hello_universe/src/paths.dart';
@@ -23,9 +23,9 @@ class RouterProviderImpl implements RouterProvider {
       builder: (_, state) => ApodDetailsScreen(apod: state.extra.forceCast()),
     ),
     GoRoute(
-      name: Routes.imageFullScreen,
-      path: Paths.imageFullScreen,
-      builder: (_, state) => FullScreenImagePage(state.extra.forceCast()),
+      name: Routes.apodFullSizeScreen,
+      path: Paths.apodFullSizeScreen,
+      builder: (_, state) => ApodFullSizeScreen(url: state.extra.forceCast()),
     ),
   ];
 }

@@ -77,7 +77,7 @@ void main() {
 
     <MediaType>[.other, .image].forEach((mediaType) {
       testWidgets(
-        'pushes ${Routes.imageFullScreen} and passes URI from Apod\'s url to it '
+        'pushes ${Routes.apodFullSizeScreen} and passes URI from Apod\'s url to it '
         'when $MediaType is $mediaType',
         (tester) async {
           final apod = TestModels.apod(mediaType: mediaType, url: 'fsf.org');
@@ -89,7 +89,7 @@ void main() {
 
           verify(
             _builder.goRouter.pushNamed(
-              Routes.imageFullScreen,
+              Routes.apodFullSizeScreen,
               extra: 'fsf.org',
             ),
           ).called(1);
