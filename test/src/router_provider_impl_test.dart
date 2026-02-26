@@ -35,7 +35,7 @@ void main() {
       contains(
         isA<GoRoute>()
             .having((p) => p.name, 'name', Routes.apodsListScreen)
-            .having((p) => p.path, 'name', Paths.apodsListScreen),
+            .having((p) => p.path, 'path', Paths.apodsListScreen),
       ),
     );
   });
@@ -64,7 +64,7 @@ void main() {
       contains(
         isA<GoRoute>()
             .having((p) => p.name, 'name', Routes.apodDetailsScreen)
-            .having((p) => p.path, 'name', Paths.apodDetailsScreen),
+            .having((p) => p.path, 'path', Paths.apodDetailsScreen),
       ),
     );
   });
@@ -97,7 +97,7 @@ void main() {
       contains(
         isA<GoRoute>()
             .having((p) => p.name, 'name', Routes.apodFullSizeScreen)
-            .having((p) => p.path, 'name', Paths.apodFullSizeScreen),
+            .having((p) => p.path, 'path', Paths.apodFullSizeScreen),
       ),
     );
   });
