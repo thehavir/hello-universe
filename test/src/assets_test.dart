@@ -10,11 +10,11 @@ void main() {
     expect(Assets.noResultIcon, 'assets/no-results.png');
   });
 
-  test('${Assets.noImageIcon} has assets/no-iamge.png value', () {
+  test('${Assets.noImageIcon} has assets/no-image.png value', () {
     expect(Assets.noImageIcon, 'assets/no-image.png');
   });
 
-  test('${Assets.placeholder} has assets/no-iamge.png value', () {
+  test('${Assets.placeholder} has assets/placeholder.png value', () {
     expect(Assets.placeholder, 'assets/placeholder.png');
   });
 }

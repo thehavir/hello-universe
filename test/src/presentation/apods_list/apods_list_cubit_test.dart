@@ -50,20 +50,6 @@ void main() {
       ).called(1);
     });
 
-    test(
-      'calls execute on $FetchApodsUseCase and pass last $ApodsPageKey to it '
-      'when data on the cubit is not null',
-      () async {
-        final tested = _builder.createTested();
-
-        await tested.fetchApods();
-
-        verify(
-          _builder.fetchApodsUseCase.execute(currentPageKey: null),
-        ).called(1);
-      },
-    );
-
     blocTest(
       'calls execute on $FetchApodsUseCase and pass last $ApodsPageKey to it '
       'when data on the cubit is not null',
