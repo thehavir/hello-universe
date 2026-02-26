@@ -3,7 +3,7 @@ import 'package:fpdart/fpdart.dart';
 import 'package:hello_universe/src/data/apod_service.dart';
 import 'package:hello_universe/src/data/apods_repository_impl.dart';
 import 'package:hello_universe/src/data/models/apod_dto.dart';
-import 'package:hello_universe/src/domain/apods_error.dart';
+import 'package:hello_universe/src/domain/entities/apods_error.dart';
 import 'package:hello_universe/src/domain/apods_repository.dart';
 import 'package:hello_universe/src/domain/entities/apod.dart';
 import 'package:mockito/annotations.dart';
@@ -15,7 +15,7 @@ import 'apods_repository_impl_test.mocks.dart';
 
 late _ArrangeBuilder _builder;
 
-@GenerateMocks([ApodService])
+@GenerateNiceMocks([MockSpec<ApodService>()])
 void main() {
   const startDate = '2020-02-25';
   const endDate = '2020-02-05';
@@ -60,7 +60,7 @@ void main() {
             endDate: endDate,
             includeThumbnails: true,
           ),
-        );
+        ).called(1);
       });
 
       test('returns ${List<Apod>} on success', () async {

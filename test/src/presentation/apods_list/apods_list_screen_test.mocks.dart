@@ -14,7 +14,7 @@ import 'package:go_router/src/match.dart' as _i16;
 import 'package:go_router/src/parser.dart' as _i7;
 import 'package:go_router/src/router.dart' as _i15;
 import 'package:go_router/src/state.dart' as _i2;
-import 'package:hello_universe/src/domain/apods_error.dart' as _i11;
+import 'package:hello_universe/src/domain/entities/apods_error.dart' as _i11;
 import 'package:hello_universe/src/presentation/apods_list/apods_list_cubit.dart'
     as _i8;
 import 'package:hello_universe/src/presentation/apods_list/apods_list_data.dart'

@@ -72,7 +72,7 @@ void main() {
           .widget<ApodDetailsContent>(find.byType(ApodDetailsContent))
           .onApodTap();
 
-      verify(_builder.uriLauncher.launch(Uri.parse('fsf.org')));
+      verify(_builder.uriLauncher.launch(Uri.parse('fsf.org'))).called(1);
     });
 
     <MediaType>[.other, .image].forEach((mediaType) {

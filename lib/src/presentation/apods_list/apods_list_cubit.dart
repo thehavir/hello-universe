@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hello_universe/src/domain/apods_error.dart';
+import 'package:hello_universe/src/domain/entities/apods_error.dart';
 import 'package:hello_universe/src/domain/fetch_apods_use_case.dart';
 import 'package:hello_universe/src/presentation/apods_list/apods_list_data.dart';
 import 'package:hello_universe/src/utils/persistent_cubit_state.dart';

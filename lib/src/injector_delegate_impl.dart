@@ -17,19 +17,19 @@ import 'package:hello_universe/src/utils/navigation/router_provider.dart';
 import 'package:hello_universe/src/utils/uri_launcher/uri_launcher.dart';
 
 /// Dependency graph for the app.
-class RealInjectorDelegate extends InjectorDelegate {
-  RealInjectorDelegate._({required Injector resolver}) : super(resolver);
+class InjectorDelegateImpl extends InjectorDelegate {
+  InjectorDelegateImpl._({required Injector resolver}) : super(resolver);
 
-  factory RealInjectorDelegate() {
+  factory InjectorDelegateImpl() {
     final injections = [..._createInjections];
     final resolver = Injector(injections);
 
-    return RealInjectorDelegate._(resolver: resolver);
+    return InjectorDelegateImpl._(resolver: resolver);
   }
 
   static List<Injection> get _createInjections => [
     SingletonInjection<ApodServiceProvider>(
-      (resolver) => RealApodServiceProvider(chopperClient: resolver.resolve()),
+      (resolver) => ApodServiceProviderImpl(chopperClient: resolver.resolve()),
     ),
     SingletonInjection<ApodService>(
       (resolver) => resolver.resolve<ApodServiceProvider>().create(),

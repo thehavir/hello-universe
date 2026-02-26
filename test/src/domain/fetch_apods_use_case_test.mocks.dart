@@ -4,11 +4,11 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:fpdart/fpdart.dart' as _i5;
-import 'package:hello_universe/src/domain/apods_error.dart' as _i6;
-import 'package:hello_universe/src/domain/apods_page_key.dart' as _i2;
 import 'package:hello_universe/src/domain/apods_pagination_handler.dart' as _i3;
 import 'package:hello_universe/src/domain/apods_repository.dart' as _i4;
 import 'package:hello_universe/src/domain/entities/apod.dart' as _i7;
+import 'package:hello_universe/src/domain/entities/apods_error.dart' as _i6;
+import 'package:hello_universe/src/domain/entities/apods_page_key.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i8;
 
@@ -37,15 +37,15 @@ class _FakeApodsPageKey_0 extends _i1.SmartFake implements _i2.ApodsPageKey {
 /// See the documentation for Mockito's code generation for more information.
 class MockApodsPaginationHandler extends _i1.Mock
     implements _i3.ApodsPaginationHandler {
-  MockApodsPaginationHandler() {
-    _i1.throwOnMissingStub(this);
-  }
-
   @override
   _i2.ApodsPageKey nextPageKey(_i2.ApodsPageKey? currentPageKey) =>
       (super.noSuchMethod(
             Invocation.method(#nextPageKey, [currentPageKey]),
             returnValue: _FakeApodsPageKey_0(
+              this,
+              Invocation.method(#nextPageKey, [currentPageKey]),
+            ),
+            returnValueForMissingStub: _FakeApodsPageKey_0(
               this,
               Invocation.method(#nextPageKey, [currentPageKey]),
             ),
@@ -57,10 +57,6 @@ class MockApodsPaginationHandler extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockApodsRepository extends _i1.Mock implements _i4.ApodsRepository {
-  MockApodsRepository() {
-    _i1.throwOnMissingStub(this);
-  }
-
   @override
   _i5.TaskEither<_i6.ApodsError, List<_i7.Apod>> fetchApods({
     required String? startDate,
@@ -74,6 +70,15 @@ class MockApodsRepository extends _i1.Mock implements _i4.ApodsRepository {
               #includeThumbnails: includeThumbnails,
             }),
             returnValue: _i8
+                .dummyValue<_i5.TaskEither<_i6.ApodsError, List<_i7.Apod>>>(
+                  this,
+                  Invocation.method(#fetchApods, [], {
+                    #startDate: startDate,
+                    #endDate: endDate,
+                    #includeThumbnails: includeThumbnails,
+                  }),
+                ),
+            returnValueForMissingStub: _i8
                 .dummyValue<_i5.TaskEither<_i6.ApodsError, List<_i7.Apod>>>(
                   this,
                   Invocation.method(#fetchApods, [], {

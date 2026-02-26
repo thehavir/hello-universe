@@ -1,14 +1,13 @@
 // ignore_for_file: cascade_invocations, avoid_redundant_argument_values
 
 import 'package:fpdart/fpdart.dart';
-import 'package:hello_universe/src/domain/apod_page.dart';
-import 'package:hello_universe/src/domain/apods_error.dart';
-import 'package:hello_universe/src/domain/apods_page_key.dart';
+import 'package:hello_universe/src/domain/entities/apod_page.dart';
+import 'package:hello_universe/src/domain/entities/apods_error.dart';
+import 'package:hello_universe/src/domain/entities/apods_page_key.dart';
 import 'package:hello_universe/src/domain/apods_pagination_handler.dart';
 import 'package:hello_universe/src/domain/apods_repository.dart';
 import 'package:hello_universe/src/domain/entities/apod.dart';
 import 'package:hello_universe/src/domain/fetch_apods_use_case.dart';
-import 'package:hello_universe/src/domain/date_time_extension.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
@@ -18,12 +17,17 @@ import 'fetch_apods_use_case_test.mocks.dart';
 
 late _ArrangeBuilder _builder;
 
-@GenerateMocks([ApodsPaginationHandler, ApodsRepository])
+@GenerateNiceMocks([
+  MockSpec<ApodsPaginationHandler>(),
+  MockSpec<ApodsRepository>(),
+])
 void main() {
-  final currentPageKey = TestModels.apodsPageKey();
+  final pageKey = TestModels.apodsPageKey();
   final response = TaskEither<ApodsError, List<Apod>>.fromEither(
     Right([TestModels.apod()]),
   );
+  provideDummy(pageKey);
+  provideDummy(response);
 
   setUp(() => _builder = _ArrangeBuilder());
 
@@ -36,57 +40,40 @@ void main() {
   group('on execute', () {
     test('calls nextPageKey on the $ApodsPaginationHandler '
         'with current page key as null when it is null', () async {
-      final pageKey = TestModels.apodsPageKey();
-      provideDummy(pageKey);
-      provideDummy(response);
-      _builder
-        ..withApodsRepositoryFetchApodsSuccess()
-        ..withApodsPaginationHandler(currentPageKey: null);
+      _builder.withApodsPaginationHandler();
       final tested = _builder.createTested();
 
       tested.execute(currentPageKey: null);
 
-      verify(_builder.apodsPaginationHandler.nextPageKey(null));
+      verify(_builder.apodsPaginationHandler.nextPageKey(null)).called(1);
     });
 
     test('calls nextPageKey on the $ApodsPaginationHandler '
         'with current page when it is not null', () async {
-      final pageKey = TestModels.apodsPageKey();
-      provideDummy(pageKey);
-      provideDummy(response);
-      _builder
-        ..withApodsRepositoryFetchApodsSuccess()
-        ..withApodsPaginationHandler(currentPageKey: currentPageKey);
+      final currentPageKey = TestModels.apodsPageKey(endDate: DateTime(1999));
+      _builder.withApodsPaginationHandler(currentPageKey: currentPageKey);
       final tested = _builder.createTested();
 
       tested.execute(currentPageKey: currentPageKey);
 
-      verify(_builder.apodsPaginationHandler.nextPageKey(currentPageKey));
+      verify(
+        _builder.apodsPaginationHandler.nextPageKey(currentPageKey),
+      ).called(1);
     });
 
     test(
       'calls fetchApods on the $ApodsRepository '
       'with the next $ApodsPageKey got from $ApodsPaginationHandler',
       () async {
-        final startDate = DateTime(2021, 01, 10);
-        final endDate = DateTime(2021, 01, 20);
         final nextPageKey = TestModels.apodsPageKey(
-          startDate: startDate,
-          endDate: endDate,
+          startDate: DateTime(2021, 01, 10),
+          endDate: DateTime(2021, 01, 20),
         );
-        provideDummy(nextPageKey);
-        provideDummy(response);
+        final currentPageKey = TestModels.apodsPageKey(endDate: DateTime(2000));
         _builder.withApodsPaginationHandler(
           currentPageKey: currentPageKey,
           result: nextPageKey,
         );
-        when(
-          _builder.apodsRepository.fetchApods(
-            startDate: startDate.format(),
-            endDate: endDate.format(),
-            includeThumbnails: true,
-          ),
-        ).thenReturn(response);
         final tested = _builder.createTested();
 
         tested.execute(currentPageKey: currentPageKey);
@@ -97,37 +84,28 @@ void main() {
             endDate: '2021-01-20',
             includeThumbnails: true,
           ),
-        );
+        ).called(1);
       },
     );
 
     test('maps ${List<Apod>} result from $ApodsRepository to the $ApodPage '
         'when it is success', () async {
-      final apods = [
-        TestModels.apod(title: 'a1'),
-        TestModels.apod(title: 'b2'),
-      ];
-      final response = TaskEither<ApodsError, List<Apod>>.fromEither(
-        Right(apods),
-      );
+      final currentPageKey = TestModels.apodsPageKey(endDate: DateTime(2001));
       final nextPageKey = TestModels.apodsPageKey(
         startDate: DateTime(2024, 05, 05),
         endDate: DateTime(2024, 05, 15),
         isLastPage: true,
       );
-      provideDummy(nextPageKey);
-      provideDummy(response);
-      _builder.withApodsPaginationHandler(
-        currentPageKey: currentPageKey,
-        result: nextPageKey,
-      );
-      when(
-        _builder.apodsRepository.fetchApods(
-          startDate: anyNamed('startDate'),
-          endDate: anyNamed('endDate'),
-          includeThumbnails: anyNamed('includeThumbnails'),
-        ),
-      ).thenReturn(response);
+      final apods = [
+        TestModels.apod(title: 'a1'),
+        TestModels.apod(title: 'b2'),
+      ];
+      _builder
+        ..withApodsPaginationHandler(
+          currentPageKey: currentPageKey,
+          result: nextPageKey,
+        )
+        ..withApodsRepositoryFetchApodsSuccess(result: apods);
       final tested = _builder.createTested();
 
       final result = await tested.execute(currentPageKey: currentPageKey).run();
@@ -140,9 +118,6 @@ void main() {
 
     test('returns $ApodsError from $ApodsRepository when it fails', () async {
       final error = ApodsError(Exception('Moon vanished!'), StackTrace.current);
-      final nextPageKey = TestModels.apodsPageKey();
-      provideDummy(nextPageKey);
-      provideDummy(response);
       _builder
         ..withApodsRepositoryFetchApodsFailure(error: error)
         ..withApodsPaginationHandler();

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hello_universe/src/domain/apods_page_key.dart';
+import 'package:hello_universe/src/domain/entities/apods_page_key.dart';
 import 'package:hello_universe/src/domain/entities/apod.dart';
 import 'package:hello_universe/src/presentation/apods_list/apods_list_content.dart';
 import 'package:hello_universe/src/presentation/apods_list/components/apod_card.dart';
@@ -11,14 +11,14 @@ import 'package:hello_universe/src/presentation/apods_list/components/first_page
 import 'package:hello_universe/src/presentation/apods_list/components/new_page_error_indicator.dart';
 import 'package:hello_universe/src/presentation/apods_list/components/no_more_item_indicator.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:mockito/mockito.dart';
 
 import '../../../test_doubles/test_models.dart';
+import '../../../test_utils/mock_context.mocks.dart';
 
 void main() {
   late BuildContext context;
 
-  setUp(() => context = _MockContext());
+  setUp(() => context = MockBuildContext());
 
   testWidgets('can be created', (tester) async {
     await tester.pumpTested();
@@ -318,5 +318,3 @@ extension on WidgetTester {
     return pagedChildBuilderDelegate.builderDelegate;
   }
 }
-
-class _MockContext extends Mock implements BuildContext {}

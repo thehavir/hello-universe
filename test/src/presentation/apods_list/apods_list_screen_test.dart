@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hello_universe/src/domain/apods_error.dart';
+import 'package:hello_universe/src/domain/entities/apods_error.dart';
 import 'package:hello_universe/src/domain/entities/apod.dart';
 import 'package:hello_universe/src/presentation/apods_list/apods_list_content.dart';
 import 'package:hello_universe/src/presentation/apods_list/apods_list_cubit.dart';

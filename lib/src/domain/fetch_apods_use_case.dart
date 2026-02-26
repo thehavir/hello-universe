@@ -1,7 +1,7 @@
 import 'package:fpdart/fpdart.dart';
-import 'package:hello_universe/src/domain/apod_page.dart';
-import 'package:hello_universe/src/domain/apods_error.dart';
-import 'package:hello_universe/src/domain/apods_page_key.dart';
+import 'package:hello_universe/src/domain/entities/apod_page.dart';
+import 'package:hello_universe/src/domain/entities/apods_error.dart';
+import 'package:hello_universe/src/domain/entities/apods_page_key.dart';
 import 'package:hello_universe/src/domain/apods_pagination_handler.dart';
 import 'package:hello_universe/src/domain/apods_repository.dart';
 import 'package:hello_universe/src/domain/date_time_extension.dart';

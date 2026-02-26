@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hello_universe/src/domain/apods_error.dart';
+import 'package:hello_universe/src/domain/entities/apods_error.dart';
 import 'package:hello_universe/src/presentation/apods_list/apods_list_content.dart';
 import 'package:hello_universe/src/presentation/apods_list/apods_list_cubit.dart';
 import 'package:hello_universe/src/routes.dart';

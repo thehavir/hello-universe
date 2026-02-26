@@ -3,16 +3,16 @@ import 'package:test/test.dart';
 
 void main() {
   test('throws on null', () {
-    expect(() => null.forceCast<_MockObject>(), throwsArgumentError);
+    expect(() => null.forceCast<_TestObject>(), throwsArgumentError);
   });
 
   test('throws on other', () {
-    expect(() => Object().forceCast<_MockObject>(), throwsArgumentError);
+    expect(() => Object().forceCast<_TestObject>(), throwsArgumentError);
   });
 
   test('casts properly', () {
-    expect(_MockObject().forceCast<_MockObject>(), isA<_MockObject>());
+    expect(_TestObject().forceCast<_TestObject>(), isA<_TestObject>());
   });
 }
 
-class _MockObject {}
+class _TestObject {}

@@ -6,13 +6,18 @@ import 'package:hello_universe/src/domain/entities/apod.dart';
 import 'package:hello_universe/src/domain/entities/media_type.dart';
 import 'package:hello_universe/src/presentation/apod_details/apod_details_content.dart';
 import 'package:hello_universe/src/presentation/components/fade_in_network_image.dart';
-import 'package:mockito/mockito.dart';
 
 import '../../../test_doubles/test_models.dart';
+import '../../../test_utils/mock_context.mocks.dart';
 
 void main() {
-  final context = _MockContext();
-  final theme = Theme.of(context);
+  late MockBuildContext context;
+  late ThemeData theme;
+
+  setUp(() {
+    context = MockBuildContext();
+    theme = Theme.of(context);
+  });
 
   testWidgets('can be created', (tester) async {
     await tester.pumpTested();
@@ -216,5 +221,3 @@ extension on WidgetTester {
     ),
   );
 }
-
-class _MockContext extends Mock implements BuildContext {}

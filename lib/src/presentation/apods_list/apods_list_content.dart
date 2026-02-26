@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hello_universe/src/domain/apods_page_key.dart';
+import 'package:hello_universe/src/domain/entities/apods_page_key.dart';
 import 'package:hello_universe/src/domain/entities/apod.dart';
 import 'package:hello_universe/src/presentation/apods_list/components/apod_card.dart';
 import 'package:hello_universe/src/presentation/apods_list/components/bottom_loader.dart';

@@ -13,11 +13,11 @@ import 'package:provider/provider.dart';
 
 import 'root_widget_test.mocks.dart';
 
-late _ArrangeBuilder _builder;
+late MockRouterProvider _routerProvider;
 
 @GenerateNiceMocks([MockSpec<RouterProvider>()])
 void main() {
-  setUp(() => _builder = _ArrangeBuilder());
+  setUp(() => _routerProvider = MockRouterProvider());
 
   testWidgets('can be created', (tester) async {
     await tester.pumpTested();
@@ -51,7 +51,6 @@ void main() {
     final routerConfig =
         tester.widget<MaterialApp>(find.byType(MaterialApp)).routerConfig
             as GoRouter;
-
     expect(
       routerConfig.configuration.navigatorKey,
       isA<LabeledGlobalKey<NavigatorState>>().having(
@@ -72,7 +71,7 @@ void main() {
         builder: (_, __) => const Text('route-1'),
       ),
     ];
-    when(_builder.routerProvider.routes).thenAnswer((_) => routes);
+    when(_routerProvider.routes).thenAnswer((_) => routes);
 
     await tester.pumpTested();
 
@@ -101,15 +100,9 @@ extension on WidgetTester {
   Future<void> pumpTested() => pumpWidget(
     Provider.value(
       value: InjectorDelegate(
-        Injector([
-          SingletonInjection<RouterProvider>((_) => _builder.routerProvider),
-        ]),
+        Injector([SingletonInjection<RouterProvider>((_) => _routerProvider)]),
       ),
       child: const RootWidget(),
     ),
   );
-}
-
-class _ArrangeBuilder {
-  final routerProvider = MockRouterProvider();
 }
