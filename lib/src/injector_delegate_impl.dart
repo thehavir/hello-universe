@@ -67,7 +67,7 @@ class InjectorDelegateImpl extends InjectorDelegate {
     SingletonInjection<UriLauncher>((_) => UriLauncherImpl()),
     SingletonInjection<RouterProvider>((_) => const RouterProviderImpl()),
     SingletonInjection<CacheManager>(
-      (resolver) => CacheManager(
+      (_) => CacheManager(
         Config(
           'apodCacheManager',
           stalePeriod: const Duration(days: 30),
