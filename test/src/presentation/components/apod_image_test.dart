@@ -52,7 +52,7 @@ void main() {
     expect(widget.fit, fit);
   });
 
-  testWidgets('$CachedNetworkImage has passed hight', (tester) async {
+  testWidgets('$CachedNetworkImage has passed height', (tester) async {
     const height = 44.10;
     await tester.pumpTested(height: height);
 
