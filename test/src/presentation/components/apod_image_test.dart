@@ -161,6 +161,7 @@ extension on WidgetTester {
     final cachedNetworkImage = widgetList<CachedNetworkImage>(
       widgetFinder,
     ).first;
-    return cachedNetworkImage.errorWidget!(context, '', Null) as Image;
+    return cachedNetworkImage.errorWidget!(context, '', Exception('error'))
+        as Image;
   }
 }
