@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:hello_universe/src/assets.dart';
 import 'package:hello_universe/src/presentation/components/apod_image.dart';
 
-import '../apod_details/apod_details_cubit_test.mocks.dart';
+import '../../../test_utils/mock_cache_manager.mocks.dart';
 
 void main() {
   testWidgets('can be created', (tester) async {

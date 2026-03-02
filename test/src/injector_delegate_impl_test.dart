@@ -107,7 +107,7 @@ void main() {
     expect(injected, isA<RouterProviderImpl>());
   });
 
-  // [CacheManager]'s [Config] is depenedent on the [PlatformChannel] and
+  // [CacheManager]'s [Config] is dependent on the [PlatformChannel] and
   // therefore it needs Flutter's [Widget] to be pumped to work and be testable.
   testWidgets('$ApodDetailsCubit is injected with the passed url', (
     tester,
@@ -122,7 +122,7 @@ void main() {
     expect(injected, isA<ApodDetailsCubit>());
   });
 
-  // [CacheManager]'s [Config] is depenedent on the [PlatformChannel] and
+  // [CacheManager]'s [Config] is dependent on the [PlatformChannel] and
   // therefore it needs Flutter's [Widget] to be pumped to work and be testable.
   testWidgets('$CacheManager is injected with the $Config', (tester) async {
     final tested = _builder.createTested();

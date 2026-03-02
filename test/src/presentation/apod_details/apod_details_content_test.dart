@@ -10,7 +10,7 @@ import 'package:hello_universe/src/presentation/components/apod_image.dart';
 
 import '../../../test_doubles/test_models.dart';
 import '../../../test_utils/mock_context.mocks.dart';
-import 'apod_details_cubit_test.mocks.dart';
+import '../../../test_utils/mock_cache_manager.mocks.dart';
 
 void main() {
   late MockBuildContext context;

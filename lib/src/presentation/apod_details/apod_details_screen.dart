@@ -17,7 +17,8 @@ class ApodDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BlocProvider<ApodDetailsCubit>(
-    create: (context) => context.resolveWithParams(apod.url),
+    create: (context) =>
+        context.resolveWithParams(apod.thumbnailUrl ?? apod.url),
     child: _Consumer(
       apod: apod,
       uriLauncher: context.resolve(),
