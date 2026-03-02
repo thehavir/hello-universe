@@ -6,6 +6,7 @@
 import 'dart:async' as _i9;
 
 import 'package:flutter/widgets.dart' as _i4;
+import 'package:flutter_bloc/flutter_bloc.dart' as _i16;
 import 'package:go_router/src/configuration.dart' as _i3;
 import 'package:go_router/src/delegate.dart' as _i5;
 import 'package:go_router/src/information_provider.dart' as _i6;
@@ -13,6 +14,9 @@ import 'package:go_router/src/match.dart' as _i13;
 import 'package:go_router/src/parser.dart' as _i7;
 import 'package:go_router/src/router.dart' as _i11;
 import 'package:go_router/src/state.dart' as _i2;
+import 'package:hello_universe/src/presentation/apod_details/apod_details_cubit.dart'
+    as _i14;
+import 'package:hello_universe/src/utils/cubit_state.dart' as _i15;
 import 'package:hello_universe/src/utils/uri_launcher/uri_launch_mode.dart'
     as _i10;
 import 'package:hello_universe/src/utils/uri_launcher/uri_launcher.dart' as _i8;
@@ -406,6 +410,80 @@ class MockGoRouter extends _i1.Mock implements _i11.GoRouter {
   @override
   void dispose() => super.noSuchMethod(
     Invocation.method(#dispose, []),
+    returnValueForMissingStub: null,
+  );
+}
+
+/// A class which mocks [ApodDetailsCubit].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockApodDetailsCubit extends _i1.Mock implements _i14.ApodDetailsCubit {
+  @override
+  _i15.CubitState<void, Object> get state =>
+      (super.noSuchMethod(
+            Invocation.getter(#state),
+            returnValue: _i12.dummyValue<_i15.CubitState<void, Object>>(
+              this,
+              Invocation.getter(#state),
+            ),
+            returnValueForMissingStub: _i12
+                .dummyValue<_i15.CubitState<void, Object>>(
+                  this,
+                  Invocation.getter(#state),
+                ),
+          )
+          as _i15.CubitState<void, Object>);
+
+  @override
+  _i9.Stream<_i15.CubitState<void, Object>> get stream =>
+      (super.noSuchMethod(
+            Invocation.getter(#stream),
+            returnValue: _i9.Stream<_i15.CubitState<void, Object>>.empty(),
+            returnValueForMissingStub:
+                _i9.Stream<_i15.CubitState<void, Object>>.empty(),
+          )
+          as _i9.Stream<_i15.CubitState<void, Object>>);
+
+  @override
+  bool get isClosed =>
+      (super.noSuchMethod(
+            Invocation.getter(#isClosed),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
+
+  @override
+  _i9.Future<void> close() =>
+      (super.noSuchMethod(
+            Invocation.method(#close, []),
+            returnValue: _i9.Future<void>.value(),
+            returnValueForMissingStub: _i9.Future<void>.value(),
+          )
+          as _i9.Future<void>);
+
+  @override
+  void emit(_i15.CubitState<void, Object>? state) => super.noSuchMethod(
+    Invocation.method(#emit, [state]),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  void onChange(_i16.Change<_i15.CubitState<void, Object>>? change) =>
+      super.noSuchMethod(
+        Invocation.method(#onChange, [change]),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void addError(Object? error, [StackTrace? stackTrace]) => super.noSuchMethod(
+    Invocation.method(#addError, [error, stackTrace]),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  void onError(Object? error, StackTrace? stackTrace) => super.noSuchMethod(
+    Invocation.method(#onError, [error, stackTrace]),
     returnValueForMissingStub: null,
   );
 }

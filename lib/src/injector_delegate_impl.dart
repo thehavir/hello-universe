@@ -1,5 +1,6 @@
 import 'package:chopper/chopper.dart';
 import 'package:chopper_built_value/chopper_built_value.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:hello_universe/src/data/apod_service.dart';
 import 'package:hello_universe/src/data/api_config_interceptor.dart';
 import 'package:hello_universe/src/data/apods_repository_impl.dart';
@@ -7,6 +8,7 @@ import 'package:hello_universe/src/data/serializer.dart';
 import 'package:hello_universe/src/domain/apods_pagination_handler.dart';
 import 'package:hello_universe/src/domain/apods_repository.dart';
 import 'package:hello_universe/src/domain/fetch_apods_use_case.dart';
+import 'package:hello_universe/src/presentation/apod_details/apod_details_cubit.dart';
 import 'package:hello_universe/src/presentation/apods_list/apods_list_cubit.dart';
 import 'package:hello_universe/src/router_provider_impl.dart';
 import 'package:hello_universe/src/utils/dependency_injection/injection.dart';
@@ -64,5 +66,18 @@ class InjectorDelegateImpl extends InjectorDelegate {
     ),
     SingletonInjection<UriLauncher>((_) => UriLauncherImpl()),
     SingletonInjection<RouterProvider>((_) => const RouterProviderImpl()),
+    SingletonInjection<CacheManager>(
+      (resolver) => CacheManager(
+        Config(
+          'apodCacheManager',
+          stalePeriod: const Duration(days: 30),
+          maxNrOfCacheObjects: 1000,
+        ),
+      ),
+    ),
+    AssistedFactoryInjection<ApodDetailsCubit, String>(
+      (resolver, apodUrl) =>
+          ApodDetailsCubit(cacheManager: resolver.resolve(), apodUrl: apodUrl),
+    ),
   ];
 }

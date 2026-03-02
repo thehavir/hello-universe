@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_redundant_argument_values
 
 import 'package:flutter/material.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hello_universe/src/domain/entities/apod.dart';
 import 'package:hello_universe/src/domain/entities/media_type.dart';
@@ -9,6 +10,7 @@ import 'package:hello_universe/src/presentation/components/fade_in_network_image
 
 import '../../../test_doubles/test_models.dart';
 import '../../../test_utils/mock_context.mocks.dart';
+import 'apod_details_cubit_test.mocks.dart';
 
 void main() {
   late MockBuildContext context;
@@ -45,7 +47,7 @@ void main() {
     expect(widget.tag, 'torproject.org');
   });
 
-  testWidgets('on $Hero tap calls onApodTap', (tester) async {
+  testWidgets('on $Hero tap calls onApodTap when it is passed', (tester) async {
     var isPressed = false;
     await tester.pumpTested(onApodTap: () => isPressed = true);
 
@@ -53,24 +55,44 @@ void main() {
     expect(isPressed, isTrue);
   });
 
-  testWidgets('has a $FadeInNetworkImage', (tester) async {
+  testWidgets('has a $ApodImage', (tester) async {
     await tester.pumpTested();
 
-    expect(find.byType(FadeInNetworkImage), findsOneWidget);
+    expect(find.byType(ApodImage), findsOneWidget);
   });
 
-  testWidgets('passes ${Apod}s url to the $FadeInNetworkImage', (tester) async {
+  testWidgets('passes ${Apod}s url to the $ApodImage', (tester) async {
     final apod = TestModels.apod(url: 'tor.org');
     await tester.pumpTested(apod: apod);
 
-    final widget = tester.widget<FadeInNetworkImage>(
-      find.byType(FadeInNetworkImage),
-    );
+    final widget = tester.widget<ApodImage>(find.byType(ApodImage));
     expect(widget.url, 'tor.org');
   });
 
+  testWidgets('passes height to the $ApodImage', (tester) async {
+    await tester.pumpTested();
+
+    final widget = tester.widget<ApodImage>(find.byType(ApodImage));
+    expect(widget.height, 360);
+  });
+
+  testWidgets('passes $CacheManager to the $ApodImage', (tester) async {
+    final cacheManager = MockCacheManager();
+    await tester.pumpTested(cacheManager: cacheManager);
+
+    final widget = tester.widget<ApodImage>(find.byType(ApodImage));
+    expect(widget.cacheManager, cacheManager);
+  });
+
+  testWidgets('passes ${BoxFit.cover} to the $ApodImage', (tester) async {
+    await tester.pumpTested();
+
+    final widget = tester.widget<ApodImage>(find.byType(ApodImage));
+    expect(widget.fit, BoxFit.cover);
+  });
+
   group('when $MediaType is ${MediaType.video}', () {
-    testWidgets('has play_circle_outline icon on top of $FadeInNetworkImage ', (
+    testWidgets('has play_circle_outline icon on top of $ApodImage ', (
       tester,
     ) async {
       final apod = TestModels.apod(mediaType: .video);
@@ -78,7 +100,7 @@ void main() {
 
       final widget = tester.widgetList<Stack>(find.byType(Stack)).first;
       expect(widget.children, [
-        isA<FadeInNetworkImage>(),
+        isA<ApodImage>(),
         isA<Icon>().having((p) => p.icon, 'icon', Icons.play_circle_outline),
       ]);
     });
@@ -111,7 +133,7 @@ void main() {
       await tester.pumpTested(apod: apod);
 
       final widget = tester.widgetList<Stack>(find.byType(Stack)).first;
-      expect(widget.children, [isA<FadeInNetworkImage>()]);
+      expect(widget.children, [isA<ApodImage>()]);
     });
   });
 
@@ -212,11 +234,16 @@ void main() {
 }
 
 extension on WidgetTester {
-  Future<void> pumpTested({Apod? apod, VoidCallback? onApodTap}) => pumpWidget(
+  Future<void> pumpTested({
+    CacheManager? cacheManager,
+    Apod? apod,
+    VoidCallback? onApodTap,
+  }) => pumpWidget(
     MaterialApp(
       home: ApodDetailsContent(
+        cacheManager: cacheManager ?? MockCacheManager(),
         apod: apod ?? TestModels.apod(),
-        onApodTap: onApodTap ?? () {},
+        onApodTap: onApodTap,
       ),
     ),
   );

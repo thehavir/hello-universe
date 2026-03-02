@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:hello_universe/src/assets.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:hello_universe/src/presentation/components/fade_in_network_image.dart';
 
 class ApodFullSizeContent extends StatelessWidget {
-  const ApodFullSizeContent({required this.url, super.key});
+  const ApodFullSizeContent({
+    required this.url,
+    required this.cacheManager,
+    super.key,
+  });
 
   final String url;
+  final CacheManager cacheManager;
 
   @override
   Widget build(BuildContext context) => Hero(
@@ -13,13 +19,10 @@ class ApodFullSizeContent extends StatelessWidget {
       child: InteractiveViewer(
         minScale: 1,
         maxScale: 5,
-        child: Image.network(
-          url,
-          width: .infinity,
+        child: ApodImage(
+          cacheManager: cacheManager,
+          url: url,
           height: .infinity,
-          fit: .fitWidth,
-          errorBuilder: (_, __, ___) =>
-              Image.asset(Assets.noImageIcon, fit: .contain),
         ),
       ),
     ),

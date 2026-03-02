@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:hello_universe/src/domain/date_time_extension.dart';
 import 'package:hello_universe/src/domain/entities/apod.dart';
 import 'package:hello_universe/src/presentation/components/fade_in_network_image.dart';
@@ -6,12 +7,14 @@ import 'package:hello_universe/src/presentation/components/fade_in_network_image
 class ApodDetailsContent extends StatelessWidget {
   const ApodDetailsContent({
     required this.apod,
+    required this.cacheManager,
     required this.onApodTap,
     super.key,
   });
 
   final Apod apod;
-  final VoidCallback onApodTap;
+  final CacheManager cacheManager;
+  final VoidCallback? onApodTap;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +31,12 @@ class ApodDetailsContent extends StatelessWidget {
               child: Stack(
                 alignment: .center,
                 children: [
-                  FadeInNetworkImage(url: apod.url),
+                  ApodImage(
+                    cacheManager: cacheManager,
+                    url: apod.url,
+                    height: 360,
+                    fit: .cover,
+                  ),
                   if (apod.mediaType == .video)
                     Icon(
                       Icons.play_circle_outline,

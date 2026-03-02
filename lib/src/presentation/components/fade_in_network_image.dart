@@ -1,24 +1,32 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:hello_universe/src/assets.dart';
 
-const _hight = 210.0;
+class ApodImage extends StatelessWidget {
+  const ApodImage({
+    required this.cacheManager,
+    required this.url,
+    required this.height,
+    this.fit = .fitWidth,
+    super.key,
+  });
 
-class FadeInNetworkImage extends StatelessWidget {
-  const FadeInNetworkImage({required this.url, super.key});
-
+  final CacheManager cacheManager;
   final String url;
+  final double height;
+  final BoxFit fit;
 
-  // Todo(Havir): Cache the image (Maybe use [CachedNetworkImage]).
   @override
-  Widget build(BuildContext context) => FadeInImage.assetNetwork(
-    key: key,
-    image: url,
-    fit: .cover,
+  Widget build(BuildContext context) => CachedNetworkImage(
+    cacheManager: cacheManager,
+    imageUrl: url,
+    fit: fit,
     width: .infinity,
-    height: _hight,
-    placeholder: Assets.placeholder,
-    placeholderFit: .cover,
-    imageErrorBuilder: (_, __, ___) =>
-        Image.asset(Assets.noImageIcon, fit: .cover, height: _hight),
+    height: height,
+    placeholder: (_, __) =>
+        Image.asset(Assets.placeholder, fit: fit, height: height),
+    errorWidget: (_, __, ___) =>
+        Image.asset(Assets.noImageIcon, height: height),
   );
 }
