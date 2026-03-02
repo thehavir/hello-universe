@@ -72,7 +72,7 @@ void main() {
     expect(widget.height, double.infinity);
   });
 
-  testWidgets('passes height to the $ApodImage', (tester) async {
+  testWidgets('passes $CacheManager to the $ApodImage', (tester) async {
     final cacheManager = MockCacheManager();
     await tester.pumpTested(cacheManager: cacheManager);
 
