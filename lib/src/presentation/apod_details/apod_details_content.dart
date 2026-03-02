@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:hello_universe/src/domain/date_time_extension.dart';
 import 'package:hello_universe/src/domain/entities/apod.dart';
-import 'package:hello_universe/src/presentation/components/fade_in_network_image.dart';
+import 'package:hello_universe/src/presentation/components/apod_image.dart';
 
 class ApodDetailsContent extends StatelessWidget {
   const ApodDetailsContent({

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hello_universe/src/presentation/apod_full_size/apod_full_size_content.dart';
-import 'package:hello_universe/src/presentation/components/fade_in_network_image.dart';
+import 'package:hello_universe/src/presentation/components/apod_image.dart';
 
 import '../../../test_utils/mock_cache_manager.mocks.dart';
 

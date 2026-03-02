@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hello_universe/src/assets.dart';
-import 'package:hello_universe/src/presentation/components/fade_in_network_image.dart';
+import 'package:hello_universe/src/presentation/components/apod_image.dart';
 
 import '../apod_details/apod_details_cubit_test.mocks.dart';
 

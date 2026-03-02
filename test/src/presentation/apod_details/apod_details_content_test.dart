@@ -6,7 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:hello_universe/src/domain/entities/apod.dart';
 import 'package:hello_universe/src/domain/entities/media_type.dart';
 import 'package:hello_universe/src/presentation/apod_details/apod_details_content.dart';
-import 'package:hello_universe/src/presentation/components/fade_in_network_image.dart';
+import 'package:hello_universe/src/presentation/components/apod_image.dart';
 
 import '../../../test_doubles/test_models.dart';
 import '../../../test_utils/mock_context.mocks.dart';
