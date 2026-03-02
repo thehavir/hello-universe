@@ -51,8 +51,8 @@ class ApodDetailsCubit extends Cubit<ApodDetailsState> {
   }
 
   @override
-  Future<void> close() {
-    _cancelStream();
+  Future<void> close() async {
+    await _cancelStream();
     return super.close();
   }
 }
