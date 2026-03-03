@@ -38,8 +38,6 @@ class _$ApodDtoSerializer implements StructuredSerializer<ApodDto> {
         object.mediaType,
         specifiedType: const FullType(MediaTypeDto),
       ),
-      'url',
-      serializers.serialize(object.url, specifiedType: const FullType(String)),
       'service_version',
       serializers.serialize(
         object.serviceVersion,
@@ -47,6 +45,14 @@ class _$ApodDtoSerializer implements StructuredSerializer<ApodDto> {
       ),
     ];
     Object? value;
+    value = object.url;
+    if (value != null) {
+      result
+        ..add('url')
+        ..add(
+          serializers.serialize(value, specifiedType: const FullType(String)),
+        );
+    }
     value = object.hdUrl;
     if (value != null) {
       result
@@ -125,8 +131,8 @@ class _$ApodDtoSerializer implements StructuredSerializer<ApodDto> {
               serializers.deserialize(
                     value,
                     specifiedType: const FullType(String),
-                  )!
-                  as String;
+                  )
+                  as String?;
           break;
         case 'hdurl':
           result.hdUrl =
@@ -177,7 +183,7 @@ class _$ApodDto extends ApodDto {
   @override
   final MediaTypeDto mediaType;
   @override
-  final String url;
+  final String? url;
   @override
   final String? hdUrl;
   @override
@@ -195,7 +201,7 @@ class _$ApodDto extends ApodDto {
     required this.title,
     required this.explanation,
     required this.mediaType,
-    required this.url,
+    this.url,
     this.hdUrl,
     this.thumbnailUrl,
     this.copyright,
@@ -347,7 +353,7 @@ class ApodDtoBuilder implements Builder<ApodDto, ApodDtoBuilder> {
             r'ApodDto',
             'mediaType',
           ),
-          url: BuiltValueNullFieldError.checkNotNull(url, r'ApodDto', 'url'),
+          url: url,
           hdUrl: hdUrl,
           thumbnailUrl: thumbnailUrl,
           copyright: copyright,

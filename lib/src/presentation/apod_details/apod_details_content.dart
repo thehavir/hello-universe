@@ -26,7 +26,7 @@ class ApodDetailsContent extends StatelessWidget {
       child: Column(
         children: [
           Hero(
-            tag: apod.url,
+            tag: apod.date,
             child: GestureDetector(
               onTap: onApodTap,
               child: Stack(

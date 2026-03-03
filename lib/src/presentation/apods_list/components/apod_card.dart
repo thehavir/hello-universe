@@ -28,7 +28,7 @@ class ApodCard extends StatelessWidget {
         child: Column(
           children: [
             Hero(
-              tag: apod.url,
+              tag: apod.date,
               child: ClipRRect(
                 borderRadius: const .vertical(top: Radius.circular(8)),
                 child: Stack(

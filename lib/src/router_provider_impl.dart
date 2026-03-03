@@ -25,7 +25,8 @@ class RouterProviderImpl implements RouterProvider {
     GoRoute(
       name: Routes.apodFullSizeScreen,
       path: Paths.apodFullSizeScreen,
-      builder: (_, state) => ApodFullSizeScreen(url: state.extra.forceCast()),
+      builder: (_, state) =>
+          ApodFullSizeScreen(arguments: state.extra.forceCast()),
     ),
   ];
 }

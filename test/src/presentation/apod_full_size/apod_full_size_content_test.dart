@@ -19,12 +19,12 @@ void main() {
     expect(find.byType(Hero), findsOneWidget);
   });
 
-  testWidgets('$Hero has tag set to the passed url', (tester) async {
-    const url = 'tor-project.org';
-    await tester.pumpTested(url: url);
+  testWidgets('$Hero has tag set to the passed date', (tester) async {
+    final date = DateTime(1994);
+    await tester.pumpTested(date: date);
 
     final widget = tester.widget<Hero>(find.byType(Hero));
-    expect(widget.tag, url);
+    expect(widget.tag, date);
   });
 
   testWidgets('has $InteractiveViewer', (tester) async {
@@ -82,13 +82,17 @@ void main() {
 }
 
 extension on WidgetTester {
-  Future<void> pumpTested({String? url, CacheManager? cacheManager}) =>
-      pumpWidget(
-        MaterialApp(
-          home: ApodFullSizeContent(
-            url: url ?? 'url',
-            cacheManager: cacheManager ?? MockCacheManager(),
-          ),
-        ),
-      );
+  Future<void> pumpTested({
+    String? url,
+    DateTime? date,
+    CacheManager? cacheManager,
+  }) => pumpWidget(
+    MaterialApp(
+      home: ApodFullSizeContent(
+        url: url ?? 'url',
+        date: date ?? DateTime(2020),
+        cacheManager: cacheManager ?? MockCacheManager(),
+      ),
+    ),
+  );
 }

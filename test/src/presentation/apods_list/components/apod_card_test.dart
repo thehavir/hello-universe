@@ -46,12 +46,13 @@ void main() {
     expect(find.byType(Hero), findsOneWidget);
   });
 
-  testWidgets('$Hero has apod\'s url as tag', (tester) async {
-    final apod = TestModels.apod(url: 'torproject.org');
+  testWidgets('$Hero has apod\'s date as tag', (tester) async {
+    final date = DateTime(1920);
+    final apod = TestModels.apod(date: date);
     await tester.pumpTested(apod: apod);
 
     final widget = tester.widget<Hero>(find.byType(Hero));
-    expect(widget.tag, 'torproject.org');
+    expect(widget.tag, date);
   });
 
   testWidgets('has a $ApodImage', (tester) async {

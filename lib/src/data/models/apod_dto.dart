@@ -24,7 +24,12 @@ abstract class ApodDto implements Built<ApodDto, ApodDtoBuilder> {
   @BuiltValueField(wireName: 'media_type')
   MediaTypeDto get mediaType;
 
-  String get url;
+  /// It is possible in some cases [url] is null, for example when
+  /// [MediaTypeDto] is [MediaTypeDto.other].
+  ///   Exapmle:
+  ///      Nasa page: http://apod.nasa.gov/apod/ap241023.html
+  ///      Complete request: https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&thumbs=true&date=2024-10-23
+  String? get url;
 
   @BuiltValueField(wireName: 'hdurl')
   String? get hdUrl;
@@ -42,7 +47,7 @@ abstract class ApodDto implements Built<ApodDto, ApodDtoBuilder> {
   ///        Complete request: https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&thumbs=true&date=2026-01-13
   ///        JSON response: "thumbnail_url": ""
   ///
-  /// For other [MediaTypeDto]s is null.
+  /// For other [MediaTypeDto]s, [thumbnailUrl] is null.
   @BuiltValueField(wireName: 'thumbnail_url')
   String? get thumbnailUrl;
 

@@ -101,8 +101,8 @@ void main() {
   });
 
   test('${Routes.apodFullSizeScreen} builds $ApodFullSizeScreen', () {
-    const url = 'trisquel.info';
-    when(_builder.goRouterState.extra).thenAnswer((_) => url);
+    final arguments = TestModels.apodFullSizeScreenArguments();
+    when(_builder.goRouterState.extra).thenAnswer((_) => arguments);
     final tested = _builder.createTested();
 
     final route = tested.routes.firstWhere(
@@ -113,7 +113,14 @@ void main() {
       _builder.goRouterState,
     );
 
-    expect(widget, isA<ApodFullSizeScreen>().having((p) => p.url, 'url', url));
+    expect(
+      widget,
+      isA<ApodFullSizeScreen>().having(
+        (p) => p.arguments,
+        'arguments',
+        arguments,
+      ),
+    );
   });
 }
 
