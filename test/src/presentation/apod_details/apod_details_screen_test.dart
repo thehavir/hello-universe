@@ -165,7 +165,7 @@ extension on WidgetTester {
                 (_) => cacheManager ?? _builder.cacheManager,
               ),
               SingletonInjection<UriLauncher>((_) => _builder.uriLauncher),
-              AssistedFactoryInjection<ApodDetailsCubit, String>(
+              AssistedFactoryInjection<ApodDetailsCubit, Apod>(
                 (_, __) => _builder.apodDetailsCubit,
               ),
             ]),

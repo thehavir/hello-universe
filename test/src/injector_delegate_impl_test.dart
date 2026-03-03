@@ -5,6 +5,7 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_test/flutter_test.dart' show testWidgets;
 import 'package:hello_universe/src/data/api_config_interceptor.dart';
 import 'package:hello_universe/src/data/apod_service.dart';
+import 'package:hello_universe/src/domain/entities/apod.dart';
 import 'package:hello_universe/src/injector_delegate_impl.dart';
 import 'package:hello_universe/src/presentation/apod_details/apod_details_cubit.dart';
 import 'package:hello_universe/src/router_provider_impl.dart';
@@ -13,6 +14,8 @@ import 'package:hello_universe/src/utils/navigation/router_provider.dart';
 import 'package:hello_universe/src/utils/uri_launcher/uri_launcher.dart';
 import 'package:provider/provider.dart';
 import 'package:test/test.dart';
+
+import '../test_doubles/test_models.dart';
 
 late _ArrangeBuilder _builder;
 
@@ -117,7 +120,9 @@ void main() {
       Provider.value(value: tested, child: const SizedBox()),
     );
 
-    final injected = tested.resolveWithParams<ApodDetailsCubit, String>('url');
+    final injected = tested.resolveWithParams<ApodDetailsCubit, Apod>(
+      TestModels.apod(),
+    );
 
     expect(injected, isA<ApodDetailsCubit>());
   });

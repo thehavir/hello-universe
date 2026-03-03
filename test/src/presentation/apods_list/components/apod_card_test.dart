@@ -116,6 +116,18 @@ void main() {
       );
       expect(widget.size, 100);
     });
+
+    testWidgets('passes thumbnailUrl to the $ApodImage', (tester) async {
+      const thumbnailUrl = 'https://duckduckgo.com/';
+      final apod = TestModels.apod(
+        mediaType: .video,
+        thumbnailUrl: thumbnailUrl,
+      );
+      await tester.pumpTested(apod: apod);
+
+      final widget = tester.widget<ApodImage>(find.byType(ApodImage));
+      expect(widget.url, thumbnailUrl);
+    });
   });
 
   <MediaType>[.image, .other].forEach((type) {
@@ -126,6 +138,16 @@ void main() {
 
       final widget = tester.widgetList<Stack>(find.byType(Stack)).first;
       expect(widget.children, [isA<ApodImage>()]);
+    });
+
+    testWidgets('passes url to the $ApodImage '
+        'when $MediaType is $type', (tester) async {
+      const url = 'https://duckduckgo.com/';
+      final apod = TestModels.apod(mediaType: type, url: url);
+      await tester.pumpTested(apod: apod);
+
+      final widget = tester.widget<ApodImage>(find.byType(ApodImage));
+      expect(widget.url, url);
     });
   });
 

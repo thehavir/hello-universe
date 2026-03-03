@@ -1,16 +1,19 @@
-// ignore_for_file: cascade_invocations
+// ignore_for_file: cascade_invocations, avoid_redundant_argument_values
 
 import 'dart:async';
 
 import 'package:bloc_test/bloc_test.dart';
 import 'package:file/file.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:hello_universe/src/domain/entities/apod.dart';
+import 'package:hello_universe/src/domain/entities/media_type.dart';
 import 'package:hello_universe/src/presentation/apod_details/apod_details_cubit.dart';
 import 'package:hello_universe/src/utils/cubit_state.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
+import '../../../test_doubles/test_models.dart';
 import 'apod_details_cubit_test.mocks.dart';
 
 late _ArrangeBuilder _builder;
@@ -31,95 +34,183 @@ void main() {
     expect(tested.state, isA<LoadingCubitState>());
   });
 
-  test('calls getFileStream on $CacheManager with apodUrl', () async {
-    const apodUrl = 'http://a-galaxy-far-far-away.universe';
-    _builder.withCacheManagerGetFileStreamEmitsData(apodUrl: apodUrl);
+  group('when $MediaType is ${MediaType.video}', () {
+    group('when thumbnailUrl is null', () {
+      test('doest not get image from $CacheManager', () {
+        _builder.createTested(
+          apod: TestModels.apod(mediaType: .video, thumbnailUrl: null),
+        );
 
-    _builder.createTested(apodUrl: apodUrl);
+        verifyZeroInteractions(_builder.cacheManager);
+      });
 
-    verify(_builder.cacheManager.getFileStream(apodUrl)).called(1);
+      test('emits $LoadedCubitState', () {
+        final tested = _builder.createTested(
+          apod: TestModels.apod(mediaType: .video, thumbnailUrl: null),
+        );
+
+        expect(tested.state, isA<LoadedCubitState>());
+      });
+    });
+
+    group('when thumbnailUrl is empty', () {
+      test('doest not get image from $CacheManager', () {
+        _builder.createTested(
+          apod: TestModels.apod(mediaType: .video, thumbnailUrl: ''),
+        );
+
+        verifyZeroInteractions(_builder.cacheManager);
+      });
+
+      test('emits $LoadedCubitState', () {
+        final tested = _builder.createTested(
+          apod: TestModels.apod(mediaType: .video, thumbnailUrl: ''),
+        );
+
+        expect(tested.state, isA<LoadedCubitState>());
+      });
+    });
+
+    group('when thumbnailUrl is not empty', () {
+      test('calls getFileStream on $CacheManager with thumbnailUrl '
+          'when it is not null', () async {
+        const thumbnailUrl = 'http://a-galaxy-far-far-away.universe';
+        final apod = TestModels.apod(
+          mediaType: .video,
+          thumbnailUrl: thumbnailUrl,
+        );
+        _builder.withCacheManagerGetFileStreamEmitsData(url: thumbnailUrl);
+
+        _builder.createTested(apod: apod);
+
+        verify(_builder.cacheManager.getFileStream(thumbnailUrl)).called(1);
+      });
+
+      blocTest(
+        'emits loaded state when $CacheManager stream emits $FileInfo',
+        setUp: () => _builder.withCacheManagerGetFileStreamEmitsData(
+          streamData: _TestFileInfo(),
+        ),
+        build: () => _builder.createTested(
+          apod: TestModels.apod(
+            mediaType: .video,
+            thumbnailUrl: 'thumbnailUrl',
+          ),
+        ),
+        expect: () => [isA<LoadedCubitState>()],
+      );
+    });
   });
 
-  group('when $CacheManager stream emits $FileInfo', () {
-    blocTest(
-      'emits loaded state',
-      setUp: () => _builder.withCacheManagerGetFileStreamEmitsData(
-        streamData: _TestFileInfo(),
-      ),
-      build: () => _builder.createTested(),
-      expect: () => [isA<LoadedCubitState>()],
-    );
+  <MediaType>[.image, .other].forEach((mediaType) {
+    group('when $MediaType is $mediaType', () {
+      test('calls getFileStream on $CacheManager with thumbnailUrl '
+          'when it is not null', () async {
+        const thumbnailUrl = 'http://a-galaxy-far-far-away.universe';
+        final apod = TestModels.apod(
+          mediaType: mediaType,
+          thumbnailUrl: thumbnailUrl,
+        );
+        _builder.withCacheManagerGetFileStreamEmitsData(url: thumbnailUrl);
 
-    blocTest<ApodDetailsCubit, ApodDetailsState>(
-      'does not emit again after last emit',
-      setUp: () {
-        final controller = StreamController<FileResponse>();
-        controller.add(_TestFileInfo());
-        controller.addError('error');
-        when(
-          _builder.cacheManager.getFileStream(any),
-        ).thenAnswer((_) => controller.stream);
-      },
-      build: () => _builder.createTested(),
-      expect: () => [isA<LoadedCubitState>()],
-    );
-  });
+        _builder.createTested(apod: apod);
 
-  blocTest(
-    'does not emit loaded state '
-    'when $CacheManager stream does not emit $FileInfo',
-    setUp: () => _builder.withCacheManagerGetFileStreamEmitsData(
-      streamData: _TestFileResponse(),
-    ),
-    build: () => _builder.createTested(),
-    expect: () => isEmpty,
-  );
+        verify(_builder.cacheManager.getFileStream(thumbnailUrl)).called(1);
+      });
 
-  group('when stream emits error', () {
-    blocTest<ApodDetailsCubit, ApodDetailsState>(
-      'emits error state',
-      setUp: () => _builder.withCacheManagerGetFileStreamEmitsError(),
-      build: () => _builder.createTested(),
-      expect: () => [isA<ErrorCubitState>()],
-    );
+      test('calls getFileStream on $CacheManager with url '
+          'when thumbnailUrl is null', () async {
+        const url = 'http://a-galaxy-far-far-away.universe';
+        final apod = TestModels.apod(thumbnailUrl: null, url: url);
+        _builder.withCacheManagerGetFileStreamEmitsData(url: url);
 
-    blocTest<ApodDetailsCubit, ApodDetailsState>(
-      'does not emit again after last emit',
-      setUp: () {
-        final controller = StreamController<FileResponse>();
-        controller.addError('error');
-        controller.add(_TestFileInfo());
-        when(
-          _builder.cacheManager.getFileStream(any),
-        ).thenAnswer((_) => controller.stream);
-      },
-      build: () => _builder.createTested(),
-      expect: () => [isA<ErrorCubitState>()],
-    );
-  });
+        _builder.createTested(apod: apod);
 
-  test('emits error state when stream throws', () async {
-    const error = 'Moon is bleeding!';
-    _builder.withCacheManagerGetFileStreamThrows(error: error);
+        verify(_builder.cacheManager.getFileStream(url)).called(1);
+      });
 
-    final tested = _builder.createTested();
-    await Future<void>.delayed(.zero);
+      group('when $CacheManager stream emits $FileInfo', () {
+        blocTest(
+          'emits loaded state',
+          setUp: () => _builder.withCacheManagerGetFileStreamEmitsData(
+            streamData: _TestFileInfo(),
+          ),
+          build: () => _builder.createTested(),
+          expect: () => [isA<LoadedCubitState>()],
+        );
 
-    expect(
-      tested.state,
-      isA<ErrorCubitState>().having((p) => p.error, 'error', error),
-    );
-  });
+        blocTest<ApodDetailsCubit, ApodDetailsState>(
+          'does not emit again after last emit',
+          setUp: () {
+            final controller = StreamController<FileResponse>();
+            controller.add(_TestFileInfo());
+            controller.addError('error');
+            when(
+              _builder.cacheManager.getFileStream(any),
+            ).thenAnswer((_) => controller.stream);
+          },
+          build: () => _builder.createTested(),
+          expect: () => [isA<LoadedCubitState>()],
+        );
+      });
 
-  test('does not emit when cubit is closed', () async {
-    _builder.withCacheManagerGetFileStreamEmitsData(
-      streamData: _TestFileInfo(),
-    );
-    final tested = _builder.createTested();
+      blocTest(
+        'does not emit loaded state '
+        'when $CacheManager stream does not emit $FileInfo',
+        setUp: () => _builder.withCacheManagerGetFileStreamEmitsData(
+          streamData: _TestFileResponse(),
+        ),
+        build: () => _builder.createTested(),
+        expect: () => isEmpty,
+      );
 
-    await tested.close();
+      group('when stream emits error', () {
+        blocTest<ApodDetailsCubit, ApodDetailsState>(
+          'emits error state',
+          setUp: () => _builder.withCacheManagerGetFileStreamEmitsError(),
+          build: () => _builder.createTested(),
+          expect: () => [isA<ErrorCubitState>()],
+        );
 
-    expect(tested.state, isA<LoadingCubitState>());
+        blocTest<ApodDetailsCubit, ApodDetailsState>(
+          'does not emit again after last emit',
+          setUp: () {
+            final controller = StreamController<FileResponse>();
+            controller.addError('error');
+            controller.add(_TestFileInfo());
+            when(
+              _builder.cacheManager.getFileStream(any),
+            ).thenAnswer((_) => controller.stream);
+          },
+          build: () => _builder.createTested(),
+          expect: () => [isA<ErrorCubitState>()],
+        );
+      });
+
+      test('emits error state when stream throws', () async {
+        const error = 'Moon is bleeding!';
+        _builder.withCacheManagerGetFileStreamThrows(error: error);
+
+        final tested = _builder.createTested();
+        await Future<void>.delayed(.zero);
+
+        expect(
+          tested.state,
+          isA<ErrorCubitState>().having((p) => p.error, 'error', error),
+        );
+      });
+
+      test('does not emit when cubit is closed', () async {
+        _builder.withCacheManagerGetFileStreamEmitsData(
+          streamData: _TestFileInfo(),
+        );
+        final tested = _builder.createTested();
+
+        await tested.close();
+
+        expect(tested.state, isA<LoadingCubitState>());
+      });
+    });
   });
 }
 
@@ -127,11 +218,11 @@ class _ArrangeBuilder {
   final cacheManager = MockCacheManager();
 
   void withCacheManagerGetFileStreamEmitsData({
-    String? apodUrl,
+    String? url,
     FileResponse? streamData,
   }) {
     when(
-      cacheManager.getFileStream(apodUrl ?? any),
+      cacheManager.getFileStream(url ?? any),
     ).thenAnswer((_) => Stream.value(streamData ?? _TestFileResponse()));
   }
 
@@ -145,8 +236,10 @@ class _ArrangeBuilder {
     ).thenAnswer((_) => Stream.error(error ?? 'error'));
   }
 
-  ApodDetailsCubit createTested({String? apodUrl}) =>
-      ApodDetailsCubit(cacheManager: cacheManager, apodUrl: apodUrl ?? '');
+  ApodDetailsCubit createTested({Apod? apod}) => ApodDetailsCubit(
+    cacheManager: cacheManager,
+    apod: apod ?? TestModels.apod(),
+  );
 }
 
 class _TestFileResponse implements FileResponse {

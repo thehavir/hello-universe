@@ -19,6 +19,8 @@ class ApodCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isVideo = apod.mediaType == .video;
+
     return Card(
       shape: const RoundedRectangleBorder(borderRadius: .all(.circular(8))),
       child: InkWell(
@@ -29,16 +31,15 @@ class ApodCard extends StatelessWidget {
               tag: apod.url,
               child: ClipRRect(
                 borderRadius: const .vertical(top: Radius.circular(8)),
-                // Todo(Havir): handle videos that they have thumbnail.
                 child: Stack(
                   alignment: .center,
                   children: [
                     ApodImage(
                       cacheManager: cacheManager,
-                      url: apod.url,
+                      url: isVideo ? apod.thumbnailUrl : apod.url,
                       height: 180,
                     ),
-                    if (apod.mediaType == .video)
+                    if (isVideo)
                       Icon(
                         Icons.play_circle_outline,
                         color: theme.colorScheme.outline,

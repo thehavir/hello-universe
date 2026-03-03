@@ -20,6 +20,7 @@ class ApodDetailsContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
+    final isVideo = apod.mediaType == .video;
 
     return SingleChildScrollView(
       child: Column(
@@ -33,11 +34,11 @@ class ApodDetailsContent extends StatelessWidget {
                 children: [
                   ApodImage(
                     cacheManager: cacheManager,
-                    url: apod.url,
+                    url: isVideo ? apod.thumbnailUrl : apod.url,
                     height: 360,
                     fit: .cover,
                   ),
-                  if (apod.mediaType == .video)
+                  if (isVideo)
                     Icon(
                       Icons.play_circle_outline,
                       color: theme.colorScheme.outline,

@@ -2,28 +2,34 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:hello_universe/src/domain/entities/apod.dart';
 import 'package:hello_universe/src/utils/cubit_state.dart';
 
 typedef ApodDetailsState = CubitState<void, Object>;
 
 class ApodDetailsCubit extends Cubit<ApodDetailsState> {
-  ApodDetailsCubit({
-    required CacheManager cacheManager,
-    required String apodUrl,
-  }) : _cacheManager = cacheManager,
-       _apodUrl = apodUrl,
-       super(const LoadingCubitState()) {
+  ApodDetailsCubit({required CacheManager cacheManager, required Apod apod})
+    : _cacheManager = cacheManager,
+      _apod = apod,
+      super(const LoadingCubitState()) {
     _init();
   }
 
   final CacheManager _cacheManager;
-  final String _apodUrl;
+  final Apod _apod;
 
   StreamSubscription<FileResponse>? _apodFileStream;
 
   Future<void> _init() async {
     try {
-      final stream = _cacheManager.getFileStream(_apodUrl);
+      final isVideo = _apod.mediaType == .video;
+      final thumbnailUrl = _apod.thumbnailUrl;
+      if (isVideo && (thumbnailUrl == null || thumbnailUrl.isEmpty)) {
+        emit(state.toLoaded(null));
+        return;
+      }
+
+      final stream = _cacheManager.getFileStream(thumbnailUrl ?? _apod.url);
       _apodFileStream = stream.listen(
         _onApodStreamData,
         onError: _onApodStreamError,

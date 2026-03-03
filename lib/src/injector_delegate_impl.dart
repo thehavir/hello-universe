@@ -7,6 +7,7 @@ import 'package:hello_universe/src/data/apods_repository_impl.dart';
 import 'package:hello_universe/src/data/serializer.dart';
 import 'package:hello_universe/src/domain/apods_pagination_handler.dart';
 import 'package:hello_universe/src/domain/apods_repository.dart';
+import 'package:hello_universe/src/domain/entities/apod.dart';
 import 'package:hello_universe/src/domain/fetch_apods_use_case.dart';
 import 'package:hello_universe/src/presentation/apod_details/apod_details_cubit.dart';
 import 'package:hello_universe/src/presentation/apods_list/apods_list_cubit.dart';
@@ -75,9 +76,9 @@ class InjectorDelegateImpl extends InjectorDelegate {
         ),
       ),
     ),
-    AssistedFactoryInjection<ApodDetailsCubit, String>(
-      (resolver, apodUrl) =>
-          ApodDetailsCubit(cacheManager: resolver.resolve(), apodUrl: apodUrl),
+    AssistedFactoryInjection<ApodDetailsCubit, Apod>(
+      (resolver, apod) =>
+          ApodDetailsCubit(cacheManager: resolver.resolve(), apod: apod),
     ),
   ];
 }
