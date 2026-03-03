@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hello_universe/src/domain/entities/apods_error.dart';
 import 'package:hello_universe/src/presentation/apods_list/apods_list_content.dart';
@@ -14,12 +15,14 @@ class ApodsListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => BlocProvider<ApodsListCubit>(
     create: (context) => context.resolve(),
-    child: const _Consumer(),
+    child: _Consumer(cacheManager: context.resolve()),
   );
 }
 
 class _Consumer extends StatelessWidget {
-  const _Consumer();
+  const _Consumer({required this.cacheManager});
+
+  final CacheManager cacheManager;
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -36,6 +39,7 @@ class _Consumer extends StatelessWidget {
           onRetry: () => context.apodsCubit.refresh(),
           onApodTap: (apod) =>
               context.pushNamed(Routes.apodDetailsScreen, extra: apod),
+          cacheManager: cacheManager,
         ),
       ),
     ),

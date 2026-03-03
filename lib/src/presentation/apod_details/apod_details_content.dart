@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:hello_universe/src/domain/date_time_extension.dart';
 import 'package:hello_universe/src/domain/entities/apod.dart';
-import 'package:hello_universe/src/presentation/components/fade_in_network_image.dart';
+import 'package:hello_universe/src/presentation/components/apod_image.dart';
 
 class ApodDetailsContent extends StatelessWidget {
   const ApodDetailsContent({
     required this.apod,
+    required this.cacheManager,
     required this.onApodTap,
     super.key,
   });
 
   final Apod apod;
-  final VoidCallback onApodTap;
+  final CacheManager cacheManager;
+  final VoidCallback? onApodTap;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
+    final isVideo = apod.mediaType == .video;
 
     return SingleChildScrollView(
       child: Column(
@@ -28,8 +32,13 @@ class ApodDetailsContent extends StatelessWidget {
               child: Stack(
                 alignment: .center,
                 children: [
-                  FadeInNetworkImage(url: apod.url),
-                  if (apod.mediaType == .video)
+                  ApodImage(
+                    cacheManager: cacheManager,
+                    url: isVideo ? apod.thumbnailUrl : apod.url,
+                    height: 360,
+                    fit: .cover,
+                  ),
+                  if (isVideo)
                     Icon(
                       Icons.play_circle_outline,
                       color: theme.colorScheme.outline,

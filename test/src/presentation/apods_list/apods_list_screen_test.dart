@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_redundant_argument_values
 
 import 'package:flutter/material.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hello_universe/src/domain/entities/apods_error.dart';
@@ -19,6 +20,7 @@ import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
 
 import '../../../test_doubles/test_models.dart';
+import '../../../test_utils/mock_cache_manager.mocks.dart';
 import '../../../test_utils/mock_go_router_provider.dart';
 import 'apods_list_screen_test.mocks.dart';
 
@@ -444,6 +446,23 @@ void main() {
       );
       expect(widget.error, apodsError.error);
     });
+
+    testWidgets('passes $CacheManager to the $ApodsListContent', (
+      tester,
+    ) async {
+      final cacheManager = MockCacheManager();
+      final state = PersistentLoadedCubitState<ApodsListData, ApodsError>(
+        TestModels.apodsData(),
+      );
+      _builder.withApodsListCubit(state: state);
+
+      await tester.pumpTested(cacheManager: cacheManager);
+
+      final widget = tester.widget<ApodsListContent>(
+        find.byType(ApodsListContent),
+      );
+      expect(widget.cacheManager, cacheManager);
+    });
   });
 
   testWidgets('onFetchNextPage calls fetchApods on the $ApodsListCubit', (
@@ -484,10 +503,13 @@ void main() {
 }
 
 extension on WidgetTester {
-  Future<void> pumpTested() => pumpWidget(
+  Future<void> pumpTested({CacheManager? cacheManager}) => pumpWidget(
     Provider.value(
       value: InjectorDelegate(
         Injector([
+          SingletonInjection<CacheManager>(
+            (_) => cacheManager ?? MockCacheManager(),
+          ),
           FactoryInjection<ApodsListCubit>((_) => _builder.apodsListCubit),
         ]),
       ),

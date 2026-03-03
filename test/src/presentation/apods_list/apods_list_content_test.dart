@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hello_universe/src/domain/entities/apods_page_key.dart';
 import 'package:hello_universe/src/domain/entities/apod.dart';
@@ -13,6 +14,7 @@ import 'package:hello_universe/src/presentation/apods_list/components/no_more_it
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 import '../../../test_doubles/test_models.dart';
+import '../../../test_utils/mock_cache_manager.mocks.dart';
 import '../../../test_utils/mock_context.mocks.dart';
 
 void main() {
@@ -137,6 +139,32 @@ void main() {
             as Column;
     expect(widget1.children, contains(isA<ApodCard>()));
     expect(widget2.children, contains(isA<ApodCard>()));
+  });
+
+  testWidgets('passes $CacheManager to $ApodCard', (tester) async {
+    final cacheManager = MockCacheManager();
+    final apod = TestModels.apod();
+    final apodPages = [
+      [apod],
+    ];
+    final apodPageKeys = [TestModels.apodsPageKey(isLastPage: false)];
+    await tester.pumpTested(
+      cacheManager: cacheManager,
+      apodPages: apodPages,
+      apodPageKeys: apodPageKeys,
+    );
+
+    final widget =
+        tester.findPagedChildBuilderDelegate().itemBuilder(context, apod, 1)
+            as Column;
+    expect(
+      widget.children.first,
+      isA<ApodCard>().having(
+        (p) => p.cacheManager,
+        'cacheManager',
+        cacheManager,
+      ),
+    );
   });
 
   testWidgets('passes $Apod to $ApodCard', (tester) async {
@@ -296,6 +324,7 @@ extension on WidgetTester {
     VoidCallback? onFetchNextPage,
     VoidCallback? onRetry,
     ValueSetter<Apod>? onApodTap,
+    CacheManager? cacheManager,
   }) => pumpWidget(
     MaterialApp(
       home: ApodsListContent(
@@ -307,6 +336,7 @@ extension on WidgetTester {
         onFetchNextPage: onFetchNextPage ?? () {},
         onRetry: onRetry ?? () {},
         onApodTap: onApodTap ?? (_) {},
+        cacheManager: cacheManager ?? MockCacheManager(),
       ),
     ),
   );

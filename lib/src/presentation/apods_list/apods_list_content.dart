@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:hello_universe/src/domain/entities/apods_page_key.dart';
 import 'package:hello_universe/src/domain/entities/apod.dart';
 import 'package:hello_universe/src/presentation/apods_list/components/apod_card.dart';
@@ -20,6 +21,7 @@ class ApodsListContent extends StatelessWidget {
     required this.onFetchNextPage,
     required this.onRetry,
     required this.onApodTap,
+    required this.cacheManager,
     super.key,
   });
 
@@ -31,6 +33,7 @@ class ApodsListContent extends StatelessWidget {
   final VoidCallback onFetchNextPage;
   final VoidCallback onRetry;
   final ValueSetter<Apod> onApodTap;
+  final CacheManager cacheManager;
 
   @override
   Widget build(BuildContext context) => PagedListView<ApodsPageKey, Apod>(
@@ -47,7 +50,11 @@ class ApodsListContent extends StatelessWidget {
       itemBuilder: (_, apod, index) => Column(
         children: [
           if (index == 0) const SizedBox(height: 16),
-          ApodCard(apod: apod, onApodTap: () => onApodTap(apod)),
+          ApodCard(
+            apod: apod,
+            onApodTap: () => onApodTap(apod),
+            cacheManager: cacheManager,
+          ),
           const SizedBox(height: 8),
         ],
       ),

@@ -1,13 +1,21 @@
 import 'package:chopper/chopper.dart';
 import 'package:chopper_built_value/chopper_built_value.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:flutter_test/flutter_test.dart' show testWidgets;
 import 'package:hello_universe/src/data/api_config_interceptor.dart';
 import 'package:hello_universe/src/data/apod_service.dart';
+import 'package:hello_universe/src/domain/entities/apod.dart';
 import 'package:hello_universe/src/injector_delegate_impl.dart';
+import 'package:hello_universe/src/presentation/apod_details/apod_details_cubit.dart';
 import 'package:hello_universe/src/router_provider_impl.dart';
 import 'package:hello_universe/src/utils/dependency_injection/injector_delegate.dart';
 import 'package:hello_universe/src/utils/navigation/router_provider.dart';
 import 'package:hello_universe/src/utils/uri_launcher/uri_launcher.dart';
+import 'package:provider/provider.dart';
 import 'package:test/test.dart';
+
+import '../test_doubles/test_models.dart';
 
 late _ArrangeBuilder _builder;
 
@@ -100,6 +108,42 @@ void main() {
     final injected = tested.resolve<RouterProvider>();
 
     expect(injected, isA<RouterProviderImpl>());
+  });
+
+  // [CacheManager]'s [Config] is dependent on the [PlatformChannel] and
+  // therefore it needs Flutter's [Widget] to be pumped to work and be testable.
+  testWidgets('$ApodDetailsCubit is injected with the passed url', (
+    tester,
+  ) async {
+    final tested = _builder.createTested();
+    await tester.pumpWidget(
+      Provider.value(value: tested, child: const SizedBox()),
+    );
+
+    final injected = tested.resolveWithParams<ApodDetailsCubit, Apod>(
+      TestModels.apod(),
+    );
+
+    expect(injected, isA<ApodDetailsCubit>());
+  });
+
+  // [CacheManager]'s [Config] is dependent on the [PlatformChannel] and
+  // therefore it needs Flutter's [Widget] to be pumped to work and be testable.
+  testWidgets('$CacheManager is injected with the $Config', (tester) async {
+    final tested = _builder.createTested();
+    await tester.pumpWidget(
+      Provider.value(value: tested, child: const SizedBox()),
+    );
+
+    final injected = tested.resolve<CacheManager>().config;
+
+    expect(
+      injected,
+      isA<Config>()
+          .having((p) => p.cacheKey, 'cacheKey', 'apodCacheManager')
+          .having((p) => p.stalePeriod, 'stalePeriod', const Duration(days: 30))
+          .having((p) => p.maxNrOfCacheObjects, 'maxNrOfCacheObjects', 1000),
+    );
   });
 }
 
