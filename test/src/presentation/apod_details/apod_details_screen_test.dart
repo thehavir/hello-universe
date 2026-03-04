@@ -67,6 +67,18 @@ void main() {
     expect(find.byType(ApodDetailsContent), findsOneWidget);
   });
 
+  testWidgets('wraps $ApodDetailsContent into the $SafeArea', (tester) async {
+    await tester.pumpTested();
+
+    expect(
+      find.descendant(
+        of: find.byType(SafeArea),
+        matching: find.byType(ApodDetailsContent),
+      ),
+      findsOneWidget,
+    );
+  });
+
   testWidgets('passes Apod to the $ApodDetailsContent', (tester) async {
     final apod = TestModels.apod(title: 'Orion belt');
     await tester.pumpTested(apod: apod);

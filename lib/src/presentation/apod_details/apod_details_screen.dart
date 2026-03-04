@@ -43,10 +43,12 @@ class _Consumer extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(title: Text(apod.title)),
     body: BlocBuilder<ApodDetailsCubit, ApodDetailsState>(
-      builder: (context, state) => ApodDetailsContent(
-        apod: apod,
-        cacheManager: cacheManager,
-        onApodTap: state.isApodReady ? () => _onApodTap(context) : null,
+      builder: (context, state) => SafeArea(
+        child: ApodDetailsContent(
+          apod: apod,
+          cacheManager: cacheManager,
+          onApodTap: state.isApodReady ? () => _onApodTap(context) : null,
+        ),
       ),
     ),
   );
