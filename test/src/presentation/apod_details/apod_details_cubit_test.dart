@@ -76,6 +76,7 @@ void main() {
     group('when thumbnailUrl is not empty', () {
       test('gets image from $CacheManager with thumbnailUrl', () {
         const thumbnailUrl = 'http://a-galaxy-far-far-away.universe';
+        _builder.withCacheManagerGetFileStreamEmitsData(url: thumbnailUrl);
         _builder.createTested(
           apod: TestModels.apod(
             mediaType: .video,
