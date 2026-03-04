@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_redundant_argument_values
+
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -7,6 +9,7 @@ import 'package:hello_universe/src/domain/entities/media_type.dart';
 import 'package:hello_universe/src/presentation/apod_details/apod_details_content.dart';
 import 'package:hello_universe/src/presentation/apod_details/apod_details_cubit.dart';
 import 'package:hello_universe/src/presentation/apod_details/apod_details_screen.dart';
+import 'package:hello_universe/src/presentation/apod_full_size/apod_full_size_screen_arguments.dart';
 import 'package:hello_universe/src/routes.dart';
 import 'package:hello_universe/src/utils/cubit_state.dart';
 import 'package:hello_universe/src/utils/dependency_injection/injection.dart';
@@ -114,6 +117,82 @@ void main() {
     });
 
     group('when $ApodDetailsCubit state is $LoadedCubitState', () {
+      group('when ${Apod}s url is null', () {
+        testWidgets('shows $SnackBar', (tester) async {
+          _builder.withApodDetailsCubitState(
+            state: const LoadedCubitState(null),
+          );
+          final apod = TestModels.apod(url: null);
+          await tester.pumpTested(apod: apod);
+
+          tester
+              .widget<ApodDetailsContent>(find.byType(ApodDetailsContent))
+              .onApodTap!();
+          await tester.pump();
+
+          expect(find.byType(SnackBar), findsOneWidget);
+        });
+
+        testWidgets('$SnackBar has title', (tester) async {
+          _builder.withApodDetailsCubitState(
+            state: const LoadedCubitState(null),
+          );
+          final apod = TestModels.apod(url: null);
+          await tester.pumpTested(apod: apod);
+
+          tester
+              .widget<ApodDetailsContent>(find.byType(ApodDetailsContent))
+              .onApodTap!();
+          await tester.pump();
+
+          expect(
+            find.descendant(
+              of: find.byType(SnackBar),
+              matching: find.text('No URL found for this APOD'),
+            ),
+            findsOneWidget,
+          );
+        });
+      });
+
+      group('when ${Apod}s url is empty', () {
+        testWidgets('shows $SnackBar', (tester) async {
+          _builder.withApodDetailsCubitState(
+            state: const LoadedCubitState(null),
+          );
+          final apod = TestModels.apod(url: '');
+          await tester.pumpTested(apod: apod);
+
+          tester
+              .widget<ApodDetailsContent>(find.byType(ApodDetailsContent))
+              .onApodTap!();
+          await tester.pump();
+
+          expect(find.byType(SnackBar), findsOneWidget);
+        });
+
+        testWidgets('$SnackBar has title', (tester) async {
+          _builder.withApodDetailsCubitState(
+            state: const LoadedCubitState(null),
+          );
+          final apod = TestModels.apod(url: '');
+          await tester.pumpTested(apod: apod);
+
+          tester
+              .widget<ApodDetailsContent>(find.byType(ApodDetailsContent))
+              .onApodTap!();
+          await tester.pump();
+
+          expect(
+            find.descendant(
+              of: find.byType(SnackBar),
+              matching: find.text('No URL found for this APOD'),
+            ),
+            findsOneWidget,
+          );
+        });
+      });
+
       testWidgets('calls launch on the $UriLauncher with URI from Apod\'s url '
           'when $MediaType is ${MediaType.video}', (tester) async {
         _builder.withApodDetailsCubitState(state: const LoadedCubitState(null));
@@ -128,28 +207,33 @@ void main() {
       });
 
       <MediaType>[.other, .image].forEach((mediaType) {
-        testWidgets(
-          'pushes ${Routes.apodFullSizeScreen} and passes URI from Apod\'s url to it '
-          'when $MediaType is $mediaType',
-          (tester) async {
-            _builder.withApodDetailsCubitState(
-              state: const LoadedCubitState(null),
-            );
-            final apod = TestModels.apod(mediaType: mediaType, url: 'fsf.org');
-            await tester.pumpTested(apod: apod);
+        testWidgets('pushes ${Routes.apodFullSizeScreen} '
+            'and passes URL and date from Apod when $MediaType is $mediaType', (
+          tester,
+        ) async {
+          _builder.withApodDetailsCubitState(
+            state: const LoadedCubitState(null),
+          );
+          const url = 'fsf.org';
+          final date = DateTime(1987);
+          final apod = TestModels.apod(
+            mediaType: mediaType,
+            url: 'fsf.org',
+            date: date,
+          );
+          await tester.pumpTested(apod: apod);
 
-            tester
-                .widget<ApodDetailsContent>(find.byType(ApodDetailsContent))
-                .onApodTap!();
+          tester
+              .widget<ApodDetailsContent>(find.byType(ApodDetailsContent))
+              .onApodTap!();
 
-            verify(
-              _builder.goRouter.pushNamed(
-                Routes.apodFullSizeScreen,
-                extra: 'fsf.org',
-              ),
-            ).called(1);
-          },
-        );
+          verify(
+            _builder.goRouter.pushNamed(
+              Routes.apodFullSizeScreen,
+              extra: ApodFullSizeScreenArguments(url: url, date: date),
+            ),
+          ).called(1);
+        });
       });
     });
   });

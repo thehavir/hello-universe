@@ -23,13 +23,13 @@ class ApodDetailsCubit extends Cubit<ApodDetailsState> {
   Future<void> _init() async {
     try {
       final isVideo = _apod.mediaType == .video;
-      final thumbnailUrl = _apod.thumbnailUrl;
-      if (isVideo && (thumbnailUrl == null || thumbnailUrl.isEmpty)) {
+      final url = isVideo ? _apod.thumbnailUrl : _apod.url;
+      if (url == null || url.isEmpty) {
         emit(state.toLoaded(null));
         return;
       }
 
-      final stream = _cacheManager.getFileStream(thumbnailUrl ?? _apod.url);
+      final stream = _cacheManager.getFileStream(url);
       _apodFileStream = stream.listen(
         _onApodStreamData,
         onError: _onApodStreamError,

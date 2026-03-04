@@ -5,6 +5,7 @@ import 'package:hello_universe/src/domain/entities/apods_error.dart';
 import 'package:hello_universe/src/domain/entities/apods_page_key.dart';
 import 'package:hello_universe/src/domain/entities/apod.dart';
 import 'package:hello_universe/src/domain/entities/media_type.dart';
+import 'package:hello_universe/src/presentation/apod_full_size/apod_full_size_screen_arguments.dart';
 import 'package:hello_universe/src/presentation/apods_list/apods_list_data.dart';
 
 abstract final class TestModels {
@@ -24,7 +25,7 @@ abstract final class TestModels {
       ..title = title ?? 'title-test1'
       ..explanation = explanation ?? 'explanation-test1'
       ..mediaType = mediaType ?? .image
-      ..url = url ?? 'url-test1'
+      ..url = url
       ..hdUrl = hdUrl
       ..thumbnailUrl = thumbnailUrl
       ..copyright = copyright
@@ -46,7 +47,7 @@ abstract final class TestModels {
     title: title ?? 'title-test1',
     explanation: explanation ?? 'explanation-test1',
     mediaType: mediaType ?? .image,
-    url: url ?? 'url-test1',
+    url: url,
     hdUrl: hdUrl,
     thumbnailUrl: thumbnailUrl,
     copyright: copyright,
@@ -81,5 +82,13 @@ abstract final class TestModels {
         ],
     apodPageKeys: apodPageKeys ?? [apodsPageKey()],
     hasNextPage: hasNextPage ?? true,
+  );
+
+  static ApodFullSizeScreenArguments apodFullSizeScreenArguments({
+    String? url,
+    DateTime? date,
+  }) => ApodFullSizeScreenArguments(
+    url: url ?? 'url',
+    date: date ?? DateTime(2020),
   );
 }
