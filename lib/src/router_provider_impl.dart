@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hello_universe/src/presentation/apod_details/apod_details_screen.dart';
 import 'package:hello_universe/src/presentation/apod_full_size/apod_full_size_screen.dart';
@@ -20,13 +21,26 @@ class RouterProviderImpl implements RouterProvider {
     GoRoute(
       name: Routes.apodDetailsScreen,
       path: Paths.apodDetailsScreen,
-      builder: (_, state) => ApodDetailsScreen(apod: state.extra.forceCast()),
+      pageBuilder: (_, state) => CustomTransitionPage<void>(
+        key: state.pageKey,
+        child: ApodDetailsScreen(apod: state.extra.forceCast()),
+        opaque: false,
+        reverseTransitionDuration: const Duration(milliseconds: 200),
+        transitionsBuilder: (_, animation, __, child) =>
+            FadeTransition(opacity: animation, child: child),
+      ),
     ),
     GoRoute(
       name: Routes.apodFullSizeScreen,
       path: Paths.apodFullSizeScreen,
-      builder: (_, state) =>
-          ApodFullSizeScreen(arguments: state.extra.forceCast()),
+      pageBuilder: (_, state) => CustomTransitionPage<void>(
+        key: state.pageKey,
+        child: ApodFullSizeScreen(arguments: state.extra.forceCast()),
+        opaque: false,
+        reverseTransitionDuration: const Duration(milliseconds: 200),
+        transitionsBuilder: (_, animation, __, child) =>
+            FadeTransition(opacity: animation, child: child),
+      ),
     ),
   ];
 }

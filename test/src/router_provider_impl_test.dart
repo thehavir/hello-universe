@@ -1,8 +1,10 @@
+import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hello_universe/src/domain/entities/apod.dart';
 import 'package:hello_universe/src/paths.dart';
 import 'package:hello_universe/src/presentation/apod_details/apod_details_screen.dart';
 import 'package:hello_universe/src/presentation/apod_full_size/apod_full_size_screen.dart';
+import 'package:hello_universe/src/presentation/apod_full_size/apod_full_size_screen_arguments.dart';
 import 'package:hello_universe/src/presentation/apods_list/apods_list_screen.dart';
 import 'package:hello_universe/src/router_provider_impl.dart';
 import 'package:hello_universe/src/routes.dart';
@@ -50,7 +52,6 @@ void main() {
       _builder.context,
       _builder.goRouterState,
     );
-
     expect(widget, isA<ApodsListScreen>());
   });
 
@@ -76,16 +77,70 @@ void main() {
     final route = tested.routes.firstWhere(
       (route) => route.name == Routes.apodDetailsScreen,
     );
-    final widget = route.builder?.call(
-      _builder.context,
-      _builder.goRouterState,
-    );
-
+    final widget =
+        route.pageBuilder?.call(_builder.context, _builder.goRouterState)
+            as CustomTransitionPage;
     expect(
-      widget,
+      widget.child,
       isA<ApodDetailsScreen>().having((p) => p.apod, 'apod', apod),
     );
   });
+
+  test('${Routes.apodDetailsScreen} has a $CustomTransitionPage '
+      'with opaque false and 200 millisecond reverseTransitionDuration', () {
+    final apod = TestModels.apod(title: 'Andromeda');
+    when(_builder.goRouterState.extra).thenAnswer((_) => apod);
+    final tested = _builder.createTested();
+
+    final route = tested.routes.firstWhere(
+      (route) => route.name == Routes.apodDetailsScreen,
+    );
+    final widget = route.pageBuilder?.call(
+      _builder.context,
+      _builder.goRouterState,
+    );
+    expect(
+      widget,
+      isA<CustomTransitionPage>()
+          .having((p) => p.opaque, 'opaque', isFalse)
+          .having(
+            (p) => p.reverseTransitionDuration,
+            'reverseTransitionDuration',
+            const Duration(milliseconds: 200),
+          ),
+    );
+  });
+
+  test(
+    '${Routes.apodDetailsScreen}\'s $CustomTransitionPage '
+    'has $FadeTransition as transitionBuilder with the child and animation',
+    () {
+      final animation = _builder.animation;
+      const child = Text('child');
+      final apod = TestModels.apod(title: 'Andromeda');
+      when(_builder.goRouterState.extra).thenAnswer((_) => apod);
+      final tested = _builder.createTested();
+
+      final route = tested.routes.firstWhere(
+        (route) => route.name == Routes.apodDetailsScreen,
+      );
+      final page =
+          route.pageBuilder?.call(_builder.context, _builder.goRouterState)
+              as CustomTransitionPage;
+      final widget = page.transitionsBuilder.call(
+        _builder.context,
+        animation,
+        _builder.animation,
+        child,
+      );
+      expect(
+        widget,
+        isA<FadeTransition>()
+            .having((p) => p.opacity, 'opacity', animation)
+            .having((p) => p.child, 'child', child),
+      );
+    },
+  );
 
   test('has ${Routes.apodFullSizeScreen}', () {
     final tested = _builder.createTested();
@@ -100,7 +155,8 @@ void main() {
     );
   });
 
-  test('${Routes.apodFullSizeScreen} builds $ApodFullSizeScreen', () {
+  test('${Routes.apodFullSizeScreen} builds $ApodFullSizeScreen '
+      'with $ApodFullSizeScreenArguments as extra', () {
     final arguments = TestModels.apodFullSizeScreenArguments();
     when(_builder.goRouterState.extra).thenAnswer((_) => arguments);
     final tested = _builder.createTested();
@@ -108,13 +164,11 @@ void main() {
     final route = tested.routes.firstWhere(
       (route) => route.name == Routes.apodFullSizeScreen,
     );
-    final widget = route.builder?.call(
-      _builder.context,
-      _builder.goRouterState,
-    );
-
+    final widget =
+        route.pageBuilder?.call(_builder.context, _builder.goRouterState)
+            as CustomTransitionPage;
     expect(
-      widget,
+      widget.child,
       isA<ApodFullSizeScreen>().having(
         (p) => p.arguments,
         'arguments',
@@ -122,11 +176,70 @@ void main() {
       ),
     );
   });
+
+  test('${Routes.apodFullSizeScreen} has a $CustomTransitionPage '
+      'with opaque false and 200 millisecond reverseTransitionDuration', () {
+    final arguments = TestModels.apodFullSizeScreenArguments();
+    when(_builder.goRouterState.extra).thenAnswer((_) => arguments);
+    final tested = _builder.createTested();
+
+    final route = tested.routes.firstWhere(
+      (route) => route.name == Routes.apodFullSizeScreen,
+    );
+    final widget = route.pageBuilder?.call(
+      _builder.context,
+      _builder.goRouterState,
+    );
+    expect(
+      widget,
+      isA<CustomTransitionPage>()
+          .having((p) => p.opaque, 'opaque', isFalse)
+          .having(
+            (p) => p.reverseTransitionDuration,
+            'reverseTransitionDuration',
+            const Duration(milliseconds: 200),
+          ),
+    );
+  });
+
+  test(
+    '${Routes.apodFullSizeScreen}\'s $CustomTransitionPage '
+    'has $FadeTransition as transitionBuilder with the child and animation',
+    () {
+      final animation = _builder.animation;
+      const child = Text('child');
+      final arguments = TestModels.apodFullSizeScreenArguments();
+      when(_builder.goRouterState.extra).thenAnswer((_) => arguments);
+      final tested = _builder.createTested();
+
+      final route = tested.routes.firstWhere(
+        (route) => route.name == Routes.apodFullSizeScreen,
+      );
+      final page =
+          route.pageBuilder?.call(_builder.context, _builder.goRouterState)
+              as CustomTransitionPage;
+      final widget = page.transitionsBuilder.call(
+        _builder.context,
+        animation,
+        _builder.animation,
+        child,
+      );
+      expect(
+        widget,
+        isA<FadeTransition>()
+            .having((p) => p.opacity, 'opacity', animation)
+            .having((p) => p.child, 'child', child),
+      );
+    },
+  );
 }
 
 class _ArrangeBuilder {
   final context = MockBuildContext();
   final goRouterState = MockGoRouterState();
+  final animation = MockAnimation();
 
   RouterProvider createTested() => const RouterProviderImpl();
 }
+
+class MockAnimation extends Mock implements Animation<double> {}
