@@ -87,7 +87,7 @@ void main() {
   });
 
   test('${Routes.apodDetailsScreen} has a $CustomTransitionPage '
-      'with opaque false and 200 milisecond reverseTransitionDuration', () {
+      'with opaque false and 200 millisecond reverseTransitionDuration', () {
     final apod = TestModels.apod(title: 'Andromeda');
     when(_builder.goRouterState.extra).thenAnswer((_) => apod);
     final tested = _builder.createTested();
@@ -105,7 +105,7 @@ void main() {
           .having((p) => p.opaque, 'opaque', isFalse)
           .having(
             (p) => p.reverseTransitionDuration,
-            'opacity',
+            'reverseTransitionDuration',
             const Duration(milliseconds: 200),
           ),
     );
@@ -178,7 +178,7 @@ void main() {
   });
 
   test('${Routes.apodFullSizeScreen} has a $CustomTransitionPage '
-      'with opaque false and 200 milisecond reverseTransitionDuration', () {
+      'with opaque false and 200 millisecond reverseTransitionDuration', () {
     final arguments = TestModels.apodFullSizeScreenArguments();
     when(_builder.goRouterState.extra).thenAnswer((_) => arguments);
     final tested = _builder.createTested();
@@ -196,14 +196,14 @@ void main() {
           .having((p) => p.opaque, 'opaque', isFalse)
           .having(
             (p) => p.reverseTransitionDuration,
-            'opacity',
+            'reverseTransitionDuration',
             const Duration(milliseconds: 200),
           ),
     );
   });
 
   test(
-    '${Routes.apodDetailsScreen}\'s $CustomTransitionPage '
+    '${Routes.apodFullSizeScreen}\'s $CustomTransitionPage '
     'has $FadeTransition as transitionBuilder with the child and animation',
     () {
       final animation = _builder.animation;
