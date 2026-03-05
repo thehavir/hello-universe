@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:hello_universe/src/presentation/apod_full_size/apod_full_size_content.dart';
 import 'package:hello_universe/src/presentation/apod_full_size/apod_full_size_screen.dart';
 import 'package:hello_universe/src/presentation/apod_full_size/apod_full_size_screen_arguments.dart';
+import 'package:hello_universe/src/presentation/apod_full_size/components/transparent_gradient_app_bar.dart';
 import 'package:hello_universe/src/utils/dependency_injection/injection.dart';
 import 'package:hello_universe/src/utils/dependency_injection/injector.dart';
 import 'package:hello_universe/src/utils/dependency_injection/injector_delegate.dart';
@@ -26,6 +27,45 @@ void main() {
 
     final widget = tester.widget<Scaffold>(find.byType(Scaffold));
     expect(widget.backgroundColor, Colors.black);
+  });
+
+  testWidgets('has $Scaffold with extendBodyBehindAppBar as true', (
+    tester,
+  ) async {
+    await tester.pumpTested();
+
+    final widget = tester.widget<Scaffold>(find.byType(Scaffold));
+    expect(widget.extendBodyBehindAppBar, isTrue);
+  });
+
+  testWidgets('does not have $AppBar when user is not tapped on the screen', (
+    tester,
+  ) async {
+    await tester.pumpTested();
+
+    expect(find.byType(TransparentGradientAppBar), findsNothing);
+  });
+
+  testWidgets('has $AppBar when user taps on the screen', (tester) async {
+    await tester.pumpTested();
+
+    await tester.tap(find.byType(ApodFullSizeContent));
+    await tester.pump();
+
+    expect(find.byType(TransparentGradientAppBar), findsOneWidget);
+  });
+
+  testWidgets('hides again $AppBar when user taps again on the screen', (
+    tester,
+  ) async {
+    await tester.pumpTested();
+
+    await tester.tap(find.byType(ApodFullSizeContent));
+    await tester.pump();
+    await tester.tap(find.byType(ApodFullSizeContent));
+    await tester.pump();
+
+    expect(find.byType(TransparentGradientAppBar), findsNothing);
   });
 
   testWidgets('has $ApodFullSizeContent', (tester) async {
