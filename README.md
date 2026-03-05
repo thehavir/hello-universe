@@ -14,7 +14,7 @@ lib/src/
 ├── data/                          # Data layer (APIs, repositories)
 │
 ├── domain/                        # Business logic (entities, use cases)
-│Flutter 3.38.7+ / Dart 3.10+
+│
 ├── presentation/                  # UI layer (screens, cubits, widgets)
 │   ├── apods_list/                # APODs list screen feature
 │   ├── apod_details/              # APOD details screen feature
