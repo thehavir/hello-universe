@@ -50,32 +50,34 @@ class ApodDetailsContent extends StatelessWidget {
           ),
           Padding(
             padding: const .all(16),
-            child: Column(
-              crossAxisAlignment: .start,
-              children: [
-                Text(
-                  apod.explanation,
-                  style: textTheme.bodyLarge?.copyWith(
-                    color: theme.colorScheme.onSurface,
+            child: SelectionArea(
+              child: Column(
+                crossAxisAlignment: .start,
+                children: [
+                  Text(
+                    apod.explanation,
+                    style: textTheme.bodyLarge?.copyWith(
+                      color: theme.colorScheme.onSurface,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  'Copyright: ${apod.copyright?.split(';').first ?? 'PUBLIC'}',
-                  style: textTheme.bodyLarge?.copyWith(
-                    color: theme.colorScheme.onSurface,
-                    fontStyle: .italic,
+                  const SizedBox(height: 16),
+                  Text(
+                    'Copyright: ${apod.copyright?.split(';').first ?? 'PUBLIC'}',
+                    style: textTheme.bodyLarge?.copyWith(
+                      color: theme.colorScheme.onSurface,
+                      fontStyle: .italic,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  apod.date.format(),
-                  style: textTheme.bodyLarge?.copyWith(
-                    color: theme.colorScheme.onSurface,
-                    fontStyle: .italic,
+                  const SizedBox(height: 8),
+                  Text(
+                    apod.date.format(),
+                    style: textTheme.bodyLarge?.copyWith(
+                      color: theme.colorScheme.onSurface,
+                      fontStyle: .italic,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],
