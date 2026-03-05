@@ -160,6 +160,12 @@ void main() {
     });
   });
 
+  testWidgets('has $SelectionArea', (tester) async {
+    await tester.pumpTested();
+
+    expect(find.byType(SelectionArea), findsOneWidget);
+  });
+
   testWidgets('has explanation', (tester) async {
     final apod = TestModels.apod(explanation: 'Blue Earth');
     await tester.pumpTested(apod: apod);
