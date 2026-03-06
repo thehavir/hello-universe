@@ -4,8 +4,8 @@ A Flutter app that displays NASA's Astronomy Picture of the Day (APOD) using the
 
 ## Technical Overview
 
-**Architecture**: Clean Architecture with 3 layers (Presentation → Domain → Data)  
-**State Management**: BLoC pattern using Cubit with custom sealed state classes  
+**Architecture**: Clean Architecture.  
+**State Management**: BLoC pattern using Cubit with custom sealed state classes.
 
 ## Project Structure
 
@@ -21,7 +21,7 @@ lib/src/
 │   ├── apod_full_size/            # APOD full-size viewer feature
 ├── utils/                         # Shared utilities (DI, navigation, extensions)
 │
-test/src/                          # Unit tests
+test/src/                          # Unit and widget tests
 ```
 
 ## Getting Started
