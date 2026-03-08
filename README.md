@@ -19,6 +19,7 @@ lib/src/
 │   ├── apods_list/                # APODs list screen feature
 │   ├── apod_details/              # APOD details screen feature
 │   ├── apod_full_size/            # APOD full-size viewer feature
+│
 ├── utils/                         # Shared utilities (DI, navigation, extensions)
 │
 test/src/                          # Unit and widget tests
@@ -26,7 +27,10 @@ test/src/                          # Unit and widget tests
 
 ## Getting Started
 
-Install Flutter 3.38.7+ / Dart 3.10+
+### Prerequisite
+Flutter 3.38.7+ / Dart 3.10+
+
+### Run/Test
 
 ```bash
 # Install dependencies
