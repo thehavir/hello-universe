@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'apod.dart';
@@ -9,6 +9,7 @@ part of 'apod.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $ApodCopyWith<Apod> get copyWith => _$ApodCopyWithImpl<Apod>(this as Apod, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Apod&&(identical(other.date, date) || other.date == date)&&(identical(other.title, title) || other.title == title)&&(identical(other.explanation, explanation) || other.explanation == explanation)&&(identical(other.mediaType, mediaType) || other.mediaType == mediaType)&&(identical(other.url, url) || other.url == url)&&(identical(other.hdUrl, hdUrl) || other.hdUrl == hdUrl)&&(identical(other.thumbnailUrl, thumbnailUrl) || other.thumbnailUrl == thumbnailUrl)&&(identical(other.copyright, copyright) || other.copyright == copyright)&&(identical(other.serviceVersion, serviceVersion) || other.serviceVersion == serviceVersion));
+  final _this = this as Apod;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Apod&&(identical(other.date, _this.date) || other.date == _this.date)&&(identical(other.title, _this.title) || other.title == _this.title)&&(identical(other.explanation, _this.explanation) || other.explanation == _this.explanation)&&(identical(other.mediaType, _this.mediaType) || other.mediaType == _this.mediaType)&&(identical(other.url, _this.url) || other.url == _this.url)&&(identical(other.hdUrl, _this.hdUrl) || other.hdUrl == _this.hdUrl)&&(identical(other.thumbnailUrl, _this.thumbnailUrl) || other.thumbnailUrl == _this.thumbnailUrl)&&(identical(other.copyright, _this.copyright) || other.copyright == _this.copyright)&&(identical(other.serviceVersion, _this.serviceVersion) || other.serviceVersion == _this.serviceVersion));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,date,title,explanation,mediaType,url,hdUrl,thumbnailUrl,copyright,serviceVersion);
+int get hashCode {
+  final _this = this as Apod;
+  return Object.hash(runtimeType,_this.date,_this.title,_this.explanation,_this.mediaType,_this.url,_this.hdUrl,_this.thumbnailUrl,_this.copyright,_this.serviceVersion);
+}
 
 @override
 String toString() {
-  return 'Apod(date: $date, title: $title, explanation: $explanation, mediaType: $mediaType, url: $url, hdUrl: $hdUrl, thumbnailUrl: $thumbnailUrl, copyright: $copyright, serviceVersion: $serviceVersion)';
+  final _this = this as Apod;
+  return 'Apod(date: ${_this.date}, title: ${_this.title}, explanation: ${_this.explanation}, mediaType: ${_this.mediaType}, url: ${_this.url}, hdUrl: ${_this.hdUrl}, thumbnailUrl: ${_this.thumbnailUrl}, copyright: ${_this.copyright}, serviceVersion: ${_this.serviceVersion})';
 }
 
 
@@ -63,7 +69,7 @@ class _$ApodCopyWithImpl<$Res>
 /// Create a copy of Apod
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? date = null,Object? title = null,Object? explanation = null,Object? mediaType = null,Object? url = freezed,Object? hdUrl = freezed,Object? thumbnailUrl = freezed,Object? copyright = freezed,Object? serviceVersion = null,}) {
-  return _then(_self.copyWith(
+  return _then(Apod(
 date: null == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
 as DateTime,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,explanation: null == explanation ? _self.explanation : explanation // ignore: cast_nullable_to_non_nullable
@@ -237,16 +243,18 @@ _$ApodCopyWith<_Apod> get copyWith => __$ApodCopyWithImpl<_Apod>(this, _$identit
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Apod&&(identical(other.date, date) || other.date == date)&&(identical(other.title, title) || other.title == title)&&(identical(other.explanation, explanation) || other.explanation == explanation)&&(identical(other.mediaType, mediaType) || other.mediaType == mediaType)&&(identical(other.url, url) || other.url == url)&&(identical(other.hdUrl, hdUrl) || other.hdUrl == hdUrl)&&(identical(other.thumbnailUrl, thumbnailUrl) || other.thumbnailUrl == thumbnailUrl)&&(identical(other.copyright, copyright) || other.copyright == copyright)&&(identical(other.serviceVersion, serviceVersion) || other.serviceVersion == serviceVersion));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Apod&&(identical(other.date, date) || other.date == date)&&(identical(other.title, title) || other.title == title)&&(identical(other.explanation, explanation) || other.explanation == explanation)&&(identical(other.mediaType, mediaType) || other.mediaType == mediaType)&&(identical(other.url, url) || other.url == url)&&(identical(other.hdUrl, hdUrl) || other.hdUrl == hdUrl)&&(identical(other.thumbnailUrl, thumbnailUrl) || other.thumbnailUrl == thumbnailUrl)&&(identical(other.copyright, copyright) || other.copyright == copyright)&&(identical(other.serviceVersion, serviceVersion) || other.serviceVersion == serviceVersion));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,date,title,explanation,mediaType,url,hdUrl,thumbnailUrl,copyright,serviceVersion);
+int get hashCode {
+    return Object.hash(runtimeType,date,title,explanation,mediaType,url,hdUrl,thumbnailUrl,copyright,serviceVersion);
+}
 
 @override
 String toString() {
-  return 'Apod(date: $date, title: $title, explanation: $explanation, mediaType: $mediaType, url: $url, hdUrl: $hdUrl, thumbnailUrl: $thumbnailUrl, copyright: $copyright, serviceVersion: $serviceVersion)';
+    return 'Apod(date: $date, title: $title, explanation: $explanation, mediaType: $mediaType, url: $url, hdUrl: $hdUrl, thumbnailUrl: $thumbnailUrl, copyright: $copyright, serviceVersion: $serviceVersion)';
 }
 
 

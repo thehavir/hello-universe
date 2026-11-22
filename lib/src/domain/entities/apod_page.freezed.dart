@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'apod_page.dart';
@@ -9,6 +9,7 @@ part of 'apod_page.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $ApodPageCopyWith<ApodPage> get copyWith => _$ApodPageCopyWithImpl<ApodPage>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ApodPage&&const DeepCollectionEquality().equals(other.apods, apods)&&(identical(other.pageKey, pageKey) || other.pageKey == pageKey));
+  final _this = this as ApodPage;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ApodPage&&const DeepCollectionEquality().equals(other.apods, _this.apods)&&(identical(other.pageKey, _this.pageKey) || other.pageKey == _this.pageKey));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(apods),pageKey);
+int get hashCode {
+  final _this = this as ApodPage;
+  return Object.hash(runtimeType,const DeepCollectionEquality().hash(_this.apods),_this.pageKey);
+}
 
 @override
 String toString() {
-  return 'ApodPage(apods: $apods, pageKey: $pageKey)';
+  final _this = this as ApodPage;
+  return 'ApodPage(apods: ${_this.apods}, pageKey: ${_this.pageKey})';
 }
 
 
@@ -63,7 +69,7 @@ class _$ApodPageCopyWithImpl<$Res>
 /// Create a copy of ApodPage
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? apods = null,Object? pageKey = null,}) {
-  return _then(_self.copyWith(
+  return _then(ApodPage(
 apods: null == apods ? _self.apods : apods // ignore: cast_nullable_to_non_nullable
 as List<Apod>,pageKey: null == pageKey ? _self.pageKey : pageKey // ignore: cast_nullable_to_non_nullable
 as ApodsPageKey,
@@ -216,7 +222,7 @@ return $default(_that.apods,_that.pageKey);case _:
 
 
 class _ApodPage implements ApodPage {
-  const _ApodPage({required final  List<Apod> apods, required this.pageKey}): _apods = apods;
+  const _ApodPage({required  List<Apod> apods, required this.pageKey}): _apods = apods;
   
 
  final  List<Apod> _apods;
@@ -238,16 +244,18 @@ _$ApodPageCopyWith<_ApodPage> get copyWith => __$ApodPageCopyWithImpl<_ApodPage>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ApodPage&&const DeepCollectionEquality().equals(other._apods, _apods)&&(identical(other.pageKey, pageKey) || other.pageKey == pageKey));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ApodPage&&const DeepCollectionEquality().equals(other.apods, _apods)&&(identical(other.pageKey, pageKey) || other.pageKey == pageKey));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_apods),pageKey);
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_apods),pageKey);
+}
 
 @override
 String toString() {
-  return 'ApodPage(apods: $apods, pageKey: $pageKey)';
+    return 'ApodPage(apods: $apods, pageKey: $pageKey)';
 }
 
 

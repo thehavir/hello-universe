@@ -38,55 +38,41 @@ class _FakeValueKey_1<T> extends _i1.SmartFake implements _i2.ValueKey<T> {
 /// See the documentation for Mockito's code generation for more information.
 class MockGoRouterState extends _i1.Mock implements _i3.GoRouterState {
   @override
-  Uri get uri =>
-      (super.noSuchMethod(
-            Invocation.getter(#uri),
-            returnValue: _FakeUri_0(this, Invocation.getter(#uri)),
-            returnValueForMissingStub: _FakeUri_0(
-              this,
-              Invocation.getter(#uri),
-            ),
-          )
-          as Uri);
+  Uri get uri => (super.noSuchMethod(
+    Invocation.getter(#uri),
+    returnValue: _FakeUri_0(this, Invocation.getter(#uri)),
+    returnValueForMissingStub: _FakeUri_0(this, Invocation.getter(#uri)),
+  ) as Uri);
 
   @override
-  String get matchedLocation =>
-      (super.noSuchMethod(
-            Invocation.getter(#matchedLocation),
-            returnValue: _i4.dummyValue<String>(
-              this,
-              Invocation.getter(#matchedLocation),
-            ),
-            returnValueForMissingStub: _i4.dummyValue<String>(
-              this,
-              Invocation.getter(#matchedLocation),
-            ),
-          )
-          as String);
+  String get matchedLocation => (super.noSuchMethod(
+    Invocation.getter(#matchedLocation),
+    returnValue: _i4.dummyValue<String>(
+      this,
+      Invocation.getter(#matchedLocation),
+    ),
+    returnValueForMissingStub: _i4.dummyValue<String>(
+      this,
+      Invocation.getter(#matchedLocation),
+    ),
+  ) as String);
 
   @override
-  Map<String, String> get pathParameters =>
-      (super.noSuchMethod(
-            Invocation.getter(#pathParameters),
-            returnValue: <String, String>{},
-            returnValueForMissingStub: <String, String>{},
-          )
-          as Map<String, String>);
+  Map<String, String> get pathParameters => (super.noSuchMethod(
+    Invocation.getter(#pathParameters),
+    returnValue: <String, String>{},
+    returnValueForMissingStub: <String, String>{},
+  ) as Map<String, String>);
 
   @override
-  _i2.ValueKey<String> get pageKey =>
-      (super.noSuchMethod(
-            Invocation.getter(#pageKey),
-            returnValue: _FakeValueKey_1<String>(
-              this,
-              Invocation.getter(#pageKey),
-            ),
-            returnValueForMissingStub: _FakeValueKey_1<String>(
-              this,
-              Invocation.getter(#pageKey),
-            ),
-          )
-          as _i2.ValueKey<String>);
+  _i2.ValueKey<String> get pageKey => (super.noSuchMethod(
+    Invocation.getter(#pageKey),
+    returnValue: _FakeValueKey_1<String>(this, Invocation.getter(#pageKey)),
+    returnValueForMissingStub: _FakeValueKey_1<String>(
+      this,
+      Invocation.getter(#pageKey),
+    ),
+  ) as _i2.ValueKey<String>);
 
   @override
   String namedLocation(
@@ -94,41 +80,39 @@ class MockGoRouterState extends _i1.Mock implements _i3.GoRouterState {
     Map<String, String>? pathParameters = const {},
     Map<String, String>? queryParameters = const {},
     String? fragment,
-  }) =>
-      (super.noSuchMethod(
-            Invocation.method(
-              #namedLocation,
-              [name],
-              {
-                #pathParameters: pathParameters,
-                #queryParameters: queryParameters,
-                #fragment: fragment,
-              },
-            ),
-            returnValue: _i4.dummyValue<String>(
-              this,
-              Invocation.method(
-                #namedLocation,
-                [name],
-                {
-                  #pathParameters: pathParameters,
-                  #queryParameters: queryParameters,
-                  #fragment: fragment,
-                },
-              ),
-            ),
-            returnValueForMissingStub: _i4.dummyValue<String>(
-              this,
-              Invocation.method(
-                #namedLocation,
-                [name],
-                {
-                  #pathParameters: pathParameters,
-                  #queryParameters: queryParameters,
-                  #fragment: fragment,
-                },
-              ),
-            ),
-          )
-          as String);
+  }) => (super.noSuchMethod(
+    Invocation.method(
+      #namedLocation,
+      [name],
+      {
+        #pathParameters: pathParameters,
+        #queryParameters: queryParameters,
+        #fragment: fragment,
+      },
+    ),
+    returnValue: _i4.dummyValue<String>(
+      this,
+      Invocation.method(
+        #namedLocation,
+        [name],
+        {
+          #pathParameters: pathParameters,
+          #queryParameters: queryParameters,
+          #fragment: fragment,
+        },
+      ),
+    ),
+    returnValueForMissingStub: _i4.dummyValue<String>(
+      this,
+      Invocation.method(
+        #namedLocation,
+        [name],
+        {
+          #pathParameters: pathParameters,
+          #queryParameters: queryParameters,
+          #fragment: fragment,
+        },
+      ),
+    ),
+  ) as String);
 }

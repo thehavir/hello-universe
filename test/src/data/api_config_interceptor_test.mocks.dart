@@ -35,26 +35,20 @@ class MockChain<BodyType> extends _i1.Mock implements _i2.Chain<BodyType> {
   }
 
   @override
-  _i3.Request get request =>
-      (super.noSuchMethod(
-            Invocation.getter(#request),
-            returnValue: _i4.dummyValue<_i3.Request>(
-              this,
-              Invocation.getter(#request),
-            ),
-          )
-          as _i3.Request);
+  _i3.Request get request => (super.noSuchMethod(
+    Invocation.getter(#request),
+    returnValue: _i4.dummyValue<_i3.Request>(this, Invocation.getter(#request)),
+  ) as _i3.Request);
 
   @override
   _i5.FutureOr<_i6.Response<BodyType>> proceed(_i3.Request? request) =>
       (super.noSuchMethod(
+        Invocation.method(#proceed, [request]),
+        returnValue: _i5.Future<_i6.Response<BodyType>>.value(
+          _i4.dummyValue<_i6.Response<BodyType>>(
+            this,
             Invocation.method(#proceed, [request]),
-            returnValue: _i5.Future<_i6.Response<BodyType>>.value(
-              _i4.dummyValue<_i6.Response<BodyType>>(
-                this,
-                Invocation.method(#proceed, [request]),
-              ),
-            ),
-          )
-          as _i5.FutureOr<_i6.Response<BodyType>>);
+          ),
+        ),
+      ) as _i5.FutureOr<_i6.Response<BodyType>>);
 }

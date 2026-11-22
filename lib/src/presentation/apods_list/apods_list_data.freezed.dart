@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'apods_list_data.dart';
@@ -9,6 +9,7 @@ part of 'apods_list_data.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $ApodsListDataCopyWith<ApodsListData> get copyWith => _$ApodsListDataCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ApodsListData&&const DeepCollectionEquality().equals(other.apodPages, apodPages)&&const DeepCollectionEquality().equals(other.apodPageKeys, apodPageKeys)&&(identical(other.hasNextPage, hasNextPage) || other.hasNextPage == hasNextPage));
+  final _this = this as ApodsListData;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ApodsListData&&const DeepCollectionEquality().equals(other.apodPages, _this.apodPages)&&const DeepCollectionEquality().equals(other.apodPageKeys, _this.apodPageKeys)&&(identical(other.hasNextPage, _this.hasNextPage) || other.hasNextPage == _this.hasNextPage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(apodPages),const DeepCollectionEquality().hash(apodPageKeys),hasNextPage);
+int get hashCode {
+  final _this = this as ApodsListData;
+  return Object.hash(runtimeType,const DeepCollectionEquality().hash(_this.apodPages),const DeepCollectionEquality().hash(_this.apodPageKeys),_this.hasNextPage);
+}
 
 @override
 String toString() {
-  return 'ApodsListData(apodPages: $apodPages, apodPageKeys: $apodPageKeys, hasNextPage: $hasNextPage)';
+  final _this = this as ApodsListData;
+  return 'ApodsListData(apodPages: ${_this.apodPages}, apodPageKeys: ${_this.apodPageKeys}, hasNextPage: ${_this.hasNextPage})';
 }
 
 
@@ -63,7 +69,7 @@ class _$ApodsListDataCopyWithImpl<$Res>
 /// Create a copy of ApodsListData
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? apodPages = null,Object? apodPageKeys = null,Object? hasNextPage = null,}) {
-  return _then(_self.copyWith(
+  return _then(ApodsListData(
 apodPages: null == apodPages ? _self.apodPages : apodPages // ignore: cast_nullable_to_non_nullable
 as List<List<Apod>>,apodPageKeys: null == apodPageKeys ? _self.apodPageKeys : apodPageKeys // ignore: cast_nullable_to_non_nullable
 as List<ApodsPageKey>,hasNextPage: null == hasNextPage ? _self.hasNextPage : hasNextPage // ignore: cast_nullable_to_non_nullable
@@ -208,7 +214,7 @@ return $default(_that.apodPages,_that.apodPageKeys,_that.hasNextPage);case _:
 
 
 class _ApodsListData implements ApodsListData {
-  const _ApodsListData({required final  List<List<Apod>> apodPages, required final  List<ApodsPageKey> apodPageKeys, required this.hasNextPage}): _apodPages = apodPages,_apodPageKeys = apodPageKeys;
+  const _ApodsListData({required  List<List<Apod>> apodPages, required  List<ApodsPageKey> apodPageKeys, required this.hasNextPage}): _apodPages = apodPages,_apodPageKeys = apodPageKeys;
   
 
  final  List<List<Apod>> _apodPages;
@@ -237,16 +243,18 @@ _$ApodsListDataCopyWith<_ApodsListData> get copyWith => __$ApodsListDataCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ApodsListData&&const DeepCollectionEquality().equals(other._apodPages, _apodPages)&&const DeepCollectionEquality().equals(other._apodPageKeys, _apodPageKeys)&&(identical(other.hasNextPage, hasNextPage) || other.hasNextPage == hasNextPage));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ApodsListData&&const DeepCollectionEquality().equals(other.apodPages, _apodPages)&&const DeepCollectionEquality().equals(other.apodPageKeys, _apodPageKeys)&&(identical(other.hasNextPage, hasNextPage) || other.hasNextPage == hasNextPage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_apodPages),const DeepCollectionEquality().hash(_apodPageKeys),hasNextPage);
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_apodPages),const DeepCollectionEquality().hash(_apodPageKeys),hasNextPage);
+}
 
 @override
 String toString() {
-  return 'ApodsListData(apodPages: $apodPages, apodPageKeys: $apodPageKeys, hasNextPage: $hasNextPage)';
+    return 'ApodsListData(apodPages: $apodPages, apodPageKeys: $apodPageKeys, hasNextPage: $hasNextPage)';
 }
 
 

@@ -47,31 +47,27 @@ class _FakeBuiltList_2<E> extends _i1.SmartFake implements _i3.BuiltList<E> {
 /// See the documentation for Mockito's code generation for more information.
 class MockApodService extends _i1.Mock implements _i4.ApodService {
   @override
-  _i5.ChopperClient get client =>
-      (super.noSuchMethod(
-            Invocation.getter(#client),
-            returnValue: _i6.dummyValue<_i5.ChopperClient>(
-              this,
-              Invocation.getter(#client),
-            ),
-            returnValueForMissingStub: _i6.dummyValue<_i5.ChopperClient>(
-              this,
-              Invocation.getter(#client),
-            ),
-          )
-          as _i5.ChopperClient);
+  _i5.ChopperClient get client => (super.noSuchMethod(
+    Invocation.getter(#client),
+    returnValue: _i6.dummyValue<_i5.ChopperClient>(
+      this,
+      Invocation.getter(#client),
+    ),
+    returnValueForMissingStub: _i6.dummyValue<_i5.ChopperClient>(
+      this,
+      Invocation.getter(#client),
+    ),
+  ) as _i5.ChopperClient);
 
   @override
-  Type get definitionType =>
-      (super.noSuchMethod(
-            Invocation.getter(#definitionType),
-            returnValue: _FakeType_0(this, Invocation.getter(#definitionType)),
-            returnValueForMissingStub: _FakeType_0(
-              this,
-              Invocation.getter(#definitionType),
-            ),
-          )
-          as Type);
+  Type get definitionType => (super.noSuchMethod(
+    Invocation.getter(#definitionType),
+    returnValue: _FakeType_0(this, Invocation.getter(#definitionType)),
+    returnValueForMissingStub: _FakeType_0(
+      this,
+      Invocation.getter(#definitionType),
+    ),
+  ) as Type);
 
   @override
   set client(_i5.ChopperClient? value) => super.noSuchMethod(
@@ -82,61 +78,57 @@ class MockApodService extends _i1.Mock implements _i4.ApodService {
   @override
   _i7.Future<_i2.ApodDto> fetchImage({required bool? includeThumbnails}) =>
       (super.noSuchMethod(
+        Invocation.method(#fetchImage, [], {
+          #includeThumbnails: includeThumbnails,
+        }),
+        returnValue: _i7.Future<_i2.ApodDto>.value(
+          _FakeApodDto_1(
+            this,
             Invocation.method(#fetchImage, [], {
               #includeThumbnails: includeThumbnails,
             }),
-            returnValue: _i7.Future<_i2.ApodDto>.value(
-              _FakeApodDto_1(
-                this,
-                Invocation.method(#fetchImage, [], {
-                  #includeThumbnails: includeThumbnails,
-                }),
-              ),
-            ),
-            returnValueForMissingStub: _i7.Future<_i2.ApodDto>.value(
-              _FakeApodDto_1(
-                this,
-                Invocation.method(#fetchImage, [], {
-                  #includeThumbnails: includeThumbnails,
-                }),
-              ),
-            ),
-          )
-          as _i7.Future<_i2.ApodDto>);
+          ),
+        ),
+        returnValueForMissingStub: _i7.Future<_i2.ApodDto>.value(
+          _FakeApodDto_1(
+            this,
+            Invocation.method(#fetchImage, [], {
+              #includeThumbnails: includeThumbnails,
+            }),
+          ),
+        ),
+      ) as _i7.Future<_i2.ApodDto>);
 
   @override
   _i7.Future<_i3.BuiltList<_i2.ApodDto>> fetchImageList({
     required String? startDate,
     required String? endDate,
     required bool? includeThumbnails,
-  }) =>
-      (super.noSuchMethod(
-            Invocation.method(#fetchImageList, [], {
-              #startDate: startDate,
-              #endDate: endDate,
-              #includeThumbnails: includeThumbnails,
-            }),
-            returnValue: _i7.Future<_i3.BuiltList<_i2.ApodDto>>.value(
-              _FakeBuiltList_2<_i2.ApodDto>(
-                this,
-                Invocation.method(#fetchImageList, [], {
-                  #startDate: startDate,
-                  #endDate: endDate,
-                  #includeThumbnails: includeThumbnails,
-                }),
-              ),
-            ),
-            returnValueForMissingStub:
-                _i7.Future<_i3.BuiltList<_i2.ApodDto>>.value(
-                  _FakeBuiltList_2<_i2.ApodDto>(
-                    this,
-                    Invocation.method(#fetchImageList, [], {
-                      #startDate: startDate,
-                      #endDate: endDate,
-                      #includeThumbnails: includeThumbnails,
-                    }),
-                  ),
-                ),
-          )
-          as _i7.Future<_i3.BuiltList<_i2.ApodDto>>);
+  }) => (super.noSuchMethod(
+    Invocation.method(#fetchImageList, [], {
+      #startDate: startDate,
+      #endDate: endDate,
+      #includeThumbnails: includeThumbnails,
+    }),
+    returnValue: _i7.Future<_i3.BuiltList<_i2.ApodDto>>.value(
+      _FakeBuiltList_2<_i2.ApodDto>(
+        this,
+        Invocation.method(#fetchImageList, [], {
+          #startDate: startDate,
+          #endDate: endDate,
+          #includeThumbnails: includeThumbnails,
+        }),
+      ),
+    ),
+    returnValueForMissingStub: _i7.Future<_i3.BuiltList<_i2.ApodDto>>.value(
+      _FakeBuiltList_2<_i2.ApodDto>(
+        this,
+        Invocation.method(#fetchImageList, [], {
+          #startDate: startDate,
+          #endDate: endDate,
+          #includeThumbnails: includeThumbnails,
+        }),
+      ),
+    ),
+  ) as _i7.Future<_i3.BuiltList<_i2.ApodDto>>);
 }

@@ -40,17 +40,16 @@ class MockApodsPaginationHandler extends _i1.Mock
   @override
   _i2.ApodsPageKey nextPageKey(_i2.ApodsPageKey? currentPageKey) =>
       (super.noSuchMethod(
-            Invocation.method(#nextPageKey, [currentPageKey]),
-            returnValue: _FakeApodsPageKey_0(
-              this,
-              Invocation.method(#nextPageKey, [currentPageKey]),
-            ),
-            returnValueForMissingStub: _FakeApodsPageKey_0(
-              this,
-              Invocation.method(#nextPageKey, [currentPageKey]),
-            ),
-          )
-          as _i2.ApodsPageKey);
+        Invocation.method(#nextPageKey, [currentPageKey]),
+        returnValue: _FakeApodsPageKey_0(
+          this,
+          Invocation.method(#nextPageKey, [currentPageKey]),
+        ),
+        returnValueForMissingStub: _FakeApodsPageKey_0(
+          this,
+          Invocation.method(#nextPageKey, [currentPageKey]),
+        ),
+      ) as _i2.ApodsPageKey);
 }
 
 /// A class which mocks [ApodsRepository].
@@ -62,31 +61,28 @@ class MockApodsRepository extends _i1.Mock implements _i4.ApodsRepository {
     required String? startDate,
     required String? endDate,
     required bool? includeThumbnails,
-  }) =>
-      (super.noSuchMethod(
-            Invocation.method(#fetchApods, [], {
-              #startDate: startDate,
-              #endDate: endDate,
-              #includeThumbnails: includeThumbnails,
-            }),
-            returnValue: _i8
-                .dummyValue<_i5.TaskEither<_i6.ApodsError, List<_i7.Apod>>>(
-                  this,
-                  Invocation.method(#fetchApods, [], {
-                    #startDate: startDate,
-                    #endDate: endDate,
-                    #includeThumbnails: includeThumbnails,
-                  }),
-                ),
-            returnValueForMissingStub: _i8
-                .dummyValue<_i5.TaskEither<_i6.ApodsError, List<_i7.Apod>>>(
-                  this,
-                  Invocation.method(#fetchApods, [], {
-                    #startDate: startDate,
-                    #endDate: endDate,
-                    #includeThumbnails: includeThumbnails,
-                  }),
-                ),
-          )
-          as _i5.TaskEither<_i6.ApodsError, List<_i7.Apod>>);
+  }) => (super.noSuchMethod(
+    Invocation.method(#fetchApods, [], {
+      #startDate: startDate,
+      #endDate: endDate,
+      #includeThumbnails: includeThumbnails,
+    }),
+    returnValue: _i8.dummyValue<_i5.TaskEither<_i6.ApodsError, List<_i7.Apod>>>(
+      this,
+      Invocation.method(#fetchApods, [], {
+        #startDate: startDate,
+        #endDate: endDate,
+        #includeThumbnails: includeThumbnails,
+      }),
+    ),
+    returnValueForMissingStub: _i8
+        .dummyValue<_i5.TaskEither<_i6.ApodsError, List<_i7.Apod>>>(
+          this,
+          Invocation.method(#fetchApods, [], {
+            #startDate: startDate,
+            #endDate: endDate,
+            #includeThumbnails: includeThumbnails,
+          }),
+        ),
+  ) as _i5.TaskEither<_i6.ApodsError, List<_i7.Apod>>);
 }

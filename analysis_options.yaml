@@ -11,6 +11,13 @@ analyzer:
     - "**/*.g.dart"
     - "**/*.pb*.dart"
     - "**/*.swagger*.dart"
+    - build/**
+    - android/**
+    - ios/**
+    - web/**
+    - windows/**
+    - macos/**
+    - linux/**
 
 linter:
   rules:
@@ -39,7 +46,6 @@ linter:
     - avoid_init_to_null
     # NOT ENABLED  - avoid_js_rounded_ints
     # NOT ENABLED  - avoid_multiple_declarations_per_line
-    - avoid_null_checks_in_equality_operators
     - avoid_positional_boolean_parameters
     - avoid_print
     # NOT ENABLED  - avoid_private_typedef_functions
@@ -196,7 +202,6 @@ linter:
     - unawaited_futures
     # NEWLY_ADDED - unintended_html_in_doc_comment
     # BEST PRACTICES - unnecessary_async
-    - unnecessary_await_in_return
     - unnecessary_brace_in_string_interps
     - unnecessary_breaks
     - unnecessary_const
@@ -226,7 +231,6 @@ linter:
     # NEWLY_ADDED - unnecessary_underscores
     # TO BE VERIFIED - unreachable_from_main # Currently experimental and not really useful
     - unrelated_type_equality_checks
-    - unsafe_html
     # NEWLY_ADDED - unsafe_variance
     # - use_build_context_synchronously # Not working with StatelessWidget
     - use_colored_box

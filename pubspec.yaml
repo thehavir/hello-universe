@@ -6,8 +6,8 @@ publish_to: 'none'
 version: 0.1.0
 
 environment:
-  sdk: ^3.10.0
-  flutter: ^3.38.7
+  sdk: ">=3.13.5 <4.0.0"
+  flutter: ">=3.47.9 <4.0.0"
 
 dependencies:
   flutter:
@@ -38,10 +38,10 @@ dev_dependencies:
   bloc_test: ^10.0.0
   mockito: ^5.6.3
   build_runner: ^2.10.5
-  analyzer: ^8.4.1
+  analyzer: ">=13.0.0 <15.0.0"
   built_value_generator: ^8.12.0
   chopper_generator: ^8.5.0
-  freezed: ^3.2.3
+  freezed: ^4.0.0
   plugin_platform_interface: ^2.1.8
   url_launcher_platform_interface: ^2.3.2
 

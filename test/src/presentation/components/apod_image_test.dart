@@ -149,18 +149,16 @@ extension on WidgetTester {
   Image findCachedNetworkImagePlaceholder() {
     final widgetFinder = find.byType(CachedNetworkImage);
     final context = widgetFinder.evaluate().first as BuildContext;
-    final cachedNetworkImage = widgetList<CachedNetworkImage>(
-      widgetFinder,
-    ).first;
+    final cachedNetworkImage = widgetList<CachedNetworkImage>(widgetFinder)
+        .first;
     return cachedNetworkImage.placeholder!(context, '') as Image;
   }
 
   Image findCachedNetworkImageErrorWidget() {
     final widgetFinder = find.byType(CachedNetworkImage);
     final context = widgetFinder.evaluate().first as BuildContext;
-    final cachedNetworkImage = widgetList<CachedNetworkImage>(
-      widgetFinder,
-    ).first;
+    final cachedNetworkImage = widgetList<CachedNetworkImage>(widgetFinder)
+        .first;
     return cachedNetworkImage.errorWidget!(context, '', Exception('error'))
         as Image;
   }

@@ -30,13 +30,11 @@ import 'package:url_launcher_platform_interface/url_launcher_platform_interface.
 class MockUrlLauncherPlatform extends _i1.Mock
     implements _i2.UrlLauncherPlatform {
   @override
-  _i3.Future<bool> canLaunch(String? url) =>
-      (super.noSuchMethod(
-            Invocation.method(#canLaunch, [url]),
-            returnValue: _i3.Future<bool>.value(false),
-            returnValueForMissingStub: _i3.Future<bool>.value(false),
-          )
-          as _i3.Future<bool>);
+  _i3.Future<bool> canLaunch(String? url) => (super.noSuchMethod(
+    Invocation.method(#canLaunch, [url]),
+    returnValue: _i3.Future<bool>.value(false),
+    returnValueForMissingStub: _i3.Future<bool>.value(false),
+  ) as _i3.Future<bool>);
 
   @override
   _i3.Future<bool> launch(
@@ -48,59 +46,52 @@ class MockUrlLauncherPlatform extends _i1.Mock
     required bool? universalLinksOnly,
     required Map<String, String>? headers,
     String? webOnlyWindowName,
-  }) =>
-      (super.noSuchMethod(
-            Invocation.method(
-              #launch,
-              [url],
-              {
-                #useSafariVC: useSafariVC,
-                #useWebView: useWebView,
-                #enableJavaScript: enableJavaScript,
-                #enableDomStorage: enableDomStorage,
-                #universalLinksOnly: universalLinksOnly,
-                #headers: headers,
-                #webOnlyWindowName: webOnlyWindowName,
-              },
-            ),
-            returnValue: _i3.Future<bool>.value(false),
-            returnValueForMissingStub: _i3.Future<bool>.value(false),
-          )
-          as _i3.Future<bool>);
+  }) => (super.noSuchMethod(
+    Invocation.method(
+      #launch,
+      [url],
+      {
+        #useSafariVC: useSafariVC,
+        #useWebView: useWebView,
+        #enableJavaScript: enableJavaScript,
+        #enableDomStorage: enableDomStorage,
+        #universalLinksOnly: universalLinksOnly,
+        #headers: headers,
+        #webOnlyWindowName: webOnlyWindowName,
+      },
+    ),
+    returnValue: _i3.Future<bool>.value(false),
+    returnValueForMissingStub: _i3.Future<bool>.value(false),
+  ) as _i3.Future<bool>);
 
   @override
   _i3.Future<bool> launchUrl(String? url, _i2.LaunchOptions? options) =>
       (super.noSuchMethod(
-            Invocation.method(#launchUrl, [url, options]),
-            returnValue: _i3.Future<bool>.value(false),
-            returnValueForMissingStub: _i3.Future<bool>.value(false),
-          )
-          as _i3.Future<bool>);
+        Invocation.method(#launchUrl, [url, options]),
+        returnValue: _i3.Future<bool>.value(false),
+        returnValueForMissingStub: _i3.Future<bool>.value(false),
+      ) as _i3.Future<bool>);
 
   @override
-  _i3.Future<void> closeWebView() =>
-      (super.noSuchMethod(
-            Invocation.method(#closeWebView, []),
-            returnValue: _i3.Future<void>.value(),
-            returnValueForMissingStub: _i3.Future<void>.value(),
-          )
-          as _i3.Future<void>);
+  _i3.Future<void> closeWebView() => (super.noSuchMethod(
+    Invocation.method(#closeWebView, []),
+    returnValue: _i3.Future<void>.value(),
+    returnValueForMissingStub: _i3.Future<void>.value(),
+  ) as _i3.Future<void>);
 
   @override
   _i3.Future<bool> supportsMode(_i2.PreferredLaunchMode? mode) =>
       (super.noSuchMethod(
-            Invocation.method(#supportsMode, [mode]),
-            returnValue: _i3.Future<bool>.value(false),
-            returnValueForMissingStub: _i3.Future<bool>.value(false),
-          )
-          as _i3.Future<bool>);
+        Invocation.method(#supportsMode, [mode]),
+        returnValue: _i3.Future<bool>.value(false),
+        returnValueForMissingStub: _i3.Future<bool>.value(false),
+      ) as _i3.Future<bool>);
 
   @override
   _i3.Future<bool> supportsCloseForMode(_i2.PreferredLaunchMode? mode) =>
       (super.noSuchMethod(
-            Invocation.method(#supportsCloseForMode, [mode]),
-            returnValue: _i3.Future<bool>.value(false),
-            returnValueForMissingStub: _i3.Future<bool>.value(false),
-          )
-          as _i3.Future<bool>);
+        Invocation.method(#supportsCloseForMode, [mode]),
+        returnValue: _i3.Future<bool>.value(false),
+        returnValueForMissingStub: _i3.Future<bool>.value(false),
+      ) as _i3.Future<bool>);
 }

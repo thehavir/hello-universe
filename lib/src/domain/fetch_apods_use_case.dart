@@ -14,10 +14,9 @@ abstract class FetchApodsUseCase {
 
 class FetchApodsUseCaseImpl implements FetchApodsUseCase {
   const FetchApodsUseCaseImpl({
-    required ApodsRepository apodsRepository,
-    required ApodsPaginationHandler apodsPaginationHandler,
-  }) : _apodsRepository = apodsRepository,
-       _apodsPaginationHandler = apodsPaginationHandler;
+    required this._apodsRepository,
+    required this._apodsPaginationHandler,
+  });
 
   final ApodsRepository _apodsRepository;
   final ApodsPaginationHandler _apodsPaginationHandler;

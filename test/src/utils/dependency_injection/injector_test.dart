@@ -200,32 +200,12 @@ void main() {
       });
     });
 
-    test('with a descriptive message when no provider was found for resolve', () {
-      final injector = Injector([]);
-
-      final resolve = () => injector.resolve<_TestClass>();
-
-      expect(
-        resolve,
-        throwsA(
-          isA<StateError>().having(
-            (e) => e.toString(),
-            'toString',
-            contains(
-              'The client has requested type "_TestClass", but it is not injected',
-            ),
-          ),
-        ),
-      );
-    });
-
     test(
-      'with a descriptive message when no provider was found for resolveWithParams',
+      'with a descriptive message when no provider was found for resolve',
       () {
         final injector = Injector([]);
 
-        final resolve = () =>
-            injector.resolveWithParams<_TestClass, String>('Name1 Name2');
+        final resolve = () => injector.resolve<_TestClass>();
 
         expect(
           resolve,
@@ -234,13 +214,33 @@ void main() {
               (e) => e.toString(),
               'toString',
               contains(
-                'The client has requested type "_TestClass" with params "Name1 Name2", but it is not injected',
+                'The client has requested type "_TestClass", but it is not injected',
               ),
             ),
           ),
         );
       },
     );
+
+    test('with a descriptive message when no provider was found for resolveWithParams', () {
+      final injector = Injector([]);
+
+      final resolve = () =>
+          injector.resolveWithParams<_TestClass, String>('Name1 Name2');
+
+      expect(
+        resolve,
+        throwsA(
+          isA<StateError>().having(
+            (e) => e.toString(),
+            'toString',
+            contains(
+              'The client has requested type "_TestClass" with params "Name1 Name2", but it is not injected',
+            ),
+          ),
+        ),
+      );
+    });
   });
 
   test('resolves with null parameter', () {

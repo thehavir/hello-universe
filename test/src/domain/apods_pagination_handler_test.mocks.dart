@@ -40,34 +40,25 @@ class MockClock extends _i1.Mock implements _i2.Clock {
   }
 
   @override
-  DateTime now() =>
-      (super.noSuchMethod(
-            Invocation.method(#now, []),
-            returnValue: _FakeDateTime_0(this, Invocation.method(#now, [])),
-          )
-          as DateTime);
+  DateTime now() => (super.noSuchMethod(
+    Invocation.method(#now, []),
+    returnValue: _FakeDateTime_0(this, Invocation.method(#now, [])),
+  ) as DateTime);
 
   @override
-  DateTime agoBy(Duration? duration) =>
-      (super.noSuchMethod(
-            Invocation.method(#agoBy, [duration]),
-            returnValue: _FakeDateTime_0(
-              this,
-              Invocation.method(#agoBy, [duration]),
-            ),
-          )
-          as DateTime);
+  DateTime agoBy(Duration? duration) => (super.noSuchMethod(
+    Invocation.method(#agoBy, [duration]),
+    returnValue: _FakeDateTime_0(this, Invocation.method(#agoBy, [duration])),
+  ) as DateTime);
 
   @override
-  DateTime fromNowBy(Duration? duration) =>
-      (super.noSuchMethod(
-            Invocation.method(#fromNowBy, [duration]),
-            returnValue: _FakeDateTime_0(
-              this,
-              Invocation.method(#fromNowBy, [duration]),
-            ),
-          )
-          as DateTime);
+  DateTime fromNowBy(Duration? duration) => (super.noSuchMethod(
+    Invocation.method(#fromNowBy, [duration]),
+    returnValue: _FakeDateTime_0(
+      this,
+      Invocation.method(#fromNowBy, [duration]),
+    ),
+  ) as DateTime);
 
   @override
   DateTime ago({
@@ -77,29 +68,27 @@ class MockClock extends _i1.Mock implements _i2.Clock {
     int? seconds = 0,
     int? milliseconds = 0,
     int? microseconds = 0,
-  }) =>
-      (super.noSuchMethod(
-            Invocation.method(#ago, [], {
-              #days: days,
-              #hours: hours,
-              #minutes: minutes,
-              #seconds: seconds,
-              #milliseconds: milliseconds,
-              #microseconds: microseconds,
-            }),
-            returnValue: _FakeDateTime_0(
-              this,
-              Invocation.method(#ago, [], {
-                #days: days,
-                #hours: hours,
-                #minutes: minutes,
-                #seconds: seconds,
-                #milliseconds: milliseconds,
-                #microseconds: microseconds,
-              }),
-            ),
-          )
-          as DateTime);
+  }) => (super.noSuchMethod(
+    Invocation.method(#ago, [], {
+      #days: days,
+      #hours: hours,
+      #minutes: minutes,
+      #seconds: seconds,
+      #milliseconds: milliseconds,
+      #microseconds: microseconds,
+    }),
+    returnValue: _FakeDateTime_0(
+      this,
+      Invocation.method(#ago, [], {
+        #days: days,
+        #hours: hours,
+        #minutes: minutes,
+        #seconds: seconds,
+        #milliseconds: milliseconds,
+        #microseconds: microseconds,
+      }),
+    ),
+  ) as DateTime);
 
   @override
   DateTime fromNow({
@@ -109,247 +98,181 @@ class MockClock extends _i1.Mock implements _i2.Clock {
     int? seconds = 0,
     int? milliseconds = 0,
     int? microseconds = 0,
-  }) =>
-      (super.noSuchMethod(
-            Invocation.method(#fromNow, [], {
-              #days: days,
-              #hours: hours,
-              #minutes: minutes,
-              #seconds: seconds,
-              #milliseconds: milliseconds,
-              #microseconds: microseconds,
-            }),
-            returnValue: _FakeDateTime_0(
-              this,
-              Invocation.method(#fromNow, [], {
-                #days: days,
-                #hours: hours,
-                #minutes: minutes,
-                #seconds: seconds,
-                #milliseconds: milliseconds,
-                #microseconds: microseconds,
-              }),
-            ),
-          )
-          as DateTime);
+  }) => (super.noSuchMethod(
+    Invocation.method(#fromNow, [], {
+      #days: days,
+      #hours: hours,
+      #minutes: minutes,
+      #seconds: seconds,
+      #milliseconds: milliseconds,
+      #microseconds: microseconds,
+    }),
+    returnValue: _FakeDateTime_0(
+      this,
+      Invocation.method(#fromNow, [], {
+        #days: days,
+        #hours: hours,
+        #minutes: minutes,
+        #seconds: seconds,
+        #milliseconds: milliseconds,
+        #microseconds: microseconds,
+      }),
+    ),
+  ) as DateTime);
 
   @override
-  DateTime microsAgo(int? microseconds) =>
-      (super.noSuchMethod(
-            Invocation.method(#microsAgo, [microseconds]),
-            returnValue: _FakeDateTime_0(
-              this,
-              Invocation.method(#microsAgo, [microseconds]),
-            ),
-          )
-          as DateTime);
+  DateTime microsAgo(int? microseconds) => (super.noSuchMethod(
+    Invocation.method(#microsAgo, [microseconds]),
+    returnValue: _FakeDateTime_0(
+      this,
+      Invocation.method(#microsAgo, [microseconds]),
+    ),
+  ) as DateTime);
 
   @override
-  DateTime microsFromNow(int? microseconds) =>
-      (super.noSuchMethod(
-            Invocation.method(#microsFromNow, [microseconds]),
-            returnValue: _FakeDateTime_0(
-              this,
-              Invocation.method(#microsFromNow, [microseconds]),
-            ),
-          )
-          as DateTime);
+  DateTime microsFromNow(int? microseconds) => (super.noSuchMethod(
+    Invocation.method(#microsFromNow, [microseconds]),
+    returnValue: _FakeDateTime_0(
+      this,
+      Invocation.method(#microsFromNow, [microseconds]),
+    ),
+  ) as DateTime);
 
   @override
-  DateTime millisAgo(int? milliseconds) =>
-      (super.noSuchMethod(
-            Invocation.method(#millisAgo, [milliseconds]),
-            returnValue: _FakeDateTime_0(
-              this,
-              Invocation.method(#millisAgo, [milliseconds]),
-            ),
-          )
-          as DateTime);
+  DateTime millisAgo(int? milliseconds) => (super.noSuchMethod(
+    Invocation.method(#millisAgo, [milliseconds]),
+    returnValue: _FakeDateTime_0(
+      this,
+      Invocation.method(#millisAgo, [milliseconds]),
+    ),
+  ) as DateTime);
 
   @override
-  DateTime millisFromNow(int? milliseconds) =>
-      (super.noSuchMethod(
-            Invocation.method(#millisFromNow, [milliseconds]),
-            returnValue: _FakeDateTime_0(
-              this,
-              Invocation.method(#millisFromNow, [milliseconds]),
-            ),
-          )
-          as DateTime);
+  DateTime millisFromNow(int? milliseconds) => (super.noSuchMethod(
+    Invocation.method(#millisFromNow, [milliseconds]),
+    returnValue: _FakeDateTime_0(
+      this,
+      Invocation.method(#millisFromNow, [milliseconds]),
+    ),
+  ) as DateTime);
 
   @override
-  DateTime secondsAgo(int? seconds) =>
-      (super.noSuchMethod(
-            Invocation.method(#secondsAgo, [seconds]),
-            returnValue: _FakeDateTime_0(
-              this,
-              Invocation.method(#secondsAgo, [seconds]),
-            ),
-          )
-          as DateTime);
+  DateTime secondsAgo(int? seconds) => (super.noSuchMethod(
+    Invocation.method(#secondsAgo, [seconds]),
+    returnValue: _FakeDateTime_0(
+      this,
+      Invocation.method(#secondsAgo, [seconds]),
+    ),
+  ) as DateTime);
 
   @override
-  DateTime secondsFromNow(int? seconds) =>
-      (super.noSuchMethod(
-            Invocation.method(#secondsFromNow, [seconds]),
-            returnValue: _FakeDateTime_0(
-              this,
-              Invocation.method(#secondsFromNow, [seconds]),
-            ),
-          )
-          as DateTime);
+  DateTime secondsFromNow(int? seconds) => (super.noSuchMethod(
+    Invocation.method(#secondsFromNow, [seconds]),
+    returnValue: _FakeDateTime_0(
+      this,
+      Invocation.method(#secondsFromNow, [seconds]),
+    ),
+  ) as DateTime);
 
   @override
-  DateTime minutesAgo(int? minutes) =>
-      (super.noSuchMethod(
-            Invocation.method(#minutesAgo, [minutes]),
-            returnValue: _FakeDateTime_0(
-              this,
-              Invocation.method(#minutesAgo, [minutes]),
-            ),
-          )
-          as DateTime);
+  DateTime minutesAgo(int? minutes) => (super.noSuchMethod(
+    Invocation.method(#minutesAgo, [minutes]),
+    returnValue: _FakeDateTime_0(
+      this,
+      Invocation.method(#minutesAgo, [minutes]),
+    ),
+  ) as DateTime);
 
   @override
-  DateTime minutesFromNow(int? minutes) =>
-      (super.noSuchMethod(
-            Invocation.method(#minutesFromNow, [minutes]),
-            returnValue: _FakeDateTime_0(
-              this,
-              Invocation.method(#minutesFromNow, [minutes]),
-            ),
-          )
-          as DateTime);
+  DateTime minutesFromNow(int? minutes) => (super.noSuchMethod(
+    Invocation.method(#minutesFromNow, [minutes]),
+    returnValue: _FakeDateTime_0(
+      this,
+      Invocation.method(#minutesFromNow, [minutes]),
+    ),
+  ) as DateTime);
 
   @override
-  DateTime hoursAgo(int? hours) =>
-      (super.noSuchMethod(
-            Invocation.method(#hoursAgo, [hours]),
-            returnValue: _FakeDateTime_0(
-              this,
-              Invocation.method(#hoursAgo, [hours]),
-            ),
-          )
-          as DateTime);
+  DateTime hoursAgo(int? hours) => (super.noSuchMethod(
+    Invocation.method(#hoursAgo, [hours]),
+    returnValue: _FakeDateTime_0(this, Invocation.method(#hoursAgo, [hours])),
+  ) as DateTime);
 
   @override
-  DateTime hoursFromNow(int? hours) =>
-      (super.noSuchMethod(
-            Invocation.method(#hoursFromNow, [hours]),
-            returnValue: _FakeDateTime_0(
-              this,
-              Invocation.method(#hoursFromNow, [hours]),
-            ),
-          )
-          as DateTime);
+  DateTime hoursFromNow(int? hours) => (super.noSuchMethod(
+    Invocation.method(#hoursFromNow, [hours]),
+    returnValue: _FakeDateTime_0(
+      this,
+      Invocation.method(#hoursFromNow, [hours]),
+    ),
+  ) as DateTime);
 
   @override
-  DateTime daysAgo(int? days) =>
-      (super.noSuchMethod(
-            Invocation.method(#daysAgo, [days]),
-            returnValue: _FakeDateTime_0(
-              this,
-              Invocation.method(#daysAgo, [days]),
-            ),
-          )
-          as DateTime);
+  DateTime daysAgo(int? days) => (super.noSuchMethod(
+    Invocation.method(#daysAgo, [days]),
+    returnValue: _FakeDateTime_0(this, Invocation.method(#daysAgo, [days])),
+  ) as DateTime);
 
   @override
-  DateTime daysFromNow(int? days) =>
-      (super.noSuchMethod(
-            Invocation.method(#daysFromNow, [days]),
-            returnValue: _FakeDateTime_0(
-              this,
-              Invocation.method(#daysFromNow, [days]),
-            ),
-          )
-          as DateTime);
+  DateTime daysFromNow(int? days) => (super.noSuchMethod(
+    Invocation.method(#daysFromNow, [days]),
+    returnValue: _FakeDateTime_0(this, Invocation.method(#daysFromNow, [days])),
+  ) as DateTime);
 
   @override
-  DateTime weeksAgo(int? weeks) =>
-      (super.noSuchMethod(
-            Invocation.method(#weeksAgo, [weeks]),
-            returnValue: _FakeDateTime_0(
-              this,
-              Invocation.method(#weeksAgo, [weeks]),
-            ),
-          )
-          as DateTime);
+  DateTime weeksAgo(int? weeks) => (super.noSuchMethod(
+    Invocation.method(#weeksAgo, [weeks]),
+    returnValue: _FakeDateTime_0(this, Invocation.method(#weeksAgo, [weeks])),
+  ) as DateTime);
 
   @override
-  DateTime weeksFromNow(int? weeks) =>
-      (super.noSuchMethod(
-            Invocation.method(#weeksFromNow, [weeks]),
-            returnValue: _FakeDateTime_0(
-              this,
-              Invocation.method(#weeksFromNow, [weeks]),
-            ),
-          )
-          as DateTime);
+  DateTime weeksFromNow(int? weeks) => (super.noSuchMethod(
+    Invocation.method(#weeksFromNow, [weeks]),
+    returnValue: _FakeDateTime_0(
+      this,
+      Invocation.method(#weeksFromNow, [weeks]),
+    ),
+  ) as DateTime);
 
   @override
-  DateTime monthsAgo(int? months) =>
-      (super.noSuchMethod(
-            Invocation.method(#monthsAgo, [months]),
-            returnValue: _FakeDateTime_0(
-              this,
-              Invocation.method(#monthsAgo, [months]),
-            ),
-          )
-          as DateTime);
+  DateTime monthsAgo(int? months) => (super.noSuchMethod(
+    Invocation.method(#monthsAgo, [months]),
+    returnValue: _FakeDateTime_0(this, Invocation.method(#monthsAgo, [months])),
+  ) as DateTime);
 
   @override
-  DateTime monthsFromNow(int? months) =>
-      (super.noSuchMethod(
-            Invocation.method(#monthsFromNow, [months]),
-            returnValue: _FakeDateTime_0(
-              this,
-              Invocation.method(#monthsFromNow, [months]),
-            ),
-          )
-          as DateTime);
+  DateTime monthsFromNow(int? months) => (super.noSuchMethod(
+    Invocation.method(#monthsFromNow, [months]),
+    returnValue: _FakeDateTime_0(
+      this,
+      Invocation.method(#monthsFromNow, [months]),
+    ),
+  ) as DateTime);
 
   @override
-  DateTime yearsAgo(int? years) =>
-      (super.noSuchMethod(
-            Invocation.method(#yearsAgo, [years]),
-            returnValue: _FakeDateTime_0(
-              this,
-              Invocation.method(#yearsAgo, [years]),
-            ),
-          )
-          as DateTime);
+  DateTime yearsAgo(int? years) => (super.noSuchMethod(
+    Invocation.method(#yearsAgo, [years]),
+    returnValue: _FakeDateTime_0(this, Invocation.method(#yearsAgo, [years])),
+  ) as DateTime);
 
   @override
-  DateTime yearsFromNow(int? years) =>
-      (super.noSuchMethod(
-            Invocation.method(#yearsFromNow, [years]),
-            returnValue: _FakeDateTime_0(
-              this,
-              Invocation.method(#yearsFromNow, [years]),
-            ),
-          )
-          as DateTime);
+  DateTime yearsFromNow(int? years) => (super.noSuchMethod(
+    Invocation.method(#yearsFromNow, [years]),
+    returnValue: _FakeDateTime_0(
+      this,
+      Invocation.method(#yearsFromNow, [years]),
+    ),
+  ) as DateTime);
 
   @override
-  Stopwatch stopwatch() =>
-      (super.noSuchMethod(
-            Invocation.method(#stopwatch, []),
-            returnValue: _FakeStopwatch_1(
-              this,
-              Invocation.method(#stopwatch, []),
-            ),
-          )
-          as Stopwatch);
+  Stopwatch stopwatch() => (super.noSuchMethod(
+    Invocation.method(#stopwatch, []),
+    returnValue: _FakeStopwatch_1(this, Invocation.method(#stopwatch, [])),
+  ) as Stopwatch);
 
   @override
-  Stopwatch getStopwatch() =>
-      (super.noSuchMethod(
-            Invocation.method(#getStopwatch, []),
-            returnValue: _FakeStopwatch_1(
-              this,
-              Invocation.method(#getStopwatch, []),
-            ),
-          )
-          as Stopwatch);
+  Stopwatch getStopwatch() => (super.noSuchMethod(
+    Invocation.method(#getStopwatch, []),
+    returnValue: _FakeStopwatch_1(this, Invocation.method(#getStopwatch, [])),
+  ) as Stopwatch);
 }

@@ -6,8 +6,7 @@ import 'package:hello_universe/src/domain/apods_repository.dart';
 import 'package:hello_universe/src/domain/entities/apod.dart';
 
 class ApodsRepositoryImpl implements ApodsRepository {
-  const ApodsRepositoryImpl({required ApodService apodService})
-    : _apodService = apodService;
+  const ApodsRepositoryImpl({required this._apodService});
 
   final ApodService _apodService;
 

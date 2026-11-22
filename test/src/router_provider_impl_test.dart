@@ -77,9 +77,10 @@ void main() {
     final route = tested.routes.firstWhere(
       (route) => route.name == Routes.apodDetailsScreen,
     );
-    final widget =
-        route.pageBuilder?.call(_builder.context, _builder.goRouterState)
-            as CustomTransitionPage;
+    final widget = route.pageBuilder?.call(
+      _builder.context,
+      _builder.goRouterState,
+    ) as CustomTransitionPage;
     expect(
       widget.child,
       isA<ApodDetailsScreen>().having((p) => p.apod, 'apod', apod),
@@ -124,9 +125,10 @@ void main() {
       final route = tested.routes.firstWhere(
         (route) => route.name == Routes.apodDetailsScreen,
       );
-      final page =
-          route.pageBuilder?.call(_builder.context, _builder.goRouterState)
-              as CustomTransitionPage;
+      final page = route.pageBuilder?.call(
+        _builder.context,
+        _builder.goRouterState,
+      ) as CustomTransitionPage;
       final widget = page.transitionsBuilder.call(
         _builder.context,
         animation,
@@ -164,9 +166,10 @@ void main() {
     final route = tested.routes.firstWhere(
       (route) => route.name == Routes.apodFullSizeScreen,
     );
-    final widget =
-        route.pageBuilder?.call(_builder.context, _builder.goRouterState)
-            as CustomTransitionPage;
+    final widget = route.pageBuilder?.call(
+      _builder.context,
+      _builder.goRouterState,
+    ) as CustomTransitionPage;
     expect(
       widget.child,
       isA<ApodFullSizeScreen>().having(
@@ -215,9 +218,10 @@ void main() {
       final route = tested.routes.firstWhere(
         (route) => route.name == Routes.apodFullSizeScreen,
       );
-      final page =
-          route.pageBuilder?.call(_builder.context, _builder.goRouterState)
-              as CustomTransitionPage;
+      final page = route.pageBuilder?.call(
+        _builder.context,
+        _builder.goRouterState,
+      ) as CustomTransitionPage;
       final widget = page.transitionsBuilder.call(
         _builder.context,
         animation,

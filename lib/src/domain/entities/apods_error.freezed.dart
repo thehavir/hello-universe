@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'apods_error.dart';
@@ -9,6 +9,7 @@ part of 'apods_error.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $ApodsErrorCopyWith<ApodsError> get copyWith => _$ApodsErrorCopyWithImpl<ApodsEr
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ApodsError&&const DeepCollectionEquality().equals(other.error, error)&&(identical(other.stackTrace, stackTrace) || other.stackTrace == stackTrace));
+  final _this = this as ApodsError;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ApodsError&&const DeepCollectionEquality().equals(other.error, _this.error)&&(identical(other.stackTrace, _this.stackTrace) || other.stackTrace == _this.stackTrace));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(error),stackTrace);
+int get hashCode {
+  final _this = this as ApodsError;
+  return Object.hash(runtimeType,const DeepCollectionEquality().hash(_this.error),_this.stackTrace);
+}
 
 @override
 String toString() {
-  return 'ApodsError(error: $error, stackTrace: $stackTrace)';
+  final _this = this as ApodsError;
+  return 'ApodsError(error: ${_this.error}, stackTrace: ${_this.stackTrace})';
 }
 
 
@@ -63,8 +69,8 @@ class _$ApodsErrorCopyWithImpl<$Res>
 /// Create a copy of ApodsError
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? error = null,Object? stackTrace = null,}) {
-  return _then(_self.copyWith(
-error: null == error ? _self.error : error ,stackTrace: null == stackTrace ? _self.stackTrace : stackTrace // ignore: cast_nullable_to_non_nullable
+  return _then(ApodsError(
+null == error ? _self.error : error ,null == stackTrace ? _self.stackTrace : stackTrace // ignore: cast_nullable_to_non_nullable
 as StackTrace,
   ));
 }
@@ -222,16 +228,18 @@ _$ApodsErrorCopyWith<_ApodsError> get copyWith => __$ApodsErrorCopyWithImpl<_Apo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ApodsError&&const DeepCollectionEquality().equals(other.error, error)&&(identical(other.stackTrace, stackTrace) || other.stackTrace == stackTrace));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ApodsError&&const DeepCollectionEquality().equals(other.error, error)&&(identical(other.stackTrace, stackTrace) || other.stackTrace == stackTrace));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(error),stackTrace);
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(error),stackTrace);
+}
 
 @override
 String toString() {
-  return 'ApodsError(error: $error, stackTrace: $stackTrace)';
+    return 'ApodsError(error: $error, stackTrace: $stackTrace)';
 }
 
 

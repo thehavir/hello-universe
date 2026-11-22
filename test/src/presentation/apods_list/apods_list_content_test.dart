@@ -131,12 +131,16 @@ void main() {
     ];
     await tester.pumpTested(apodPages: apodPages, apodPageKeys: apodPageKeys);
 
-    final widget1 =
-        tester.findPagedChildBuilderDelegate().itemBuilder(context, apod1, 0)
-            as Column;
-    final widget2 =
-        tester.findPagedChildBuilderDelegate().itemBuilder(context, apod2, 1)
-            as Column;
+    final widget1 = tester.findPagedChildBuilderDelegate().itemBuilder(
+      context,
+      apod1,
+      0,
+    ) as Column;
+    final widget2 = tester.findPagedChildBuilderDelegate().itemBuilder(
+      context,
+      apod2,
+      1,
+    ) as Column;
     expect(widget1.children, contains(isA<ApodCard>()));
     expect(widget2.children, contains(isA<ApodCard>()));
   });
@@ -154,9 +158,11 @@ void main() {
       apodPageKeys: apodPageKeys,
     );
 
-    final widget =
-        tester.findPagedChildBuilderDelegate().itemBuilder(context, apod, 1)
-            as Column;
+    final widget = tester.findPagedChildBuilderDelegate().itemBuilder(
+      context,
+      apod,
+      1,
+    ) as Column;
     expect(
       widget.children.first,
       isA<ApodCard>().having(
@@ -180,9 +186,11 @@ void main() {
     ];
     await tester.pumpTested(apodPages: apodPages, apodPageKeys: apodPageKeys);
 
-    final widget =
-        tester.findPagedChildBuilderDelegate().itemBuilder(context, apod2, 1)
-            as Column;
+    final widget = tester.findPagedChildBuilderDelegate().itemBuilder(
+      context,
+      apod2,
+      1,
+    ) as Column;
     expect(
       widget.children.first,
       isA<ApodCard>().having((p) => p.apod, 'apod', apod2),
@@ -207,9 +215,11 @@ void main() {
       onApodTap: (apod) => tappedApod = apod,
     );
 
-    final widget =
-        tester.findPagedChildBuilderDelegate().itemBuilder(context, apod2, 1)
-            as Column;
+    final widget = tester.findPagedChildBuilderDelegate().itemBuilder(
+      context,
+      apod2,
+      1,
+    ) as Column;
     final apodCard = widget.children.first as ApodCard;
     apodCard.onApodTap();
     expect(tappedApod, apod2);
@@ -233,9 +243,8 @@ void main() {
 
     final widget =
         tester.findPagedChildBuilderDelegate().firstPageErrorIndicatorBuilder!(
-              context,
-            )
-            as ErrorContent;
+          context,
+        ) as ErrorContent;
     expect(widget.error, error);
   });
 
@@ -245,9 +254,8 @@ void main() {
 
     final widget =
         tester.findPagedChildBuilderDelegate().firstPageErrorIndicatorBuilder!(
-              context,
-            )
-            as ErrorContent;
+          context,
+        ) as ErrorContent;
     expect(widget.onRetry, callback);
   });
 
@@ -277,9 +285,8 @@ void main() {
 
     final widget =
         tester.findPagedChildBuilderDelegate().newPageErrorIndicatorBuilder!(
-              context,
-            )
-            as NewPageErrorIndicator;
+          context,
+        ) as NewPageErrorIndicator;
     expect(widget.onRetry, callback);
   });
 

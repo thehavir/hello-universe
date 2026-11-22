@@ -28,11 +28,9 @@ import 'package:mockito/mockito.dart' as _i1;
 /// See the documentation for Mockito's code generation for more information.
 class MockRouterProvider extends _i1.Mock implements _i2.RouterProvider {
   @override
-  List<_i3.GoRoute> get routes =>
-      (super.noSuchMethod(
-            Invocation.getter(#routes),
-            returnValue: <_i3.GoRoute>[],
-            returnValueForMissingStub: <_i3.GoRoute>[],
-          )
-          as List<_i3.GoRoute>);
+  List<_i3.GoRoute> get routes => (super.noSuchMethod(
+    Invocation.getter(#routes),
+    returnValue: <_i3.GoRoute>[],
+    returnValueForMissingStub: <_i3.GoRoute>[],
+  ) as List<_i3.GoRoute>);
 }

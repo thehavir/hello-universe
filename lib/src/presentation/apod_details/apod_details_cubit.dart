@@ -8,10 +8,8 @@ import 'package:hello_universe/src/utils/cubit_state.dart';
 typedef ApodDetailsState = CubitState<void, Object>;
 
 class ApodDetailsCubit extends Cubit<ApodDetailsState> {
-  ApodDetailsCubit({required CacheManager cacheManager, required Apod apod})
-    : _cacheManager = cacheManager,
-      _apod = apod,
-      super(const LoadingCubitState()) {
+  ApodDetailsCubit({required this._cacheManager, required this._apod})
+    : super(const LoadingCubitState()) {
     _init();
   }
 

@@ -56,9 +56,8 @@ void main() {
 
       tested.execute(currentPageKey: currentPageKey);
 
-      verify(
-        _builder.apodsPaginationHandler.nextPageKey(currentPageKey),
-      ).called(1);
+      verify(_builder.apodsPaginationHandler.nextPageKey(currentPageKey))
+          .called(1);
     });
 
     test(
@@ -138,9 +137,8 @@ class _ArrangeBuilder {
     ApodsPageKey? currentPageKey,
     ApodsPageKey? result,
   }) {
-    when(
-      _builder.apodsPaginationHandler.nextPageKey(currentPageKey),
-    ).thenReturn(result ?? TestModels.apodsPageKey());
+    when(_builder.apodsPaginationHandler.nextPageKey(currentPageKey))
+        .thenReturn(result ?? TestModels.apodsPageKey());
   }
 
   void withApodsRepositoryFetchApodsSuccess({List<Apod>? result}) {

@@ -45,9 +45,8 @@ void main() {
 
       await tested.fetchApods();
 
-      verify(
-        _builder.fetchApodsUseCase.execute(currentPageKey: null),
-      ).called(1);
+      verify(_builder.fetchApodsUseCase.execute(currentPageKey: null))
+          .called(1);
     });
 
     blocTest(
@@ -178,12 +177,15 @@ void main() {
       ),
       act: (cubit) => cubit.fetchApods(),
       expect: () => [
-        isA<ApodsListState>()
-            .having((p) => p.data?.apodPageKeys, 'apodPageKeys', [
-              TestModels.apodsPageKey(startDate: DateTime(1800)),
-              TestModels.apodsPageKey(startDate: DateTime(1999)),
-              TestModels.apodsPageKey(startDate: DateTime(2066)),
-            ]),
+        isA<ApodsListState>().having(
+          (p) => p.data?.apodPageKeys,
+          'apodPageKeys',
+          [
+            TestModels.apodsPageKey(startDate: DateTime(1800)),
+            TestModels.apodsPageKey(startDate: DateTime(1999)),
+            TestModels.apodsPageKey(startDate: DateTime(2066)),
+          ],
+        ),
       ],
     );
 

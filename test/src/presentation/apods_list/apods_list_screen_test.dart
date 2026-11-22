@@ -496,9 +496,8 @@ void main() {
         .widget<ApodsListContent>(find.byType(ApodsListContent))
         .onApodTap(apod);
 
-    verify(
-      _builder.goRouter.pushNamed(Routes.apodDetailsScreen, extra: apod),
-    ).called(1);
+    verify(_builder.goRouter.pushNamed(Routes.apodDetailsScreen, extra: apod))
+        .called(1);
   });
 }
 
@@ -530,8 +529,7 @@ class _ArrangeBuilder {
   void withApodsListCubit({
     PersistentCubitState<ApodsListData, ApodsError>? state,
   }) {
-    when(
-      apodsListCubit.state,
-    ).thenAnswer((_) => state ?? const PersistentLoadingCubitState());
+    when(apodsListCubit.state)
+        .thenAnswer((_) => state ?? const PersistentLoadingCubitState());
   }
 }

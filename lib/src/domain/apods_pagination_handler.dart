@@ -11,7 +11,7 @@ abstract class ApodsPaginationHandler {
 }
 
 class ApodsPaginationHandlerImpl implements ApodsPaginationHandler {
-  const ApodsPaginationHandlerImpl({required Clock clock}) : _clock = clock;
+  const ApodsPaginationHandlerImpl({required this._clock});
 
   final Clock _clock;
 

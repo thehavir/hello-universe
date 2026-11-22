@@ -52,9 +52,9 @@ void main() {
       );
 
       final caputured =
-          verify(
-                _builder.urlLauncher.launchUrl(any, captureAny),
-              ).captured.single
+          verify(_builder.urlLauncher.launchUrl(any, captureAny))
+                  .captured
+                  .single
               as LaunchOptions;
 
       expect(caputured.mode, PreferredLaunchMode.externalNonBrowserApplication);
@@ -67,9 +67,9 @@ void main() {
       await tested.launch(Uri.parse('url.com'), mode: null);
 
       final caputured =
-          verify(
-                _builder.urlLauncher.launchUrl(any, captureAny),
-              ).captured.single
+          verify(_builder.urlLauncher.launchUrl(any, captureAny))
+                  .captured
+                  .single
               as LaunchOptions;
 
       expect(caputured.mode, PreferredLaunchMode.externalApplication);
@@ -77,9 +77,8 @@ void main() {
 
     [true, false].forEach((isLanuched) {
       testWidgets('returns $isLanuched', (tester) async {
-        when(
-          _builder.urlLauncher.launchUrl(any, any),
-        ).thenAnswer((_) async => isLanuched);
+        when(_builder.urlLauncher.launchUrl(any, any))
+            .thenAnswer((_) async => isLanuched);
         final tested = _builder.createTested();
 
         final result = await tested.launch(Uri.parse('url.com'));

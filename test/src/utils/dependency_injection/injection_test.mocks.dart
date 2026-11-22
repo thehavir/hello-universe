@@ -28,34 +28,28 @@ import 'package:mockito/src/dummies.dart' as _i3;
 /// See the documentation for Mockito's code generation for more information.
 class MockInjector extends _i1.Mock implements _i2.Injector {
   @override
-  T resolve<T extends Object>() =>
-      (super.noSuchMethod(
-            Invocation.method(#resolve, []),
-            returnValue: _i3.dummyValue<T>(
-              this,
-              Invocation.method(#resolve, []),
-            ),
-            returnValueForMissingStub: _i3.dummyValue<T>(
-              this,
-              Invocation.method(#resolve, []),
-            ),
-          )
-          as T);
+  T resolve<T extends Object>() => (super.noSuchMethod(
+    Invocation.method(#resolve, []),
+    returnValue: _i3.dummyValue<T>(this, Invocation.method(#resolve, [])),
+    returnValueForMissingStub: _i3.dummyValue<T>(
+      this,
+      Invocation.method(#resolve, []),
+    ),
+  ) as T);
 
   @override
   T resolveWithParams<T extends Object, P extends Object?>(P? params) =>
       (super.noSuchMethod(
-            Invocation.method(#resolveWithParams, [params]),
-            returnValue: _i3.dummyValue<T>(
-              this,
-              Invocation.method(#resolveWithParams, [params]),
-            ),
-            returnValueForMissingStub: _i3.dummyValue<T>(
-              this,
-              Invocation.method(#resolveWithParams, [params]),
-            ),
-          )
-          as T);
+        Invocation.method(#resolveWithParams, [params]),
+        returnValue: _i3.dummyValue<T>(
+          this,
+          Invocation.method(#resolveWithParams, [params]),
+        ),
+        returnValueForMissingStub: _i3.dummyValue<T>(
+          this,
+          Invocation.method(#resolveWithParams, [params]),
+        ),
+      ) as T);
 
   @override
   void dispose() => super.noSuchMethod(

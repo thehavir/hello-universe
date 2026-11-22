@@ -283,8 +283,7 @@ class _ArrangeBuilder {
   final cacheManager = MockCacheManager();
 
   void withApodDetailsCubitState({CubitState? state}) {
-    when(
-      apodDetailsCubit.state,
-    ).thenAnswer((_) => state ?? const LoadingCubitState());
+    when(apodDetailsCubit.state)
+        .thenAnswer((_) => state ?? const LoadingCubitState());
   }
 }

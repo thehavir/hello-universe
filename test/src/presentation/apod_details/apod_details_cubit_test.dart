@@ -171,9 +171,8 @@ void main() {
               final controller = StreamController<FileResponse>();
               controller.add(_TestFileInfo());
               controller.addError('error');
-              when(
-                _builder.cacheManager.getFileStream(any),
-              ).thenAnswer((_) => controller.stream);
+              when(_builder.cacheManager.getFileStream(any))
+                  .thenAnswer((_) => controller.stream);
             },
             build: () =>
                 _builder.createTested(apod: TestModels.apod(url: 'url')),
@@ -206,9 +205,8 @@ void main() {
               final controller = StreamController<FileResponse>();
               controller.addError('error');
               controller.add(_TestFileInfo());
-              when(
-                _builder.cacheManager.getFileStream(any),
-              ).thenAnswer((_) => controller.stream);
+              when(_builder.cacheManager.getFileStream(any))
+                  .thenAnswer((_) => controller.stream);
             },
             build: () =>
                 _builder.createTested(apod: TestModels.apod(url: 'url')),
@@ -255,9 +253,8 @@ class _ArrangeBuilder {
     String? url,
     FileResponse? streamData,
   }) {
-    when(
-      cacheManager.getFileStream(url ?? any),
-    ).thenAnswer((_) => Stream.value(streamData ?? _TestFileResponse()));
+    when(cacheManager.getFileStream(url ?? any))
+        .thenAnswer((_) => Stream.value(streamData ?? _TestFileResponse()));
   }
 
   void withCacheManagerGetFileStreamThrows({Object? error}) {
@@ -265,9 +262,8 @@ class _ArrangeBuilder {
   }
 
   void withCacheManagerGetFileStreamEmitsError({Object? error}) {
-    when(
-      cacheManager.getFileStream(any),
-    ).thenAnswer((_) => Stream.error(error ?? 'error'));
+    when(cacheManager.getFileStream(any))
+        .thenAnswer((_) => Stream.error(error ?? 'error'));
   }
 
   ApodDetailsCubit createTested({Apod? apod}) => ApodDetailsCubit(

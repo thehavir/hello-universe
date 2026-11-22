@@ -27,8 +27,7 @@ abstract class ApodServiceProvider {
 }
 
 class ApodServiceProviderImpl implements ApodServiceProvider {
-  ApodServiceProviderImpl({required ChopperClient chopperClient})
-    : _chopperClient = chopperClient;
+  ApodServiceProviderImpl({required this._chopperClient});
 
   final ChopperClient _chopperClient;
 

@@ -28,7 +28,7 @@ test/src/                          # Unit and widget tests
 ## Getting Started
 
 ### Prerequisite
-Flutter 3.38.7+ / Dart 3.10+
+Flutter `>=3.47.9 <4.0.0` / Dart `>=3.13.5 <4.0.0`
 
 ### Run/Test
 

@@ -7,9 +7,8 @@ import 'package:hello_universe/src/utils/persistent_cubit_state.dart';
 typedef ApodsListState = PersistentCubitState<ApodsListData, ApodsError>;
 
 class ApodsListCubit extends Cubit<ApodsListState> {
-  ApodsListCubit({required FetchApodsUseCase fetchApodsUseCase})
-    : _fetchApodsUseCase = fetchApodsUseCase,
-      super(const PersistentLoadingCubitState());
+  ApodsListCubit({required this._fetchApodsUseCase})
+    : super(const PersistentLoadingCubitState());
 
   final FetchApodsUseCase _fetchApodsUseCase;
 

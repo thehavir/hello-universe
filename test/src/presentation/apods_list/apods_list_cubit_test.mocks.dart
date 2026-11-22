@@ -33,23 +33,16 @@ class MockFetchApodsUseCase extends _i1.Mock implements _i2.FetchApodsUseCase {
   @override
   _i3.TaskEither<_i4.ApodsError, _i5.ApodPage> execute({
     required _i6.ApodsPageKey? currentPageKey,
-  }) =>
-      (super.noSuchMethod(
-            Invocation.method(#execute, [], {#currentPageKey: currentPageKey}),
-            returnValue: _i7
-                .dummyValue<_i3.TaskEither<_i4.ApodsError, _i5.ApodPage>>(
-                  this,
-                  Invocation.method(#execute, [], {
-                    #currentPageKey: currentPageKey,
-                  }),
-                ),
-            returnValueForMissingStub: _i7
-                .dummyValue<_i3.TaskEither<_i4.ApodsError, _i5.ApodPage>>(
-                  this,
-                  Invocation.method(#execute, [], {
-                    #currentPageKey: currentPageKey,
-                  }),
-                ),
-          )
-          as _i3.TaskEither<_i4.ApodsError, _i5.ApodPage>);
+  }) => (super.noSuchMethod(
+    Invocation.method(#execute, [], {#currentPageKey: currentPageKey}),
+    returnValue: _i7.dummyValue<_i3.TaskEither<_i4.ApodsError, _i5.ApodPage>>(
+      this,
+      Invocation.method(#execute, [], {#currentPageKey: currentPageKey}),
+    ),
+    returnValueForMissingStub: _i7
+        .dummyValue<_i3.TaskEither<_i4.ApodsError, _i5.ApodPage>>(
+          this,
+          Invocation.method(#execute, [], {#currentPageKey: currentPageKey}),
+        ),
+  ) as _i3.TaskEither<_i4.ApodsError, _i5.ApodPage>);
 }
