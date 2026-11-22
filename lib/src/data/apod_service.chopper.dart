@@ -30,7 +30,9 @@ final class _$ApodService extends ApodService {
       client.baseUrl,
       parameters: $params,
     );
-    final Response $response = await client.send<ApodDto, ApodDto>($request);
+    final Response<ApodDto> $response = await client.send<ApodDto, ApodDto>(
+      $request,
+    );
     return $response.bodyOrThrow;
   }
 
@@ -52,9 +54,8 @@ final class _$ApodService extends ApodService {
       client.baseUrl,
       parameters: $params,
     );
-    final Response $response = await client.send<BuiltList<ApodDto>, ApodDto>(
-      $request,
-    );
+    final Response<BuiltList<ApodDto>> $response = await client
+        .send<BuiltList<ApodDto>, ApodDto>($request);
     return $response.bodyOrThrow;
   }
 }
